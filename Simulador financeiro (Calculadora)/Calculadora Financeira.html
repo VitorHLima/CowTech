@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+
+    <!--ESTA CALCULADORA TEM COMO PROPÓSITO A PARTIR DOS VALORES INFORMADOS PELO USUÁRIO EXIBIR UMA MENSAGEM COM OS DADOS ABAIXO:
+
+        - LUCRO ANUAL DO PRODUTOR;
+        - VALOR DAS PERDAS DEVIDO AO ESTRESSE TERMICO;
+        - LUCRO RESTANTE APÓS O PREJUIZO
+        - VALOR APROXIMADO RECUPERADO COM O SISTEMA;
+        - NOVO LUCRO COM A QUANTIA RESTANTE MAIS O VALOR RECIUPERADO;
+    -->
+
+    <h2>Calcule suas perdas devido ao estresse térmico</h2>
+
+    <p>Quantidade de vacas que possui</p>
+    <input id="input_qtdVacas">
+    <p>Média de produção de leite (vaca/dia)</p>
+    <input id="input_producaoDiaria_Litro">
+    <p>Preço do litro de leite</p>
+    <input id="input_precoLitro">
+    <p>Custo para manter cada vaca (vaca/mês)</p>
+    <input id="input_custoVaca">
+    <button onclick="calcular_perdas()">Calcular</button>
+
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+
+    function calcular_perdas () {
+        // Armazenando os valores das inputs
+        var vacas = Number(input_qtdVacas.value);
+        var producao_diaria = Number(input_producaoDiaria_Litro.value);
+        var preco_litro = Number(input_precoLitro.value);
+        var custo_vaca = Number(input_custoVaca.value);
+
+        // Calculando lucros diários, mensais e anuais
+        var lucro_diario = vacas * (producao_diaria * preco_litro); // A quantidade de vacas que possuo multiplicado pelo lucro que obtenho com a produção e o preço do leite
+        var lucro_mensal = lucro_diario * 30;
+        var lucro_anual = lucro_mensal * 12;
+
+        // Calculando custo com todas as vacas mensalmente e anualmente
+        var custo_vacas_mensal = vacas *  custo_vaca; // Custo por uma vaca ao mês multiplicado pela quantidade de vacas que tenho
+        var custo_vacas_anual = custo_vacas_mensal * 12;
+
+        // Calculando prejuizos
+        var prejuizo_mensal_leite = lucro_mensal * 0.20; // Perda de aproximadamente 20% do lucro mensal devido ao estresse termico
+        var prejuizo_anual_leite =  prejuizo_mensal_leite * 12;
+
+        var prejuizo_anual_vacas = custo_vacas_anual; // O custo anualmente com todas as vacas
+        var prejuizo_total = prejuizo_anual_leite + prejuizo_anual_vacas; // Prejuizo total é a soma das perdas economicas do leite mais o custo para manter as vacas
+        
+        // Calculando valor recuperado
+        var valor_recuperado = prejuizo_total * 0.15;// Recupero até 15% do prejuizo total
+
+        var lucro_restante = lucro_anual - prejuizo_total; // Valor restante após o prejuizo
+        var novo_lucro = lucro_restante + valor_recuperado; // Valor restante após o prejuizo mais o valor que recupero com o sistema
+        
+        div_mensagem.innerHTML = 
+        `<br> Seu lucro anual é de <b><span>R$${lucro_anual}</span></b>, porém você perde aproximadamente <b>20%</b> todo mês, sendo esse valor: <b>R$${prejuizo_mensal_leite}</b>. <br>E um prejuizo de <b><span style="color: red">R$${prejuizo_anual_leite}</span></b> 
+        por estresse térmico ao ano. Com isso, o seu lucro diminui para <b><span style="color: red">R$${lucro_restante}</span></b> 
+         <br>
+         <br> Com o nosso serviço você pode recuperar até  <b>15%</b> do prejuizo <b><span style="color: blue">R$${valor_recuperado}</span></b>
+         <br>
+         <br> Totalizando um lucro anual de <b><span style="color: green">R$${novo_lucro}</span></b>`;
+
+    }
+
+</script>
