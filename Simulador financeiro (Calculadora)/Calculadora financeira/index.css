@@ -1,0 +1,113 @@
+* {
+    font-family: Poppins;
+}
+#div_principal {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+}
+#borda {
+    width: 45%;
+    height: 80%;
+    padding: 0 0 2rem 0;
+    border: 1px solid black;
+    border-radius: 7px;
+    -webkit-box-shadow: 3px 6px 4px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 6px 4px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 6px 4px 0px rgba(0,0,0,0.75);
+}
+#div_teste {
+
+    width: 92%;
+    height: 100%;   
+}
+#div_texto {
+    width: 100%;
+    height: 70%;
+    padding:0.4rem;
+}
+#div_botao {
+    width: 100%;
+    height: 30%;
+}
+.div_opcao {
+    flex-direction: row;
+    display: flex;
+}
+.botao_escolher {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+}
+.h2_sensor {
+    font-weight: 400 bold;
+}
+.button_calcular {
+    width: 80%;
+    padding: 0.6rem;
+    border-radius: 20px;
+    color: white;
+    background-color: black;
+}
+#div_englobar {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    width: 100%;
+}
+#div_cadastro {
+    width: 55%;
+    height: auto;
+    border-right: 1px solid black;
+}
+#div_resultado {
+    width: 50%;
+    height: 100%;
+}
+.h3_perguntas {
+    width: 95%;
+}
+.input1 {
+    width: 75%;
+    border-radius: 8px;
+    border: 0.5px solid black;
+    padding: 0.2rem;
+    text-align: center;
+}
+#radius:hover {
+    cursor: pointer;
+}
+.botao_escolher:hover {
+    color: white;
+    background-color: black;
+    border-bottom: none;
+}
+.button_calcular:hover {
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid black;
+    color:black;
+    font-weight: 800;
+}
+#div_resultado {
+    width: 45%;
+}
+#div_informacao {
+    width: 100%;
+    text-align: center;
+}
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+}
