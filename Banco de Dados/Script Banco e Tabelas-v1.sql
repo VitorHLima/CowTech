@@ -9,8 +9,9 @@ CREATE TABLE empresa (
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 	cnpj CHAR(14) UNIQUE NOT NULL,
 	nomeEmpresa VARCHAR(50) NOT NULL,
-	ddd CHAR(2) NOT NULL,
-	telefone CHAR(9) NOT NULL,
+    representante VARCHAR(60),
+	ddd CHAR(2) NOT NULL, /*Tabela externa?*/
+	contato CHAR(9) NOT NULL,
 	email VARCHAR(30) NOT NULL,
 	senha VARCHAR(20) NOT NULL,
 	fkEndereco INT,
@@ -43,27 +44,39 @@ CREATE TABLE funcionario (
 CREATE TABLE registro (
 	idRegistro INT PRIMARY KEY AUTO_INCREMENT,
 	dtAtual DATETIME DEFAULT CURRENT_TIMESTAMP,
+    temperatura FLOAT(4) NOT NULL,
+	umidade FLOAT(4) NOT NULL,
     fkSensor INT,
 	CONSTRAINT fkSensor FOREIGN KEY (fkSensor)
 	REFERENCES sensor (idSensor)
+    
 );
 
 CREATE TABLE sensor(
 	idSensor INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(20) NOT NULL,
-	codigo VARCHAR(10) NOT NULL,
-    temperatura FLOAT(4) NOT NULL,
-	umidade FLOAT(4) NOT NULL,
-    tempRecomendada float(4) not null,
-     fkLocal INT,
-	CONSTRAINT fkLocal FOREIGN KEY (fkLocal)
-	REFERENCES localSensor (idLocal)
+	codigo VARCHAR(10),
+    tipo varchar(30) not null,
+	setor varchar(45),
+    fkEmpresa INT, 
+    FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa)
 );
 
-CREATE TABLE localSensor (
-	idLocal INT PRIMARY KEY auto_increment,
-    nome VARCHAR(20) NOT NULL
+create table ideal(
+	idIdeal int primary key
+	temperaturaIdealMin
+    trmperaturaIdealMax int
+    umidadeIdealMin int
+    umidadeIdealMax 
+
+CREATE TABLE suporte (
+	idSuporte int primary key auto_increment,
+    Tipo varchar(100),
+    Descrição varchar(1000),
+    Horario datetime default current_timestamp,
+    fkFuncionario int, constraint fkFunc FOREIGN key (fkFunc) references funcionario(idFuncionario) 
 );
+
 
 
 
