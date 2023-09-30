@@ -9,7 +9,7 @@ CREATE TABLE empresa (
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 	cnpj CHAR(14) UNIQUE NOT NULL,
 	nomeEmpresa VARCHAR(50) NOT NULL,
-    representante VARCHAR(60),
+    representante VARCHAR(60) NOT NULL,
 	ddd CHAR(2) NOT NULL, /*Tabela externa?*/
 	contato CHAR(9) NOT NULL,
 	email VARCHAR(30) NOT NULL,
@@ -21,8 +21,8 @@ CREATE TABLE empresa (
 CREATE TABLE endereco (
 	idEndereco INT PRIMARY KEY NOT NULL,
 	logradouro VARCHAR(50),
-	bairro VARCHAR(20),
-	municipio VARCHAR(20),
+	bairro VARCHAR(30),
+	municipio VARCHAR(30),
 	estado VARCHAR(20) NOT NULL,
 	cep CHAR(8),
     ponto_referencia VARCHAR(60),
@@ -62,18 +62,21 @@ CREATE TABLE sensor(
     FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa)
 );
 
-create table ideal(
-	idIdeal int primary key
-	temperaturaIdealMin
-    trmperaturaIdealMax int
-    umidadeIdealMin int
-    umidadeIdealMax 
+create table TempIdeal(
+	idIdeal int primary key,
+	temperaturaIdealMin varchar(2),
+    temperaturaIdealMax varchar(2),
+    umidadeIdealMin varchar(2),
+    umidadeIdealMax varchar(2)
+    );
 
 CREATE TABLE suporte (
 	idSuporte int primary key auto_increment,
-    Tipo varchar(100),
-    Descrição varchar(1000),
-    Horario datetime default current_timestamp,
+    tipo varchar(100) not null,
+    telefone char(11) not null,
+    descrição varchar(1000) not null,
+    email varchar(30) not null,
+    horario datetime default current_timestamp,
     fkFuncionario int, constraint fkFunc FOREIGN key (fkFunc) references funcionario(idFuncionario) 
 );
 
