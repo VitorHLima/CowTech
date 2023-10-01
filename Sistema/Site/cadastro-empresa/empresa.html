@@ -48,18 +48,18 @@
         <div class="entradas">
             <h4>Cadastro</h4>
             <label class="label-cnpj" for="">CNPJ</label>
-            <input class="css-input" type="text">
+            <input class="css-input" id="input_cnpj" type="text">
             <label class="label-nome" for="">Nome Fantasia</label>
-            <input class="css-input" type="text">
+            <input class="css-input" id="input_nome" type="text">
             <label class="label-representante" for="">Representante</label>
-            <input class="css-input" type="text">
+            <input class="css-input" id="input_representante" type="text">
             <label class="label-ddd" for="">DDD</label>
             <label class="label-telefone" for="">Telefone</label>
-            <input class="css-input telefone-top" type="text">
-            <input class="css-input ddd" type="text">
+            <input class="css-input telefone-top" id="input_telefone" type="text">
+            <input class="css-input ddd" id="input_ddd" type="text">
             <label class="label-check" for="">Aceita receber novidades sobre atualizações em seu e-mail?</label>
             <input class="css-checkbox" type="checkbox" id="">
-            <button class="bt-enviar">Avançar</button>
+            <button class="bt-enviar" onclick="cadastroEmpresa()">Avançar</button>
             <a class="a-cadastrar" href="#">Já tem cadastro?</a>
         </div>
     </div>
@@ -67,3 +67,33 @@
 </body>
 
 </html>
+
+<script>
+
+    function cadastroEmpresa() {
+        var cnpj = input_cnpj.value
+        var nome = input_nome.value
+        var representante = input_representante.value
+        var ddd = input_ddd.value
+        var telefone = input_telefone.value
+
+        if (cnpj == '') {
+            alert("Digite um valor no campo cnpj")
+        } else if (nome == '') {
+            alert("Digite um valor no campo nome")
+        } else if (representante == '') {
+            alert("Digite um valor no campo representante")
+        } else if (ddd == '') {
+            alert("Digite um valor no campo ddd")
+        } else if (telefone == '') {
+            alert("Digite um valor no campo telefone")
+        } else {
+            alert("Cadastro realizado!!")
+        }
+
+        console.log(cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5"));
+
+        // /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/
+        // "$1.$2.$3/$4-$5"
+    }
+</script>

@@ -45,11 +45,11 @@
         <div class="entradas">
             <h4>LOGIN</h4>
             <label for="">E-mail</label>
-            <input class="css-input" type="text">
+            <input class="css-input" id="input_email" type="text">
             <label for="">Senha</label>
-            <input class="css-input" type="text">
+            <input class="css-input" id="input_senha" type="text">
             <a class="a-senha" href="#">Esqueceu sua senha?</a>
-            <button class="bt-enviar">Entrar</button>
+            <button class="bt-enviar" onclick="login()">Entrar</button>
             <a class="a-cadastrar" href="#">Cadastre-se</a>
         </div>
     </div>
@@ -57,3 +57,26 @@
 </body>
 
 </html>
+
+<script>
+
+    function login() {
+        var email = input_email.value
+        var senha = input_senha.value
+        var confirmaEmail = "cowtech@gmail.com";
+        var confirmaSenha = "123456";
+
+        if (email == '') {
+            alert("Digite um valor no campo email")
+        } else if (senha == '') {
+            alert("Digite um valor no campo senha")
+        } else if (email != confirmaEmail) {
+            alert("O email está incorreto")
+        } else if (senha != confirmaSenha) {
+            alert("A senha está incorreta")
+        } else {
+            alert("Login realizado!!")
+        }
+    }
+
+</script>
