@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <title>Login de Usuário</title>
+    <link rel="stylesheet" href="estilo.css">
+    <title>Cadastro de Empresa</title>
 </head>
 
 <body>
@@ -35,26 +36,31 @@
     <div class="card">
         <div class="card-P">
             <div class="textos">
-                <p class="bordao">Informe o endereço da sua empresa para uma melhor experiencia! </p>
-                <p class="apoio">Caso tenha dificuldades com a sua localidade da sua conta, entre em contato com nossa
-                    equipe de <span>suporte</span>
+                <p class="bordao">Faça seu cadastro e venha fazer parte de nossa equipe!</p>
+                <p class="apoio">Caso tenha dificuldades ao tentar acessar sua conta, entre em contato com nossa equipe
+                    de
+                    <span>suporte</span>
                 </p>
+                <p class="termos">Ao clicar em “Cadastrar”, o solicitante do cadastro está ciente e aceita os termos e
+                    condições de uso</p>
             </div>
         </div>
         <div class="entradas">
-            <a class="p-volta" href="#">Voltar</a>
-            <h4>Endereço</h4>
-            <label class="label-logradouro label" for="">Logradouro</label>
+            <h4>Cadastro</h4>
+            <label class="label-cnpj" for="">CNPJ</label>
             <input class="css-input" type="text">
-            <label class="label-bairro label" for="">Bairro</label>
+            <label class="label-nome" for="">Nome Fantasia</label>
             <input class="css-input" type="text">
-            <label class="label-municipio label" for="">Município</label>
+            <label class="label-representante" for="">Representante</label>
             <input class="css-input" type="text">
-            <label class="label-estado label" for="">Estado</label>
-            <input class="css-input" type="text">
-            <label class="label-cep label" for="">CEP</label>
-            <input class="css-input" type="text">
+            <label class="label-ddd" for="">DDD</label>
+            <label class="label-telefone" for="">Telefone</label>
+            <input class="css-input telefone-top" type="text">
+            <input class="css-input ddd" type="text">
+            <label class="label-check" for="">Aceita receber novidades sobre atualizações em seu e-mail?</label>
+            <input class="css-checkbox" type="checkbox" id="">
             <button class="bt-enviar">Avançar</button>
+            <a class="a-cadastrar" href="#">Já tem cadastro?</a>
         </div>
     </div>
 
