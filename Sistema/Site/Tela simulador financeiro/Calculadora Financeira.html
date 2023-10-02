@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,200&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!--ESTA CALCULADORA TEM COMO PROPÓSITO A PARTIR DOS VALORES INFORMADOS PELO USUÁRIO EXIBIR UMA MENSAGEM COM OS DADOS ABAIXO:
+
+        - LUCRO ANUAL DO PRODUTOR;
+        - VALOR DAS PERDAS DEVIDO AO ESTRESSE TERMICO;
+        - LUCRO RESTANTE APÓS O PREJUIZO
+        - VALOR APROXIMADO RECUPERADO COM O SISTEMA;
+        - NOVO LUCRO COM A QUANTIA RESTANTE MAIS O VALOR RECIUPERADO;
+    -->
+
+    <div class="cabecario">
+        <div id="div_logo">
+          <h2 id="texto_cowtech"><a href="http://">COW TECH</a></h2>
+        </div>
+        <div id="div_links">
+          <ul id="lista_cabecario">
+            <a href="http://">CALCULADORA</a>
+            <a href="http://">CADASTRAR</a>
+            <a href="http://">LOGIN</a>
+          </ul>
+        </div>
+      </div>
+      <br>
+      <br>
+
+    <div id="div_principal">
+        <div id="borda">
+            <div id="div_opcao">
+                <button class="botao_escolher"><h2 class="h2_sensor">Calculadora</h2></button>
+            <div id="div_englobar">
+                <div id="div_cadastro">
+                    <h4 class="h3_pergunta">Quantas vacas possui?</h4><input class="input1" type="number" id="input_qtdVacas">
+                    <h4 class="h3_pergunta">Média de produção de leite diária de cada vaca:</h4><input class="input1" type="text" id="input_producaoDiaria_Litro">
+                    <h4 class="h3_perguntas">Preço cobrado por litro:</h4><input class="input1" type="text" id="input_precoLitro">
+                    <h4 class="h3_perguntas">Custo para manter cada vaca por um mês:</h4><input class="input1" type="text" id="input_custoVaca">
+                </div>
+                <div id="div_resultado">
+                    <div id="div_teste">
+                        <div id="div_texto">
+                            <h4 id="mostrar"></h4>
+                        </div>
+                        <div id="div_botao">
+                            <button class="button_calcular" onclick="calcular()">Calcular</button>
+                            <div id="div_mensagem"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div id="divTable"></div>
+                <h4>O estresse térmico causa uma perda de 40% a 50%.<br>
+                    E reduz a produção de leitede 15% a 20%.</h4>
+                <h5>*Os valores acima devem ser apresentados em REAIS*</h5> 
+            </div>
+            </div>
+        </div>
+
+    <!-- <h2>Calcule suas perdas devido ao estresse térmico</h2>
+
+    <p>Quantidade de vacas que possui</p>
+    <input id="input_qtdVacas">
+    <p>Média de produção de leite (vaca/dia)</p>
+    <input id="input_producaoDiaria_Litro">
+    <p>Preço do litro de leite</p>
+    <input id="input_precoLitro">
+    <p>Custo para manter cada vaca (vaca/mês)</p>
+    <input id="input_custoVaca"> 
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="div_mensagem"></div> -->
+    
+
+</body>
+</html>
+<script>
+
+    function calcular() {
+        
+        // Armazenando os valores das inputs
+        var vacas = Number(input_qtdVacas.value);
+        var producao_vaca = Number(input_producaoDiaria_Litro.value);
+        var preco_litro = Number(input_precoLitro.value);
+        var custo_vaca = Number(input_custoVaca.value);
+
+        //calculo aumento vacas leiteiras
+        var vacas_cowtech = 10 * vacas / 6;
+
+        //calculo diário
+        var producao_diaria = vacas * producao_vaca;
+        var faturamento_diario = producao_diaria * preco_litro;
+        var producao_diaria_cowtech = producao_diaria * 1.25;
+        var faturamento_diario_cowtech = (vacas_cowtech * producao_vaca) * 1.25 * preco_litro;
+
+        //calculo Mensal
+        var media_producao_mensal = producao_diaria * 30;
+        var media_faturamento_mensal = faturamento_diario * 30;
+        var media_producao_mensal_cowtech = producao_diaria_cowtech * 30;
+        var media_faturamento_mensal_cowtech = faturamento_diario_cowtech * 30;
+
+        //calculo anual
+        var media_producao_anual = media_producao_mensal * 12;
+        var media_faturamento_anual = media_faturamento_mensal *12;
+        var media_producao_anual_cowtech = media_producao_mensal_cowtech * 12;
+        var media_faturamento_anual_cowtech = media_faturamento_mensal_cowtech *12;
+
+        //calculo diverença
+        var aumento_producao_diario = producao_diaria_cowtech - producao_diaria;
+        var aumento_producao_mensal = media_faturamento_mensal_cowtech - media_producao_mensal;
+        var aumento_producao_anual =media_producao_anual_cowtech.toFixed(2) - media_producao_anual;
+
+        var aumento_faturamento_diario = faturamento_diario_cowtech - faturamento_diario;
+        var aumento_faturamento_mensal = media_faturamento_mensal_cowtech - media_faturamento_mensal;
+        var aumento_faturamento_anual = media_faturamento_anual_cowtech.toFixed(2) - media_faturamento_anual;
+
+        div_mensagem.innerHTML = `
+        <br>
+        <b>Com a CowTech você terá</b><br> 
+        <b>um aumento de:</b><br>
+        <br>
+        <b>Produção Diaria: ${aumento_producao_diario.toFixed(2)}</b><br>
+        <b>produção Mensal: ${aumento_faturamento_mensal.toFixed(2)}</b><br>
+        <b>Produção Anual: ${aumento_producao_anual.toFixed(2)}</b><br>
+        <br>
+        <b>Faturamento Diario: ${aumento_faturamento_diario.toFixed(2)}</b><br>
+        <b>Fatutamento Mensal: ${aumento_faturamento_mensal.toFixed(2)}</b><br>
+        <b>Faturamento Anual: ${aumento_faturamento_anual.toFixed(2)}</b><br>
+        
+        `
+
+        divTable.innerHTML = `
+        <center>
+        <table style="
+        background-color: rgb(255, 255, 255);
+        align = center;
+        border: 3px rgb(0, 0, 0) solid;
+        border-radius: 5px;
+        width: 490px;
+        text-align: center;
+        }">
+      
+        <tbody>
+                        <tr>
+                            <th>Resultados</th>
+                            <th>Sem a CowTech</th>
+                            <th>Com a CowTech</th>
+                        </tr>
+
+                        <tr>
+                            <th>Produção Diária</th>
+                            <th>${producao_diaria}</th>
+                            <th>${producao_diaria_cowtech}</th>
+                        </tr>
+
+                        <tr>
+                            <th>Produção Mensal</th>
+                            <th>${media_producao_mensal}</th>
+                            <th>${media_producao_mensal_cowtech}</th>
+                        </tr>
+
+                        <tr>
+                            <th>Produção Mensal</th>
+                            <th>${media_producao_anual}</th>
+                            <th>${media_producao_anual_cowtech}</th>
+                        </tr>
+
+                        <tr>
+                            <th>Faturamento Diária</th>
+                            <th>${faturamento_diario}</th>
+                            <th>${faturamento_diario_cowtech}</th>
+                        </tr>
+
+                        <tr>
+                            <th>Faturamento Mensal</th>
+                            <th>${media_faturamento_mensal}</th>
+                            <th>${media_faturamento_mensal_cowtech}</th>
+                        </tr>
+
+                        <tr>
+                            <th>Faturamento Mensal</th>
+                            <th>${media_faturamento_anual}</th>
+                            <th>${media_faturamento_anual_cowtech}</th>
+                        </tr>
+
+
+        </tbody>
+        </table>
+        `
+
+
+
+
+        // // Armazenando os valores das inputs
+        // var vacas = Number(input_qtdVacas.value);
+        // var producao_vaca = Number(input_producaoDiaria_Litro.value);
+        // var preco_litro = Number(input_precoLitro.value);
+        // var custo_vaca = Number(input_custoVaca.value);
+
+        // // Calculando lucros diários, mensais e anuais
+        // var faturamento_diario = vacas * (producao_vaca * preco_litro); // A quantidade de vacas que possuo multiplicado pelo lucro que obtenho com a produção e o preço do leite
+        // var faturamento_mensal = faturamento_diario * 30;
+        // var faturamento_anual = faturamento_mensal * 12;
+
+        // // Calculando custo com todas as vacas mensalmente e anualmente
+        // var custo_vacas_mensal = vacas *  custo_vaca; // Custo por uma vaca ao mês multiplicado pela quantidade de vacas que tenho
+        // var custo_vacas_anual = custo_vacas_mensal * 12;
+
+        // // Calculando prejuizos
+        // var prejuizo_mensal_leite = faturamento_mensal * 0.20; // Perda de aproximadamente 20% do lucro mensal devido ao estresse termico
+        // var prejuizo_anual_leite =  prejuizo_mensal_leite * 12;
+
+        // var gasto_total = prejuizo_anual_leite + custo_vacas_anual; // Prejuizo total é a soma das perdas economicas do leite mais o custo para manter as vacas
+        
+        // //aumento da qualidade e da produção
+        // // Calculando valor recuperado
+        // var valor_recuperado = gasto_total * 0.15;// Recupero até 15% do prejuizo total
+
+        // var faturamento_restante = faturamento_anual - gasto_total; // Valor restante após o prejuizo
+        // var novo_lucro = faturamento_restante + valor_recuperado; // Valor restante após o prejuizo mais o valor que recupero com o sistema
+        
+        // div_mensagem.innerHTML = 
+        // `<br> Seu faturamento anual é de <b><span>R$${faturamento_anual}</span></b>,<br>
+        // porém você perde aproximadamente <b>20%</b> todo mês,<br>
+        // representando uma perda de <b>R$${prejuizo_mensal_leite}</b> ao mês.<br>
+        // Totalizando um prejuizo de <b><span style="color: red">R$${prejuizo_anual_leite}</span></b>  por estresse térmico ao ano.<br> 
+        // Com isso, o seu lucro bruto diminui para <b><span style="color: red">R$${faturamento_restante}</span></b><br>
+        // Com o nosso serviço você pode recuperar até  <b>15%</b> do prejuizo <b><span style="color: blue">R$${valor_recuperado}</span></b><br>
+        // Totalizando um lucro bruto anual de <b><span style="color: green">R$${novo_lucro}</span></b>`;
+
+    }
+
+</script>
