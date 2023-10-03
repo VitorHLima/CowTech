@@ -154,6 +154,7 @@
     border: 2px solid black;
     display: none;
     position:absolute;
+    opacity: 1;
     flex-direction: column;
     border-radius: 10px;
 }
@@ -225,6 +226,7 @@
 #input_ddd {
     width: 10%;
 }
+
 #input_telefone {
     width: 30%;
 }
@@ -239,4 +241,24 @@ input[type=number] {
    -moz-appearance: textfield;
    appearance: textfield;
 
+}
+#div_senha {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+}
+#div_senha button {
+    width: 5%;
+    background-color: transparent;
+    border: 0;
+    height: auto;
+    color: black;
+    margin-left: 1%;
+}
+#olho {
+    margin-top: -2%;
+    width: 25px;
+    position: absolute;
+    height: auto;
 }

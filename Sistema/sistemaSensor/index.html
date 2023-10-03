@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="index.css" />
   </head>
-  <body>
+  <body id="body_id">
     <div class="cabecario">
       <div id="div_logo">
         <h2 id="texto_cowtech"><a href="#">COW TECH</a></h2>
@@ -62,21 +62,28 @@
               <h4>E-mail</h4>
               <input type="email" id="input_email"/><br />
               <h4>Senha</h4>
-              <input type="password" id="input_senha"/><br />
+              <div id="div_senha">
+                <input type="password" id="input_senha"/><br />
+                <button onclick="Olho()">
+                  <img src="../Site/Imagens/visivel.png" alt="" id="olho">
+                </button>
+              </div><br>
               <button onclick="Cadastrar()">Cadastrar</button>
             </form>
           </div>
         </div>
         <table id="table_funcionario">
-          <tr>
+          <tbody>
+          <tr id="tr_formulario">
             <td id="td_id"><b>ID</b></td>
             <td></td>
             <td id="td_nome">Nome</td>
             <td id="td_email">E-mail</td>
             <td id="td_telefone">Telefone</td>
             <td></td>
-            <td id="td_button"><button>-</button></td>
+            <td id="td_button"><button onclick="Remover()">-</button></td>
           </tr>
+        </tbody>
         </table>
         <div id="div_button_adicionar">
           <button
@@ -92,34 +99,80 @@
   </div>
   </body>
   <script>
+      var nome;
+      var ddd;
+      var telefone;
+      var email;  
+      var senha;  
+
     function Cadastrar() {
-      var nome = input_nome.value
-      var ddd = input_ddd.value
-      var telefone = input_telefone.value
-      var email = input_email.value
-      var senha = input_senha.value
-      
-      if(nome == '' || ddd == '' || telefone == '' || email == '' || senha == ''){
-        alert('Insira uma valor')
-      }else {
-        td_nome.innerHTML = `${nome}`
-        td_telefone.innerHTML = `${ddd+telefone}`
-        td_email.innerHTML = `${email}`
+       nome = input_nome.value
+       ddd = input_ddd.value
+       telefone = input_telefone.value
+       email = input_email.value
+       senha = input_senha.value
+
+      if(nome == ''){
+        alert('Insira um nome válido') 
+        return false
       }
-        nome == ''
-        email == ''
-        ddd == ''
-        telfone == ''
-        senha == ''
+      if(ddd == ''){
+        alert('Insira um DDD válido') 
+        return false
+      }
+      if(telefone == ''){
+        alert('Insira um telefone válido') 
+        return false
+      }
+      if(email == ''){
+        alert('Insira um email válido') 
+        return false
+      }
+      if(senha == ''){
+        alert('Insira um senha válido')
+        return false 
+      }
+      if(!email.endsWith('.com')) {
+        alert('Email sem .com')
+        return false
+      }
+      else {
+        table_funcionario.innerHTML += `<br><tbody>
+          <tr id="tr_formulario">
+            <td id="td_id"><b>ID</b></td>
+            <td></td>
+            <td id="td_nome">${nome}</td>
+            <td id="td_email">${email}</td>
+            <td id="td_telefone">(${ddd}) ${telefone}</td>
+            <td></td>
+            <td id="td_button"><button>-</button></td>
+          </tr>`
+          Sair()
+      }
+    }
+    function Remover() {
+      table_funcionario.innerHTML = ``
     }
     function Adicionar() {
       pop_up.style.display = "flex";
       button_adicionar.style.display = "none";
+      body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+      body_id.style.opacity = 1;
     }
     function Sair() {
       pop_up.style.display = "none";
       button_adicionar.style.display = "inline";
       document.body.style.opacity = 1;
+      body_id.style.backgroundColor = `white`;
+    }
+    function Olho() {
+      var senha = input_senha
+
+      if(senha.type == 'password') {
+        senha.type = 'text'
+      }else {
+        senha.type = 'password'
+      }
     }
   </script>
 </html>
