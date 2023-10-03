@@ -1,99 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilo.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="estilo.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilo.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="estilo.css" />
     <title>Cadastro de Empresa</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="cabecario">
-        <div class="div_logo">
-            <h2 class="texto_cowtech"><a href="http://">COW TECH</a></h2>
-        </div>
-        <div class="div_links">
-            <ul class="lista_cabecario">
-                <a href="http://">CALCULADORA</a>
-                <a href="http://">LOGIN</a>
-                <a href="http://">CADASTRO</a>
-            </ul>
-        </div>
-
+      <div class="div_logo">
+        <h2 class="texto_cowtech"><a href="http://">COW TECH</a></h2>
+      </div>
+      <div class="div_links">
+        <ul class="lista_cabecario">
+          <a href="http://">CALCULADORA</a>
+          <a href="http://">LOGIN</a>
+          <a href="http://">CADASTRO</a>
+        </ul>
+      </div>
     </div>
 
-
-    <img class="img-vaca" src="img/vaca-removebg-preview (1) 1.jpg" alt="">
-    <img class="img-planta" src="img/freepik--Plants--inject-352.jpg" alt="">
-    <img class="img-chao" src="img/freepik--Floor--inject-352.jpg" alt="">
-
+    <img class="img-vaca" src="img/vaca-removebg-preview (1) 1.jpg" alt="" />
+    <img class="img-planta" src="img/freepik--Plants--inject-352.jpg" alt="" />
+    <img class="img-chao" src="img/freepik--Floor--inject-352.jpg" alt="" />
 
     <div class="card">
-        <div class="card-P">
-            <div class="textos">
-                <p class="bordao">Faça seu cadastro e venha fazer parte de nossa equipe!</p>
-                <p class="apoio">Caso tenha dificuldades ao tentar acessar sua conta, entre em contato com nossa equipe
-                    de
-                    <span>suporte</span>
-                </p>
-                <p class="termos">Ao clicar em “Cadastrar”, o solicitante do cadastro está ciente e aceita os termos e
-                    condições de uso</p>
-            </div>
+      <div class="card-P">
+        <div class="textos">
+          <p class="bordao">
+            Faça seu cadastro e venha fazer parte de nossa equipe!
+          </p>
+          <p class="apoio">
+            Caso tenha dificuldades ao tentar acessar sua conta, entre em
+            contato com nossa equipe de
+            <a href=""><span>suporte</span></a>
+          </p>
+          <p class="termos">
+            Ao clicar em “Cadastrar”, o solicitante do cadastro está ciente e
+            aceita os termos e condições de uso
+          </p>
         </div>
-        <div class="entradas">
-            <h4>Cadastro</h4>
-            <label class="label-cnpj" for="">CNPJ</label>
-            <input class="css-input" id="input_cnpj" type="text">
-            <label class="label-nome" for="">Nome Fantasia</label>
-            <input class="css-input" id="input_nome" type="text">
-            <label class="label-representante" for="">Representante</label>
-            <input class="css-input" id="input_representante" type="text">
-            <label class="label-ddd" for="">DDD</label>
-            <label class="label-telefone" for="">Telefone</label>
-            <input class="css-input telefone-top" id="input_telefone" type="text">
-            <input class="css-input ddd" id="input_ddd" type="text">
-            <label class="label-check" for="">Aceita receber novidades sobre atualizações em seu e-mail?</label>
-            <input class="css-checkbox" type="checkbox" id="">
-            <button class="bt-enviar" onclick="cadastroEmpresa()">Avançar</button>
-            <a class="a-cadastrar" href="#">Já tem cadastro?</a>
-        </div>
+      </div>
+      <div class="entradas">
+        <h4>Cadastro</h4>
+        <label class="label-cnpj" for="">CNPJ</label>
+        <input class="css-input" id="input_cnpj" type="text" />
+        <label class="label-nome" for="">Nome Fantasia</label>
+        <input class="css-input" id="input_nome" type="text" />
+        <label class="label-representante" for="">Representante</label>
+        <input class="css-input" id="input_representante" type="text" />
+        <label class="label-ddd" for="">DDD</label>
+        <label class="label-telefone" for="">Telefone</label>
+        <input class="css-input telefone-top" id="input_telefone" type="text" />
+        <input class="css-input ddd" id="input_ddd" type="text" />
+        <label class="label-check" for=""
+          >Aceita receber novidades sobre atualizações em seu e-mail?</label
+        >
+        <input class="css-checkbox" type="checkbox" id="" />
+        <button class="bt-enviar" onclick="cadastroEmpresa()">Avançar</button>
+        <a class="a-cadastrar" href="#">Já tem cadastro?</a>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
 
 <script>
+  function cadastroEmpresa() {
+    var cnpj = input_cnpj.value;
+    var nome = input_nome.value;
+    var representante = input_representante.value;
+    var ddd = input_ddd.value;
+    var telefone = input_telefone.value;
 
-    function cadastroEmpresa() {
-        var cnpj = input_cnpj.value
-        var nome = input_nome.value
-        var representante = input_representante.value
-        var ddd = input_ddd.value
-        var telefone = input_telefone.value
-
-        if (cnpj == '') {
-            alert("Digite um valor no campo cnpj")
-        } else if (nome == '') {
-            alert("Digite um valor no campo nome")
-        } else if (representante == '') {
-            alert("Digite um valor no campo representante")
-        } else if (ddd == '') {
-            alert("Digite um valor no campo ddd")
-        } else if (telefone == '') {
-            alert("Digite um valor no campo telefone")
-        } else {
-            alert("Cadastro realizado!!")
-        }
-
-        console.log(cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5"));
-
-        // /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/
-        // "$1.$2.$3/$4-$5"
+    if (cnpj == "") {
+      alert("Digite um valor no campo cnpj");
+    } else if (nome == "") {
+      alert("Digite um valor no campo nome");
+    } else if (representante == "") {
+      alert("Digite um valor no campo representante");
+    } else if (ddd == "") {
+      alert("Digite um valor no campo ddd");
+    } else if (telefone == "") {
+      alert("Digite um valor no campo telefone");
+    } else {
+      alert("Cadastro realizado!!");
     }
+
+    console.log(
+      cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5")
+    );
+
+    // /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/
+    // "$1.$2.$3/$4-$5"
+  }
 </script>

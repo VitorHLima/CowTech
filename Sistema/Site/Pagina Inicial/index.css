@@ -206,6 +206,12 @@
     width: 100%;
     border-radius: 100%;
     height: 100%;
+    background-size: cover;
+}
+#imagem_bruno {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
     background-size: contain;
 }
 .foto img:hover {
