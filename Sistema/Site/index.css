@@ -69,7 +69,7 @@
     max-width: 100%;
     height: 650px;
     border: 1px solid black;
-    background: url('Imagens/image\ 3.png') no-repeat bottom;
+    background: url('img/background.png') no-repeat bottom;
     background-size:cover   
 }
 #texto_inicial {
@@ -191,7 +191,7 @@
     width: 100%;
     text-align: center;
 }
-#imagem_wagner {
+#imagem_vagner {
     width: 100%;
     height: 100%;
     border-radius: 100%;
@@ -417,5 +417,3 @@ input {
     height: 300px;
     background-color: #000000;
 }
-
-
