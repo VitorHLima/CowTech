@@ -13,9 +13,7 @@ CREATE TABLE empresa (
 	ddd CHAR(2) NOT NULL, /*Tabela externa?*/
 	contato CHAR(9) NOT NULL,
 	email VARCHAR(30) NOT NULL,
-	senha VARCHAR(20) NOT NULL,
-	fkEndereco INT,
-  CONSTRAINT fkEndereco FOREIGN KEY (fkEndereco) REFERENCES endereco (idEndereco)
+	senha VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE endereco (
@@ -26,7 +24,9 @@ CREATE TABLE endereco (
 	estado VARCHAR(20) NOT NULL,
 	cep CHAR(8),
     ponto_referencia VARCHAR(60),
-    numero varchar(10)
+    numero varchar(10),
+	fkEmpresa INT,
+	CONSTRAINT fkEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
 CREATE TABLE funcionario (
@@ -63,7 +63,7 @@ CREATE TABLE sensor(
 
 create table Metricas_ideais(
 	idIdeal int primary key auto_increment,
-    tempmin FLOAT(4) NOT NULL,
+    tempMin FLOAT(4) NOT NULL,
     tempMax FLOAT(4) NOT NULL,
     umidadeMin FLOAT(4) NOT NULL,
     umidadeMax FLOAT(4) NOT NULL
@@ -71,7 +71,7 @@ create table Metricas_ideais(
 
 CREATE TABLE suporte (
 	idSuporte int primary key auto_increment,
-    assunto varchar(30) not null,
+    assunto varchar(40) not null,
     descrição varchar(500) not null,
     telefone char(11) not null,
     email varchar(30) not null,
