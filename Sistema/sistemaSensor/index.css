@@ -3,27 +3,32 @@
     margin: 0;
     font-family: Poppins;
 }
+
 .div_principal_sistema {
     background-color: white;
 }
+
 .cabecario {
     display: flex;
     width: 100%;
     height: fit-content;
     flex-direction: row;
     background-color: transparent;
-    padding: 20px 0 0 0 ;
+    padding: 20px 0 0 0;
 }
+
 #div_logo {
     padding: 10px;
     width: 40%;
 }
+
 #texto_cowtech {
     margin: 0 0 0 5%;
     font-weight: 600;
     font-size: 25px;
 }
-#texto_cowtech a{
+
+#texto_cowtech a {
     text-decoration: none;
     list-style: none;
     color: black;
@@ -31,6 +36,7 @@
     font-weight: 600;
     font-size: 25px;
 }
+
 #div_links {
     display: flex;
     flex-direction: row;
@@ -39,6 +45,7 @@
     padding: 10px;
     text-align: center;
 }
+
 #lista_cabecario {
     justify-content: right;
     text-align: right;
@@ -46,21 +53,24 @@
     flex-direction: row;
     width: 100%;
 }
+
 #lista_cabecario a {
     text-decoration: none;
     color: black;
     list-style: none;
     margin: 8px 10% 0 0;
-    font-weight:500;
+    font-weight: 500;
     font-size: 17px;
 }
+
 #lista_cabecario a:hover {
     opacity: 0.8;
 }
 
-#texto_cowtech a:hover{
+#texto_cowtech a:hover {
     opacity: 0.8;
 }
+
 #div_funcionario {
     width: 100%;
     height: auto;
@@ -72,9 +82,11 @@
     margin-top: 60%;
     margin-bottom: 20%;
 }
+
 #titulo_funcionario {
     width: 100%;
 }
+
 #divisao_funcao_funcionario {
     width: 100%;
     margin-top: 5%;
@@ -84,37 +96,45 @@
     justify-content: center;
     flex-direction: column;
 }
+
 #table_funcionario {
     width: 70%;
     height: auto;
 }
-#table_funcionario td{
+
+#table_funcionario td {
     padding: 8px;
 }
+
 #td_id {
     border: 1px solid;
     border-radius: 100%;
     height: 20px;
     width: 7%;
 }
+
 #td_nome {
-    border:1px solid black;
+    border: 1px solid black;
     height: 20px;
     width: 30%;
 }
+
 #td_email {
-    border:1px solid black;
+    border: 1px solid black;
     width: 35%;
 }
+
 #td_telefone {
-    border:1px solid black;
+    border: 1px solid black;
     width: 30%;
 }
-#td_button  {
+
+#td_button {
     width: 5%;
     height: 100%;
     font-size: 100%;
 }
+
 #td_button button {
     width: 100%;
     height: 20%;
@@ -122,9 +142,11 @@
     border: 0;
     font-size: 30px;
 }
+
 #td_button button:hover {
     cursor: pointer;
 }
+
 #div_button_adicionar {
     margin-top: 3%;
     width: 60%;
@@ -134,36 +156,41 @@
     align-items: center;
     justify-content: right;
 }
+
 .button_adicionar {
     background-color: black;
     color: white;
     width: 20%;
     height: auto;
-    font-weight:400;
+    font-weight: 400;
     padding: 4px;
     display: inline;
 }
+
 .button_adicionar:hover {
     cursor: pointer;
     opacity: 0.7;
 }
+
 #pop_up {
     width: 40%;
     background-color: white;
     height: 450px;
     border: 2px solid black;
     display: none;
-    position:absolute;
+    position: absolute;
     opacity: 1;
     flex-direction: column;
     border-radius: 10px;
 }
+
 #div_button_popUp {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: right;
 }
+
 #button_sair {
     border: 15px;
     width: 50px;
@@ -172,9 +199,11 @@
     font-size: 30px;
     height: 50px;
 }
+
 #button_sair:hover {
     cursor: pointer;
 }
+
 #div_formulario {
     width: 100%;
     height: 100%;
@@ -184,6 +213,7 @@
     align-items: left;
     justify-content: left;
 }
+
 #formulario {
     display: flex;
     width: 70%;
@@ -193,6 +223,7 @@
     justify-content: left;
     padding: 0 0 0 5%;
 }
+
 #formulario input {
     width: 100%;
     box-shadow: 1px 1px 1px 0px;
@@ -200,6 +231,7 @@
     text-align: left;
     padding: 2px;
 }
+
 #formulario button {
     width: 40%;
     background-color: black;
@@ -207,22 +239,27 @@
     padding: 4px;
     border: 0;
 }
+
 #formulario button:hover {
     cursor: pointer;
 }
+
 #div_telefone {
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: row;
 }
+
 #div_ddd {
     width: 10%;
     margin-right: 5%;
 }
+
 #div_numero_telefone {
     width: 100%;
 }
+
 #input_ddd {
     width: 10%;
 }
@@ -230,24 +267,29 @@
 #input_telefone {
     width: 30%;
 }
-#img_sair{
+
+#img_sair {
     max-width: 50%;
 }
-input[type=number]::-webkit-inner-spin-button { 
+
+input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    
-}
-input[type=number] { 
-   -moz-appearance: textfield;
-   appearance: textfield;
 
 }
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+}
+
 #div_senha {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: auto;
 }
+
 #div_senha button {
     width: 5%;
     background-color: transparent;
@@ -256,12 +298,14 @@ input[type=number] {
     color: black;
     margin-left: 1%;
 }
+
 #olho {
     margin-top: -2%;
     width: 25px;
     position: absolute;
     height: auto;
 }
+
 #principal_sensor {
     width: 100%;
     margin-top: 5%;
@@ -272,21 +316,24 @@ input[type=number] {
     flex-direction: column;
     margin-bottom: 10%;
 }
+
 #titulo_sensor {
     text-align: center;
     width: 100%;
 }
+
 #pop_up_sensor {
     width: 40%;
     background-color: white;
     height: 300px;
     border: 2px solid black;
     display: none;
-    position:absolute;
+    position: absolute;
     opacity: 1;
     flex-direction: column;
     border-radius: 10px;
 }
+
 .button_sensor {
     width: 40%;
     background-color: black;
@@ -294,10 +341,12 @@ input[type=number] {
     padding: 7px;
     border: 0;
 }
+
 #button_adicionar_sensor {
     margin-top: 7%;
     text-align: center;
 }
+
 #principal_alerta {
     width: 100%;
     flex-direction: column;
@@ -308,10 +357,12 @@ input[type=number] {
     align-items: center;
     margin-bottom: 10%;
 }
+
 #titulo_alerta {
     text-align: center;
     width: 100%;
 }
+
 #pop_up_alerta {
     border: 2px solid black;
     display: none;
@@ -324,6 +375,7 @@ input[type=number] {
     margin-top: 20%;
     padding: 0% 0% 2% 0%;
 }
+
 #pop_up_titulo {
     color: white;
     padding: 3% 0 3% 0;
@@ -334,6 +386,7 @@ input[type=number] {
     background-color: rgb(202, 39, 39);
     width: 100%;
 }
+
 #pop_up_texto {
     margin-top: 10%;
     width: 100%;
@@ -343,6 +396,7 @@ input[type=number] {
     display: flex;
     flex-direction: column;
 }
+
 #div_button_alerta {
     width: 100%;
     height: auto;
@@ -351,6 +405,7 @@ input[type=number] {
     justify-content: center;
     padding: 8% 0 0 0;
 }
+
 #button_alerta {
     width: 40%;
     padding: 2%;
@@ -359,3 +414,214 @@ input[type=number] {
     border: 0;
     font-weight: 400;
 }
+
+.card-P {
+    width: 50%;
+}
+
+.bordao {
+    font-weight: bold;
+    font-size: 27px;
+    padding-left: 3%;
+}
+
+.apoio {
+    padding-top: 4%;
+    padding-left: 3%;
+    font-size: 18px;
+}
+
+.apoio a {
+    color: black;
+    text-decoration: none;
+}
+
+.textos {
+    margin-top: 115px;
+    margin-left: 10px;
+}
+
+.img-fundo {
+    position: absolute;
+    bottom: 8%;
+    max-width: 35%;
+    left: 61%;
+}
+
+.botao-inicial {
+    width: 149px;
+    height: 35px;
+    border: solid 1px;
+    color: white;
+    border-radius: 10px 10px 10px 10px;
+    background-color: black;
+    font-weight: bold;
+    margin-left: 5%;
+    margin-top: 5%;
+    cursor: pointer;
+}
+
+.card-principal {
+    width: 50%;
+    position: relative;
+    margin-top: 20%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.qtd-sensor {
+    position: relative;
+    left: 30%;
+    height: 50px;
+    font-weight: bold;
+}
+
+.card-sensores {
+    border: 2px solid;
+    width: 500px;
+    height: 374px;
+    margin-left: 10%;
+    border-radius: 10px;
+}
+
+.texto-aviso {
+    margin-top: 3%;
+    word-break: break-word;
+}
+
+.descricao {
+    border: 2px solid;
+    position: relative;
+    left: 94%;
+    margin-top: -72%;
+    width: 650px;
+    height: 260px;
+}
+
+.ajuste-temp {
+    border: 2px solid;
+    width: 650px;
+    height: 130px;
+    position: relative;
+    left: 94%;
+    margin-top: -30%;
+}
+
+.add-prototipo {
+    border: 2px solid;
+    width: 650px;
+    height: 130px;
+    position: relative;
+    left: 94%;
+    margin-top: -7%;
+}
+
+.metrica-ideal {
+    position: relative;
+    left: 88%;
+    height: 50px;
+    font-weight: bold;
+}
+
+.ajuste-temp p {
+    font-weight: bold;
+    font-size: 20px;
+    padding-top: 8%;
+}
+
+.add-prototipo p {
+    font-weight: bold;
+    font-size: 20px;
+    padding-top: 8%;
+
+}
+
+.descricao-nome {
+    font-weight: bold;
+    font-size: 19px;
+    padding-top: 7%;
+}
+
+.descricao-breve {
+    font-size: 14px;
+    padding-top: 6%;
+}
+
+.adicionar-prot {
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* carrosel */
+
+@keyframes giro {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-100%);
+    }
+
+    45% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(-200%);
+    }
+
+    70% {
+        transform: translateX(-200%);
+    }
+
+    75% {
+        transform: translateX(-300%);
+    }
+
+    90% {
+        transform: translateX(-300%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+
+}
+
+
+.img1,
+.img2 {
+    width: 500px;
+    height: 374px;
+    position: absolute;
+    animation: giro 8s infinite;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.img1 {
+    background-image: url('img/dht11.jpg');
+    left: 11%;
+    width: 481px;
+    height: 374px;
+}
+
+.img2 {
+    background-image: url('img/lm35.jpg');
+    left: 86%;
+    width: 400px;
+    height: 374px;
+}
+
+/* fim carrosel */
