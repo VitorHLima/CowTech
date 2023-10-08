@@ -79,7 +79,7 @@
     text-align: center;
     justify-content: center;
     /*Quando mexer nas paginas iniciais, mexer na margin-top e margin-bottom, só coloquei essa porcentagem para ficar mais legivel quando for utilizar o código*/
-    margin-top: 60%;
+    margin-top: 30%;
     margin-bottom: 20%;
 }
 
@@ -162,7 +162,7 @@
     color: white;
     width: 20%;
     height: auto;
-    font-weight: 400;
+    font-weight: 200;
     padding: 4px;
     display: inline;
 }
@@ -351,7 +351,7 @@ input[type=number] {
     width: 100%;
     flex-direction: column;
     height: auto;
-    display: flex;
+    display: none;
     margin-top: 19%;
     justify-items: center;
     align-items: center;
@@ -437,14 +437,16 @@ input[type=number] {
 }
 
 .textos {
+    width: 100%;
     margin-top: 115px;
     margin-left: 10px;
+    padding: 0 0 0 5%;
 }
 
 .img-fundo {
     position: absolute;
-    bottom: 8%;
-    max-width: 35%;
+    bottom: 11%;
+    max-width: 32%;
     left: 61%;
 }
 
@@ -455,13 +457,12 @@ input[type=number] {
     color: white;
     border-radius: 10px 10px 10px 10px;
     background-color: black;
-    font-weight: bold;
-    margin-left: 5%;
+    margin-left: 10%;
     margin-top: 5%;
     cursor: pointer;
 }
 
-.card-principal {
+/* .card-principal {
     width: 50%;
     position: relative;
     margin-top: 20%;
@@ -553,75 +554,189 @@ input[type=number] {
     text-decoration: underline;
     font-weight: bold;
     cursor: pointer;
-}
+} */
 
 /* carrosel */
 
-@keyframes giro {
-
-    0% {
-        transform: translateX(0);
-    }
-
-    20% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-100%);
-    }
-
-    45% {
-        transform: translateX(-100%);
-    }
-
-    50% {
-        transform: translateX(-200%);
-    }
-
-    70% {
-        transform: translateX(-200%);
-    }
-
-    75% {
-        transform: translateX(-300%);
-    }
-
-    90% {
-        transform: translateX(-300%);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-
-
+#card-principal {
+    width: 100%;
+    margin-top: 25%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
 }
-
-
-.img1,
-.img2 {
-    width: 500px;
-    height: 374px;
-    position: absolute;
-    animation: giro 8s infinite;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+#separacao_esquerda_sistema {
+    height: 100%;
+    width: 30%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0 5%;
+    margin-right: 1%;
 }
-
-.img1 {
-    background-image: url('img/dht11.jpg');
-    left: 11%;
-    width: 481px;
-    height: 374px;
+#qt_sensor {
+    width: 100%;
+    text-align: center;
 }
-
-.img2 {
-    background-image: url('img/lm35.jpg');
-    left: 86%;
-    width: 400px;
-    height: 374px;
+#div_imagem_sensor {
+    width: 100%;
+    height: 300px;
+    margin-top: 3%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    webkit-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
 }
-
+#div_imagem_sensor img{
+    max-width: 70%;
+    display: flex;
+}
+#div_botoes {
+    width: 100%;
+    height: 100px;
+    margin: 2% 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    webkit-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+}
+#esquerda_sensor {
+    margin: 0 30% 0 0;
+}
+.botao_sistema_seta {
+    max-width: 30%;
+    width: 15%;
+    height: 50%;
+    background-color: transparent;
+    border: 0;
+}
+.botao_sistema_seta:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+.botao_sistema_seta img{
+    max-width: 100%;
+}
+#texto_sensor {
+    margin: 2% 0 0 0;
+    font-size: 10px;
+    width: 100%;
+    text-align: justify;
+    color: black;
+    display: flex;
+}
+#separacao_direita_sistema {
+    height: 100%;
+    width: 50%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0 5%;
+}
+#temperatura_recomendada {
+    width: 100%;
+    text-align: center;
+}
+#detalhes_sensor {
+    padding: 5%;
+    text-align: justify;
+    width: 100%;
+    height: 230px;
+    margin-top: 2%;
+    border-radius: 4px;
+    webkit-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+}
+#detalhes_sensor p {
+    width: 90%;
+}
+#ajustar_temp {
+    width: 110%;
+    height: 60px;
+    margin-top: 3%;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    webkit-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+}
+#adicionar_sensor {
+    width: 110%;
+    height: 60px;
+    margin-top: 3%;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    webkit-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+}
+#texto_temper {
+    width: 55%;
+    height: auto;
+    margin: 2.3% 0 0 6%;
+}
+#buttoes_controlar_sensor {
+    width: 20%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.botoes_controller {
+    width: 15%;
+    margin: 0 10% 0 10%;
+    height: auto;
+    border: 0;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: transparent;
+}
+.botoes_controller:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+#texto_adicionar_sensor {
+    height: auto;
+    width: 100%;
+    margin: 2.3% 0 0 6%;
+}
+#texto_adicionar_sensor span{
+    height: auto;
+    margin: 0 0 0 4%;
+    font-size: 17px;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    padding: 0;
+}
+#texto_adicionar_sensor button{
+    background-color: transparent;
+    border: 0;
+    font-size: 18px;
+    border-bottom: 2px solid black;
+    font-weight: bold;
+}
+#texto_adicionar_sensor button:hover{
+    cursor: pointer;
+    opacity: 0.5;
+}
 /* fim carrosel */
+
+#div_grafico {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+}

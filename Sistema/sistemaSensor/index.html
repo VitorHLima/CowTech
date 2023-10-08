@@ -40,11 +40,11 @@
         </div>
         <button class="botao-inicial">Começar</button>
 
-        <img class="img-fundo" src="img/Programmer-amico 1.jpg" alt="">
+        <img class="img-fundo" id="img_fundo" src="img/Programmer-amico 1.jpg" alt="">
       </div>
     </div>
     <!--Div do sistema, deixei separado para evitar problemas com o código-->
-    <div class="card-principal">
+    <!-- <div class="card-principal">
       <p class="qtd-sensor">Quantidade de sensores: 2</p>
       <p class="metrica-ideal">A temperatura recomendada é: 20C</p>
       <div class="card-sensores">
@@ -67,10 +67,92 @@
       </div>
       <div class="add-prototipo">
         <p>Deseja adicionar mais em prototipo? <span class="adicionar-prot">Adicionar</span> </p>
+      </div> -->
+      <div id="card-principal">
+        <div id="separacao_esquerda_sistema">
+          <div id="qt_sensor">
+            <h3>Quantidade de sensores</h3>
+          </div>
+          <div id="div_imagem_sensor">
+            <img src="../sistemaSensor/img/Rectangle 3.jpg"id='img_sensor' alt="">
+          </div>
+          <div id="div_botoes">
+            <button id="esquerda_sensor" class="botao_sistema_seta">
+              <img src="../sistemaSensor/img/icons8-voltar-100.png" alt="">
+            </button>
+            <button id="direita_sensor" class="botao_sistema_seta">
+              <img src="../sistemaSensor/img/icons8-voltar-50.png" alt="">
+            </button>
+          </div>
+          <div id="texto_sensor">
+            <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir, para mais informações seria necessario pesquisas mais aprofundadas dependendo do local </p>
+          </div>
+        </div>
+        <div id="separacao_direita_sistema">
+          <div id="temperatura_recomendada">
+            <h3>A temperatura recomendada é: 20*C</h3>
+        </div>
+          <div id="detalhes_sensor">
+            <h2>X92G49193 (Nome do sensor)</h2><br>
+            <p>Aqui seria a descrição do prototipo, onde o usuario pode escolher um “apelido” para o equipamento, e mostra a quantidade que possue no cadastro. </p>
+          </div>
+          <div id="ajustar_temp">
+            <div id="texto_temper">
+              <h3>Ajustar temperatura recomendada</h3>
+            </div>
+            <div id="buttoes_controlar_sensor">
+              <button class="botoes_controller" onclick="Aumentar_temperatura()">+</button>
+              <h3 id="dado_sensor">18</h3>
+              <button class="botoes_controller" onclick="Diminuir_temperatura()">-</button>
+            </div>
+          </div>
+          <div id="adicionar_sensor">
+            <div id="texto_adicionar_sensor">
+              <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span></h3>
+            </div>
+          </div>
+        </div>
+        <div id="principal_alerta">
+          <div id='pop_up_alerta'>
+            <div id="pop_up_titulo">
+              <h2>AVISO!</h2>
+            </div>
+            <div id="pop_up_texto">
+              <h3>A temperatura não está ideal!</h3><br><br>
+              <h4>Recomendamos que normalize a temperatura no local</h4><br>
+            </div>
+            <div id="div_button_alerta">
+              <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="principal_sensor">
+        <div id="pop_up_sensor">
+          <div id="div_button_popUp">
+            <button id="button_sair" onclick="Sair_sensor()">
+              <img src="../Site/Página Inicial/img/sair.png" id="img_sair" alt="" />
+            </button>
+          </div>
+          <div id="div_formulario">
+            <form id="formulario" action="#divisao_funcao_funcionario">
+              <h4>Nome</h4>
+              <input type="text" id="input_nome" placeholder="Ex: Frizza" /><br />
+  
+              <h4>Código</h4>
+              <input type="text" id="input_codigo" placeholder="Ex: Frizza@sptech.school" /><br /><br>
+              <button class="button_sensor" onclick="Cadastrar_sensor()">Cadastrar</button>
+          </div><br>
+          </form>
+        </div>
       </div>
     </div>
     <!--Div do grafico-->
-    <div id="div_grafico"></div>
+    <div id="div_grafico">
+      <div id="div_titulo_grafico">
+        <h1>GRAFICO</h1>
+      </div>
+    </div>
     <!--Div do cadastro de funcionarios-->
     <div id="div_funcionario">
       <div id="titulo_funcionario">
@@ -130,50 +212,6 @@
           </button>
         </div>
       </div>
-    </div>
-    <div id="principal_sensor">
-      <div id="titulo_sensor">
-        <h1>Sensores cadastrados
-        </h1>
-      </div>
-      <div id="pop_up_sensor">
-        <div id="div_button_popUp">
-          <button id="button_sair" onclick="Sair_sensor()">
-            <img src="../Site/Página Inicial/img/sair.png" id="img_sair" alt="" />
-          </button>
-        </div>
-        <div id="div_formulario">
-          <form id="formulario" action="#divisao_funcao_funcionario">
-            <h4>Nome</h4>
-            <input type="text" id="input_nome" placeholder="Ex: Frizza" /><br />
-
-            <h4>Código</h4>
-            <input type="text" id="input_codigo" placeholder="Ex: Frizza@sptech.school" /><br /><br>
-            <button class="button_sensor" onclick="Cadastrar_sensor()">Cadastrar</button>
-        </div><br>
-        </form>
-
-      </div>
-      <button onclick="Adicionar_sensor()" id="button_adicionar_sensor" class="button_adicionar">Adicionar</button>
-    </div>
-    <div id="principal_alerta">
-      <div id="titulo_alerta">
-        <h1>Alerta
-        </h1>
-      </div>
-      <div id='pop_up_alerta'>
-        <div id="pop_up_titulo">
-          <h2>AVISO!</h2>
-        </div>
-        <div id="pop_up_texto">
-          <h3>A temperatura não está ideal!</h3><br><br>
-          <h4>Recomendamos que normalize a temperatura no local</h4><br>
-        </div>
-        <div id="div_button_alerta">
-          <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
-        </div>
-      </div><br><br><br>
-      <button class="button_adicionar" id="button_alerta_adicionar" onclick="Alerta()">Adicionar</button>
     </div>
   </div>
 </body>
@@ -274,14 +312,51 @@
     body_id.style.background = `rgb(0, 0, 0, 0.800)`;
     body_id.style.opacity = 1;
     button_adicionar.style.display = "none";
-    button_adicionar_sensor.style.display = 'none'
+    button_adicionar_sensor.style.display = 'none';
+    pop_up_sensor.style.position = 'absolute'
   }
+ 
   function Alerta() {
-    pop_up_alerta.style.display = `flex`
+    pop_up_alerta.style.display = `flex`;
+    
   }
   function Alerta_continuar() {
     body_id.style.background = `white`;
-    pop_up_alerta.style.display = `none`
+    pop_up_alerta.style.display = `none`;
+    img_sensor.style.display = 'flex'
+    img_fundo.style.display = 'flex'
+  }
+  function Aumentar_temperatura() {
+    var dado = dado_sensor.innerHTML;
+    
+    var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
+    
+    dado_sensor.innerHTML = `${dadoConcrecto+=1}`
+
+    if(dadoConcrecto > 20) {
+      Alerta()
+      body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+      principal_alerta.style.display = 'flex'
+      principal_alerta.style.position = 'absolute'
+      img_sensor.style.display = 'none'
+      img_fundo.style.display = 'none'
+    }
+  }
+  function Diminuir_temperatura() {
+    var dado = dado_sensor.innerHTML;
+    
+    var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
+    
+    dado_sensor.innerHTML = `${dadoConcrecto-=1}`
+
+    if(dadoConcrecto < 4) {
+      Alerta()
+      body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+      principal_alerta.style.display = 'flex'
+      principal_alerta.style.position = 'absolute';
+      img_sensor.style.display = 'none'
+      img_fundo.style.display = 'none'
+    }
   }
 </script>
 
