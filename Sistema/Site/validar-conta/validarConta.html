@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="estilo.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Validar Conta</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="cabecario">
-        <div class="div_logo">
-            <h2 class="texto_cowtech">
-                <a href="../paginaInicial.html">COW TECH</a>
-            </h2>
-        </div>
-        <div class="div_links">
-            <ul class="lista_cabecario">
-                <a href="../paginaInicial.html">Pagina Inicial</a>
-                <a href="../Tela simulador financeiro/Calculadora Financeira.html">CALCULADORA</a>
-                <a href="../cadastro-empresa/empresa.html">CADASTRO</a>
-            </ul>
-        </div>
+      <div class="div_logo">
+        <h2 class="texto_cowtech">
+          <a href="../Página Inicial/paginaInicial.html">COW TECH</a>
+        </h2>
+      </div>
+      <div class="div_links">
+        <ul class="lista_cabecario">
+          <a href="../Página Inicial/paginaInicial.html">Pagina Inicial</a>
+          <a href="../Tela simulador financeiro/Calculadora Financeira.html"
+            >CALCULADORA</a
+          >
+          <a href="../cadastro-empresa/empresa.html">CADASTRO</a>
+        </ul>
+      </div>
     </div>
 
     <img class="img-vaca" src="img/vaca-removebg-preview (1) 1.jpg" alt="" />
@@ -32,40 +36,46 @@
     <img class="img-chao" src="img/freepik--Floor--inject-352.jpg" alt="" />
 
     <div class="card">
-        <div class="card-P">
-            <div class="textos">
-                <p class="bordao">Valide sua conta em seu
-                    e-mail para continuar!</p>
-                <p class="apoio">
-                    Caso tenha dificuldades com a validação da sua conta, entre em contato com nossa equipe de
-                    <a href=""><span>suporte</span></a>
-                </p>
-            </div>
+      <div class="card-P">
+        <div class="textos">
+          <p class="bordao">Valide sua conta em seu e-mail para continuar!</p>
+          <p class="apoio">
+            Caso tenha dificuldades com a validação da sua conta, entre em
+            contato com nossa equipe de
+            <a href=""><span>suporte</span></a>
+          </p>
         </div>
-        <div class="entradas">
-            <a class="p-volta" href="#">Voltar</a>
-            <h4>VALIDE SUA CONTA</h4>
-            <label for="">Codigo</label>
-            <input class="css-input" placeholder=" X X X X" id="input_codigo" type="text" />
-            <label class="label-check" for="">O código solicitado vai chegar no e-mail cadastrado</label>
-            <button class="bt-enviar" onclick="validar()">Validar</button>
-        </div>
+      </div>
+      <div class="entradas">
+        <a class="p-volta" href="../cadastro-empresa/empresa.html">Voltar</a>
+        <h4>VALIDE SUA CONTA</h4>
+        <label for="">Codigo</label>
+        <input
+          class="css-input"
+          placeholder=" X X X X"
+          id="input_codigo"
+          type="text"
+        />
+        <label class="label-check" for=""
+          >O código solicitado vai chegar no e-mail cadastrado</label
+        >
+        <button class="bt-enviar" onclick="validar()">Validar</button>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
 
 <script>
-    function validar() {
-        var codigo = input_codigo.value;
-        var confirmaCodigo = "2025";
+  function validar() {
+    var codigo = input_codigo.value;
+    var confirmaCodigo = "2025";
 
-        if (codigo == "") {
-            alert("Digite um valor no campo código");
-        } else if (codigo != confirmaCodigo) {
-            alert("O código está incorreto");
-        } else {
-            alert("Conta validada!!");
-        }
+    if (codigo == "") {
+      alert("Digite um valor no campo código");
+    } else if (codigo != confirmaCodigo) {
+      alert("O código está incorreto");
+    } else {
+      alert("Conta validada!!");
     }
+  }
 </script>
