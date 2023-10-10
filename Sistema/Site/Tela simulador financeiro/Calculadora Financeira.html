@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculadora</title>
-    <link rel="stylesheet" href="index.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,200&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <!--ESTA CALCULADORA TEM COMO PROPÓSITO A PARTIR DOS VALORES INFORMADOS PELO USUÁRIO EXIBIR UMA MENSAGEM COM OS DADOS ABAIXO:
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,200&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!--ESTA CALCULADORA TEM COMO PROPÓSITO A PARTIR DOS VALORES INFORMADOS PELO USUÁRIO EXIBIR UMA MENSAGEM COM OS DADOS ABAIXO:
 
         - LUCRO ANUAL DO PRODUTOR;
         - VALOR DAS PERDAS DEVIDO AO ESTRESSE TERMICO;
@@ -22,73 +21,69 @@
         - NOVO LUCRO COM A QUANTIA RESTANTE MAIS O VALOR RECIUPERADO;
     -->
 
-    <div class="cabecario">
-      <div id="div_logo">
-        <h2 id="texto_cowtech">
-          <a href="../paginaInicial.html">COW TECH</a>
-        </h2>
-      </div>
-      <div id="div_links">
-        <ul id="lista_cabecario">
-          <a href="../paginaInicial.html">Pagina Inicial</a>
-          <a href="../cadastro-empresa/empresa.html">CADASTRAR</a>
-          <a href="../login/login.html">LOGIN</a>
-        </ul>
-      </div>
+  <div class="cabecario">
+    <div id="div_logo">
+      <h2 id="texto_cowtech">
+        <a href="../Página Inicial/paginaInicial.html">COW TECH</a>
+      </h2>
     </div>
-    <br />
-    <br />
+    <div id="div_links">
+      <ul id="lista_cabecario">
+        <a href="../Página Inicial/paginaInicial.html">Pagina Inicial</a>
+        <a href="../cadastro-empresa/empresa.html">CADASTRAR</a>
+        <a href="../login/login.html">LOGIN</a>
+      </ul>
+    </div>
+  </div>
+  <br />
+  <br />
 
-    <div id="div_principal">
-      <div id="borda">
-        <div id="div_opcao">
-          <button class="botao_escolher">
-            <h2 class="h2_sensor">Calculadora</h2>
-          </button>
-          <div id="div_englobar">
-            <div id="div_cadastro">
-              <h4 class="h3_pergunta">Quantas vacas possui?</h4>
-              <input class="input1" type="number" id="input_qtdVacas" />
-              <h4 class="h3_pergunta">
-                Média de produção de leite diária de cada vaca:
-              </h4>
-              <input
-                class="input1"
-                type="text"
-                id="input_producaoDiaria_Litro"
-              />
-              <h4 class="h3_perguntas">Preço cobrado por litro:</h4>
-              <input class="input1" type="text" id="input_precoLitro" />
-              <h4 class="h3_perguntas">
-                Custo para manter cada vaca por um mês:
-              </h4>
-              <input class="input1" type="text" id="input_custoVaca" />
-            </div>
-            <div id="div_resultado">
-              <div id="div_teste">
-                <div id="div_texto">
-                  <h4 id="mostrar"></h4>
-                </div>
-                <div id="div_botao">
-                  <button class="button_calcular" onclick="calcular()">
-                    Calcular
-                  </button>
-                  <div id="div_mensagem"></div>
-                </div>
+  <div id="div_principal">
+    <div id="borda">
+      <div id="div_opcao">
+        <button class="botao_escolher">
+          <h2 class="h2_sensor">Calculadora</h2>
+        </button>
+        <div id="div_englobar">
+          <div id="div_cadastro">
+            <h4 class="h3_pergunta">Quantas vacas possui?</h4>
+            <input class="input1" type="number" id="input_qtdVacas" />
+            <h4 class="h3_pergunta">
+              Média de produção de leite diária de cada vaca:
+            </h4>
+            <input class="input1" type="text" id="input_producaoDiaria_Litro" />
+            <h4 class="h3_perguntas">Preço cobrado por litro:</h4>
+            <input class="input1" type="text" id="input_precoLitro" />
+            <h4 class="h3_perguntas">
+              Custo para manter cada vaca por um mês:
+            </h4>
+            <input class="input1" type="text" id="input_custoVaca" />
+          </div>
+          <div id="div_resultado">
+            <div id="div_teste">
+              <div id="div_texto">
+                <h4 id="mostrar"></h4>
+              </div>
+              <div id="div_botao">
+                <button class="button_calcular" onclick="calcular()">
+                  Calcular
+                </button>
+                <div id="div_mensagem"></div>
               </div>
             </div>
           </div>
-          <div id="divTable"></div>
-          <h4>
-            O estresse térmico causa uma perda de 40% a 50% na reprodução.<br />
-            E reduz a produção de leite de 15% a 20%.
-          </h4>
-          <h5>*Os valores acima devem ser apresentados em REAIS*</h5>
         </div>
+        <div id="divTable"></div>
+        <h4>
+          O estresse térmico causa uma perda de 40% a 50% na reprodução.<br />
+          E reduz a produção de leite de 15% a 20%.
+        </h4>
+        <h5>*Os valores acima devem ser apresentados em REAIS*</h5>
       </div>
     </div>
+  </div>
 
-    <!-- <h2>Calcule suas perdas devido ao estresse térmico</h2>
+  <!-- <h2>Calcule suas perdas devido ao estresse térmico</h2>
 
     <p>Quantidade de vacas que possui</p>
     <input id="input_qtdVacas">
@@ -101,7 +96,8 @@
     <button onclick="calcular()">Calcular</button>
 
     <div id="div_mensagem"></div> -->
-  </body>
+</body>
+
 </html>
 <script>
   function calcular() {
@@ -216,16 +212,16 @@
                             <th>Faturamento Mensal</th>
                             <th>${media_faturamento_mensal.toFixed(2)}</th>
                             <th>${media_faturamento_mensal_cowtech.toFixed(
-                              2
-                            )}</th>
+        2
+      )}</th>
                         </tr>
 
                         <tr>
                             <th>Faturamento Anual</th>
                             <th>${media_faturamento_anual.toFixed(2)}</th>
                             <th>${media_faturamento_anual_cowtech.toFixed(
-                              2
-                            )}</th>
+        2
+      )}</th>
                         </tr>
 
 

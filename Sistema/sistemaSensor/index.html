@@ -11,6 +11,9 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;0,800;1,300;1,500;1,600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="index.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+  <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 </head>
 
 <body id="body_id">
@@ -20,9 +23,9 @@
     </div>
     <div id="div_links">
       <ul id="lista_cabecario">
-        <a href="http://">USUARIOS</a>
-        <a href="cadastro-empresa/empresa.html">GRAFICOS</a>
-        <a href="../Site/login/login.html">SAIR</a>
+        <a href="#div_funcionario">USUARIOS</a>
+        <a href="#div_grafico">GRAFICOS</a>
+        <a href="../Site/Página Inicial/paginaInicial.html">SAIR</a>
       </ul>
     </div>
   </div id='div_principal_sistema' class='div_principal_sistema'>
@@ -68,151 +71,177 @@
       <div class="add-prototipo">
         <p>Deseja adicionar mais em prototipo? <span class="adicionar-prot">Adicionar</span> </p>
       </div> -->
-      <div id="card-principal">
-        <div id="separacao_esquerda_sistema">
-          <div id="qt_sensor">
-            <h3>Quantidade de sensores</h3>
+    <div id="card-principal">
+      <div id="separacao_esquerda_sistema">
+        <div id="qt_sensor">
+          <h3>Quantidade de sensores</h3>
+        </div>
+        <div id="div_imagem_sensor">
+          <img src="../sistemaSensor/img/Rectangle 3.jpg" id='img_sensor' alt="">
+        </div>
+        <div id="div_botoes">
+          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_direita()">
+            <img src="../sistemaSensor/img/icons8-voltar-100.png" alt="">
+          </button>
+          <button id="direita_sensor" class="botao_sistema_seta">
+            <img src="../sistemaSensor/img/icons8-voltar-50.png" alt="">
+          </button>
+        </div>
+        <div id="texto_sensor">
+          <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir, para mais informações seria necessario
+            pesquisas mais aprofundadas dependendo do local </p>
+        </div>
+      </div>
+      <div id="separacao_direita_sistema">
+        <div id="temperatura_recomendada">
+          <h3>A temperatura recomendada é: 20*C</h3>
+        </div>
+        <div id="detalhes_sensor">
+          <h2>X92G49193 (Nome do sensor)</h2><br>
+          <p>Aqui seria a descrição do prototipo, onde o usuario pode escolher um “apelido” para o equipamento, e mostra
+            a quantidade que possue no cadastro. </p>
+        </div>
+        <div id="ajustar_temp">
+          <div id="texto_temper">
+            <h3>Ajustar temperatura recomendada</h3>
           </div>
-          <div id="div_imagem_sensor">
-            <img src="../sistemaSensor/img/Rectangle 3.jpg"id='img_sensor' alt="">
-          </div>
-          <div id="div_botoes">
-            <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_direita()">
-              <img src="../sistemaSensor/img/icons8-voltar-100.png" alt="">
-            </button>
-            <button id="direita_sensor" class="botao_sistema_seta">
-              <img src="../sistemaSensor/img/icons8-voltar-50.png" alt="">
-            </button>
-          </div>
-          <div id="texto_sensor">
-            <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir, para mais informações seria necessario pesquisas mais aprofundadas dependendo do local </p>
+          <div id="buttoes_controlar_sensor">
+            <button class="botoes_controller" onclick="Aumentar_temperatura()">+</button>
+            <h3 id="dado_sensor">18</h3>
+            <button class="botoes_controller" onclick="Diminuir_temperatura()">-</button>
           </div>
         </div>
-        <div id="separacao_direita_sistema">
-          <div id="temperatura_recomendada">
-            <h3>A temperatura recomendada é: 20*C</h3>
-        </div>
-          <div id="detalhes_sensor">
-            <h2>X92G49193 (Nome do sensor)</h2><br>
-            <p>Aqui seria a descrição do prototipo, onde o usuario pode escolher um “apelido” para o equipamento, e mostra a quantidade que possue no cadastro. </p>
-          </div>
-          <div id="ajustar_temp">
-            <div id="texto_temper">
-              <h3>Ajustar temperatura recomendada</h3>
-            </div>
-            <div id="buttoes_controlar_sensor">
-              <button class="botoes_controller" onclick="Aumentar_temperatura()">+</button>
-              <h3 id="dado_sensor">18</h3>
-              <button class="botoes_controller" onclick="Diminuir_temperatura()">-</button>
-            </div>
-          </div>
-          <div id="adicionar_sensor">
-            <div id="texto_adicionar_sensor">
-              <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span></h3>
-            </div>
-          </div>
-        </div>
-        <div id="principal_alerta">
-          <div id='pop_up_alerta'>
-            <div id="pop_up_titulo">
-              <h2>AVISO!</h2>
-            </div>
-            <div id="pop_up_texto">
-              <h3>A temperatura não está ideal!</h3><br><br>
-              <h4>Recomendamos que normalize a temperatura no local</h4><br>
-            </div>
-            <div id="div_button_alerta">
-              <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
-            </div>
+        <div id="adicionar_sensor">
+          <div id="texto_adicionar_sensor">
+            <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span>
+            </h3>
           </div>
         </div>
       </div>
-      <div id="principal_sensor">
-        <div id="pop_up_sensor">
-          <div id="div_button_popUp">
-            <button id="button_sair" onclick="Sair_sensor()">
-              <img src="../Site/Página Inicial/img/sair.png" id="img_sair" alt="" />
-            </button>
+      <div id="principal_alerta">
+        <div id='pop_up_alerta'>
+          <div id="pop_up_titulo">
+            <h2>AVISO!</h2>
           </div>
-          <div id="div_formulario">
-            <form id="formulario" action="#divisao_funcao_funcionario">
-              <h4>Nome</h4>
-              <input type="text" id="input_nome" placeholder="Ex: Frizza" /><br />
-  
-              <h4>Código</h4>
-              <input type="text" id="input_codigo" placeholder="Ex: Frizza@sptech.school" /><br /><br>
-              <button class="button_sensor" onclick="Cadastrar_sensor()">Cadastrar</button>
-          </div><br>
+          <div id="pop_up_texto">
+            <h3>A temperatura não está ideal!</h3><br><br>
+            <h4>Recomendamos que normalize a temperatura no local</h4><br>
+          </div>
+          <div id="div_button_alerta">
+            <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="principal_sensor">
+      <div id="pop_up_sensor">
+        <div id="div_button_popUp">
+          <button id="button_sair" onclick="Sair_sensor()">
+            <img src="../Site/Página Inicial/img/sair.png" id="img_sair" alt="" />
+          </button>
+        </div>
+        <div id="div_formulario">
+          <form id="formulario" action="#divisao_funcao_funcionario">
+            <h4>Nome</h4>
+            <input type="text" id="input_nome" placeholder="Ex: Frizza" /><br />
+
+            <h4>Código</h4>
+            <input type="text" id="input_codigo" placeholder="Ex: Frizza@sptech.school" /><br /><br>
+            <button class="button_sensor" onclick="Cadastrar_sensor()">Cadastrar</button>
+        </div><br>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--Div do grafico-->
+  <div id="div_grafico">
+    <div id="div_titulo_grafico">
+      <h1>GRAFICO</h1>
+    </div>
+
+    <div style="margin-top: 5%;">
+      <h1>Sensor DHT 11 - Umidade</h1>
+      <section style="width:100%">
+        <canvas id="dht11Umidade"></canvas>
+      </section>
+      <!--<h1>Sensor DHT 11 - Temperatura</h1>-->
+      <section style="width: 100%; display: none;">
+        <canvas id="dht11Temperatura"></canvas>
+      </section>
+      <!--<h1>Sensor Luminosidade</h1> -->
+      <section style="width: 100%; display: none;">
+        <canvas id="luminosidade"></canvas>
+      </section>
+      <h1>Sensor LM35 - Temperatura</h1>
+      <section style="width: 100%;">
+        <canvas id="lm35Temperatura"></canvas>
+      </section>
+      <!-- <h1>Sensor Chave</h1>-->
+      <section style="width: 100%; display: none;">
+        <canvas id="chave"></canvas>
+      </section>
+    </div>
+  </div>
+  <!--Div do cadastro de funcionarios-->
+  <div id="div_funcionario">
+    <div id="titulo_funcionario">
+      <h1>Funcionarios cadastrados</h1>
+    </div>
+    <div id="divisao_funcao_funcionario">
+      <div id="pop_up">
+        <div id="div_button_popUp">
+          <button id="button_sair" onclick="Sair()">
+            <img src="../Site/Página Inicial/img/sair.png" id="img_sair" alt="" />
+          </button>
+        </div>
+        <div id="div_formulario">
+          <form id="formulario" action="#divisao_funcao_funcionario">
+            <h4>Nome</h4>
+            <input type="text" id="input_nome" placeholder="Ex: Frizza" /><br />
+            <div id="div_telefone">
+              <div id="div_ddd">
+                <h4>DDD</h4>
+                <input type="number" id="input_ddd" placeholder='11' />
+              </div>
+              <div id="div_numero_telefone">
+                <h4>Telefone</h4>
+                <input type="number" id="input_telefone" placeholder="99999-9999" /><br />
+              </div>
+            </div>
+            <br />
+            <h4>E-mail</h4>
+            <input type="email" id="input_email" placeholder="Ex: Frizza@sptech.school" /><br />
+            <h4>Senha</h4>
+            <div id="div_senha">
+              <input type="password" id="input_senha" placeholder="********" /><br />
+              <button onclick="Olho()">
+                <img src="../Site/Página Inicial/img/visivel.png" alt="" id="olho">
+              </button>
+            </div><br>
+            <button onclick="Cadastrar()">Cadastrar</button>
           </form>
         </div>
       </div>
-    </div>
-    <!--Div do grafico-->
-    <div id="div_grafico">
-      <div id="div_titulo_grafico">
-        <h1>GRAFICO</h1>
+      <table id="table_funcionario">
+        <tbody>
+          <tr id="tr_formulario">
+            <td id="td_id"><b>ID</b></td>
+            <td></td>
+            <td id="td_nome">Nome</td>
+            <td id="td_email">E-mail</td>
+            <td id="td_telefone">Telefone</td>
+            <td></td>
+            <td id="td_button"><button onclick="Remover()">-</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="div_button_adicionar">
+        <button class="button_adicionar" id="button_adicionar" onclick="Adicionar()">
+          Adicionar
+        </button>
       </div>
     </div>
-    <!--Div do cadastro de funcionarios-->
-    <div id="div_funcionario">
-      <div id="titulo_funcionario">
-        <h1>Funcionarios cadastrados</h1>
-      </div>
-      <div id="divisao_funcao_funcionario">
-        <div id="pop_up">
-          <div id="div_button_popUp">
-            <button id="button_sair" onclick="Sair()">
-              <img src="../Site/Página Inicial/img/sair.png" id="img_sair" alt="" />
-            </button>
-          </div>
-          <div id="div_formulario">
-            <form id="formulario" action="#divisao_funcao_funcionario">
-              <h4>Nome</h4>
-              <input type="text" id="input_nome" placeholder="Ex: Frizza" /><br />
-              <div id="div_telefone">
-                <div id="div_ddd">
-                  <h4>DDD</h4>
-                  <input type="number" id="input_ddd" placeholder='11' />
-                </div>
-                <div id="div_numero_telefone">
-                  <h4>Telefone</h4>
-                  <input type="number" id="input_telefone" placeholder="99999-9999" /><br />
-                </div>
-              </div>
-              <br />
-              <h4>E-mail</h4>
-              <input type="email" id="input_email" placeholder="Ex: Frizza@sptech.school" /><br />
-              <h4>Senha</h4>
-              <div id="div_senha">
-                <input type="password" id="input_senha" placeholder="********" /><br />
-                <button onclick="Olho()">
-                  <img src="../Site/Página Inicial/img/visivel.png" alt="" id="olho">
-                </button>
-              </div><br>
-              <button onclick="Cadastrar()">Cadastrar</button>
-            </form>
-          </div>
-        </div>
-        <table id="table_funcionario">
-          <tbody>
-            <tr id="tr_formulario">
-              <td id="td_id"><b>ID</b></td>
-              <td></td>
-              <td id="td_nome">Nome</td>
-              <td id="td_email">E-mail</td>
-              <td id="td_telefone">Telefone</td>
-              <td></td>
-              <td id="td_button"><button onclick="Remover()">-</button></td>
-            </tr>
-          </tbody>
-        </table>
-        <div id="div_button_adicionar">
-          <button class="button_adicionar" id="button_adicionar" onclick="Adicionar()">
-            Adicionar
-          </button>
-        </div>
-      </div>
-    </div>
+  </div>
   </div>
 </body>
 <script>
@@ -315,10 +344,10 @@
     button_adicionar_sensor.style.display = 'none';
     pop_up_sensor.style.position = 'absolute'
   }
- 
+
   function Alerta() {
     pop_up_alerta.style.display = `flex`;
-    
+
   }
   function Alerta_continuar() {
     body_id.style.background = `white`;
@@ -328,12 +357,12 @@
   }
   function Aumentar_temperatura() {
     var dado = dado_sensor.innerHTML;
-    
-    var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
-    
-    dado_sensor.innerHTML = `${dadoConcrecto+=1}`
 
-    if(dadoConcrecto > 20) {
+    var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
+
+    dado_sensor.innerHTML = `${dadoConcrecto += 1}`
+
+    if (dadoConcrecto > 20) {
       Alerta()
       body_id.style.background = `rgb(0, 0, 0, 0.800)`;
       principal_alerta.style.display = 'flex'
@@ -344,12 +373,12 @@
   }
   function Diminuir_temperatura() {
     var dado = dado_sensor.innerHTML;
-    
-    var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
-    
-    dado_sensor.innerHTML = `${dadoConcrecto-=1}`
 
-    if(dadoConcrecto < 4) {
+    var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
+
+    dado_sensor.innerHTML = `${dadoConcrecto -= 1}`
+
+    if (dadoConcrecto < 4) {
       Alerta()
       body_id.style.background = `rgb(0, 0, 0, 0.800)`;
       principal_alerta.style.display = 'flex'
@@ -358,6 +387,126 @@
       img_fundo.style.display = 'none'
     }
   }
+
+  /* -- dht11Umidade -- */
+  var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
+  contextoDht11Umidade.canvas.width = 1000;
+  contextoDht11Umidade.canvas.height = 300;
+  var dht11Umidade = new Chart(
+    contextoDht11Umidade,
+    {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'Umidade',
+          type: 'line',
+          borderColor: ['#45b3e7'],
+          backgroundColor: ['#89cff0']
+        }]
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            distribution: 'series',
+            ticks: {
+              beginAtZero: true
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Umidade'
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+        animation: {
+          duration: 0
+        }
+      }
+    }
+  );
+
+  /* -- lm35Temperatura */
+  var contextoLm35Temperatura = document.getElementById('lm35Temperatura').getContext('2d');
+  contextoLm35Temperatura.canvas.width = 1000;
+  contextoLm35Temperatura.canvas.height = 300;
+  var lm35Temperatura = new Chart(
+    contextoLm35Temperatura,
+    {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'Temperatura',
+          type: 'line',
+          borderColor: ['#ffd902'],
+          backgroundColor: ['#ffe135']
+        }]
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            distribution: 'series',
+            ticks: {
+              beginAtZero: true
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Temperatura'
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+        animation: {
+          duration: 0
+        }
+      }
+    }
+  );
+
+  var paginacao = {};
+  var tempo = {};
+  function obterDados(grafico, endpoint) {
+    var http = new XMLHttpRequest();
+    http.open('GET', 'http://localhost:3000/sensores/' + endpoint, false);
+    http.send(null);
+    var valores = JSON.parse(http.responseText);
+    if (paginacao[endpoint] == null) {
+      paginacao[endpoint] = 0;
+    }
+    if (tempo[endpoint] == null) {
+      tempo[endpoint] = 0;
+    }
+    // Exibir à partir do último elemento exibido anteriormente
+    var ultimaPaginacao = paginacao[endpoint];
+    paginacao[endpoint] = valores.length;
+    var valores = valores.slice(ultimaPaginacao);
+    valores.forEach((valor) => {
+      //Máximo de 60 itens exibidos no gráfico
+      if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+        grafico.data.labels.shift();
+        grafico.data.datasets[0].data.shift();
+      }
+
+      grafico.data.labels.push(tempo[endpoint]++);
+      grafico.data.datasets[0].data.push(parseFloat(valor));
+      grafico.update();
+    })
+  }
+
+  setInterval(() => {
+    obterDados(dht11Umidade, 'dht11/umidade');
+    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
+    /* obterDados(luminosidade, 'luminosidade'); */
+    obterDados(lm35Temperatura, 'lm35/temperatura');
+    /* obterDados(chave, 'chave'); */
+  }, 1000);
 
 </script>
 
