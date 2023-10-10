@@ -477,19 +477,34 @@ input {
     vertical-align: top;
 }
 
+.redeFooter{
+    display: flex;
+    align-items: center
+}
+
 #facebook-logo {
     width: 70px;
     height: 70px;
+    margin-bottom: 6px;
+    margin-top: 6px;
 }
 
 #instagram-logo {
-    width: 37px;
-    height: 37px;
+    width: 45px;
+    height: 45px;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 6px;
+    margin-top: 6px;
 }
 
 #whatsapp-logo {
-    width: 37px;
-    height: 37px;
+    width: 45px;
+    height: 45px;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 12px;
+    margin-bottom: 6px;
 }
 
 
