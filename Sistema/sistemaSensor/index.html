@@ -71,19 +71,33 @@
       <div class="add-prototipo">
         <p>Deseja adicionar mais em prototipo? <span class="adicionar-prot">Adicionar</span> </p>
       </div> -->
-    <div id="card-principal">
+      <div id="principal_alerta">
+        <div id='pop_up_alerta'>
+          <div id="pop_up_titulo">
+            <h2>AVISO!</h2>
+          </div>
+          <div id="pop_up_texto">
+            <h3>A temperatura não está ideal!</h3><br><br>
+            <h4>Recomendamos que normalize a temperatura no local</h4><br>
+          </div>
+          <div id="div_button_alerta">
+            <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
+          </div>
+        </div>
+      </div>
+    <div id="card_principal">
       <div id="separacao_esquerda_sistema">
         <div id="qt_sensor">
-          <h3>Quantidade de sensores</h3>
+          <h3>Quantidade de sensores: 1</h3>
         </div>
         <div id="div_imagem_sensor">
           <img src="../sistemaSensor/img/Rectangle 3.jpg" id='img_sensor' alt="">
         </div>
         <div id="div_botoes">
-          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_direita()">
+          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda()">
             <img src="../sistemaSensor/img/icons8-voltar-100.png" alt="">
           </button>
-          <button id="direita_sensor" class="botao_sistema_seta">
+          <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita()">
             <img src="../sistemaSensor/img/icons8-voltar-50.png" alt="">
           </button>
         </div>
@@ -107,6 +121,54 @@
           </div>
           <div id="buttoes_controlar_sensor">
             <button class="botoes_controller" onclick="Aumentar_temperatura()">+</button>
+            <h3 id="dado_sensor1">18</h3>
+            <button class="botoes_controller" onclick="Diminuir_temperatura()">-</button>
+          </div>
+        </div>
+        <div id="adicionar_sensor">
+          <div id="texto_adicionar_sensor">
+            <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="card_secundario">
+      <div id="separacao_esquerda_sistema">
+        <div id="qt_sensor">
+          <h3>Quantidade de sensores: 1</h3>
+        </div>
+        <div id="div_imagem_sensor">
+          <img src="../sistemaSensor/img/dht11.jpg" id='img_sensor_dth11' alt="">
+        </div>
+        <div id="div_botoes">
+          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda_dht11()">
+            <img src="../sistemaSensor/img/icons8-voltar-100.png" alt="">
+          </button>
+          <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita_dht11()">
+            <img src="../sistemaSensor/img/icons8-voltar-50.png" alt="">
+          </button>
+        </div>
+        <div id="texto_sensor">
+          <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir, para mais informações seria necessario
+            pesquisas mais aprofundadas dependendo do local </p>
+        </div>
+      </div>
+      <div id="separacao_direita_sistema">
+        <div id="temperatura_recomendada">
+          <h3>A temperatura recomendada é: 20*C</h3>
+        </div>
+        <div id="detalhes_sensor">
+          <h2>DHT11 (Nome do sensor)</h2><br>
+          <p>Aqui seria a descrição do prototipo, onde o usuario pode escolher um “apelido” para o equipamento, e mostra
+            a quantidade que possue no cadastro. </p>
+        </div>
+        <div id="ajustar_temp">
+          <div id="texto_temper">
+            <h3>Ajustar temperatura recomendada</h3>
+          </div>
+          <div id="buttoes_controlar_sensor">
+            <button class="botoes_controller" onclick="Aumentar_temperatura()">+</button>
             <h3 id="dado_sensor">18</h3>
             <button class="botoes_controller" onclick="Diminuir_temperatura()">-</button>
           </div>
@@ -118,17 +180,51 @@
           </div>
         </div>
       </div>
-      <div id="principal_alerta">
-        <div id='pop_up_alerta'>
-          <div id="pop_up_titulo">
-            <h2>AVISO!</h2>
+    </div>
+    <div id="card_terceiro">
+      <div id="separacao_esquerda_sistema">
+        <div id="qt_sensor">
+          <h3>Quantidade de sensores: 1</h3>
+        </div>
+        <div id="div_imagem_sensor">
+          <img src="../sistemaSensor/img/lm35.jpg" id='img_sensor_lm35' alt="">
+        </div>
+        <div id="div_botoes">
+          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda_lm35()">
+            <img src="../sistemaSensor/img/icons8-voltar-100.png" alt="">
+          </button>
+          <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita_lm35()">
+            <img src="../sistemaSensor/img/icons8-voltar-50.png" alt="">
+          </button>
+        </div>
+        <div id="texto_sensor">
+          <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir, para mais informações seria necessario
+            pesquisas mais aprofundadas dependendo do local </p>
+        </div>
+      </div>
+      <div id="separacao_direita_sistema">
+        <div id="temperatura_recomendada">
+          <h3>A temperatura recomendada é: 20*C</h3>
+        </div>
+        <div id="detalhes_sensor">
+          <h2>LM35 (Nome do sensor)</h2><br>
+          <p>Aqui seria a descrição do prototipo, onde o usuario pode escolher um “apelido” para o equipamento, e mostra
+            a quantidade que possue no cadastro. </p>
+        </div>
+        <div id="ajustar_temp">
+          <div id="texto_temper">
+            <h3>Ajustar temperatura recomendada</h3>
           </div>
-          <div id="pop_up_texto">
-            <h3>A temperatura não está ideal!</h3><br><br>
-            <h4>Recomendamos que normalize a temperatura no local</h4><br>
+          <div id="buttoes_controlar_sensor">
+            <button class="botoes_controller" onclick="Aumentar_temperatura()">+</button>
+            <h3 id="dado_sensor">18</h3>
+            <button class="botoes_controller" onclick="Diminuir_temperatura()">-</button>
           </div>
-          <div id="div_button_alerta">
-            <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
+        </div>
+        <div id="adicionar_sensor">
+          <div id="texto_adicionar_sensor">
+            <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span>
+            </h3>
           </div>
         </div>
       </div>
@@ -143,7 +239,7 @@
         <div id="div_formulario">
           <form id="formulario" action="#divisao_funcao_funcionario">
             <h4>Nome</h4>
-            <input type="text" id="input_nome" placeholder="Ex: Frizza" /><br />
+            <input type="text" id="input_nome_sensor" placeholder="Ex: Frizza" /><br />
 
             <h4>Código</h4>
             <input type="text" id="input_codigo" placeholder="Ex: Frizza@sptech.school" /><br /><br>
@@ -197,7 +293,7 @@
         <div id="div_formulario">
           <form id="formulario" action="#divisao_funcao_funcionario">
             <h4>Nome</h4>
-            <input type="text" id="input_nome" placeholder="Ex: Frizza" /><br />
+            <input type="text" id="input_nome_pessoa" placeholder="Ex: Frizza" /><br />
             <div id="div_telefone">
               <div id="div_ddd">
                 <h4>DDD</h4>
@@ -252,7 +348,7 @@
   var senha;
 
   function Cadastrar() {
-    nome = input_nome.value
+    nome = input_nome_pessoa.value
     ddd = input_ddd.value
     telefone = input_telefone.value
     email = input_email.value
@@ -356,11 +452,11 @@
     img_fundo.style.display = 'flex'
   }
   function Aumentar_temperatura() {
-    var dado = dado_sensor.innerHTML;
+    var dado = dado_sensor1.innerHTML;
 
     var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
 
-    dado_sensor.innerHTML = `${dadoConcrecto += 1}`
+    dado_sensor1.innerHTML = `${dadoConcrecto += 1}`
 
     if (dadoConcrecto > 20) {
       Alerta()
@@ -372,11 +468,11 @@
     }
   }
   function Diminuir_temperatura() {
-    var dado = dado_sensor.innerHTML;
+    var dado = dado_sensor1.innerHTML;
 
     var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
 
-    dado_sensor.innerHTML = `${dadoConcrecto -= 1}`
+    dado_sensor1.innerHTML = `${dadoConcrecto -= 1}`
 
     if (dadoConcrecto < 4) {
       Alerta()
@@ -388,125 +484,151 @@
     }
   }
 
-  /* -- dht11Umidade -- */
-  var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
-  contextoDht11Umidade.canvas.width = 1000;
-  contextoDht11Umidade.canvas.height = 300;
-  var dht11Umidade = new Chart(
-    contextoDht11Umidade,
-    {
-      type: 'line',
-      data: {
-        datasets: [{
-          label: 'Umidade',
-          type: 'line',
-          borderColor: ['#45b3e7'],
-          backgroundColor: ['#89cff0']
-        }]
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            distribution: 'series',
-            ticks: {
-              beginAtZero: true
-            }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Umidade'
-            },
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        },
-        animation: {
-          duration: 0
-        }
-      }
-    }
-  );
+  function carrosel_esquerda() {
+    card_secundario.style.display = 'flex'
+    card_principal.style.display = 'none'
 
-  /* -- lm35Temperatura */
-  var contextoLm35Temperatura = document.getElementById('lm35Temperatura').getContext('2d');
-  contextoLm35Temperatura.canvas.width = 1000;
-  contextoLm35Temperatura.canvas.height = 300;
-  var lm35Temperatura = new Chart(
-    contextoLm35Temperatura,
-    {
-      type: 'line',
-      data: {
-        datasets: [{
-          label: 'Temperatura',
-          type: 'line',
-          borderColor: ['#ffd902'],
-          backgroundColor: ['#ffe135']
-        }]
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            distribution: 'series',
-            ticks: {
-              beginAtZero: true
-            }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Temperatura'
-            },
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        },
-        animation: {
-          duration: 0
-        }
-      }
     }
-  );
+ 
+ function carrosel_esquerda_dht11() {
+    card_secundario.style.display = 'none'
+    card_terceiro.style.display = 'flex'
+ }
+ function carrosel_esquerda_lm35() {
+    card_terceiro.style.display = 'none'
+    card_principal.style.display = 'flex'
+}
+function carrosel_direita() {
+  card_secundario.style.display = 'flex'
+    card_principal.style.display = 'none'
+}
+function carrosel_direita_dht11() {
+  card_secundario.style.display = 'none'
+    card_terceiro.style.display = 'flex'
+}
+function carrosel_direita_lm35() {
+  card_terceiro.style.display = 'none'
+    card_principal.style.display = 'flex'
+}
+    /* -- dht11Umidade -- */
+  // var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
+  // contextoDht11Umidade.canvas.width = 1000;
+  // contextoDht11Umidade.canvas.height = 300;
+  // var dht11Umidade = new Chart(
+  //   contextoDht11Umidade,
+  //   {
+  //     type: 'line',
+  //     data: {
+  //       datasets: [{
+  //         label: 'Umidade',
+  //         type: 'line',
+  //         borderColor: ['#45b3e7'],
+  //         backgroundColor: ['#89cff0']
+  //       }]
+  //     },
+  //     options: {
+  //       scales: {
+  //         xAxes: [{
+  //           distribution: 'series',
+  //           ticks: {
+  //             beginAtZero: true
+  //           }
+  //         }],
+  //         yAxes: [{
+  //           scaleLabel: {
+  //             display: true,
+  //             labelString: 'Umidade'
+  //           },
+  //           ticks: {
+  //             beginAtZero: true
+  //           }
+  //         }]
+  //       },
+  //       animation: {
+  //         duration: 0
+  //       }
+  //     }
+  //   }
+  // );
 
-  var paginacao = {};
-  var tempo = {};
-  function obterDados(grafico, endpoint) {
-    var http = new XMLHttpRequest();
-    http.open('GET', 'http://localhost:3000/sensores/' + endpoint, false);
-    http.send(null);
-    var valores = JSON.parse(http.responseText);
-    if (paginacao[endpoint] == null) {
-      paginacao[endpoint] = 0;
-    }
-    if (tempo[endpoint] == null) {
-      tempo[endpoint] = 0;
-    }
-    // Exibir à partir do último elemento exibido anteriormente
-    var ultimaPaginacao = paginacao[endpoint];
-    paginacao[endpoint] = valores.length;
-    var valores = valores.slice(ultimaPaginacao);
-    valores.forEach((valor) => {
-      //Máximo de 60 itens exibidos no gráfico
-      if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
-        grafico.data.labels.shift();
-        grafico.data.datasets[0].data.shift();
-      }
+  // /* -- lm35Temperatura */
+  // var contextoLm35Temperatura = document.getElementById('lm35Temperatura').getContext('2d');
+  // contextoLm35Temperatura.canvas.width = 1000;
+  // contextoLm35Temperatura.canvas.height = 300;
+  // var lm35Temperatura = new Chart(
+  //   contextoLm35Temperatura,
+  //   {
+  //     type: 'line',
+  //     data: {
+  //       datasets: [{
+  //         label: 'Temperatura',
+  //         type: 'line',
+  //         borderColor: ['#ffd902'],
+  //         backgroundColor: ['#ffe135']
+  //       }]
+  //     },
+  //     options: {
+  //       scales: {
+  //         xAxes: [{
+  //           distribution: 'series',
+  //           ticks: {
+  //             beginAtZero: true
+  //           }
+  //         }],
+  //         yAxes: [{
+  //           scaleLabel: {
+  //             display: true,
+  //             labelString: 'Temperatura'
+  //           },
+  //           ticks: {
+  //             beginAtZero: true
+  //           }
+  //         }]
+  //       },
+  //       animation: {
+  //         duration: 0
+  //       }
+  //     }
+  //   }
+  // );
 
-      grafico.data.labels.push(tempo[endpoint]++);
-      grafico.data.datasets[0].data.push(parseFloat(valor));
-      grafico.update();
-    })
-  }
+  // var paginacao = {};
+  // var tempo = {};
+  // function obterDados(grafico, endpoint) {
+  //   var http = new XMLHttpRequest();
+  //   http.open('GET', 'http://localhost:3000/sensores/' + endpoint, false);
+  //   http.send(null);
+  //   var valores = JSON.parse(http.responseText);
+  //   if (paginacao[endpoint] == null) {
+  //     paginacao[endpoint] = 0;
+  //   }
+  //   if (tempo[endpoint] == null) {
+  //     tempo[endpoint] = 0;
+  //   }
+  //   // Exibir à partir do último elemento exibido anteriormente
+  //   var ultimaPaginacao = paginacao[endpoint];
+  //   paginacao[endpoint] = valores.length;
+  //   var valores = valores.slice(ultimaPaginacao);
+  //   valores.forEach((valor) => {
+  //     //Máximo de 60 itens exibidos no gráfico
+  //     if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+  //       grafico.data.labels.shift();
+  //       grafico.data.datasets[0].data.shift();
+  //     }
 
-  setInterval(() => {
-    obterDados(dht11Umidade, 'dht11/umidade');
-    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
-    /* obterDados(luminosidade, 'luminosidade'); */
-    obterDados(lm35Temperatura, 'lm35/temperatura');
-    /* obterDados(chave, 'chave'); */
-  }, 1000);
+  //     grafico.data.labels.push(tempo[endpoint]++);
+  //     grafico.data.datasets[0].data.push(parseFloat(valor));
+  //     grafico.update();
+  //   })
+  // }
+
+  // setInterval(() => {
+  //   obterDados(dht11Umidade, 'dht11/umidade');
+  //   /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
+  //   /* obterDados(luminosidade, 'luminosidade'); */
+  //   obterDados(lm35Temperatura, 'lm35/temperatura');
+  //   /* obterDados(chave, 'chave'); */
+  // }, 1000);
 
 </script>
 
