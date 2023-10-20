@@ -4,6 +4,12 @@
     font-family: Poppins;
 }
 
+canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
 .div_principal_sistema {
     background-color: white;
 }
