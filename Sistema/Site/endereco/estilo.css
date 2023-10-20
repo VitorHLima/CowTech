@@ -160,6 +160,11 @@
     font-size: 12px;
 }
 
+.apoio a {
+    color: black;
+    text-decoration: none;
+}
+
 .textos {
     margin-top: 115px;
     margin-left: 10px;
