@@ -1,3 +1,4 @@
+//Buscar as informações 
 const serialport = require('serialport');
 const express = require('express');
 const mysql = require('mysql2');
@@ -13,13 +14,13 @@ const serial = async (
     valoresLm35Temperatura,
     /* valoresChave */
 ) => {
-    const poolBancoDados = mysql.createPool(
+    const poolBancoDados = mysql.createPool( //Conexão com o banco para fazer o insert
         {
-            host: 'localhost',
-            port: 3306,
-            user: 'aluno',
-            password: 'sptech',
-            database: 'bdsistema'
+            host: 'localhost',//Servidor de busca dos códigos
+            port: 3306,//Porta para entrada de dados
+            user: 'aluno',//Usuario dentro do banco
+            password: 'sptech',//Senha do usuario
+            database: 'bdsistema'//Banco de dados para busca
         }
     ).promise();
 
@@ -45,6 +46,7 @@ const serial = async (
         const lm35Temperatura = parseFloat(valores[3]);
         /* const chave = parseInt(valores[4]); */
 
+        //
         valoresDht11Umidade.push(dht11Umidade);
         /* valoresDht11Temperatura.push(dht11Temperatura); */
         /* valoresLuminosidade.push(luminosidade); */
