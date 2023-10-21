@@ -44,12 +44,13 @@ CREATE TABLE funcionario (
 CREATE TABLE registro (
 	idRegistro INT PRIMARY KEY AUTO_INCREMENT,
 	dtAtual DATETIME DEFAULT CURRENT_TIMESTAMP,
-    lm35_temperatura FLOAT(4) NOT NULL,
-	dht11_umidade FLOAT(4) NOT NULL,
+    dht11_umidade FLOAT(4) NOT NULL,
+	lm35_temperatura FLOAT(4) NOT NULL,
     fkSensor INT,
 	CONSTRAINT fkSensor FOREIGN KEY (fkSensor)
 	REFERENCES sensor (idSensor)
 );
+
 
 CREATE TABLE sensor(
 	idSensor INT PRIMARY KEY AUTO_INCREMENT,

@@ -23,9 +23,15 @@
     </div>
     <div id="div_links">
       <ul id="lista_cabecario">
+<<<<<<< HEAD
         <a href="#table_funcionario">FUNCIONARIOS</a>
         <a href="#div_grafico">GRAFICOS</a>
         <a href="../Site/login/login.html">SAIR</a>
+=======
+        <a href="#div_funcionario">USUÁRIOS</a>
+        <a href="#div_grafico">GRÁFICOS</a>
+        <a href="../Site/Página Inicial/paginaInicial.html">SAIR</a>
+>>>>>>> 1a76c368b93b0edd7e2b51d3e775695a9163e626
       </ul>
     </div>
   </div id='div_principal_sistema' class='div_principal_sistema'>
@@ -34,10 +40,10 @@
     <div id="div_inicial">
       <div class="card-P">
         <div class="textos">
-          <p class="bordao">É ótimo ter você por aqui, utilize e personalize seu sensor da melhor forma possivel!
+          <p class="bordao">É ótimo ter você por aqui, utilize e personalize seu sensor da melhor forma possível!
           </p>
           <p class="apoio">
-            Para começar sua experiencia, cadastre seu sensor em nosso sistema, para ter acesso a mais
+            Para começar sua experiência, cadastre seu sensor em nosso sistema, para ter acesso a mais
             informações e controle sobre a produção de suas vacas leiteiras.
           </p>
         </div>
@@ -71,20 +77,20 @@
       <div class="add-prototipo">
         <p>Deseja adicionar mais em prototipo? <span class="adicionar-prot">Adicionar</span> </p>
       </div> -->
-      <div id="principal_alerta">
-        <div id='pop_up_alerta'>
-          <div id="pop_up_titulo">
-            <h2>AVISO!</h2>
-          </div>
-          <div id="pop_up_texto">
-            <h3>A temperatura não está ideal!</h3><br><br>
-            <h4>Recomendamos que normalize a temperatura no local</h4><br>
-          </div>
-          <div id="div_button_alerta">
-            <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
-          </div>
+    <div id="principal_alerta">
+      <div id='pop_up_alerta'>
+        <div id="pop_up_titulo">
+          <h2>AVISO!</h2>
+        </div>
+        <div id="pop_up_texto">
+          <h3>A temperatura não está ideal!</h3><br><br>
+          <h4>Recomendamos que normalize a temperatura no local</h4><br>
+        </div>
+        <div id="div_button_alerta">
+          <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
         </div>
       </div>
+    </div>
     <div id="card_principal">
       <div id="separacao_esquerda_sistema">
         <div id="qt_sensor">
@@ -108,11 +114,11 @@
       </div>
       <div id="separacao_direita_sistema">
         <div id="temperatura_recomendada">
-          <h3>A temperatura recomendada é: 20*C</h3>
+          <h3>A temperatura recomendada é: 20°C</h3>
         </div>
         <div id="detalhes_sensor">
           <h2>X92G49193 (Nome do sensor)</h2><br>
-          <p>Aqui seria a descrição do prototipo, onde o usuario pode escolher um “apelido” para o equipamento, e mostra
+          <p>Aqui seria a descrição do protótipo, onde o usuário pode escolher um “apelido” para o equipamento, e mostra
             a quantidade que possue no cadastro. </p>
         </div>
         <div id="ajustar_temp">
@@ -252,8 +258,13 @@
   <!--Div do grafico-->
   <div id="div_grafico">
     <div id="div_titulo_grafico">
+<<<<<<< HEAD
       <h1>GRAFICOS</h1>
     </div><br><br>
+=======
+      <h1>GRÁFICO</h1>
+    </div>
+>>>>>>> 1a76c368b93b0edd7e2b51d3e775695a9163e626
 
     <div id="div_principal_sensor">
       <h2>Sensor DHT 11 - Umidade</h2>
@@ -283,7 +294,7 @@
   <!--Div do cadastro de funcionarios-->
   <div id="div_funcionario">
     <div id="titulo_funcionario">
-      <h1>Funcionarios cadastrados</h1>
+      <h1>Funcionários cadastrados</h1>
     </div>
     <div id="divisao_funcao_funcionario">
       <div id="pop_up">
@@ -490,27 +501,28 @@
     card_secundario.style.display = 'flex'
     card_principal.style.display = 'none'
 
-    }
- 
- function carrosel_esquerda_dht11() {
+  }
+
+  function carrosel_esquerda_dht11() {
     card_secundario.style.display = 'none'
     card_terceiro.style.display = 'flex'
- }
- function carrosel_esquerda_lm35() {
+  }
+  function carrosel_esquerda_lm35() {
     card_terceiro.style.display = 'none'
     card_principal.style.display = 'flex'
-}
-function carrosel_direita() {
-  card_secundario.style.display = 'flex'
+  }
+  function carrosel_direita() {
+    card_secundario.style.display = 'flex'
     card_principal.style.display = 'none'
-}
-function carrosel_direita_dht11() {
-  card_secundario.style.display = 'none'
+  }
+  function carrosel_direita_dht11() {
+    card_secundario.style.display = 'none'
     card_terceiro.style.display = 'flex'
-}
-function carrosel_direita_lm35() {
-  card_terceiro.style.display = 'none'
+  }
+  function carrosel_direita_lm35() {
+    card_terceiro.style.display = 'none'
     card_principal.style.display = 'flex'
+<<<<<<< HEAD
 }
     /* -- dht11Umidade -- */
   var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
@@ -553,6 +565,50 @@ function carrosel_direita_lm35() {
     }
   );
 
+=======
+  }
+
+  /* -- dht11Umidade -- */
+  var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
+  contextoDht11Umidade.canvas.width = 1000;
+  contextoDht11Umidade.canvas.height = 300;
+  var dht11Umidade = new Chart(
+    contextoDht11Umidade,
+    {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'Umidade',
+          type: 'line',
+          borderColor: ['#45b3e7'],
+          backgroundColor: ['#89cff0']
+        }]
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            distribution: 'series',
+            ticks: {
+              beginAtZero: true
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Umidade'
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+        animation: {
+          duration: 0
+        }
+      }
+    }
+  );
+>>>>>>> 1a76c368b93b0edd7e2b51d3e775695a9163e626
 
   /* -- lm35Temperatura */
   var contextoLm35Temperatura = document.getElementById('lm35Temperatura').getContext('2d');
@@ -618,6 +674,7 @@ function carrosel_direita_lm35() {
         grafico.data.labels.shift();
         grafico.data.datasets[0].data.shift();
       }
+<<<<<<< HEAD
 
       grafico.data.labels.push(tempo[endpoint]++);
       grafico.data.datasets[0].data.push(parseFloat(valor));
@@ -633,6 +690,22 @@ function carrosel_direita_lm35() {
     /* obterDados(chave, 'chave'); */
   }, 1000);
 
+=======
+
+      grafico.data.labels.push(tempo[endpoint]++);
+      grafico.data.datasets[0].data.push(parseFloat(valor));
+      grafico.update();
+    })
+  }
+
+  setInterval(() => {
+    obterDados(dht11Umidade, 'dht11/umidade');
+    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
+    /* obterDados(luminosidade, 'luminosidade'); */
+    obterDados(lm35Temperatura, 'lm35/temperatura');
+    obterDados(chave, 'chave');
+  }, 1000);
+>>>>>>> 1a76c368b93b0edd7e2b51d3e775695a9163e626
 
 </script>
 
