@@ -251,7 +251,7 @@
             </div>
           </div>
       </div>
-      <div class="div_sobreSistema">
+      <div class="div_sobreSistema" id="div_sobreSistema">
         <div class="titulo_sobreSistema"><h1>Sobre o sistema</h1></div>
         <div class="divisao_sobreSistema">
           <div class="texto_sobreSistema">
@@ -269,7 +269,7 @@
       </div>
       </div>
 
-      <div class="div_perdendoProblema">
+      <div class="div_perdendoProblema" id="div_perdendoProblema">
         <div class="titulo_perdendoProblema">
           <h1>O QUANTO ESTOU PERDENDO COM ESSE PROBLEMA?</h1></div>
 
@@ -285,19 +285,19 @@
 
                       
 
-      <div class="div_suporte">
+      <div class="div_suporte" id="div_suporte">
         <div class="titulo_suporte">
           <h1>SUPORTE</h1> </div>
 
         <div class="divisao_suporte">
             <div class="contatoSuporte">
               <h5>Nome</h5> <input id="ipt_nomeSuporte">  <br> <br>
-              <h5>E-mail</h5> <input id="ipt_emailSuporte">  <br> <br>
+              <h5>E-mail</h5> <input id="ipt_emailSuporte" type="email">  <br> <br>
               <h5>Telefone</h5> <input id="ipt_telefoneSuporte">  <br> <br>
               <h5>Assunto</h5> <input id="ipt_assuntoSuporte">  <br> <br>
               <h5>Descrição</h5> <input id="ipt_descricaoSuporte" class="ipt_descricao">  <br> <br>
             <div id="div_botaoSuporte">
-              <button class="botaoEnviarSuporte"> Enviar </button>
+              <button class="botaoEnviarSuporte" onclick="Suporte()"> Enviar </button>
             </div>
             </div>
 
@@ -330,12 +330,12 @@
 
         <div class="sobreFooter">
           <div class="titulo_SobreFooter">Sobre nós</div>
-          <ul><li><a href="#">Início</a></li>
-            <li><a href="#">Quem somos</a></li>
-            <li><a href="#">Equipe</a></li>
-            <li><a href="#">Sistema</a></li>
-            <li><a href="#">Problema</a></li>
-            <li><a href="#">Suporte</a></li></ul></div>
+          <ul><li><a href="#div_inicial">Início</a></li>
+            <li><a href="#div_quemSomos">Quem somos</a></li>
+            <li><a href="#div_nossaEquipe">Equipe</a></li>
+            <li><a href="#div_sobreSistema">Sistema</a></li>
+            <li><a href="#div_perdendoProblema">Problema</a></li>
+            <li><a href="#div_suporte">Suporte</a></li></ul></div>
 
 
         <div class="contatoFooter">
@@ -375,12 +375,21 @@
 
 
 
-
-
-
-
-
-
     </div>
   </body>
+  <script>
+    function Suporte() {
+      var nome = ipt_nomeSuporte.value
+      var email = ipt_emailSuporte.value
+      var telefone = ipt_telefoneSuporte.value
+      var assunto = ipt_assuntoSuporte.value
+      var descricao = ipt_descricaoSuporte.value
+      
+      if(nome == '' || email == '' || telefone == '' || assunto == '' || descricao == '') {
+        alert('Insira todos os dados do formulario!')
+      }else {
+        alert('Email enviado!')
+      }
+    }
+  </script>
   </html>
