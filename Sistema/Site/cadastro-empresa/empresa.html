@@ -63,7 +63,8 @@
       <input class="css-input ddd" id="input_ddd" type="text" />
       <label class="label-check" for="">Aceita receber novidades sobre atualizações em seu e-mail?</label>
       <input class="css-checkbox" type="checkbox" id="" />
-      <button class="bt-enviar" onclick="cadastroEmpresa()">Avançar</button>
+      <button class="bt-enviar" onclick="cadastroEmpresa()"><a
+          href="../confirmaCadastro/confirma.html">Avançar</a></button>
       <a class="a-cadastrar" href="../login/login.html">Já tem cadastro?</a>
     </div>
   </div>
@@ -89,8 +90,8 @@
       alert("Digite um valor no campo ddd");
     } else if (telefone == "") {
       alert("Digite um valor no campo telefone");
-    } else {
-      alert("Cadastro realizado!!");
+    } else if (cnpj != "" && nome != "" && representante != "" && ddd != "" && telefone != "") {
+      alert("Cadastro salvo!!");
     }
 
     console.log(
