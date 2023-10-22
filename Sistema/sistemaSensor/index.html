@@ -23,15 +23,9 @@
     </div>
     <div id="div_links">
       <ul id="lista_cabecario">
-<<<<<<< HEAD
-        <a href="#table_funcionario">FUNCIONARIOS</a>
-        <a href="#div_grafico">GRAFICOS</a>
-        <a href="../Site/login/login.html">SAIR</a>
-=======
-        <a href="#div_funcionario">USUÁRIOS</a>
+        <a href="#table_funcionario">FUNCIONÁRIOS</a>
         <a href="#div_grafico">GRÁFICOS</a>
-        <a href="../Site/Página Inicial/paginaInicial.html">SAIR</a>
->>>>>>> 1a76c368b93b0edd7e2b51d3e775695a9163e626
+        <a href="../Site/login/login.html">SAIR</a>
       </ul>
     </div>
   </div id='div_principal_sistema' class='div_principal_sistema'>
@@ -258,38 +252,36 @@
   <!--Div do grafico-->
   <div id="div_grafico">
     <div id="div_titulo_grafico">
-<<<<<<< HEAD
-      <h1>GRAFICOS</h1>
+      <h1>GRÁFICOS</h1>
     </div><br><br>
-=======
-      <h1>GRÁFICO</h1>
-    </div>
->>>>>>> 1a76c368b93b0edd7e2b51d3e775695a9163e626
 
-    <div id="div_principal_sensor">
-      <h2>Sensor DHT 11 - Umidade</h2>
-      <br>
-      <section style="width:100%">
-        <canvas id="dht11Umidade"></canvas>
-      </section>
-      <br>
-      <!--<h1>Sensor DHT 11 - Temperatura</h1>-->
-      <section style="width: 100%; display: none;">
-        <canvas id="dht11Temperatura"></canvas>
-      </section>
-      <!--<h1>Sensor Luminosidade</h1> -->
-      <section style="width: 100%; display: none;">
-        <canvas id="luminosidade"></canvas>
-      </section><br><br>
-      <h2>Sensor LM35 - Temperatura</h2><br>
-      <section style="width: 100%;">
-        <canvas id="lm35Temperatura"></canvas>
-      </section>
-      <!-- <h1>Sensor Chave</h1>-->
-      <section style="width: 100%; display: none;">
-        <canvas id="chave"></canvas>
-      </section>
-    </div>
+
+  </div>
+
+  <div id="div_principal_sensor">
+    <h2>Sensor DHT 11 - Umidade</h2>
+    <br>
+    <section style="width:100%">
+      <canvas id="dht11Umidade"></canvas>
+    </section>
+    <br>
+    <!--<h1>Sensor DHT 11 - Temperatura</h1>-->
+    <section style="width: 100%; display: none;">
+      <canvas id="dht11Temperatura"></canvas>
+    </section>
+    <!--<h1>Sensor Luminosidade</h1> -->
+    <section style="width: 100%; display: none;">
+      <canvas id="luminosidade"></canvas>
+    </section><br><br>
+    <h2>Sensor LM35 - Temperatura</h2><br>
+    <section style="width: 100%;">
+      <canvas id="lm35Temperatura"></canvas>
+    </section>
+    <!-- <h1>Sensor Chave</h1>-->
+    <section style="width: 100%; display: none;">
+      <canvas id="chave"></canvas>
+    </section>
+  </div>
   </div>
   <!--Div do cadastro de funcionarios-->
   <div id="div_funcionario">
@@ -522,50 +514,6 @@
   function carrosel_direita_lm35() {
     card_terceiro.style.display = 'none'
     card_principal.style.display = 'flex'
-<<<<<<< HEAD
-}
-    /* -- dht11Umidade -- */
-  var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
-  contextoDht11Umidade.canvas.width = 1000;
-  contextoDht11Umidade.canvas.height = 300;
-  var dht11Umidade = new Chart(
-    contextoDht11Umidade,
-    {
-      type: 'line',
-      data: {
-        datasets: [{
-          label: 'Umidade',
-          type: 'line',
-          borderColor: ['#45b3e7'],
-          backgroundColor: ['#89cff0']
-        }]
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            distribution: 'series',
-            ticks: {
-              beginAtZero: true
-            }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Umidade'
-            },
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        },
-        animation: {
-          duration: 0
-        }
-      }
-    }
-  );
-
-=======
   }
 
   /* -- dht11Umidade -- */
@@ -608,7 +556,7 @@
       }
     }
   );
->>>>>>> 1a76c368b93b0edd7e2b51d3e775695a9163e626
+
 
   /* -- lm35Temperatura */
   var contextoLm35Temperatura = document.getElementById('lm35Temperatura').getContext('2d');
@@ -622,8 +570,8 @@
         datasets: [{
           label: 'Temperatura',
           type: 'line',
-          borderColor: ['#ffd902'],
-          backgroundColor: ['#ffe135']
+          borderColor: ['#d1196c'],
+          backgroundColor: ['#ff0274']
         }]
       },
       options: {
@@ -674,7 +622,6 @@
         grafico.data.labels.shift();
         grafico.data.datasets[0].data.shift();
       }
-<<<<<<< HEAD
 
       grafico.data.labels.push(tempo[endpoint]++);
       grafico.data.datasets[0].data.push(parseFloat(valor));
@@ -682,7 +629,7 @@
     })
   }
 
-   var abrir = (async() => {
+  var abrir = (async () => {
     obterDados(dht11Umidade, 'dht11/umidade');
     /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
     /* obterDados(luminosidade, 'luminosidade'); */
@@ -690,22 +637,6 @@
     /* obterDados(chave, 'chave'); */
   }, 1000);
 
-=======
-
-      grafico.data.labels.push(tempo[endpoint]++);
-      grafico.data.datasets[0].data.push(parseFloat(valor));
-      grafico.update();
-    })
-  }
-
-  setInterval(() => {
-    obterDados(dht11Umidade, 'dht11/umidade');
-    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
-    /* obterDados(luminosidade, 'luminosidade'); */
-    obterDados(lm35Temperatura, 'lm35/temperatura');
-    obterDados(chave, 'chave');
-  }, 1000);
->>>>>>> 1a76c368b93b0edd7e2b51d3e775695a9163e626
 
 </script>
 
