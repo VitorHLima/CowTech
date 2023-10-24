@@ -23,8 +23,13 @@
     </div>
     <div id="div_links">
       <ul id="lista_cabecario">
+<<<<<<< HEAD
         <a href="#table_funcionario">FUNCIONARIOS</a>
         <a href="#div_grafico">GRAFICOS</a>
+=======
+        <a href="#table_funcionario">FUNCIONÁRIOS</a>
+        <a href="#div_grafico">GRÁFICOS</a>
+>>>>>>> c1afe5dabd50896ff69d820ba1c3d9957204551a
         <a href="../Site/login/login.html">SAIR</a>
       </ul>
     </div>
@@ -79,6 +84,7 @@
         <div id="pop_up_texto">
           <h3>A temperatura não está ideal!</h3><br><br>
           <h4>Recomendamos que normalize a temperatura no local</h4><br>
+          <h4>X92G49193 (Nome do sensor)</h4>
         </div>
         <div id="div_button_alerta">
           <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
@@ -252,33 +258,40 @@
   <!--Div do grafico-->
   <div id="div_grafico">
     <div id="div_titulo_grafico">
+<<<<<<< HEAD
       <h1>GRAFICOS</h1>
+=======
+      <h1>GRÁFICOS</h1>
+>>>>>>> c1afe5dabd50896ff69d820ba1c3d9957204551a
     </div><br><br>
 
-    <div id="div_principal_sensor">
-      <h2>Sensor DHT 11 - Umidade</h2>
-      <br>
-      <section style="width:100%">
-        <canvas id="dht11Umidade"></canvas>
-      </section>
-      <br>
-      <!--<h1>Sensor DHT 11 - Temperatura</h1>-->
-      <section style="width: 100%; display: none;">
-        <canvas id="dht11Temperatura"></canvas>
-      </section>
-      <!--<h1>Sensor Luminosidade</h1> -->
-      <section style="width: 100%; display: none;">
-        <canvas id="luminosidade"></canvas>
-      </section><br><br>
-      <h2>Sensor LM35 - Temperatura</h2><br>
-      <section style="width: 100%;">
-        <canvas id="lm35Temperatura"></canvas>
-      </section>
-      <!-- <h1>Sensor Chave</h1>-->
-      <section style="width: 100%; display: none;">
-        <canvas id="chave"></canvas>
-      </section>
-    </div>
+
+  </div>
+
+  <div id="div_principal_sensor">
+    <h2>Sensor DHT 11 - Umidade</h2>
+    <br>
+    <section style="width:100%">
+      <canvas id="dht11Umidade"></canvas>
+    </section>
+    <br>
+    <!--<h1>Sensor DHT 11 - Temperatura</h1>-->
+    <section style="width: 100%; display: none;">
+      <canvas id="dht11Temperatura"></canvas>
+    </section>
+    <!--<h1>Sensor Luminosidade</h1> -->
+    <section style="width: 100%; display: none;">
+      <canvas id="luminosidade"></canvas>
+    </section><br><br>
+    <h2>Sensor LM35 - Temperatura</h2><br>
+    <section style="width: 100%;">
+      <canvas id="lm35Temperatura"></canvas>
+    </section>
+    <!-- <h1>Sensor Chave</h1>-->
+    <section style="width: 100%; display: none;">
+      <canvas id="chave"></canvas>
+    </section>
+  </div>
   </div>
   <!--Div do cadastro de funcionarios-->
   <div id="div_funcionario">
@@ -511,8 +524,14 @@
   function carrosel_direita_lm35() {
     card_terceiro.style.display = 'none'
     card_principal.style.display = 'flex'
+<<<<<<< HEAD
 }
     /* -- dht11Umidade -- */
+=======
+  }
+
+  /* -- dht11Umidade -- */
+>>>>>>> c1afe5dabd50896ff69d820ba1c3d9957204551a
   var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
   contextoDht11Umidade.canvas.width = 1000;
   contextoDht11Umidade.canvas.height = 300;
@@ -566,8 +585,8 @@
         datasets: [{
           label: 'Temperatura',
           type: 'line',
-          borderColor: ['#ffd902'],
-          backgroundColor: ['#ffe135']
+          borderColor: ['#d1196c'],
+          backgroundColor: ['#ff0274']
         }]
       },
       options: {
@@ -625,6 +644,7 @@
     })
   }
 
+<<<<<<< HEAD
    var abrir = (async() => {
     obterDados(dht11Umidade, 'dht11/umidade');
     /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
@@ -632,6 +652,15 @@
     obterDados(lm35Temperatura, 'lm35/temperatura');
     /* obterDados(chave, 'chave'); */
   }, 1000);
+=======
+  setInterval(() => {
+     obterDados(dht11Umidade, 'dht11/umidade');
+     /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
+     /* obterDados(luminosidade, 'luminosidade'); */
+     obterDados(lm35Temperatura, 'lm35/temperatura');
+     /* obterDados(chave, 'chave'); */
+   }, 1000);
+>>>>>>> c1afe5dabd50896ff69d820ba1c3d9957204551a
 
 
 </script>

@@ -814,11 +814,13 @@ input[type=number] {
     align-items: center;
     justify-content: center;
 }
+
 #div_principal_sensor {
     max-width: 70%;
     padding: 2% 0 0 0;
     text-align: center;
 }
+
 #div_titulo_grafico {
     width: 100%;
     height: auto;
@@ -830,8 +832,10 @@ canvas {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
 #div_principal_sensor {
     display: flex;
     width: 100%;
     flex-direction: column;
+    margin: auto;
 }
