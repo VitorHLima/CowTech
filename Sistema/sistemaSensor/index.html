@@ -79,6 +79,7 @@
         <div id="pop_up_texto">
           <h3>A temperatura não está ideal!</h3><br><br>
           <h4>Recomendamos que normalize a temperatura no local</h4><br>
+          <h4>X92G49193 (Nome do sensor)</h4>
         </div>
         <div id="div_button_alerta">
           <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
@@ -629,13 +630,13 @@
     })
   }
 
-  var abrir = (async () => {
-    obterDados(dht11Umidade, 'dht11/umidade');
-    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
-    /* obterDados(luminosidade, 'luminosidade'); */
-    obterDados(lm35Temperatura, 'lm35/temperatura');
-    /* obterDados(chave, 'chave'); */
-  }, 1000);
+  setInterval(() => {
+     obterDados(dht11Umidade, 'dht11/umidade');
+     /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
+     /* obterDados(luminosidade, 'luminosidade'); */
+     obterDados(lm35Temperatura, 'lm35/temperatura');
+     /* obterDados(chave, 'chave'); */
+   }, 1000);
 
 
 </script>
