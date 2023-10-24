@@ -122,6 +122,25 @@
           if (validacaoNumero) {
             if (senha == confirmaSenha) {
               alert("A senha é valida");
+              if (email.indexOf("@") < 0) {
+                alert("Digite um Email válido");
+              } else if (confirmaEmail.indexOf("@") < 0) {
+                alert("Digite um Email válido no confirma email");
+              } else if (email == "") {
+                alert("Digite um valor no campo email");
+              } else if (confirmaEmail == "") {
+                alert("Digite um valor no campo repita e-mail");
+              } else if (senha == "") {
+                alert("Digite um valor no campo senha");
+              } else if (confirmaSenha == "") {
+                alert("Digite um valor no campo repita senha");
+              } else if (email != confirmaEmail) {
+                alert("E-mail diferente do confirma e-mail");
+              } else if (email == confirmaEmail && senha == confirmaSenha && senha != "" && email != "" &&
+                confirmaEmail != "" && confirmaSenha != "" && email.indexOf("@") > 0 && confirmaEmail.indexOf("@") > 0) {
+                alert("Cadastro realizado!!");
+                window.location.href = "../../sistemaSensor/index.html";
+              }
             } else {
               alert("A senha não é valida");
             }
@@ -140,23 +159,6 @@
       alert("A senha deve ter pelo menos 8 caracteres");
     }
 
-    if (email.indexOf("@") < 0) {
-      alert("Digite um Email válido");
-    } else if (confirmaEmail.indexOf("@") < 0) {
-      alert("Digite um Email válido no confirma email");
-    } else if (email == "") {
-      alert("Digite um valor no campo email");
-    } else if (confirmaEmail == "") {
-      alert("Digite um valor no campo repita e-mail");
-    } else if (senha == "") {
-      alert("Digite um valor no campo senha");
-    } else if (confirmaSenha == "") {
-      alert("Digite um valor no campo repita senha");
-    } else if (email != confirmaEmail) {
-      alert("E-mail diferente do confirma e-mail");
-    } else {
-      alert("Cadastro realizado!!");
-      window.location.href = "../../sistemaSensor/index.html";
-    }
+
   }
 </script>
