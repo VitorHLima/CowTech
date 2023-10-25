@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <title>Confirmação de Usuário</title>
+    <title>Login de Usuário</title>
   </head>
 
   <body>
@@ -22,7 +22,7 @@
       </div>
       <div class="div_links">
         <ul class="lista_cabecario">
-          <a href="../Página Inicial/paginaInicial.html">PÁGINA INICIAL</a>
+          <a href="../Página Inicial/paginaInicial.html">Pagina Inicial</a>
           <a href="../Tela simulador financeiro/Calculadora Financeira.html"
             >CALCULADORA</a
           >
@@ -126,12 +126,21 @@
         if (validacaoEspecial) {
           if (validacaoNumero) {
             if (senha == confirmaSenha) {
+              alert("A senha é valida");
               if (email.indexOf("@") < 0) {
                 alert("Digite um Email válido");
+              } else if (confirmaEmail.indexOf("@") < 0) {
+                alert("Digite um Email válido no confirma email");
               } else if (email == "") {
                 alert("Digite um valor no campo email");
+              } else if (confirmaEmail == "") {
+                alert("Digite um valor no campo repita e-mail");
               } else if (senha == "") {
                 alert("Digite um valor no campo senha");
+              } else if (confirmaSenha == "") {
+                alert("Digite um valor no campo repita senha");
+              } else if (email != confirmaEmail) {
+                alert("E-mail diferente do confirma e-mail");
               } else if (
                 email == confirmaEmail &&
                 senha == confirmaSenha &&
@@ -144,8 +153,6 @@
               ) {
                 alert("Cadastro realizado!!");
                 window.location.href = "../../sistemaSensor/index.html";
-              } else {
-                alert("Preencha todos os campos corretamente");
               }
             } else {
               alert("A senha não é valida");
@@ -156,25 +163,13 @@
         } else {
           alert("A senha deve conter ao menos um carácter especial");
         }
-
-        if (email.indexOf("@") < 0) {
-          alert("Digite um Email válido");
-        } else if (confirmaEmail.indexOf("@") < 0) {
-          alert("Digite um Email válido no confirma email");
-        } else if (email == "") {
-          alert("Digite um valor no campo email");
-        } else if (confirmaEmail == "") {
-          alert("Digite um valor no campo repita e-mail");
-        } else if (email != confirmaEmail) {
-          alert("E-mail diferente do confirma e-mail");
-        } else if (confirmaSenha == "") {
-          alert("Digite um valor no campo repita senha");
-        } else if (senha == "") {
-          alert("Digite um valor no campo senha");
-        } else {
-          alert("Cadastro realizado!!");
-        }
+      } else {
+        alert(
+          "A senha deve conter ao menos uma letra maiuscula e uma minuscula"
+        );
       }
+    } else {
+      alert("A senha deve ter pelo menos 8 caracteres");
     }
   }
 </script>
