@@ -56,9 +56,9 @@ CREATE TABLE sensor(
 	idSensor INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(20) NOT NULL,
 	codigo VARCHAR(10),
-    tipo varchar(30) not null,
-	setor varchar(30),
-    fkEmpresa INT, FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa),
+   -- tipo varchar(30) not null,
+	-- setor varchar(30),
+    -- fkEmpresa INT, FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa),
     fkMetrica int, constraint fkMetrica foreign key (fkMetrica) references Metricas_ideais(idIdeal)    
 );
 
@@ -68,7 +68,17 @@ create table Metricas_ideais(
     tempMax FLOAT(4) NOT NULL,
     umidadeMin FLOAT(4) NOT NULL,
     umidadeMax FLOAT(4) NOT NULL
-    );
+);
+
+/* create table Metricas_ideais(
+	idIdeal int primary key auto_increment,
+    tempMin FLOAT(4) NOT NULL,
+    tempMax FLOAT(4) NOT NULL,
+    umidadeMin FLOAT(4) NOT NULL,
+    umidadeMax FLOAT(4) NOT NULL,
+    tipo varchar(15),
+    fkEmpresa INT, FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa)
+); */
 
 CREATE TABLE suporte (
 	idSuporte int primary key auto_increment,
@@ -76,8 +86,8 @@ CREATE TABLE suporte (
     descrição varchar(500) not null,
     telefone char(11) not null,
     email varchar(30) not null,
-    horario datetime default current_timestamp,
-    fkFuncionario int, constraint fkFunc FOREIGN key (fkFunc) references funcionario(idFuncionario) 
+    horario datetime default current_timestamp
+   -- fkFuncionario int, constraint fkFunc FOREIGN key (fkFunc) references funcionario(idFuncionario) 
 );
 
 
