@@ -1,65 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilo.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Login de Usuário</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="estilo.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-  <title>Login de Usuário</title>
-</head>
-
-<body>
-  <div class="cabecario">
-    <div class="div_logo">
-      <h2 class="texto_cowtech">
-        <a href="../paginaInicial.html">COW TECH</a>
-      </h2>
-    </div>
-    <div class="div_links">
-      <ul class="lista_cabecario">
-        <a href="../Página Inicial/paginaInicial.html">Pagina Inicial</a>
-        <a href="../Tela simulador financeiro/Calculadora Financeira.html">CALCULADORA</a>
-        <a href="../cadastro-empresa/empresa.html">CADASTRO</a>
-      </ul>
-    </div>
-  </div>
-
-  <img class="img-vaca" src="img/vaca-removebg-preview (1) 1.jpg" alt="" />
-  <img class="img-planta" src="img/freepik--Plants--inject-352.jpg" alt="" />
-  <img class="img-chao" src="img/freepik--Floor--inject-352.jpg" alt="" />
-
-  <div class="card">
-    <div class="card-P">
-      <div class="textos">
-        <p class="bordao">
-          Confirme seu e-mail e senha para continuar, estamos quase lá!
-        </p>
-        <p class="apoio">
-          Caso tenha dificuldades com a confirmação dos dados de sua conta,
-          entre em contato com nossa equipe de
-          <a href="../Página Inicial/paginaInicial.html"><span>suporte</span></a>
-        </p>
+  <body>
+    <div class="cabecario">
+      <div class="div_logo">
+        <h2 class="texto_cowtech">
+          <a href="../paginaInicial.html">COW TECH</a>
+        </h2>
+      </div>
+      <div class="div_links">
+        <ul class="lista_cabecario">
+          <a href="../Página Inicial/paginaInicial.html">Pagina Inicial</a>
+          <a href="../Tela simulador financeiro/Calculadora Financeira.html"
+            >CALCULADORA</a
+          >
+          <a href="../cadastro-empresa/empresa.html">CADASTRO</a>
+        </ul>
       </div>
     </div>
-    <div class="entradas">
-      <a class="p-volta" href="../endereco/endereco.html">Voltar</a>
-      <h4>Cadastro</h4>
-      <label class="email" for="">E-mail</label>
-      <input class="css-input" id="input_email" type="text" />
-      <label class="emailRepeat" for="">Repita e-mail</label>
-      <input class="css-input" id="input_confirmaEmail" type="text" />
-      <label class="senha" for="">Senha</label>
-      <input class="css-input" id="input_senha" type="text" />
-      <label class="senhaRepeat" for="">Repita senha</label>
-      <input class="css-input" id="input_confirmaSenha" type="text" />
-      <button class="bt-enviar" onclick="cadastro()">Cadastrar-se</button>
-    </div>
-  </div>
-</body>
 
+    <img class="img-vaca" src="img/vaca-removebg-preview (1) 1.jpg" alt="" />
+    <img class="img-planta" src="img/freepik--Plants--inject-352.jpg" alt="" />
+    <img class="img-chao" src="img/freepik--Floor--inject-352.jpg" alt="" />
+
+    <div class="card">
+      <div class="card-P">
+        <div class="textos">
+          <p class="bordao">
+            Confirme seu e-mail e senha para continuar, estamos quase lá!
+          </p>
+          <p class="apoio">
+            Caso tenha dificuldades com a confirmação dos dados de sua conta,
+            entre em contato com nossa equipe de
+            <a href="../Página Inicial/paginaInicial.html"
+              ><span>suporte</span></a
+            >
+          </p>
+        </div>
+      </div>
+      <div class="entradas">
+        <a class="p-volta" href="../endereco/endereco.html">Voltar</a>
+        <h4>Cadastro</h4>
+        <label class="email" for="">E-mail</label>
+        <input class="css-input" id="input_email" type="text" />
+        <label class="emailRepeat" for="">Repita e-mail</label>
+        <input class="css-input" id="input_confirmaEmail" type="text" />
+        <label class="senha" for="">Senha</label>
+        <input class="css-input" id="input_senha" type="text" />
+        <label class="senhaRepeat" for="">Repita senha</label>
+        <input class="css-input" id="input_confirmaSenha" type="text" />
+        <button class="bt-enviar" onclick="cadastro()">Cadastrar-se</button>
+      </div>
+    </div>
+  </body>
 </html>
 
 <script>
@@ -121,25 +126,26 @@
         if (validacaoEspecial) {
           if (validacaoNumero) {
             if (senha == confirmaSenha) {
-              alert("A senha é valida");
               if (email.indexOf("@") < 0) {
                 alert("Digite um Email válido");
-              } else if (confirmaEmail.indexOf("@") < 0) {
-                alert("Digite um Email válido no confirma email");
               } else if (email == "") {
                 alert("Digite um valor no campo email");
-              } else if (confirmaEmail == "") {
-                alert("Digite um valor no campo repita e-mail");
               } else if (senha == "") {
                 alert("Digite um valor no campo senha");
-              } else if (confirmaSenha == "") {
-                alert("Digite um valor no campo repita senha");
-              } else if (email != confirmaEmail) {
-                alert("E-mail diferente do confirma e-mail");
-              } else if (email == confirmaEmail && senha == confirmaSenha && senha != "" && email != "" &&
-                confirmaEmail != "" && confirmaSenha != "" && email.indexOf("@") > 0 && confirmaEmail.indexOf("@") > 0) {
+              } else if (
+                email == confirmaEmail &&
+                senha == confirmaSenha &&
+                senha != "" &&
+                email != "" &&
+                confirmaEmail != "" &&
+                confirmaSenha != "" &&
+                email.indexOf("@") > 0 &&
+                confirmaEmail.indexOf("@") > 0
+              ) {
                 alert("Cadastro realizado!!");
                 window.location.href = "../../sistemaSensor/index.html";
+              } else {
+                alert("Preencha todos os campos corretamente");
               }
             } else {
               alert("A senha não é valida");
@@ -158,7 +164,5 @@
     } else {
       alert("A senha deve ter pelo menos 8 caracteres");
     }
-
-
   }
 </script>

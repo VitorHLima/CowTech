@@ -362,27 +362,21 @@
 
     if (nome == '') {
       alert('Insira um nome válido')
-      return false
     }
     if (ddd == '') {
       alert('Insira um DDD válido')
-      return false
     }
     if (telefone == '') {
       alert('Insira um telefone válido')
-      return false
     }
     if (email == '') {
       alert('Insira um email válido')
-      return false
     }
     if (senha == '') {
       alert('Insira um senha válido')
-      return false
     }
     if (!email.endsWith('.com')) {
       alert('Email sem .com')
-      return false
     }
     else {
       table_funcionario.innerHTML += `<br><tbody>
@@ -464,7 +458,7 @@
 
     dado_sensor1.innerHTML = `${dadoConcrecto += 1}`
 
-    if (dadoConcrecto > 20) {
+    if (dadoConcrecto > 24) {
       Alerta()
       body_id.style.background = `rgb(0, 0, 0, 0.800)`;
       principal_alerta.style.display = 'flex'
@@ -630,13 +624,13 @@
     })
   }
 
-  setInterval(() => {
-     obterDados(dht11Umidade, 'dht11/umidade');
-     /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
-     /* obterDados(luminosidade, 'luminosidade'); */
-     obterDados(lm35Temperatura, 'lm35/temperatura');
-     /* obterDados(chave, 'chave'); */
-   }, 1000);
+  // setInterval(() => {
+  //    obterDados(dht11Umidade, 'dht11/umidade');
+  //    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
+  //    /* obterDados(luminosidade, 'luminosidade'); */
+  //    obterDados(lm35Temperatura, 'lm35/temperatura');
+  //    /* obterDados(chave, 'chave'); */
+  //  }, 1000);
 
 
 </script>
