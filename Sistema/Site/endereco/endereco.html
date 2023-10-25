@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilo.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <title>Cadastro de Endereço</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="estilo.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-  <title>Cadastro de Endereço</title>
-</head>
-
-<body>
-  <div class="cabecario">
-    <div class="div_logo">
-      <h2 class="texto_cowtech"><a href="http://">COW TECH</a></h2>
-    </div>
-    <div class="div_links">
-      <ul class="lista_cabecario">
-        <a href="../Tela simulador financeiro/Calculadora Financeira.html">CALCULADORA</a>
-        <a href="../login/login.html">LOGIN</a>
-        <a href="../cadastro-empresa/empresa.html">CADASTRO</a>
-      </ul>
+  <body>
+    <div class="cabecario">
+      <div class="div_logo">
+        <h2 class="texto_cowtech"><a href="http://">COW TECH</a></h2>
+      </div>
+      <div class="div_links">
+        <ul class="lista_cabecario">
+          <a href="../Tela simulador financeiro/Calculadora Financeira.html"
+            >CALCULADORA</a
+          >
+          <a href="../login/login.html">LOGIN</a>
+          <a href="../cadastro-empresa/empresa.html">CADASTRO</a>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -29,35 +31,42 @@
   <img class="img-planta" src="img/freepik--Plants--inject-352.jpg" alt="" />
   <img class="img-chao" src="img/freepik--Floor--inject-352.jpg" alt="" />
 
-  <div class="card">
-    <div class="card-P">
-      <div class="textos">
-        <p class="bordao">
-          Informe o endereço da sua empresa para uma melhor experiencia!
-        </p>
-        <p class="apoio">
-          Caso tenha dificuldades com a sua localidade da sua conta, entre em
-          contato com nossa equipe de
-          <a href="../Página Inicial/paginaInicial.html" style="color: black"><span>suporte</span></a>
-        </p>
+    <div class="card">
+      <div class="card-P">
+        <div class="textos">
+          <p class="bordao">
+            Informe o endereço da sua empresa para uma melhor experiencia!
+          </p>
+          <p class="apoio">
+            Caso tenha dificuldades com a sua localidade da sua conta, entre em
+            contato com nossa equipe de
+            <a href="../Página Inicial/paginaInicial.html" style="color: black"
+              ><span>suporte</span></a
+            >
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="entradas">
-      <a class="p-volta" href="../cadastro-empresa/empresa.html">Voltar</a>
-      <h4>Endereço</h4>
-      <label class="label-logradouro label" for="">Logradouro</label>
-      <input class="css-input" id="input_logradouro" type="text" />
-      <label class="label-bairro label" for="">Bairro</label>
-      <input class="css-input" id="input_bairro" type="text" />
-      <label class="label-municipio label" for="">Município</label>
-      <input class="css-input" type="text" id="input_municipio" />
-      <label class="label-estado label" for="">Estado</label>
-      <input class="css-input" id="input_estado" type="text" />
-      <label class="label-cep label" for="">CEP</label>
-      <input class="css-input" id="input_cep" type="text" />
-      <button class="bt-enviar" id="button-enviar" onclick="cadastroEndereco()">
-        Avançar
-      </button>
+      <div class="entradas">
+        <a class="p-volta" href="../cadastro-empresa/empresa.html">Voltar</a>
+        <h4>Endereço</h4>
+        <label class="label-logradouro label" for="">Logradouro</label>
+        <input class="css-input" id="input_logradouro" type="text" />
+        <label class="label-bairro label" for="">Bairro</label>
+        <input class="css-input" id="input_bairro" type="text" />
+        <label class="label-municipio label" for="">Município</label>
+        <input class="css-input" type="text" id="input_municipio" />
+        <label class="label-estado label" for="">Estado</label>
+        <input class="css-input" id="input_estado" type="text" />
+        <label class="label-cep label" for="">CEP</label>
+        <input class="css-input" id="input_cep" type="text" />
+        <button
+          class="bt-enviar"
+          id="button-enviar"
+          onclick="cadastroEndereco()"
+        >
+          Avançar
+        </button>
+      </div>
     </div>
   </div>
 </body>

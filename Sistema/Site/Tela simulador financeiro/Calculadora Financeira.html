@@ -156,13 +156,13 @@
         <b>Com a CowTech você terá</b><br> 
         <b>um aumento de:</b><br>
         <br>
-        <b>Produção Diária: ${aumento_producao_diario.toFixed(2)}</b><br>
-        <b>Produção Mensal: ${aumento_faturamento_mensal.toFixed(2)}</b><br>
-        <b>Produção Anual: ${aumento_producao_anual.toFixed(2)}</b><br>
+        <b>Produção Diária: ${aumento_producao_diario.toFixed(2)}L</b><br>
+        <b>Produção Mensal: ${aumento_faturamento_mensal.toFixed(2)}L</b><br>
+        <b>Produção Anual: ${aumento_producao_anual.toFixed(2)}L</b><br>
         <br>
-        <b>Faturamento Diário: ${aumento_faturamento_diario.toFixed(2)}</b><br>
-        <b>Faturamento Mensal: ${aumento_faturamento_mensal.toFixed(2)}</b><br>
-        <b>Faturamento Anual: ${aumento_faturamento_anual.toFixed(2)}</b><br>
+        <b>Faturamento Diário: R$${aumento_faturamento_diario.toFixed(2)}</b><br>
+        <b>Faturamento Mensal: R$${aumento_faturamento_mensal.toFixed(2)}</b><br>
+        <b>Faturamento Anual: R$${aumento_faturamento_anual.toFixed(2)}</b><br>
         
         `;
 
@@ -186,48 +186,42 @@
 
                         <tr>
                             <th>Produção Diária</th>
-                            <th>${producao_diaria.toFixed(2)}</th>
-                            <th>${producao_diaria_cowtech.toFixed(2)}</th>
+                            <th><span style="color:red;">${producao_diaria.toFixed(2)}L</span></th>
+                            <th><span style="color:green;">${producao_diaria_cowtech.toFixed(2)}L</span></th>
                         </tr>
 
                         <tr>
                             <th>Produção Mensal</th>
-                            <th>${media_producao_mensal.toFixed(2)}</th>
-                            <th>${media_producao_mensal_cowtech.toFixed(2)}</th>
+                            <th><span style="color:red;">${media_producao_mensal.toFixed(2)}L</span></th>
+                            <th><span style="color:green;">${media_producao_mensal_cowtech.toFixed(2)}L</span></th>
                         </tr>
 
                         <tr>
                             <th>Produção Anual</th>
-                            <th>${media_producao_anual.toFixed(2)}</th>
-                            <th>${media_producao_anual_cowtech.toFixed(2)}</th>
+                            <th><span style="color:red;">${media_producao_anual.toFixed(2)}L</span></th>
+                            <th><span style="color:green;">${media_producao_anual_cowtech.toFixed(2)}L</span></th>
                         </tr>
 
                         <tr>
                             <th>Faturamento Diária</th>
-                            <th>${faturamento_diario.toFixed(2)}</th>
-                            <th>${faturamento_diario_cowtech.toFixed(2)}</th>
+                            <th><span style="color:red;">R$${faturamento_diario.toFixed(2)}</span></th>
+                            <th><span style="color:green;">R$${faturamento_diario_cowtech.toFixed(2)}</span></th>
                         </tr>
 
                         <tr>
                             <th>Faturamento Mensal</th>
-                            <th>${media_faturamento_mensal.toFixed(2)}</th>
-                            <th>${media_faturamento_mensal_cowtech.toFixed(
-        2
-      )}</th>
+                            <th><span style="color:red;">R$${media_faturamento_mensal.toFixed(2)}</span></th>
+                            <th><span style="color:green;">R$${media_faturamento_mensal_cowtech.toFixed(2)}</span></th>
                         </tr>
 
                         <tr>
                             <th>Faturamento Anual</th>
-                            <th>${media_faturamento_anual.toFixed(2)}</th>
-                            <th>${media_faturamento_anual_cowtech.toFixed(
-        2
-      )}</th>
+                            <th><span style="color:red;">R$${media_faturamento_anual.toFixed(2)}</span></th>
+                            <th><span style="color:green;">R$${media_faturamento_anual_cowtech.toFixed(2)}</span></th>
                         </tr>
 
-
         </tbody>
-        </table>
-        `;
+        </table>`;
     }
 
     // // Armazenando os valores das inputs
