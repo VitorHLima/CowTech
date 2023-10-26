@@ -18,8 +18,8 @@ const serial = async (
         {
             host: 'localhost',//Servidor de busca dos códigos
             port: 3306,//Porta para entrada de dados
-            user: 'aluno',//Usuario dentro do banco
-            password: 'sptech',//Senha do usuario
+            user: 'root',//Usuario dentro do banco
+            password: '',//Senha do usuario
             database: 'bdsistema'//Banco de dados para busca
         }
     ).promise();
