@@ -509,8 +509,8 @@
   function carrosel_direita_lm35() {
     card_terceiro.style.display = 'none'
     card_principal.style.display = 'flex'
-}
-    /* -- dht11Umidade -- */
+  }
+  /* -- dht11Umidade -- */
   var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
   contextoDht11Umidade.canvas.width = 1000;
   contextoDht11Umidade.canvas.height = 300;
@@ -623,7 +623,6 @@
     })
   }
 
-<<<<<<< HEAD
   // setInterval(() => {
   //    obterDados(dht11Umidade, 'dht11/umidade');
   //    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
@@ -631,15 +630,14 @@
   //    obterDados(lm35Temperatura, 'lm35/temperatura');
   //    /* obterDados(chave, 'chave'); */
   //  }, 1000);
-=======
-   var abrir = (async() => {
+
+  var abrir = (async () => {
     obterDados(dht11Umidade, 'dht11/umidade');
     /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
     /* obterDados(luminosidade, 'luminosidade'); */
     obterDados(lm35Temperatura, 'lm35/temperatura');
     /* obterDados(chave, 'chave'); */
   }, 1000);
->>>>>>> cb1624481b9111139b296429346c3f68c5fdc519
 
 
 </script>
