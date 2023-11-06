@@ -32,6 +32,11 @@
   <img class="img-chao" src="img/freepik--Floor--inject-352.jpg" alt="" />
 
   <div class="card">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
     <div class="card-P">
       <div class="textos">
         <p class="bordao">
@@ -56,6 +61,11 @@
       <label class="senhaRepeat" for="">Repita senha</label>
       <input class="css-input" id="input_confirmaSenha" type="text" />
       <button class="bt-enviar" onclick="cadastro()">Cadastrar-se</button>
+      <div id="div_aguardar" class="loading-div">
+        <img src="./assets/circle-loading.gif" id="loading-gif" />
+      </div>
+
+      <div id="div_erros_login"></div>
     </div>
   </div>
 </body>
@@ -64,6 +74,9 @@
 
 <script>
   function cadastro() {
+    aguardar();
+
+
     var email = input_email.value;
     var senha = input_senha.value;
     var confirmaSenha = input_confirmaSenha.value;
@@ -118,19 +131,54 @@
 
 
     if (email.indexOf("@") < 0) {
-      alert("Digite um Email válido");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um email válido)";
+
+      finalizarAguardar();
+      return false;
     } else if (confirmaEmail.indexOf("@") < 0) {
-      alert("Digite um Email válido no confirma email");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um Email válido no confirma email)";
+
+      finalizarAguardar();
+      return false;
     } else if (email == "") {
-      alert("Digite um valor no campo email");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um valor no campo email)";
+
+      finalizarAguardar();
+      return false;
     } else if (confirmaEmail == "") {
-      alert("Digite um valor no campo repita e-mail");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um valor no campo repita e-mail)";
+
+      finalizarAguardar();
+      return false;
     } else if (senha == "") {
-      alert("Digite um valor no campo senha");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um valor no campo senha)";
+
+      finalizarAguardar();
+      return false;
     } else if (confirmaSenha == "") {
-      alert("Digite um valor no campo repita senha");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um valor no campo repita senha)";
+
+      finalizarAguardar();
+      return false;
     } else if (email != confirmaEmail) {
-      alert("E-mail diferente do confirma e-mail");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(E-mail diferente do confirma e-mail)";
+
+      finalizarAguardar();
+      return false;
     } else if (senha.length >= 8) {
       if (senha != senha.toLowerCase() && senha != senha.toUpperCase()) {
         if (validacaoEspecial) {
@@ -146,25 +194,86 @@
                 email.indexOf("@") > 0 &&
                 confirmaEmail.indexOf("@") > 0
               ) {
-                alert("Cadastro realizado!!");
-                window.location.href = "../../sistemaSensor/index.html";
+                setInterval(sumirMensagem, 5000);
+                fetch("/usuarios/cadastrar", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    emailServer: email,
+                    confirmaEmailServer: confirmaEmail,
+                    senhaServer: senha,
+                    confirmaSenhaServer: confirmaSenha
+                  }),
+                })
+                  .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+                      cardErro.style.display = "block";
+
+                      mensagem_erro.innerHTML =
+                        "Cadastro realizado com sucesso! Redirecionando para tela do Sistema...";
+
+                      setTimeout(() => {
+                        window.location = "../../sistemaSensor/index.html";
+                      }, "2000");
+
+                      limparFormulario();
+                      finalizarAguardar();
+                    } else {
+                      throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                  })
+                  .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                    finalizarAguardar();
+                  });
+
+                return false;
               }
             } else {
-              alert("Digite senha igual no repita Senha");
+              cardErro.style.display = "block";
+              mensagem_erro.innerHTML =
+                "(Digite senha igual no repita Senha)";
+
+              finalizarAguardar();
+              return false;
             }
           } else {
-            alert("A senha deve conter pelo menos um numero");
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+              "(A senha deve conter pelo menos um numero)";
+
+            finalizarAguardar();
+            return false;
           }
         } else {
-          alert("A senha deve conter ao menos um carácter especial");
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML =
+            "(A senha deve conter ao menos um carácter especial)";
+
+          finalizarAguardar();
+          return false;
         }
       } else {
-        alert(
-          "A senha deve conter ao menos uma letra maiuscula e uma minuscula"
-        );
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML =
+          "(A senha deve conter ao menos uma letra maiuscula e uma minuscula)";
+
+        finalizarAguardar();
+        return false;
       }
     } else {
-      alert("A senha deve ter pelo menos 8 caracteres");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(A senha deve ter pelo menos 8 caracteres)";
+
+      finalizarAguardar();
+      return false;
     }
 
 
