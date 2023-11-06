@@ -75,8 +75,8 @@
         </div>
         <div id="divTable"></div>
         <h4>
-          O estresse térmico causa uma perda de 40% a 50% na reprodução.<br />
-          E reduz a produção de leite de 15% a 20%.
+          <!--  causa uma perda de 40% a 50% na reprodução.<br /> -->
+          O estresse térmico reduz a produção de leite de 15% a 20%.
         </h4>
         <h5>*Os valores acima devem ser apresentados em REAIS*</h5>
       </div>
@@ -107,14 +107,11 @@
     var preco_litro = Number(input_precoLitro.value);
     var custo_vaca = Number(input_custoVaca.value);
 
-    //calculo aumento vacas leiteiras
-    var vacas_cowtech = (10 * vacas) / 6;
-
     //calculo diário
     var producao_diaria = vacas * producao_vaca;
     var faturamento_diario = producao_diaria * preco_litro;
-    var producao_diaria_cowtech = vacas_cowtech * producao_vaca * 1.25;
-    var faturamento_diario_cowtech = vacas_cowtech * producao_vaca * 1.25 * preco_litro;
+    var producao_diaria_cowtech = vacas * producao_vaca * 1.17;
+    var faturamento_diario_cowtech = vacas * producao_vaca * 1.17 * preco_litro;
 
     //calculo Mensal
     var media_producao_mensal = producao_diaria * 30;
