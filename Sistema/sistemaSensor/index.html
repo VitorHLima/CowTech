@@ -509,8 +509,8 @@
   function carrosel_direita_lm35() {
     card_terceiro.style.display = 'none'
     card_principal.style.display = 'flex'
-}
-    /* -- dht11Umidade -- */
+  }
+  /* -- dht11Umidade -- */
   var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
   contextoDht11Umidade.canvas.width = 1000;
   contextoDht11Umidade.canvas.height = 300;
@@ -626,6 +626,22 @@
   }
 
   // setInterval(() => {
+<<<<<<< HEAD
+  //    obterDados(dht11Umidade, 'dht11/umidade');
+  //    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
+  //    /* obterDados(luminosidade, 'luminosidade'); */
+  //    obterDados(lm35Temperatura, 'lm35/temperatura');
+  //    /* obterDados(chave, 'chave'); */
+  //  }, 1000);
+
+  var abrir = (async () => {
+    obterDados(dht11Umidade, 'dht11/umidade');
+    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
+    /* obterDados(luminosidade, 'luminosidade'); */
+    obterDados(lm35Temperatura, 'lm35/temperatura');
+    /* obterDados(chave, 'chave'); */
+  }, 1000);
+=======
   //   obterDados(dht11Umidade, 'dht11/umidade');
   //   /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
   //   /* obterDados(luminosidade, 'luminosidade'); */
@@ -633,6 +649,7 @@
   //   /* obterDados(chave, 'chave'); */
   // }, 4000);
   
+>>>>>>> 687410095252c5a7a966915b6767f3901b6e5577
 
 
 </script>
