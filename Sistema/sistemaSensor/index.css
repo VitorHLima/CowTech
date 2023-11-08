@@ -818,7 +818,7 @@ input[type=number] {
 #div_principal_sensor {
     max-width: 70%;
     padding: 2% 0 0 0;
-    text-align: center;
+
 }
 
 #div_titulo_grafico {
@@ -838,4 +838,107 @@ canvas {
     width: 100%;
     flex-direction: column;
     margin: auto;
+}
+
+#div_button_sensor {
+    width: 100%;
+    margin: 0% 0 0% 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#button_grafico {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#button_temperatura {
+    margin-right: 15%;
+    background-color: transparent;
+    border: 0;
+    font-size: 20px;
+}
+
+#button_umidade {
+    background-color: transparent;
+    border: 0;
+    font-size: 20px;
+}
+
+#button_temperatura:hover {
+    cursor: pointer;
+    opacity: 0.7
+}
+
+#button_umidade:hover {
+    cursor: pointer;
+    opacity: 0.7
+}
+
+#div_informacao_grafico {
+    width: 100%;
+    align-items: left;
+    display: flex;
+    padding: 2%;
+}
+
+#button_informacao {
+    padding: 0.8%;
+    width: 20%;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    font-size: 15px;
+}
+
+#button_informacao:hover {
+    padding: 0.8%;
+    width: 20%;
+    border-radius: 20px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.titulo_grafico_sensor {
+    border-bottom: 5px solid black;
+}
+
+.opcao_grafico {
+    border-radius: 100px;
+    padding: 2px;
+    width: 4%;
+    height: 38px;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+}
+
+.opcao_grafico:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+#opcao1_grafico {
+    margin-left: 59%;
+}
+
+#opcao2_grafico {
+    margin: 0 1% 0 1%;
+}
+
+.grafico {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.ativo {
+    opacity: 1;
 }
