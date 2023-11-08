@@ -54,10 +54,6 @@
             <input class="input1" type="text" id="input_producaoDiaria_Litro" />
             <h4 class="h3_perguntas">Preço cobrado por litro:</h4>
             <input class="input1" type="text" id="input_precoLitro" />
-            <h4 class="h3_perguntas">
-              Custo para manter cada vaca por um mês:
-            </h4>
-            <input class="input1" type="text" id="input_custoVaca" />
           </div>
           <div id="div_resultado">
             <div id="div_teste">
@@ -105,7 +101,6 @@
     var vacas = Number(input_qtdVacas.value);
     var producao_vaca = Number(input_producaoDiaria_Litro.value);
     var preco_litro = Number(input_precoLitro.value);
-    var custo_vaca = Number(input_custoVaca.value);
 
     //calculo diário
     var producao_diaria = vacas * producao_vaca;
@@ -114,9 +109,9 @@
     var faturamento_diario_cowtech = vacas * producao_vaca * 1.17 * preco_litro;
 
     //calculo Mensal
-    var media_producao_mensal = producao_diaria * 30;
+    var media_producao_mensal = (vacas * producao_vaca * 30);
     var media_faturamento_mensal = faturamento_diario * 30;
-    var media_producao_mensal_cowtech = producao_diaria_cowtech * 30;
+    var media_producao_mensal_cowtech = vacas * producao_diaria_cowtech * 30;
     var media_faturamento_mensal_cowtech = faturamento_diario_cowtech * 30;
 
     //calculo anual
@@ -142,8 +137,7 @@
     if (
       vacas == "" ||
       producao_vaca == "" ||
-      preco_litro == "" ||
-      custo_vaca == ""
+      preco_litro == ""
     ) {
       alert("Insira todos os valores");
       return false;
