@@ -19,7 +19,7 @@ const serial = async (
             host: 'localhost',//Servidor de busca dos códigos
             port: 3306,//Porta para entrada de dados
             user: 'root',//Usuario dentro do banco
-            password: '',//Senha do usuario
+            password: 'Vi19hu86!',//Senha do usuario
             database: 'bdsistema'//Banco de dados para busca
         }
     ).promise();
@@ -35,6 +35,7 @@ const serial = async (
             baudRate: SERIAL_BAUD_RATE
         }
     );
+    
     arduino.on('open', () => {
         console.log(`A leitura do arduino foi iniciada na porta ${portaArduino.path} utilizando Baud Rate de ${SERIAL_BAUD_RATE}`);
     });

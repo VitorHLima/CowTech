@@ -28,6 +28,7 @@
         <a href="../Site/login/login.html">SAIR</a>
       </ul>
     </div>
+    </div>
   </div id='div_principal_sistema' class='div_principal_sistema'>
   <div>
     <!--A baixo, a div da introdução do sistema, pode ver no figma onde essa parte fica, é a inicial do sistema, depois disso vem o sistema-->
@@ -260,28 +261,28 @@
   </div>
 
   <div id="div_principal_sensor">
-    <h2>Sensor DHT 11 - Umidade</h2>
-    <br>
-    <section style="width:100%">
+    <div id="div_button_sensor">
+      <button id="button_temperatura" onclick="Grafico_temperatura()">
+        <h5 class="titulo_grafico_sensor">TEMPERATURA</h5>
+      </button>
+      <button id="button_umidade"><h5 class="titulo_grafico_sensor" onclick="Grafico_umidade()">UMIDADE</h5></button>
+    </div>
+    <h2 style="width:100%; display: none; margin-top: 10%;" id="h2_dht11">Sensor DHT 11 - Umidade</h2>
+    <section style="width:100%; display: none;" id="section_dht11Umidade">
       <canvas id="dht11Umidade"></canvas>
     </section>
-    <br>
-    <!--<h1>Sensor DHT 11 - Temperatura</h1>-->
-    <section style="width: 100%; display: none;">
-      <canvas id="dht11Temperatura"></canvas>
-    </section>
-    <!--<h1>Sensor Luminosidade</h1> -->
-    <section style="width: 100%; display: none;">
-      <canvas id="luminosidade"></canvas>
-    </section><br><br>
-    <h2>Sensor LM35 - Temperatura</h2><br>
-    <section style="width: 100%;">
+    <h2 id="h2_lm35" style="width: 100%;margin-top: 10%;">Sensor LM35 - Temperatura</h2>
+    <section style="width: 100%;" id="section_lm35Temperatura">
       <canvas id="lm35Temperatura"></canvas>
     </section>
     <!-- <h1>Sensor Chave</h1>-->
-    <section style="width: 100%; display: none;">
-      <canvas id="chave"></canvas>
-    </section>
+  
+    <div id="div_informacao_grafico">
+      <button id="button_informacao">INFORMAÇÕES</button>
+      <button class="opcao_grafico" id="opcao1_grafico">A</button>
+      <button class="opcao_grafico" id="opcao2_grafico">B</button>
+      <button class="opcao_grafico">C</button>
+    </div>
   </div>
   </div>
   <!--Div do cadastro de funcionarios-->
@@ -510,6 +511,20 @@
     card_terceiro.style.display = 'none'
     card_principal.style.display = 'flex'
   }
+
+  function Grafico_temperatura() {
+    section_lm35Temperatura.style.display = 'flex'
+    section_dht11Umidade.style.display = 'none'
+    h2_lm35.style.display = 'flex' 
+    h2_dht11.style.display = 'none'
+  }
+  function Grafico_umidade() {
+    section_lm35Temperatura.style.display = 'none'
+    section_dht11Umidade.style.display = 'flex'
+    h2_lm35.style.display = 'none' 
+    h2_dht11.style.display = 'flex'
+  }
+
   /* -- dht11Umidade -- */
   var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
   contextoDht11Umidade.canvas.width = 1000;
@@ -522,6 +537,7 @@
         datasets: [{
           label: 'Umidade',
           type: 'line',
+          data: [40, 50, 70],
           borderColor: ['#45b3e7'],
           backgroundColor: ['#89cff0']
         }]
@@ -564,6 +580,7 @@
         datasets: [{
           label: 'Temperatura',
           type: 'line',
+          data: [5, 10, 20, 24],
           borderColor: ['#d1196c'],
           backgroundColor: ['#ff0274']
         }]
@@ -624,7 +641,6 @@
   }
 
   // setInterval(() => {
-<<<<<<< HEAD
   //    obterDados(dht11Umidade, 'dht11/umidade');
   //    /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
   //    /* obterDados(luminosidade, 'luminosidade'); */
@@ -639,7 +655,6 @@
     obterDados(lm35Temperatura, 'lm35/temperatura');
     /* obterDados(chave, 'chave'); */
   }, 1000);
-=======
   //   obterDados(dht11Umidade, 'dht11/umidade');
   //   /* obterDados(dht11Temperatura, 'dht11/temperatura'); */
   //   /* obterDados(luminosidade, 'luminosidade'); */
@@ -647,7 +662,6 @@
   //   /* obterDados(chave, 'chave'); */
   // }, 4000);
   
->>>>>>> 687410095252c5a7a966915b6767f3901b6e5577
 
 
 </script>

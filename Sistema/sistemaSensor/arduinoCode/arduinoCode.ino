@@ -51,5 +51,5 @@ Serial.print(lm35_temperatura);
 //Serial.print("0");
 //}
 Serial.println();//Pula uma linha 
-delay(1200000);//Deley de 20 minutos
+delay(4000);//Deley de 20 minutos
 }
