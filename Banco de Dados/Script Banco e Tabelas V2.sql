@@ -7,7 +7,7 @@ idEndereco int primary key auto_increment,
 logradouro varchar(50),
 bairro varchar(30),
 municipio varchar(30),
-estado varchar(20), -- select char 2
+estado varchar(20),
 cep char(8),
 ponto_referencia varchar(60),
 numero varchar(10)
@@ -24,6 +24,17 @@ email varchar(30),
 senha varchar(20),
 fkEndereco int,
 foreign key (fkendereco) references endereco(idEndereco)
+);
+
+create table metricasIdeais(
+idMetricas int auto_increment,
+fkEmpresa int,
+tempMax float,
+tempMin float,
+umidMax float,
+umidMin float,
+foreign key (fkEmpresa) references empresa(idEmpresa),
+primary key (idMetricas,fkEmpresa)
 );
 
 create table funcionario(
