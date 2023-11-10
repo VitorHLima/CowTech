@@ -25,70 +25,62 @@
     bottom: 7.6%;
 }
 
+/* Estilos para o cabeçalho */
 .cabecario {
     display: flex;
-    width: 100%;
-    height: fit-content;
-    flex-direction: row;
-    background-color: transparent;
-    padding: 20px 0 0 0;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff; 
+    padding: 10px 0; 
 }
 
-.div_logo {
+#div_logo {
     padding: 10px;
     width: 40%;
 }
 
-.div_links {
+#texto_cowtech {
+    margin: 0 0 0 5%;
+    font-weight: 600;
+    font-size: 23px; 
+}
+
+#texto_cowtech a {
+    text-decoration: none;
+    color: #000; 
+}
+
+#div_links {
     display: flex;
     flex-direction: row;
-    width: 5%;
-    width: 60%;
+    width: 50%; 
     padding: 10px;
-    text-align: center;
+    justify-content: flex-end; 
+    align-items: center;
+}
+
+#lista_cabecario {
     list-style: none;
+    margin-right: 40px;
 }
 
-.lista_cabecario {
-    justify-content: right;
-    text-align: right;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-.texto_cowtech {
-    margin: 0 0 0 5%;
-    font-weight: 600;
-    font-size: 25px;
-}
-
-.texto_cowtech a {
+#lista_cabecario a {
     text-decoration: none;
-    list-style: none;
-    color: black;
-    margin: 0 0 0 5%;
-    font-weight: 600;
-    font-size: 25px;
-}
-
-.lista_cabecario a {
-    text-decoration: none;
-    color: black;
-    list-style: none;
-    margin: 8px 10% 0 0;
+    color: #000; 
     font-weight: 500;
-    font-size: 19px;
+    font-size: 16px; 
+    margin-left: 70px; 
+    transition: opacity 0.3s; 
 }
 
-.lista_cabecario a:hover {
+#lista_cabecario a:hover {
     opacity: 0.8;
 }
 
-.texto_cowtech a:hover {
-    opacity: 0.8;
+/* Adicionar uma linha sob o link ativo */
+#lista_cabecario a.ativo {
+    border-bottom: 2px solid #000; 
 }
-
 
 .card {
     border: solid 2px;
