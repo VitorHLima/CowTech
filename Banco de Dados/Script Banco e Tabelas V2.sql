@@ -2,17 +2,6 @@ create database bdsistema;
 
 use bdsistema;
 
-create table endereco(
-idEndereco int primary key auto_increment,
-logradouro varchar(50),
-bairro varchar(30),
-municipio varchar(30),
-estado varchar(20),
-cep char(8),
-ponto_referencia varchar(60),
-numero varchar(10)
-);
-
 create table empresa(
 idEmpresa int primary key auto_increment,
 cnpj char(14),
@@ -21,32 +10,31 @@ representante varchar(60),
 ddd char(2),
 contato char(9),
 email varchar(30),
-senha varchar(20),
+senha varchar(20)
+);
+
+create table fazenda(
+idFazenda int auto_increment
+);
+
+create table endereco(
+idEndereco int primary key auto_increment,
+logradouro varchar(50),
+bairro varchar(30),
+municipio varchar(30),
+estado varchar(20),
+cep char(8),
+ponto_referencia varchar(60),
+numero varchar(10),
 fkEndereco int,
-foreign key (fkendereco) references endereco(idEndereco)
+fkFazenda int,
+foreign key (fkEmpresa) references empresa(idEmpresa),
+foreign key (fkFazenda) references fazenda(idFazenda)
 );
 
-create table metricasIdeais(
-idMetricas int auto_increment,
-fkEmpresa int,
-tempMax float,
-tempMin float,
-umidMax float,
-umidMin float,
-foreign key (fkEmpresa) references empresa(idEmpresa),
-primary key (idMetricas,fkEmpresa)
-);
-
-create table funcionario(
-fkEmpresa int,
-idFuncionario int,
-nome varchar(40),
-ddd char(2),
-telefone char(9),
-email varchar(30),
-senha char(20),
-foreign key (fkEmpresa) references empresa(idEmpresa),
-primary key (fkEmpresa,idFuncionario)
+create table galpao(
+idGalpao int,
+fkFazenda int
 );
 
 create table sensor(
