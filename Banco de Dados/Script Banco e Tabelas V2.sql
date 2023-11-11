@@ -13,10 +13,6 @@ email varchar(30),
 senha varchar(20)
 );
 
-create table fazenda(
-idFazenda int auto_increment
-);
-
 create table endereco(
 idEndereco int primary key auto_increment,
 logradouro varchar(50),
@@ -27,36 +23,40 @@ cep char(8),
 ponto_referencia varchar(60),
 numero varchar(10),
 fkEndereco int,
-fkFazenda int,
-foreign key (fkEmpresa) references empresa(idEmpresa),
-foreign key (fkFazenda) references fazenda(idFazenda)
+foreign key (fkEmpresa) references empresa(idEmpresa)
+);
+
+create table fazenda(
+idFazenda int primary key auto_increment,
+nome varchar(40),
+fkEndereco int,
+foreign key (fkEndereco) references endereco(idEndereco)
 );
 
 create table galpao(
+fkFazenda int,
 idGalpao int,
-fkFazenda int
+setor varchar(45),
+foreign key (fkFazenda) references fazenda(idFazenda),
+primary key (fkFazenda,idGalpao)
 );
 
 create table sensor(
-fkEmpresa int,
-idSensor int,
+idSensor int primary key,
 nome varchar(20),
 codigo varchar(10),
 tipo varchar(5),
 constraint check (tipo in(Lm35,Dht11)),
-dalpao varchar(45),
-foreign key (fkEmpresa) references empresa(idEmpresa),
-primary key (fkEmpresa,idSensor)
+fkGalpao varchar(45),
+foreign key (fkGalpao) references galpao(idGalpao) 
 );
 
 create table registro(
-fkEmpresa int,
 fkSensor int,
-idRegistro int auto_increment, -- usar datetime
+idRegistro int auto_increment,
 dtAtual datetime default current_timestamp,
 dht11_Umidade float,
 lm35_temperatura float,
-foreign key (fkEmpresa) references sensor(fkEmpresa),
 foreign key (fkSensor) references sensor(idSensor),
-primary key (fkEmpresa,fkSensor,idRegistro)
+primary key (fkSensor,idRegistro)
 );
