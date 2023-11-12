@@ -2,10 +2,12 @@ var enderecoModel = require("../models/enderecoModel");
 
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var nome = req.body.nomeServer;
     var logradouro = req.body.logradouroServer;
     var municipio = req.body.municipioServer;
     var cep = req.body.cepServer;
     var bairro = req.body.bairroServer;
+    var numero = req.body.numeroServer;
     var estado = req.body.estadoServer;
     var empresaId = req.body.empresaServer;
 
@@ -20,12 +22,16 @@ function cadastrar(req, res) {
         res.status(400).send("Seu bairro está undefined!");
     } else if (estado == undefined) {
         res.status(400).send("Seu estado está undefined!");
+    } else if (numero == undefined) {
+        res.status(400).send("Seu número está undefined!");
+    } else if (nome == undefined) {
+        res.status(400).send("Seu nome está undefined!");
     } else if (empresaId == undefined) {
         res.status(400).send("Sua empresa está undefined!");
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo enderecoModel.js
-        enderecoModel.cadastrar(nomeFazenda, logradouro, bairro, municipio, estado, cep, numero, idEmpresa)
+        enderecoModel.cadastrar(nome, logradouro, bairro, municipio, estado, cep, numero, empresaId)
             .then(
                 function (resultado) {
                     res.json(resultado);

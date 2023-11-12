@@ -67,7 +67,7 @@ function cadastrar(req, res) {
                     .status(401)
                     .json({ mensagem: `a empresa com o cnpj ${cnpj} já existe` });
             } else {
-                empresaModel.cadastrar(cnpj, nomeEmpresa, ddd, contato, email, senha).then((resultado) => {
+                empresaModel.cadastrar(cnpj, nome, ddd, contato, email, senha).then((resultado) => {
                     res.status(201).json(resultado);
                 });
             }
@@ -90,7 +90,7 @@ function listar(req, res) {
 }
 
 function buscarPorId(req, res) {
-    var id = req.params.id;
+    var id = req.params.idEmpresa;
 
     empresaModel.buscarPorId(id).then((resultado) => {
         res.status(200).json(resultado);

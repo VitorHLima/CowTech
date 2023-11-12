@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="estilo.css" />
-  <script src="js/sessao.js"></script>
+  <script src="../js/sessao.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
@@ -72,11 +72,11 @@
       <select name="empresas" id="listaEmpresas">
         <option selected>Selecione uma empresa</option>
       </select>
-      <button class="bt-enviar" id="button-enviar" onclick="cadastroEndereco()">
+      <button class="bt-enviar" id="button-enviar" onclick="cadastrar()">
         Avançar
       </button>
       <div id="div_aguardar" class="loading-div">
-        <img src="./assets/circle-loading.gif" id="loading-gif" />
+        <img src="img/circle-loading.gif" id="loading-gif" />
       </div>
 
       <div id="div_erros_login"></div>
@@ -88,15 +88,17 @@
 </html>
 
 <script>
-  function cadastroEndereco() {
+  function cadastrar() {
     aguardar();
 
+    var nome = input_fazenda.value;
     var logradouro = input_logradouro.value;
     var bairro = input_bairro.value;
     var municipio = input_municipio.value;
     var estado = input_estado.value;
     var cep = input_cep.value;
-    var empresaVar = listaEmpresas.value;
+    var numero = input_numero.value;
+    var empresaVar = listaEmpresas.value
 
     if (logradouro == "") {
       cardErro.style.display = "block";
@@ -126,10 +128,24 @@
 
       finalizarAguardar();
       return false;
+    } else if (numero == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um valor no campo numero)";
+
+      finalizarAguardar();
+      return false;
     } else if (cep == "") {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "(Digite um valor no campo cep)";
+
+      finalizarAguardar();
+      return false;
+    } else if (nome == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um valor no campo nome)";
 
       finalizarAguardar();
       return false;
@@ -144,8 +160,10 @@
       setInterval(sumirMensagem, 5000);
     }
 
+    console.log(empresaVar);
+
     // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
+    fetch("/enderecos/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -153,11 +171,13 @@
       body: JSON.stringify({
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nome,
         logradouroServer: logradouro,
         municipioServer: municipio,
         cepServer: cep,
         bairroServer: bairro,
         estadoServer: estado,
+        numeroServer: numero,
         empresaServer: empresaVar
       }),
     })
@@ -168,10 +188,10 @@
           cardErro.style.display = "block";
 
           mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de confirmação de cadastro...";
+            "Cadastro realizado com sucesso! Redirecionando para tela de login...";
 
           setTimeout(() => {
-            window.location = "../confirmaCadastro/confirmaCadastro.html";
+            window.location = "../login/login.html";
           }, "2000");
 
           limparFormulario();
@@ -196,7 +216,7 @@
       .then(function (resposta) {
         resposta.json().then((empresas) => {
           empresas.forEach((empresa) => {
-            listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+            listaEmpresas.innerHTML += `<option value='${empresa.idEmpresa}'>${empresa.cnpj}</option>`;
           });
         });
       })

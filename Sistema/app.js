@@ -12,16 +12,14 @@ var indexRouter = require("./src/routes/index");
 // var usuarioRouter = require("./src/routes/usuarios");
 // var medidasRouter = require("./src/routes/medidas");
 // var aquariosRouter = require("./src/routes/aquarios");
-var enderecoRouter = require("./src/routes/endereco");
+var enderecoRouter = require("./src/routes/enderecos");
 var empresasRouter = require("./src/routes/empresas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "Página Inicial")));
-app.use(express.static(path.join(__dirname, "cadastro-empresa")));
-app.use(express.static(path.join(__dirname, "endereco")));
-app.use(express.static(path.join(__dirname, "login")));
-app.use(express.static(path.join(__dirname, "sistemaSensor")));
+app.use(express.static(path.join(__dirname, "public/Site/Página Inicial")));
+app.use(express.static(path.join(__dirname, "public/Site")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 

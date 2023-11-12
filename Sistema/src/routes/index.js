@@ -2,15 +2,21 @@ var express = require("express");
 var router = express.Router();
 
 router.get("/cadastro-empresa", function (req, res) {
-    res.render("empresa");
+    res.render("empresa.html");
 });
 
 router.get("/login", function (req, res) {
-    res.render("login");
+    res.render("login.html");
 });
+
 router.get("/sistemaSensor", function (req, res) {
     res.render("index");
 });
+
+router.get("/Tela Simulador financeiro", function (req, res) {
+    res.render("Calculadora Financeira");
+});
+
 router.get("/", function (req, res) {
     res.render("index");
 });
