@@ -6,15 +6,15 @@ create table empresa(
 idEmpresa int primary key auto_increment,
 cnpj char(14),
 nomeEmpresa varchar(50),
-representante varchar(60),
 ddd char(2),
 contato char(9),
 email varchar(30),
 senha varchar(20)
 );
 
-create table endereco(
+create table endFazenda(
 idEndereco int primary key auto_increment,
+nomeFazenda varchar(50),
 logradouro varchar(50),
 bairro varchar(30),
 municipio varchar(30),
@@ -25,34 +25,26 @@ fkEmpresa int,
 foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
-create table fazenda(
-idFazenda int primary key auto_increment,
-nome varchar(40),
-fkEndereco int,
-foreign key (fkEndereco) references endereco(idEndereco)
-);
-
-create table galpao(
-idGalpao int primary key auto_increment,
-setor varchar(45),
-fkFazenda int,
-foreign key (fkFazenda) references fazenda(idFazenda)
+create table curral(
+idCurral int primary key auto_increment,
+nome varchar(45),
+fkEndFazenda int,
+foreign key (fkEndFazenda) references endFazenda(idEndereco)
 );
 
 create table sensor(
 idSensor int primary key,
 nome varchar(20),
-codigo varchar(10),
-fkGalpao varchar(45),
-foreign key (fkGalpao) references galpao(idGalpao) 
+fkCurral int,
+foreign key (fkCurral) references curral(idCurral) 
 );
 
 create table registro(
-fkSensor int,
-idRegistro int auto_increment,
+idRegistro int,
 dtAtual datetime default current_timestamp,
 dht11_Umidade float,
 lm35_temperatura float,
+fkSensor int,
 foreign key (fkSensor) references sensor(idSensor),
 primary key (fkSensor,idRegistro)
 );
