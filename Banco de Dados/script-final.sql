@@ -1,6 +1,10 @@
+-- Criação do Banco de Dados
+
 create database bdsistema;
 
 use bdsistema;
+
+-- Criação das Tabelas
 
 create table empresa(
 idEmpresa int primary key auto_increment,
@@ -48,3 +52,32 @@ fkSensor int,
 foreign key (fkSensor) references sensor(idSensor),
 primary key (fkSensor,idRegistro)
 );
+
+-- Inserção de Dados
+
+insert into empresa values
+	(null,'01234567891234','Etiel','11','912345678','etiel@sptech.com','cowTech_123');
+    
+insert into endFazenda values
+	(null,'FrezzaLaticinios','Rua Abobrinha','Chacaras Leguminosas','Hortifrut','Acre','69912345',678,1);
+    
+insert into curral values
+	(null,'Galpão Sul',1),
+	(null,'Galpão Norte',1),
+	(null,'Galpão Leste',1);
+    
+insert into sensor values
+	(1,'Sensor 1',1),
+	(2,'Sensor 2',1),
+	(3,'Sensor 3',1),
+	(4,'Sensor 1',2),
+	(5,'Sensor 2',2),
+	(6,'Sensor 3',2),
+	(7,'Sensor 4',2),
+	(8,'Sensor 5',2),
+	(9,'Sensor 1',3),
+	(10,'Sensor 2',3),
+	(11,'Sensor 3',3),
+	(12,'Sensor 4',3);
+    
+    
