@@ -17,7 +17,11 @@ var empresasRouter = require("./src/routes/empresas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "Página Inicial")));
+app.use(express.static(path.join(__dirname, "cadastro-empresa")));
+app.use(express.static(path.join(__dirname, "endereco")));
+app.use(express.static(path.join(__dirname, "login")));
+app.use(express.static(path.join(__dirname, "sistemaSensor")));
 
 app.use(cors());
 
