@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="estilo.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="estilo.css" />
+  <title>Cadastro de Empresa</title>
+</head>
+
+<body>
+  <div class="cabecario">
+    <div id="div_logo">
+      <h2 id="texto_cowtech">
+        <a href="../Página Inicial/index.html">COW TECH</a>
+      </h2>
+    </div>
+    <div id="div_links">
+      <ul id="lista_cabecario">
+        <a href="../Tela simulador financeiro/Calculadora Financeira.html">CALCULADORA</a>
+        <a href="../cadastro-empresa/empresa.html" class="ativo">CADASTRAR</a>
+        <a href="../login/login.html">LOGIN</a>
+      </ul>
+    </div>
+  </div>
+
+  <img class="img-vaca" src="img/vaca-removebg-preview (1) 1.jpg" alt="" />
+  <img class="img-planta" src="img/freepik--Plants--inject-352.jpg" alt="" />
+  <img class="img-chao" src="img/freepik--Floor--inject-352.jpg" alt="" />
+
+  <div class="card">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+    <div class="card-P">
+      <div class="textos">
+        <p class="bordao">
+          Faça seu cadastro e venha fazer parte de nossa equipe!
+        </p>
+        <p class="apoio">
+          Caso tenha dificuldades ao tentar acessar sua conta, entre em
+          contato com nossa equipe de
+          <a href="../Página Inicial/index.html"><span>suporte</span></a>
+        </p>
+        <p class="termos">
+          Ao clicar em “Cadastrar”, o solicitante do cadastro está ciente e
+          aceita os termos e condições de uso
+        </p>
+      </div>
+    </div>
+    <div class="entradas">
+      <h4>Cadastro</h4>
+      <label class="label-cnpj" for="">CNPJ</label>
+      <input class="css-input" id="input_cnpj" type="text" />
+      <label class="label-nome" for="">Nome Fantasia</label>
+      <input class="css-input" id="input_nome" type="text" />
+      <label class="label-ddd" for="">DDD</label>
+      <label class="label-telefone" for="">Telefone</label>
+      <input class="css-input telefone-top" id="input_contato" type="text" />
+      <input class="css-input ddd" id="input_ddd" type="text" />
+      <label class="email" for="">E-mail</label>
+      <input class="css-input" id="input_email" type="text" />
+      <label class="emailRepeat" for="">Repita e-mail</label>
+      <input class="css-input" id="input_confirmaEmail" type="text" />
+      <label class="senha" for="">Senha</label>
+      <input class="css-input" id="input_senha" type="text" />
+      <label class="senhaRepeat" for="">Repita senha</label>
+      <input class="css-input" id="input_confirmaSenha" type="text" />
+      <label class="label-check" for="">Aceita receber novidades sobre atualizações em seu e-mail?</label>
+      <input class="css-checkbox" type="checkbox" id="" />
+      <button class="bt-enviar" onclick="cadastro()">Avançar</button>
+      <div id="div_aguardar" class="loading-div">
+        <img src="./assets/circle-loading.gif" id="loading-gif" />
+      </div>
+      <div id="div_erros_login"></div>
+      <a class="a-cadastrar" href="../login/login.html">Já tem cadastro?</a>
+    </div>
+  </div>
+  </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  function cadastro() {
+    aguardar();
+
+    var cnpj = input_cnpj.value;
+    var nome = input_nome.value;
+    var ddd = input_ddd.value;
+    var contato = input_contato.value;
+    var email = input_email.value;
+    var senha = input_senha.value;
+    var confirmaSenha = input_confirmaSenha.value;
+    var confirmaEmail = input_confirmaEmail.value;
+
+    if (cnpj == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para cnpj em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (nome == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para nome em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (representante == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para representante em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (ddd == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para ddd em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (telefone == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para telefone em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (email == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para email em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (confirmaEmail == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para confirma email em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (senha == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para senha em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (confirmaSenha == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para confirmaSenha em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (email.indexOf("@") < 0) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um email válido)";
+
+      finalizarAguardar();
+      return false;
+    } else if (confirmaEmail.indexOf("@") < 0) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Digite um Email válido no confirma email)";
+
+      finalizarAguardar();
+      return false;
+    } else if (email != confirmaEmail) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(E-mail diferente do confirma e-mail)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    var validacaoEspecial =
+      senha.indexOf("!") >= 0 ||
+      senha.indexOf("@") >= 0 ||
+      senha.indexOf("#") >= 0 ||
+      senha.indexOf("$") >= 0 ||
+      senha.indexOf("%") >= 0 ||
+      senha.indexOf("¨") >= 0 ||
+      senha.indexOf("&") >= 0 ||
+      senha.indexOf("*") >= 0 ||
+      senha.indexOf("(") >= 0 ||
+      senha.indexOf(")") >= 0 ||
+      senha.indexOf("-") >= 0 ||
+      senha.indexOf("_") >= 0 ||
+      senha.indexOf("+") >= 0 ||
+      senha.indexOf("=") >= 0 ||
+      senha.indexOf("§") >= 0 ||
+      senha.indexOf('"') >= 0 ||
+      senha.indexOf("'") >= 0 ||
+      senha.indexOf(",") >= 0 ||
+      senha.indexOf("<") >= 0 ||
+      senha.indexOf(".") >= 0 ||
+      senha.indexOf(">") >= 0 ||
+      senha.indexOf(":") >= 0 ||
+      senha.indexOf(":") >= 0 ||
+      senha.indexOf("/") >= 0 ||
+      senha.indexOf("?") >= 0 ||
+      senha.indexOf("°") >= 0 ||
+      senha.indexOf("º") >= 0 ||
+      senha.indexOf("]") >= 0 ||
+      senha.indexOf("}") >= 0 ||
+      senha.indexOf("ª") >= 0 ||
+      senha.indexOf("[") >= 0 ||
+      senha.indexOf("{") >= 0 ||
+      senha.indexOf("%") >= 0;
+
+    var validacaoNumero =
+      senha.indexOf(0) >= 0 ||
+      senha.indexOf(1) >= 0 ||
+      senha.indexOf(2) >= 0 ||
+      senha.indexOf(3) >= 0 ||
+      senha.indexOf(4) >= 0 ||
+      senha.indexOf(5) >= 0 ||
+      senha.indexOf(6) >= 0 ||
+      senha.indexOf(7) >= 0 ||
+      senha.indexOf(8) >= 0 ||
+      senha.indexOf(9) >= 0;
+
+    if (senha.length >= 8) {
+      if (senha != senha.toLowerCase() && senha != senha.toUpperCase()) {
+        if (validacaoEspecial) {
+          if (validacaoNumero) {
+            if (senha == confirmaSenha) {
+              if (
+                email == confirmaEmail &&
+                senha == confirmaSenha &&
+                senha != "" &&
+                email != "" &&
+                confirmaEmail != "" &&
+                confirmaSenha != "" &&
+                email.indexOf("@") > 0 &&
+                confirmaEmail.indexOf("@") > 0
+              ) {
+                setInterval(sumirMensagem, 5000);
+                fetch("/usuarios/cadastrar", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nome,
+                    cnpjServer: cnpj,
+                    dddServer: ddd,
+                    contatoServer: contato,
+                    emailServer: email,
+                    senhaServer: senha,
+                    confirmaSenhaServer: confirmaSenha,
+                    confirmaEmailServer: confirmaEmail
+                  }),
+                })
+                  .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+                      cardErro.style.display = "block";
+
+                      mensagem_erro.innerHTML =
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Endereço...";
+
+                      setTimeout(() => {
+                        window.location = "../endereco/endereco.html";
+                      }, "2000");
+
+                      limparFormulario();
+                      finalizarAguardar();
+                    } else {
+                      throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                  })
+                  .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                    finalizarAguardar();
+                  });
+
+                return false;
+              }
+            } else {
+              cardErro.style.display = "block";
+              mensagem_erro.innerHTML =
+                "(Digite senha igual no repita Senha)";
+
+              finalizarAguardar();
+              return false;
+            }
+          } else {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+              "(A senha deve conter pelo menos um numero)";
+
+            finalizarAguardar();
+            return false;
+          }
+        } else {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML =
+            "(A senha deve conter ao menos um carácter especial)";
+
+          finalizarAguardar();
+          return false;
+        }
+      } else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML =
+          "(A senha deve conter ao menos uma letra maiuscula e uma minuscula)";
+
+        finalizarAguardar();
+        return false;
+      }
+    } else {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(A senha deve ter pelo menos 8 caracteres)";
+
+      finalizarAguardar();
+      return false;
+    }
+  }
+</script>

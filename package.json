@@ -1,0 +1,10 @@
+{
+  "name": "sistema",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./sistema/app.js",
+    "dev": "cd sistema && npm run dev",
+    "postinstall": "cd sistema && npm install"
+  }
+}
