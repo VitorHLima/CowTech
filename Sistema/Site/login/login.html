@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="estilo.css" />
-  <script src="js/sessao.js"></script>
+  <script src="../js/sessao.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
@@ -57,7 +57,7 @@
       <a class="a-senha" href="../redefinir-senha/redefinirSenha.html">Esqueceu sua senha?</a>
       <button class="bt-enviar" onclick="entrar()">Entrar</button>
       <div id="div_aguardar" class="loading-div">
-        <img src="./assets/circle-loading.gif" id="loading-gif" />
+        <img src="img/circle-loading.gif" id="loading-gif" />
       </div>
 
       <div id="div_erros_login"></div>
@@ -93,7 +93,7 @@
     console.log("FORM LOGIN: ", emailVar);
     console.log("FORM SENHA: ", senhaVar);
 
-    fetch("/usuarios/entrar", {
+    fetch("/empresas/entrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

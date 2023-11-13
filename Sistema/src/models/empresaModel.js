@@ -9,9 +9,9 @@ function entrar(email, senha) {
     return database.executar(instrucao);
 }
 
-function cadastrar(cnpj, nomeEmpresa, ddd, contato, email, senha) {
+function cadastrar(cnpj, nome, ddd, contato, email, senha) {
 
-    instrucaoSql = `insert into (cnpj, nomeEmpresa, ddd, contato, email, senha) empresa values (${cnpj}, ${nomeEmpresa}, ${ddd}, ${contato}, ${email}, ${senha})`;
+    instrucaoSql = `insert into empresa (cnpj, nomeEmpresa, ddd, contato, email, senha)  values ('${cnpj}', '${nome}', '${ddd}', '${contato}', '${email}', '${senha}');`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

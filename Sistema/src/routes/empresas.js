@@ -13,7 +13,7 @@ router.get("/buscar", function (req, res) {
 });
 
 router.post("/entrar", function (req, res) {
-  empresaControllerController.entrar(req, res);
+  empresaController.entrar(req, res);
 });
 
 router.get("/buscar/:id", function (req, res) {

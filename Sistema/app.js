@@ -9,20 +9,33 @@ var PORTA = process.env.AMBIENTE_PROCESSO == "desenvolvimento" ? 3333 : 8080;
 var app = express();
 
 var indexRouter = require("./src/routes/index");
+<<<<<<< HEAD
 var usuarioRouter = require("./src/routes/usuarios");
 var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
 var enderecoRouter = require("./src/routes/endereco");
+=======
+// var usuarioRouter = require("./src/routes/usuarios");
+// var medidasRouter = require("./src/routes/medidas");
+// var aquariosRouter = require("./src/routes/aquarios");
+var enderecoRouter = require("./src/routes/enderecos");
+>>>>>>> e1e9c3275c40c65fa75809eb2a1142ec3f5b5de0
 var empresasRouter = require("./src/routes/empresas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, "Página Inicial")));
 app.use(express.static(path.join(__dirname, "cadastro-empresa")));
 app.use(express.static(path.join(__dirname, "endereco")));
 app.use(express.static(path.join(__dirname, "login")));
 app.use(express.static(path.join(__dirname, "sistemaSensor")));
 app.use(express.static(path.join(__dirname, "img")));
+=======
+app.use(express.static(path.join(__dirname, "public/Site/Página Inicial")));
+app.use(express.static(path.join(__dirname, "public/Site")));
+app.use(express.static(path.join(__dirname, "public")));
+>>>>>>> e1e9c3275c40c65fa75809eb2a1142ec3f5b5de0
 
 app.use(cors());
 
