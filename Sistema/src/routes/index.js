@@ -11,8 +11,8 @@ router.get("/login", function (req, res) {
 router.get("/sistemaSensor", function (req, res) {
     res.render("index");
 });
-router.get("/", function (req, res) {
-    res.render("index");
-});
+// router.get("/", function (req, res) {
+//     res.render("index.html");
+// });
 
 module.exports = router;

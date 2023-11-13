@@ -9,9 +9,9 @@ var PORTA = process.env.AMBIENTE_PROCESSO == "desenvolvimento" ? 3333 : 8080;
 var app = express();
 
 var indexRouter = require("./src/routes/index");
-// var usuarioRouter = require("./src/routes/usuarios");
-// var medidasRouter = require("./src/routes/medidas");
-// var aquariosRouter = require("./src/routes/aquarios");
+var usuarioRouter = require("./src/routes/usuarios");
+var medidasRouter = require("./src/routes/medidas");
+var aquariosRouter = require("./src/routes/aquarios");
 var enderecoRouter = require("./src/routes/endereco");
 var empresasRouter = require("./src/routes/empresas");
 
@@ -22,14 +22,15 @@ app.use(express.static(path.join(__dirname, "cadastro-empresa")));
 app.use(express.static(path.join(__dirname, "endereco")));
 app.use(express.static(path.join(__dirname, "login")));
 app.use(express.static(path.join(__dirname, "sistemaSensor")));
+app.use(express.static(path.join(__dirname, "img")));
 
 app.use(cors());
 
 app.use("/", indexRouter);
-// app.use("/usuarios", usuarioRouter);
+app.use("/usuarios", usuarioRouter);
 app.use("/enderecos", enderecoRouter);
-// app.use("/medidas", medidasRouter);
-// app.use("/aquarios", aquariosRouter);
+app.use("/medidas", medidasRouter);
+app.use("/aquarios", aquariosRouter);
 app.use("/empresas", empresasRouter);
 
 app.listen(PORTA, function () {

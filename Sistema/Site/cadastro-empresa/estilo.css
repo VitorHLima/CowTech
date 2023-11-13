@@ -98,7 +98,8 @@
     left: 50%;
     background-color: black;
     border-radius: 7px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     place-items: center;
 }
 
@@ -178,7 +179,7 @@ label {
     right: 30%;
     position: relative;
     font-size: 14px;
-    top: 10%;
+    top: 0%;
 }
 
 a {
@@ -204,9 +205,11 @@ h4 {
 
 .ddd {
     width: 30px;
-    position: relative;
     left: -31%;
-    bottom: 175%;
+    display: flex;
+    top: 0%;
+    bottom: -10%;
+
 }
 
 .label-cnpj {
@@ -237,16 +240,16 @@ h4 {
 }
 
 .label-telefone {
-    margin-bottom: 1%;
+    margin-bottom: 0%;
 }
 
 .label-ddd {
-    margin-bottom: 0%;
+    margin-bottom: -10%;
 }
 
 .label-telefone {
     right: 14%;
-    top: -80%;
+    top: 20%;
 }
 
 .label-ddd {
@@ -255,7 +258,7 @@ h4 {
 
 .label-check {
     right: -6%;
-    top: -170%;
+    top: -10%;
     font-size: 11px;
 }
 
@@ -266,8 +269,9 @@ h4 {
 }
 
 .telefone-top {
-    bottom: 76%;
+    bottom: 30%;
     width: 57%;
+    margin-top: 10%;
     left: 6%;
 }
 
