@@ -57,13 +57,14 @@
     <div class="entradas">
       <h4>Cadastro</h4>
       <label class="label-cnpj" for="">CNPJ</label>
-      <input class="css-input" id="input_cnpj" type="text" />
+      <input class="css-input input_cnpj" id="input_cnpj" type="text" maxlength="18"/>
+      
       <label class="label-nome" for="">Nome Fantasia</label>
       <input class="css-input" id="input_nome" type="text" />
       <label class="label-ddd" for="">DDD</label>
-      <input class="css-input ddd" id="input_ddd" type="text" />
+      <input class="css-input ddd" id="input_ddd" type="text" maxlength="2" />
       <label class="label-telefone" for="">Telefone</label>
-      <input class="css-input telefone-top" id="input_contato" type="text" />
+      <input class="css-input telefone-top" id="input_contato" type="text" maxlength="10"/>
       <label class="email" for="">E-mail</label>
       <input class="css-input" id="input_email" type="text" />
       <label class="emailRepeat" for="">Repita e-mail</label>
@@ -329,6 +330,32 @@
       return false;
     }
   }
+
+  function mascara() {
+  const input_cnpj = document.querySelector('.input_cnpj');
+
+  input_cnpj.addEventListener('keypress', () => {
+    let cnpjLength = input_cnpj.value.length;
+
+    if (cnpjLength == 2 || cnpjLength == 6) {
+      input_cnpj.value += ".";
+    } else if (cnpjLength == 10) {
+      input_cnpj.value += "/";
+    } else if (cnpjLength == 15) {
+      input_cnpj.value += "-";
+    }
+  });
+
+  const input_contato = document.querySelector('.telefone-top');
+
+  input_contato.addEventListener('keypress', () => {
+    let telLength = input_contato.value.length;
+
+    if (telLength == 5) input_contato.value += '-'
+  })
+}
+
+mascara();
 
   function sumirMensagem() {
     cardErro.style.display = "none";
