@@ -301,28 +301,12 @@
         </div>
         <div id="div_formulario">
           <form id="formulario" action="#divisao_funcao_funcionario">
-            <h4>Nome</h4>
-            <input type="text" id="input_nome_pessoa" placeholder="Ex: Frizza" /><br />
-            <div id="div_telefone">
-              <div id="div_ddd">
-                <h4>DDD</h4>
-                <input type="number" id="input_ddd" placeholder='11' />
-              </div>
-              <div id="div_numero_telefone">
-                <h4>Telefone</h4>
-                <input type="number" id="input_telefone" placeholder="99999-9999" /><br />
-              </div>
-            </div>
+            <h4>Nome da fazenda</h4>
+            <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
             <br />
-            <h4>E-mail</h4>
-            <input type="email" id="input_email" placeholder="Ex: Frizza@sptech.school" /><br />
-            <h4>Senha</h4>
-            <div id="div_senha">
-              <input type="password" id="input_senha" placeholder="********" /><br />
-              <button onclick="Olho()">
-                <img src="../Site/Página Inicial/img/visivel.png" alt="" id="olho">
-              </button>
-            </div><br>
+            <h4>Endereço</h4>
+            <input type="text" id="input_endereco" placeholder="Ex: Rua José..." /><br />
+
             <button onclick="Cadastrar()">Cadastrar</button>
           </form>
         </div>
@@ -333,7 +317,7 @@
             <td id="td_id"><b>ID</b></td>
             <td></td>
             <td id="td_nome">Nome</td>
-            <td id="td_email" style="width: 100%;">Endereço</td>
+            <td id="td_endereco" style="width: 100%; border: 1px solid black;">Endereço</td>
             <td></td>
             <td id="td_button"><button onclick="Remover()">-</button></td>
           </tr>
@@ -400,50 +384,66 @@
 </body>
 <script>
   var nome;
-  var ddd;
-  var telefone;
-  var email;
-  var senha;
+  var endereco;
 
+  
   function Cadastrar() {
     nome = input_nome_pessoa.value
-    ddd = input_ddd.value
-    telefone = input_telefone.value
-    email = input_email.value
-    senha = input_senha.value
+    endereco = input_endereco.value
 
+    var idUsuario = sessionStorage.ID_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
+
+    var corpo = { //Aqui é a criação da variavel corpo, sendo um objeto, que o JSON consegue ler
+      nome: nome, //Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
+      endereco: endereco//Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
+    };
     if (nome == '') {
       alert('Insira um nome válido')
     }
-    if (ddd == '') {
-      alert('Insira um DDD válido')
-    }
-    if (telefone == '') {
-      alert('Insira um telefone válido')
-    }
-    if (email == '') {
-      alert('Insira um email válido')
-    }
-    if (senha == '') {
-      alert('Insira um senha válido')
-    }
-    if (!email.endsWith('.com')) {
-      alert('Email sem .com')
+    if (endereco == '') {
+      alert('Insira um endereco válido')
     }
     else {
+    fetch(`/avisos/publicar/${idUsuario}`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
+    method: "POST", //Aqui é o tipo da requisição, se é POST OU GET, POST é para enviar dados
+    headers: {
+    "Content-Type": "application/json",// Aqui informa ao servidor como será enviado, será em JSON
+  },
+    body: JSON.stringify(corpo), //Aqui é o tipo dos dados que vão mandar, transformou o objeto corpo lá em cima, por um JSON, que vai ser recebido com o body na pagina controller
+  })
+  .then(function (resposta) {// Aqui é ele vai tentar mandar os dados pegos lá em cima, com o parametro de resposta para pegar se é uma resposta postiviva ou negativa vindo do servidor
+    console.log("resposta: ", resposta);//Aqui ele vai exibir a resposta do servidor
+
+    if (resposta.ok) { //Se a resposta for ok, ele vai cadastrar a historia com sucesso
+      alert("Curral cadastrado");//Vai exibir para o usuario o resultado positivo
       table_funcionario.innerHTML += `<br><tbody>
           <tr id="tr_formulario">
             <td id="td_id"><b>ID</b></td>
             <td></td>
             <td id="td_nome">${nome}</td>
-            <td id="td_email">${email}</td>
-            <td id="td_telefone">(${ddd}) ${telefone}</td>
+            <td id="td_endereco">${endereco}</td>
             <td></td>
             <td id="td_button"><button>-</button></td>
           </tr>`
-      Sair()
+      Sair()// Aqui está transferindo o usuario para outra pagina
+    } else if (resposta.status == 404) {//Se a resposta for o erro 404, que pode ser que o servidor caiu ou não funcionou a requisição
+      window.alert("Deu 404!");//Aqui ele está exibindo um alerta na pagina, deu 404!
+    } else {//Senão for o erro 404
+      throw ( //Aqui ele está lançando uma mensagem caso não seja o erro acima
+        "Houve um erro ao tentar realizar a postagem! Código da resposta: " +//Aqui é respota que vai ser lançada
+        resposta.status// Aqui é a resposta e os status daquela resposta
+      );
     }
-  }
+  })
+  .catch(function (resposta) { // Aqui ele vai pegar o erro, e com o paramentro seria a informação daquele erro
+    console.log(`#ERRO: ${resposta}`);//Está exibindo o erro
+  });
+
+  return false;//Está retornando falso
+}
+
+    }
+  
   function Remover() {
     table_funcionario.innerHTML = ``
   }
@@ -460,15 +460,6 @@
     document.body.style.opacity = 1;
     body_id.style.backgroundColor = `white`;
     button_adicionar_sensor.style.display = `flex`
-  }
-  function Olho() {
-    var senha = input_senha
-
-    if (senha.type == 'password') {
-      senha.type = 'text'
-    } else {
-      senha.type = 'password'
-    }
   }
   function Cadastrar_sensor() {
     pop_up_sensor.style.display = "none";
