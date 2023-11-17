@@ -8,4 +8,12 @@ router.post("/cadastrar", function (req, res) {
     enderecoController.cadastrar(req, res);
 })
 
+router.get("/buscar", function (req, res) {
+    enderecoController.buscarPorNomeFazenda(req, res);
+});
+
+router.get("/listar", function (req, res) {
+    enderecoController.listar(req, res);
+});
+
 module.exports = router;
