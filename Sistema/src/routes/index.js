@@ -2,11 +2,11 @@ var express = require("express");
 var router = express.Router();
 
 router.get("/cadastro-empresa", function (req, res) {
-    res.render("cadastro-empresa/empresa.html");
+    res.render("empresa.html");
 });
 
 router.get("/login", function (req, res) {
-    res.render("login/login.html");
+    res.render("login.html");
 });
 
 router.get("/sistemaSensor", function (req, res) {
@@ -18,7 +18,7 @@ router.get("/Tela Simulador financeiro", function (req, res) {
 });
 
 router.get("/inicial", function (req, res) {
-    res.render("inicial/index");
+    res.render("index");
 });
 
 module.exports = router;

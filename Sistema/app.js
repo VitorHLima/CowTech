@@ -21,9 +21,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "inicial")));
 app.use(express.static(path.join(__dirname, "cadastro-empresa")));
 app.use(express.static(path.join(__dirname, "endereco")));
+app.use(express.static(path.join(__dirname, "Site")));
 app.use(express.static(path.join(__dirname, "login")));
-app.use(express.static(path.join(__dirname, "sistemaSensor")));
 app.use(express.static(path.join(__dirname, "paginaGrafico")));
+app.use(express.static(path.join(__dirname, "sistemaSensor")));
 app.use(express.static(path.join(__dirname, "img")));
 
 app.use(cors());

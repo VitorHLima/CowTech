@@ -1,8 +1,8 @@
 var fazendaModel = require("../models/fazendaModel");
 
 function publicar(req, res) {
-    var nome = req.body.nomeVar;
-    var endereco = req.body.enderecoVar;
+    var nome = req.body.nome;
+    var endereco = req.body.endereco;
     var idUsuario = req.body.idUsuario;
 
     if (nome == undefined) {
