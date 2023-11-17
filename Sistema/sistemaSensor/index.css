@@ -10,6 +10,10 @@ canvas {
     -ms-user-select: none;
 }
 
+#myChartCanvas {
+    max-width: 100%;
+}
+
 .div_principal_sistema {
     background-color: white;
 }

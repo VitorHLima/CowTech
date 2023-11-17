@@ -383,13 +383,11 @@
   </div>
 </body>
 <script>
-  var nome;
-  var endereco;
 
   
   function Cadastrar() {
-    nome = input_nome_pessoa.value
-    endereco = input_endereco.value
+    var nome = input_nome_pessoa.value
+    var endereco = input_endereco.value
 
     var idUsuario = sessionStorage.ID_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
 
@@ -447,13 +445,13 @@
   function Remover() {
     table_funcionario.innerHTML = ``
   }
-  // function Adicionar() {
-  //   pop_up.style.display = "flex";
-  //   button_adicionar.style.display = "none";
-  //   body_id.style.background = `rgb(0, 0, 0, 0.800)`;
-  //   body_id.style.opacity = 1;
-  //   button_adicionar_sensor.style.display = `none`
-  // }
+  function Adicionar() {
+    pop_up.style.display = "flex";
+    button_adicionar.style.display = "none";
+    body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+    body_id.style.opacity = 1;
+    button_adicionar_sensor.style.display = `none`
+  }
   function Sair() {
     pop_up.style.display = "none";
     button_adicionar.style.display = "inline";
