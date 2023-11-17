@@ -1,18 +1,15 @@
 var fazendaModel = require("../models/fazendaModel");
 
 function publicar(req, res) {
-    var nome = req.body.nome;
-    var endereco = req.body.endereco;
-    var idUsuario = req.body.idUsuario;
+    var nome = req.body.nomeServer;
+    var idEndereco = req.body.enderecoServer;
 
     if (nome == undefined) {
         res.status(400).send("O nome está indefinido!");
-    } else if (endereco == undefined) {
-        res.status(400).send("O endereço está indefinido!");
-    } else if (idUsuario == undefined) {
+    } else if (idEndereco == undefined) {
         res.status(400).send("O endereço está indefinido!");
     } else {
-        fazendaModel.publicar(nome, endereco, idUsuario)
+        fazendaModel.publicar(nome, idEndereco)
             .then(
                 function (resultado) {
                     res.json(resultado);

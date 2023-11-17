@@ -8,6 +8,20 @@ function cadastrar(nome, logradouro, bairro, municipio, estado, cep, numero, emp
     return database.executar(instrucaoSql);
 }
 
+function listar() {
+    var query = `select * from endFazenda`;
+
+    return database.executar(query);
+}
+
+function buscarPorNomeFazenda(nomeFazenda) {
+    var query = `select * from endFazenda where nomeFazenda = '${nomeFazenda}'`;
+
+    return database.executar(query);
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    listar,
+    buscarPorNomeFazenda
 };    

@@ -49,6 +49,22 @@ function cadastrar(req, res) {
     }
 }
 
+function buscarPorNomeFazenda(req, res) {
+    var nomeFazenda = req.query.nomeFazenda;
+
+    enderecoModel.buscarPorNomeFazenda(nomeFazenda).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
+function listar(req, res) {
+    enderecoModel.listar().then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    listar,
+    buscarPorNomeFazenda
 }
