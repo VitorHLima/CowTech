@@ -1,9 +1,9 @@
 -- Criação do Banco de Dados
-
+DROP DATABASE bdsistema;
 create database bdsistema;
 
 use bdsistema;
-DROP DATABASE bdsistema;
+
 -- Criação das Tabelas
 
 create table empresa(
@@ -48,12 +48,14 @@ foreign key (fkCurral) references curral(idCurral)
 create table registro(
 idRegistro int,
 dtAtual datetime default current_timestamp,
-dht11_Umidade float,
-lm35_temperatura float,
+dht11_Umidade decimal(10,2),
+lm35_temperatura decimal(10,2),
 fkSensor int,
 foreign key (fkSensor) references sensor(idSensor),
 primary key (fkSensor,idRegistro)
-);
+)auto_increment = 1000;
+
+SELECT * FROM registro;
 
 -- Inserção de Dados
 

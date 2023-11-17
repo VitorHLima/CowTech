@@ -35,16 +35,16 @@ const serial = async (
             baudRate: SERIAL_BAUD_RATE
         }
     );
-    
+
     arduino.on('open', () => {
         console.log(`A leitura do arduino foi iniciada na porta ${portaArduino.path} utilizando Baud Rate de ${SERIAL_BAUD_RATE}`);
     });
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         const valores = data.split(';');
-        const dht11Umidade = parseFloat(valores[0]);
+        var dht11Umidade = parseFloat(valores[0]);
         /* const dht11Temperatura = parseFloat(valores[1]); */
         /* const luminosidade = parseFloat(valores[2]); */
-        const lm35Temperatura = parseFloat(valores[3]);
+        var lm35Temperatura = parseFloat(valores[0]);
         /* const chave = parseInt(valores[4]); */
 
         //
@@ -56,7 +56,8 @@ const serial = async (
 
         if (HABILITAR_OPERACAO_INSERIR) {
             await poolBancoDados.execute(
-                'INSERT INTO registro (dht11_umidade, lm35_temperatura) VALUES (?, ?)',
+                `INSERT INTO registro(dht11_Umidade,lm35_temperatura, fkSensor) 
+                VALUES ('${dht11Umidade}','${lm35Temperatura}', 1)`,
                 [dht11Umidade, lm35Temperatura]
             );
         }

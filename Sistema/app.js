@@ -15,6 +15,7 @@ var enderecoRouter = require("./src/routes/enderecos");
 var medidasRouter = require("./src/routes/medidas");
 var empresasRouter = require("./src/routes/empresas");
 var fazendaRouter = require("./src/routes/fazenda");
+var sensoresRouter = require("./src/routes/sensores");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,6 +27,8 @@ app.use(express.static(path.join(__dirname, "login")));
 app.use(express.static(path.join(__dirname, "paginaGrafico")));
 app.use(express.static(path.join(__dirname, "sistemaSensor")));
 app.use(express.static(path.join(__dirname, "img")));
+app.use(express.static(path.join(__dirname, "Tela simulador financeiro")));
+app.use(express.static(path.join(__dirname, "paginaGrafico")));
 
 app.use(cors());
 
@@ -36,6 +39,7 @@ app.use("/medidas", medidasRouter);
 app.use("/aquarios", aquariosRouter);
 app.use("/empresas", empresasRouter);
 app.use("/fazenda", fazendaRouter);
+app.use("/sensores", sensoresRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

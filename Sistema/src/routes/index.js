@@ -8,7 +8,9 @@ router.get("/cadastro-empresa", function (req, res) {
 router.get("/login", function (req, res) {
     res.render("login.html");
 });
-
+router.get("/paginaGrafico", function (req, res) {
+    res.render("paginaGrafico.html");
+});
 router.get("/sistemaSensor", function (req, res) {
     res.render("sistema.html");
 });

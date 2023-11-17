@@ -7,9 +7,9 @@
 // #include "DHT.h"
 
 //Definido as saidas de dados
-#define DHTPIN A1
+#define DHTPIN A0
 #define LM35PIN A5
-#define LUMIPIN A0
+#define LUMIPIN A1
 #define CHAVPIN 7
 
 //Especificando o tipo de sensor DHT
