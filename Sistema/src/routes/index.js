@@ -10,7 +10,7 @@ router.get("/login", function (req, res) {
 });
 
 router.get("/sistemaSensor", function (req, res) {
-    res.render("index");
+    res.render("sistema.html");
 });
 router.get("/", function (req, res) {
     res.render("index.html");

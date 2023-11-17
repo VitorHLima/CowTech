@@ -16,7 +16,7 @@
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 </head>
 
-<body id="body_id" onload="abrir()">
+<body id="body_id">
   <div class="cabecario">
     <div id="div_logo">
       <h2 id="texto_cowtech"><a href="../Site/Página Inicial/index.html">COW TECH</a></h2>
@@ -25,7 +25,7 @@
       <ul id="lista_cabecario">
         <a href="#table_funcionario">FUNCIONÁRIOS</a>
         <a href="#div_grafico">GRÁFICOS</a>
-        <a href="../Site/login/login.html">SAIR</a>
+        <a href="/login.html">SAIR</a>
       </ul>
     </div>
   </div>
@@ -93,14 +93,14 @@
           <h3>Quantidade de sensores: 1</h3>
         </div>
         <div id="div_imagem_sensor">
-          <img src="../sistemaSensor/img/Rectangle 3.jpg" id='img_sensor' alt="">
+          <img src="img/Rectangle 3.jpg" id='img_sensor' alt="">
         </div>
         <div id="div_botoes">
           <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda()">
-            <img src="../sistemaSensor/img/icons8-voltar-100.png" alt="">
+            <img src="img/icons8-voltar-100.png" alt="">
           </button>
           <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita()">
-            <img src="../sistemaSensor/img/icons8-voltar-50.png" alt="">
+            <img src="img/icons8-voltar-50.png" alt="">
           </button>
         </div>
       </div>
@@ -141,14 +141,14 @@
           <h3>Quantidade de sensores: 1</h3>
         </div>
         <div id="div_imagem_sensor">
-          <img src="../sistemaSensor/img/dht11.jpg" id='img_sensor_dth11' alt="">
+          <img src="img/dht11.jpg" id='img_sensor_dth11' alt="">
         </div>
         <div id="div_botoes">
           <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda_dht11()">
-            <img src="../sistemaSensor/img/icons8-voltar-100.png" alt="">
+            <img src="img/icons8-voltar-100.png" alt="">
           </button>
           <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita_dht11()">
-            <img src="../sistemaSensor/img/icons8-voltar-50.png" alt="">
+            <img src="img/icons8-voltar-50.png" alt="">
           </button>
         </div>
       </div>
@@ -189,14 +189,14 @@
           <h3>Quantidade de sensores: 1</h3>
         </div>
         <div id="div_imagem_sensor">
-          <img src="../sistemaSensor/img/lm35.jpg" id='img_sensor_lm35' alt="">
+          <img src="img/lm35.jpg" id='img_sensor_lm35' alt="">
         </div>
         <div id="div_botoes">
           <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda_lm35()">
-            <img src="../sistemaSensor/img/icons8-voltar-100.png" alt="">
+            <img src="img/icons8-voltar-100.png" alt="">
           </button>
           <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita_lm35()">
-            <img src="../sistemaSensor/img/icons8-voltar-50.png" alt="">
+            <img src="img/icons8-voltar-50.png" alt="">
           </button>
         </div>
         <div id="texto_sensor">
@@ -235,7 +235,7 @@
       <div id="pop_up_sensor">
         <div id="div_button_popUp">
           <button id="button_sair" onclick="Sair_sensor()">
-            <img src="../Site/Página Inicial/img/sair.png" id="img_sair" alt="" />
+            <img src="img/sair.png" id="img_sair" alt="" />
           </button>
         </div>
         <div id="div_formulario">
@@ -296,7 +296,7 @@
       <div id="pop_up">
         <div id="div_button_popUp">
           <button id="button_sair" onclick="Sair()">
-            <img src="../Site/Página Inicial/img/sair.png" id="img_sair" alt="" />
+            <img src="img/sair.png" id="img_sair" alt="" />
           </button>
         </div>
         <div id="div_formulario">
@@ -404,7 +404,7 @@
       alert('Insira um endereco válido')
     }
     else {
-    fetch(`/avisos/publicar/${idUsuario}`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
+    fetch(`/fazenda/publicar/${idUsuario}`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
     method: "POST", //Aqui é o tipo da requisição, se é POST OU GET, POST é para enviar dados
     headers: {
     "Content-Type": "application/json",// Aqui informa ao servidor como será enviado, será em JSON
@@ -447,13 +447,13 @@
   function Remover() {
     table_funcionario.innerHTML = ``
   }
-  function Adicionar() {
-    pop_up.style.display = "flex";
-    button_adicionar.style.display = "none";
-    body_id.style.background = `rgb(0, 0, 0, 0.800)`;
-    body_id.style.opacity = 1;
-    button_adicionar_sensor.style.display = `none`
-  }
+  // function Adicionar() {
+  //   pop_up.style.display = "flex";
+  //   button_adicionar.style.display = "none";
+  //   body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+  //   body_id.style.opacity = 1;
+  //   button_adicionar_sensor.style.display = `none`
+  // }
   function Sair() {
     pop_up.style.display = "none";
     button_adicionar.style.display = "inline";

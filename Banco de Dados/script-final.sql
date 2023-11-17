@@ -3,18 +3,20 @@
 create database bdsistema;
 
 use bdsistema;
-
+DROP DATABASE bdsistema;
 -- Criação das Tabelas
 
 create table empresa(
 idEmpresa int primary key auto_increment,
-cnpj char(14),
+cnpj char(18),
 nomeEmpresa varchar(50),
 ddd char(2),
-contato char(9),
+contato char(10),
 email varchar(30),
 senha varchar(20)
 );
+
+SELECT * FROM empresa;
 
 create table endFazenda(
 idEndereco int primary key auto_increment,

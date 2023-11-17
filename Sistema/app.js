@@ -10,22 +10,24 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-// var medidasRouter = require("./src/routes/medidas");
+var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
 var enderecoRouter = require("./src/routes/enderecos");
-// var usuarioRouter = require("./src/routes/usuarios");
-// var medidasRouter = require("./src/routes/medidas");
-// var aquariosRouter = require("./src/routes/aquarios");
-// var enderecoRouter = require("./src/routes/enderecos");
+var usuarioRouter = require("./src/routes/usuarios");
+var medidasRouter = require("./src/routes/medidas");
+var aquariosRouter = require("./src/routes/aquarios");
+var enderecoRouter = require("./src/routes/enderecos");
 var empresasRouter = require("./src/routes/empresas");
+var fazendaRouter = require("./src/routes/fazenda");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "Página Inicial")));
-app.use(express.static(path.join(__dirname, "cadastro-empresa")));
+app.use(express.static(path.join(__dirname, "Site/cadastro-empresa")));
 app.use(express.static(path.join(__dirname, "endereco")));
+app.use(express.static(path.join(__dirname, "Site")));
 app.use(express.static(path.join(__dirname, "login")));
-app.use(express.static(path.join(__dirname, "sistemaSensor")));
+app.use(express.static(path.join(__dirname, "Sistema/sistemaSensor")));
 app.use(express.static(path.join(__dirname, "img")));
 app.use(express.static(path.join(__dirname, "public/Site/Página Inicial")));
 app.use(express.static(path.join(__dirname, "public/Site")));
@@ -39,6 +41,7 @@ app.use("/enderecos", enderecoRouter);
 // app.use("/medidas", medidasRouter);
 app.use("/aquarios", aquariosRouter);
 app.use("/empresas", empresasRouter);
+app.use("/fazenda", fazendaRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n
