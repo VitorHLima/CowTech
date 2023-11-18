@@ -1,16 +1,14 @@
-var database = require("../database/config")
+var database = require("../database/config");
 
-function cadastrar(dht11Umidade, lm35_temperatura, idRegistro) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
-
+function publicar(nome, idUsuario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ");
     var instrucao = `
-        INSERT INTO registro(idRegistro, dtAtual, dht11_Umidade, lm35_temperatura, fkSensor) 
-        VALUES (${idRegistro}, ?, ${dht11Umidade}, ${lm35_temperatura}, ?);
+        INSERT INTO sensor(nome, fkCurral) VALUES ('${nome}',${idUsuario});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 module.exports = {
-    cadastrar
-};
+    publicar
+}

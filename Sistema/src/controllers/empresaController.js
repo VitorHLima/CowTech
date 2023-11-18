@@ -1,6 +1,7 @@
 var empresaModel = require("../models/empresaModel");
+var aquarioModel = require("../models/aquarioModel");
 
-function entrar(req, res) {
+function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
@@ -10,22 +11,40 @@ function entrar(req, res) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
 
-        empresaModel.entrar(email, senha)
+        empresaModel.autenticar(email, senha)
             .then(
-                function (resultado) {
-                    console.log(`\nResultados encontrados: ${resultado.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
-                    if (resultado.length == 1) {
-                        console.log(resultado);
-                        res.json(resultado[0]);
-                    } else if (resultado.length == 0) {
+                    if (resultadoAutenticar.length == 1) {
+                        console.log(resultadoAutenticar);
+
+                        aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].idEmpresa)
+                            .then((resultadoAquarios) => {
+                                if (resultadoAquarios.length >= 0) {
+                                    res.json({
+                                        idEmpresa: resultadoAutenticar[0].idEmpresa,
+                                        email: resultadoAutenticar[0].email,
+                                        nome: resultadoAutenticar[0].nickname,
+                                        senha: resultadoAutenticar[0].senha,
+                                        sensor: resultadoAquarios,
+                                        curral: resultadoAquarios
+                                    });
+                                }
+                                else {
+                                    res.status(204).json({ sensor: [] }, { curral: [] });
+                                }
+                            })
+                    } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
                         res.status(403).send("Mais de um usuário com o mesmo login e senha!");
                     }
                 }
-            ).catch(
+
+            )
+            .catch(
                 function (erro) {
                     console.log(erro);
                     console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
@@ -97,7 +116,7 @@ function buscarPorId(req, res) {
     });
 }
 module.exports = {
-    entrar,
+    autenticar,
     cadastrar,
     buscarPorCnpj,
     buscarPorId,

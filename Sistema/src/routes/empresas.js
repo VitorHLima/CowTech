@@ -11,11 +11,9 @@ router.post("/cadastrar", function (req, res) {
 router.get("/buscar", function (req, res) {
   empresaController.buscarPorCnpj(req, res);
 });
-
-router.post("/entrar", function (req, res) {
-  empresaController.entrar(req, res);
+router.post("/autenticar", function (req, res) {
+  empresaController.autenticar(req, res);
 });
-
 router.get("/buscar/:id", function (req, res) {
   empresaController.buscarPorId(req, res);
 });

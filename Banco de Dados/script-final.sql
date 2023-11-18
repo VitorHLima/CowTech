@@ -38,12 +38,16 @@ fkEndFazenda int,
 foreign key (fkEndFazenda) references endFazenda(idEndereco)
 );
 
+SELECT * FROM curral JOIN EndFazenda ON idEndereco = fkEndFazenda;
+
 create table sensor(
 idSensor int primary key,
 nome varchar(20),
 fkCurral int,
 foreign key (fkCurral) references curral(idCurral) 
 );
+
+SELECT * FROM sensor;
 
 create table registro(
 idRegistro int,

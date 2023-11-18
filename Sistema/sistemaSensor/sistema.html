@@ -242,10 +242,7 @@
           <form id="formulario" action="#divisao_funcao_funcionario">
             <h4>Nome</h4>
             <input type="text" id="input_nome_sensor" placeholder="Ex: Frizza" /><br />
-
-            <h4>Código</h4>
-            <input type="text" id="input_codigo" placeholder="Ex: Frizza@sptech.school" /><br /><br>
-            <button class="button_sensor" onclick="Cadastrar_sensor()">Cadastrar</button>
+             <button class="button_sensor" onclick="Cadastrar_sensor()">Cadastrar</button>
         </div><br>
         </form>
       </div>
@@ -385,13 +382,13 @@
   </div>
 </body>
 <script>
-
+  // div_logo.innerHTML = sessionStorage.ID_EMPRESA
 
   function Cadastrar() {
     var nomeVar = input_nome_pessoa.value
     var enderecoVar = listaEnderecos.value
 
-    var idUsuario = sessionStorage.ID_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
+    var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
 
     var corpo = { //Aqui é a criação da variavel corpo, sendo um objeto, que o JSON consegue ler
       nomeServer: nomeVar, //Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
@@ -473,13 +470,56 @@
     body_id.style.backgroundColor = `white`;
     button_adicionar_sensor.style.display = `flex`
   }
+
+
+
+
   function Cadastrar_sensor() {
-    pop_up_sensor.style.display = "none";
-    button_adicionar.style.display = "inline";
-    document.body.style.opacity = 1;
-    body_id.style.backgroundColor = `white`;
-    button_adicionar_sensor.style.display = 'inline'
-  }
+    var idUsuario = sessionStorage.ID_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
+
+    var nomeVar = input_nome_sensor.value
+
+    var corpo = { //Aqui é a criação da variavel corpo, sendo um objeto, que o JSON consegue ler
+    nomeServer: nomeVar, //Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
+    };
+
+    fetch(`/sensores/publicar/${idUsuario}`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
+        method: "POST", //Aqui é o tipo da requisição, se é POST OU GET, POST é para enviar dados
+        headers: {
+          "Content-Type": "application/json",// Aqui informa ao servidor como será enviado, será em JSON
+        },
+        body: JSON.stringify(corpo), //Aqui é o tipo dos dados que vão mandar, transformou o objeto corpo lá em cima, por um JSON, que vai ser recebido com o body na pagina controller
+      })
+        .then(function (resposta) {// Aqui é ele vai tentar mandar os dados pegos lá em cima, com o parametro de resposta para pegar se é uma resposta postiviva ou negativa vindo do servidor
+          console.log("resposta: ", resposta);//Aqui ele vai exibir a resposta do servidor
+
+          if (resposta.ok) { //Se a resposta for ok, ele vai cadastrar a historia com sucesso
+            alert("Curral cadastrado");//Vai exibir para o usuario o resultado positivo
+            pop_up_sensor.style.display = "none";
+            button_adicionar.style.display = "inline";
+            document.body.style.opacity = 1;
+            body_id.style.backgroundColor = `white`;
+            button_adicionar_sensor.style.display = 'inline'
+              Sair()// Aqui está transferindo o usuario para outra pagina
+          } else if (resposta.status == 404) {//Se a resposta for o erro 404, que pode ser que o servidor caiu ou não funcionou a requisição
+            alert("Deu 404!");//Aqui ele está exibindo um alerta na pagina, deu 404!
+          } else {//Senão for o erro 404
+            throw ( //Aqui ele está lançando uma mensagem caso não seja o erro acima
+              "Houve um erro ao tentar realizar a postagem! Código da resposta: " +//Aqui é respota que vai ser lançada
+              resposta.status// Aqui é a resposta e os status daquela resposta
+            );
+          }
+        })
+        .catch(function (resposta) { // Aqui ele vai pegar o erro, e com o paramentro seria a informação daquele erro
+          console.log(`#ERRO: ${resposta}`);//Está exibindo o erro
+        });
+
+      return false;//Está retornando falso
+    }
+
+
+
+
   function Sair_sensor() {
     pop_up_sensor.style.display = "none";
     document.body.style.opacity = 1;

@@ -55,11 +55,80 @@
       <label for="">Senha</label>
       <input class="css-input" id="input_senha" type="text" />
       <a class="a-senha" href="../redefinir-senha/redefinirSenha.html">Esqueceu sua senha?</a>
-      <button class="bt-enviar" onclick="entrar()">Entrar</button>
+      <button class="bt-enviar" onclick="autenticar()">Entrar</button>
       <a class="a-cadastrar" href="empresa.html">Cadastre-se</a>
     </div>
   </div>
 </body>
+</html>
+
+<script>
+
+  function autenticar() {
+
+    var emailVar = input_email.value;
+    var senhaVar = input_senha.value;
+
+    if (emailVar == "") {
+      alert('Insira o email')
+      return false;
+    } else if (senhaVar == "") {
+      alert('Insira o email')
+      return false;
+    } else {
+
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
+
+    fetch("/empresas/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+          sessionStorage.EMAIL_USUARIO = json.email;
+          sessionStorage.NOME_USUARIO = json.nome;
+          sessionStorage.ID_EMPRESA = json.idEmpresa;
+          sessionStorage.SENSOR = JSON.stringify(json.sensor)
+          sessionStorage.CURRAL = JSON.stringify(json.curral)
+
+          setTimeout(function () {
+            window.location = "sistema.html";
+          }, 1000); // apenas para exibir o loading
+
+        });
+      
+
+      } else {
+
+        console.log("Houve um erro ao tentar realizar o login!");
+
+        resposta.text().then(texto => {
+          console.error(texto);
+        });
+      }
+
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+
+    return false;
+  }
+  }
+
+</script>
 <style>
   * {
     margin: 0;
@@ -298,71 +367,3 @@ h4 {
     font-size: 20px;
 }
 </style>
-</html>
-
-<script>
-
-  function entrar() {
-
-    var emailVar = input_email.value;
-    var senhaVar = input_senha.value;
-
-    if (emailVar == "") {
-      alert('Insira o email')
-      return false;
-    } else if (senhaVar == "") {
-      alert('Insira o email')
-      return false;
-    } else {
-
-    console.log("FORM LOGIN: ", emailVar);
-    console.log("FORM SENHA: ", senhaVar);
-
-    fetch("/empresas/entrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        emailServer: emailVar,
-        senhaServer: senhaVar
-      })
-    }).then(function (resposta) {
-      console.log("ESTOU NO THEN DO entrar()!")
-
-      if (resposta.ok) {
-        console.log(resposta);
-
-        resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
-          sessionStorage.EMAIL_USUARIO = json.email;
-          sessionStorage.NOME_USUARIO = json.nome;
-          sessionStorage.ID_USUARIO = json.idUsuario;
-          // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-
-          setTimeout(function () {
-            window.location = "sistema.html";
-          }, 1000); // apenas para exibir o loading
-
-        });
-      
-
-      } else {
-
-        console.log("Houve um erro ao tentar realizar o login!");
-
-        resposta.text().then(texto => {
-          console.error(texto);
-        });
-      }
-
-    }).catch(function (erro) {
-      console.log(erro);
-    })
-
-    return false;
-  }
-  }
-
-</script>
