@@ -90,17 +90,18 @@ console.log(Sensores)
     if(Sensores) {
       var div = document.createElement('div')
       var h4 = document.createElement('h4')
-      var button = document.createElement('button')
+      var button1 = document.createElement('button')
 
-      button.classList.add('button_sensor')
+      button1.classList.add('button_sensor')
       div.classList.add('div_tipos_metricas')
 
       div.inneHTML = Sensores.map(item => item.idSensor)
       h4 = Sensores.map(item => item.nome)
-      console.log(button)
-      div.appendChild(button)
+      console.log(button1)
 
       div.innerHTML = h4[i]
+      div.appendChild(button1)
+
       divPrincipal.appendChild(div)
     }else {
       console.log('Impossivel achar os dados')
@@ -547,10 +548,20 @@ console.log(Sensores)
 }
 .button_sensor {
   padding: 2%;
-  width: 100%;
+  width: 90%;
+  height: 30px;
   border: 1px solid black;
-  background-color: transparent;
+  margin-top: 50%;
   border-radius: 10px;
+  cursor: pointer;
+}.button_sensor:hover {
+  padding: 2%;
+  width: 90%;
+  height: 30px;
+  border: 1px solid black;
+  margin-top: 50%;
+  border-radius: 10px;
+  opacity: 0.8;
 }
 canvas {
     -moz-user-select: none;
