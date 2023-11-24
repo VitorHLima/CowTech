@@ -109,9 +109,9 @@
     var faturamento_diario_cowtech = vacas * producao_vaca * 1.17 * preco_litro;
 
     //calculo Mensal
-    var media_producao_mensal = (vacas * producao_vaca * 30);
+    var media_producao_mensal = producao_diaria * 30;
     var media_faturamento_mensal = faturamento_diario * 30;
-    var media_producao_mensal_cowtech = vacas * producao_diaria_cowtech * 30;
+    var media_producao_mensal_cowtech = producao_diaria_cowtech * 30;
     var media_faturamento_mensal_cowtech = faturamento_diario_cowtech * 30;
 
     //calculo anual
