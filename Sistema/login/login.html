@@ -16,12 +16,12 @@
   <div class="cabecario">
     <div id="div_logo">
       <h2 id="texto_cowtech">
-        <a href="../Página Inicial/index.html">COW TECH</a>
+        <a href="index.html">COW TECH</a>
       </h2>
     </div>
     <div id="div_links">
       <ul id="lista_cabecario">
-        <a href="../Tela simulador financeiro/Calculadora Financeira.html">CALCULADORA</a>
+        <a href="Calculadora Financeira.html">CALCULADORA</a>
         <a href="empresa.html">CADASTRAR</a>
         <a href="login.html" class="ativo">LOGIN</a>
       </ul>
@@ -44,7 +44,7 @@
         <p class="apoio">
           Caso tenha dificuldades ao tentar entrar em sua conta, entre em
           contato com nossa equipe de
-          <a href="../Página Inicial/index.html"><span>suporte</span></a>
+          <a href="index.html"><span>suporte</span></a>
         </p>
       </div>
     </div>
@@ -54,9 +54,9 @@
       <input class="css-input" id="input_email" type="text" />
       <label for="">Senha</label>
       <input class="css-input" id="input_senha" type="text" />
-      <a class="a-senha" href="../redefinir-senha/redefinirSenha.html">Esqueceu sua senha?</a>
+      <!-- <a class="a-senha" href="../redefinirSenha.html">Esqueceu sua senha?</a> -->
       <button class="bt-enviar" onclick="autenticar()">Entrar</button>
-      <a class="a-cadastrar" href="empresa.html">Cadastre-se</a>
+      <div><a class="a-cadastrar" href="empresa.html">Cadastre-se</a></div>
     </div>
   </div>
 </body>
@@ -252,11 +252,14 @@
     width: 50%;
     padding: 1px;
     font-size: 13px;
+    margin-top: 5%;
     border-width: 1px;
     border-color: #fff;
     background-color: #000000;
     color: #fff;
     border-style: solid;
+    position: relative;
+    bottom: 8%;
     cursor: pointer;
 }
 

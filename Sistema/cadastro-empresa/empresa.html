@@ -17,14 +17,14 @@
   <div class="cabecario">
     <div id="div_logo">
       <h2 id="texto_cowtech">
-        <a href="../Página Inicial/index.html">COW TECH</a>
+        <a href="../index.html">COW TECH</a>
       </h2>
     </div>
     <div id="div_links">
       <ul id="lista_cabecario">
-        <a href="../Tela simulador financeiro/Calculadora Financeira.html">CALCULADORA</a>
-        <a href="empresa.html" class="ativo">CADASTRAR</a>
-        <a href="../login/login.html">LOGIN</a>
+        <a href="../Calculadora Financeira.html">CALCULADORA</a>
+        <a href="../empresa.html" class="ativo">CADASTRAR</a>
+        <a href="../login.html">LOGIN</a>
       </ul>
     </div>
   </div>
@@ -47,7 +47,7 @@
         <p class="apoio">
           Caso tenha dificuldades ao tentar acessar sua conta, entre em
           contato com nossa equipe de
-          <a href="../Página Inicial/index.html"><span>suporte</span></a>
+          <a href="../index.html"><span>suporte</span></a>
         </p>
         <p class="termos">
           Ao clicar em “Cadastrar”, o solicitante do cadastro está ciente e
@@ -80,7 +80,7 @@
         <img src="img/circle-loading.gif" id="loading-gif" />
       </div>
       <div id="div_erros_login"></div>
-      <a class="a-cadastrar" href="login.html">Já tem cadastro?</a>
+      <a class="a-cadastrar" href="../login.html">Já tem cadastro?</a>
     </div>
   </div>
   </div>
@@ -101,81 +101,59 @@
     var confirmaEmail = input_confirmaEmail.value;
 
     if (cnpj == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Mensagem de erro para cnpj em branco)";
 
-      finalizarAguardar();
       return false;
     } else if (nome == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Mensagem de erro para nome em branco)";
 
-      finalizarAguardar();
       return false;
     } else if (ddd == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Mensagem de erro para ddd em branco)";
 
-      finalizarAguardar();
       return false;
     } else if (contato == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Mensagem de erro para contato em branco)";
 
-      finalizarAguardar();
       return false;
     } else if (email == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Mensagem de erro para email em branco)";
 
-      finalizarAguardar();
       return false;
     } else if (confirmaEmail == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Mensagem de erro para confirma email em branco)";
 
-      finalizarAguardar();
       return false;
     } else if (senha == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Mensagem de erro para senha em branco)";
 
-      finalizarAguardar();
       return false;
     } else if (confirmaSenha == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Mensagem de erro para confirmaSenha em branco)";
 
-      finalizarAguardar();
       return false;
     } else if (email.indexOf("@") < 0) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Digite um email válido)";
 
-      finalizarAguardar();
       return false;
     } else if (confirmaEmail.indexOf("@") < 0) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(Digite um Email válido no confirma email)";
 
-      finalizarAguardar();
       return false;
     } else if (email != confirmaEmail) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(E-mail diferente do confirma e-mail)";
 
-      finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -272,18 +250,18 @@
                         "Cadastro realizado com sucesso! Redirecionando para tela de Endereço...";
 
                       setTimeout(() => {
-                        window.location = "../endereco/endereco.html";
+                        window.location = "endereco.html";
                       }, "2000");
 
                       limparFormulario();
-                      finalizarAguardar();
+              
                     } else {
                       throw "Houve um erro ao tentar realizar o cadastro!";
                     }
                   })
                   .catch(function (resposta) {
                     console.log(`#ERRO: ${resposta}`);
-                    finalizarAguardar();
+            
                   });
 
                 return false;
@@ -293,7 +271,7 @@
               mensagem_erro.innerHTML =
                 "(Digite senha igual no repita Senha)";
 
-              finalizarAguardar();
+      
               return false;
             }
           } else {
@@ -301,7 +279,7 @@
             mensagem_erro.innerHTML =
               "(A senha deve conter pelo menos um numero)";
 
-            finalizarAguardar();
+    
             return false;
           }
         } else {
@@ -309,7 +287,7 @@
           mensagem_erro.innerHTML =
             "(A senha deve conter ao menos um carácter especial)";
 
-          finalizarAguardar();
+  
           return false;
         }
       } else {
@@ -317,15 +295,13 @@
         mensagem_erro.innerHTML =
           "(A senha deve conter ao menos uma letra maiuscula e uma minuscula)";
 
-        finalizarAguardar();
+
         return false;
       }
     } else {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
+    
         "(A senha deve ter pelo menos 8 caracteres)";
 
-      finalizarAguardar();
       return false;
     }
   }

@@ -44,7 +44,7 @@ foreign key (fkEndFazenda) references endFazenda(idEndereco)
 SELECT * FROM curral JOIN EndFazenda ON idEndereco = fkEndFazenda;
 
 create table sensor(
-idSensor int primary key,
+idSensor int primary key auto_increment,
 nome varchar(20),
 fkCurral int,
 foreign key (fkCurral) references curral(idCurral) 
@@ -53,16 +53,19 @@ foreign key (fkCurral) references curral(idCurral)
 SELECT * FROM sensor;
 
 create table registro(
-idRegistro int,
+idRegistro int auto_increment,
 dtAtual datetime default current_timestamp,
 dht11_Umidade decimal(10,2),
 lm35_temperatura decimal(10,2),
 fkSensor int,
+key(idRegistro),
 foreign key (fkSensor) references sensor(idSensor),
 primary key (fkSensor,idRegistro)
 )auto_increment = 1000;
 
 SELECT * FROM registro;
+
+SELECT idSensor, nome from Sensor;
 
 -- Inserção de Dados
 

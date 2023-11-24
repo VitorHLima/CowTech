@@ -17,6 +17,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
   <div id="principal_pagina_grafico">
     <div class="cabecario">
       <div id="div_logo">
@@ -29,6 +30,67 @@
           <a href="../Site/login/login.html">SAIR</a>
         </ul>
       </div>
+=======
+    <div id="principal_pagina_grafico">
+        <div class="cabecario">
+            <div id="div_logo">
+                <h2 id="texto_cowtech"><a href="index.html">COW TECH</a></h2>
+      
+            </div>
+            <div id="div_links">
+                <ul id="lista_cabecario">
+                    <a href="sistema.html">SISTEMA</a>
+                    <a href="#div_grafico">GRÁFICOS</a>
+                    <a href="login.html">SAIR</a>
+                </ul>
+            </div>
+        </div>
+        <div id="div_graficos">
+            <div id="div_select" style="position: relative;">
+                <h4 id="select_fazenda" style="color: black; position: absolute; margin-top: -12%;">Curral</h4>
+                <select name="" id="select_curral" class="select_grafico"></select>
+                <h4 id="select_galpao" style="color: black; position: absolute;margin-top: -12%;">Fazenda</h4>
+                <select name="" id="select_curral1" class="select_grafico"></select>
+                <button id="button_pesquisar"><img src="lupa.png" alt=""></button>
+            </div>
+            <div id="div_titulo_grafico">
+            
+            </div>
+            <div id="div_todos_graficos">
+                <div id="div_separacao_grafico">
+                    <div class="graficos1" style="margin-right: 2%;">
+                      
+                            <section style="width: 100%;" id="myChartCanvas">
+                                <canvas id="lm35Temperatura"></canvas>
+                              </section>
+                    
+                    </div>
+                    <div class="graficos1">
+                     
+                            <section style="width: 100%;" id="myChartCanvas">
+                                <canvas id="lm35Temperatura"></canvas>
+                              </section>
+                     
+                    </div>
+                </div>
+                <div id="div_separacao_grafico">
+                    <div class="graficos1" style="margin-right: 2%;">
+                   
+                            <section style="width: 100%;" id="myChartCanvas">
+                                <canvas id="dht11Umidade"></canvas>
+                              </section>
+                     
+                    </div>
+                    <div class="graficos1">
+                            <section style="width: 100%;" id="myChartCanvas">
+                                <canvas id="lm35Temperatura2"></canvas>
+                              </section>
+             
+                    </div>
+                </div>
+            </div>
+        </div>
+>>>>>>> a12afc18948792d3bf3494c6ac665a5f162c043f
     </div>
     <div id="div_graficos">
       <div id="div_select" style="position: relative;">
@@ -91,6 +153,7 @@
   var idEmpresa = sessionStorage.ID_EMPRESA
   texto_cowtech.innerHTML = sessionStorage.ID_EMPRESA;
 
+<<<<<<< HEAD
   fetch("/enderecos/listar", {
     method: "GET",
   })
@@ -98,6 +161,47 @@
       resposta.json().then((enderecos) => {
         enderecos.forEach((endFazenda) => {
           select_curral.innerHTML += `<option value='${endFazenda.idEndereco}'>${endFazenda.nomeFazenda}</option>`;
+=======
+var Sensores = JSON.parse(sessionStorage.SENSOR)
+console.log(Sensores)
+
+  for(var i = 0; i < Sensores.length; i++) {
+    var divPrincipal = document.getElementById('div_titulo_grafico')
+    if(Sensores) {
+      var div = document.createElement('div')
+      var h4 = document.createElement('h4')
+      var button1 = document.createElement('button')
+
+      button1.classList.add('button_sensor')
+      div.classList.add('div_tipos_metricas')
+
+      div.inneHTML = Sensores.map(item => item.idSensor)
+      h4 = Sensores.map(item => item.nome)
+
+      div.innerHTML = h4[i]
+
+      divPrincipal.appendChild(div)
+
+      div.appendChild(button1)
+      button1.addEventListener('click', function Mostrar_Graficos(valor) {
+        
+      })
+
+    }else {
+      console.log('Impossivel achar os dados')
+    }
+  }
+
+
+    fetch("/enderecos/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((enderecos)=> {
+          enderecos.forEach((endFazenda) => {
+            select_curral.innerHTML += `<option value='${endFazenda.idEndereco}'>${endFazenda.nomeFazenda}</option>`;
+          });
+>>>>>>> a12afc18948792d3bf3494c6ac665a5f162c043f
         });
       });
     })
@@ -117,6 +221,7 @@
           listaCurrais.innerHTML += `<option value='${curral.idCurral}'>${curral.nome}</option>`;
         });
       });
+<<<<<<< HEAD
     })
     .catch(function (resposta) {
       console.log(`#ERRO: ${resposta}`);
@@ -145,6 +250,9 @@
     });
 
 
+=======
+  
+>>>>>>> a12afc18948792d3bf3494c6ac665a5f162c043f
 
 
   let proximaAtualizacao;
@@ -551,9 +659,39 @@
     padding: 0;
     margin: 0;
     font-family: Poppins;
+<<<<<<< HEAD
   }
 
   canvas {
+=======
+}
+.button_sensor {
+  padding: 2%;
+  width: 90%;
+  height: 25px;
+  border: 1px solid black;
+  margin-top: 60%;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 6px 5px 10px -6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
+
+}.button_sensor:hover {
+  padding: 2%;
+  width: 90%;
+  height: 25px;
+  border: 1px solid black;
+  margin-top: 60%;
+  border-radius: 10px;
+  opacity: 0.8;
+}
+.button_sensor:focus {
+  background-color: black;
+  border: 0;
+}
+canvas {
+>>>>>>> a12afc18948792d3bf3494c6ac665a5f162c043f
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -701,7 +839,7 @@
     width: 15%;
     border-radius: 5px;
     margin: 2%;
-    height: 150px;
+    height: 170px;
     padding: 2%;
     border: 1px solid black;
     display: flex;
@@ -728,6 +866,7 @@
     margin-top: 1%;
     border-radius: 10px;
     width: 40%;
+    display: flex;
     border: 1px solid black;
     height: 350px;
     box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
@@ -778,7 +917,7 @@
     width: 30%;
     padding: 0.3%;
     margin-right: 2%;
-    border-radius: 3px;
+    border-radius: 5px;
 
   }
 
