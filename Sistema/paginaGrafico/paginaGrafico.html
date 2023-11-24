@@ -97,12 +97,16 @@ console.log(Sensores)
 
       div.inneHTML = Sensores.map(item => item.idSensor)
       h4 = Sensores.map(item => item.nome)
-      console.log(button1)
 
       div.innerHTML = h4[i]
-      div.appendChild(button1)
 
       divPrincipal.appendChild(div)
+
+      div.appendChild(button1)
+      button1.addEventListener('click', function Mostrar_Graficos(valor) {
+        
+      })
+
     }else {
       console.log('Impossivel achar os dados')
     }
@@ -549,19 +553,27 @@ console.log(Sensores)
 .button_sensor {
   padding: 2%;
   width: 90%;
-  height: 30px;
+  height: 25px;
   border: 1px solid black;
-  margin-top: 50%;
+  margin-top: 60%;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 6px 5px 10px -6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
+
 }.button_sensor:hover {
   padding: 2%;
   width: 90%;
-  height: 30px;
+  height: 25px;
   border: 1px solid black;
-  margin-top: 50%;
+  margin-top: 60%;
   border-radius: 10px;
   opacity: 0.8;
+}
+.button_sensor:focus {
+  background-color: black;
+  border: 0;
 }
 canvas {
     -moz-user-select: none;
@@ -711,7 +723,7 @@ canvas {
     width: 15%;
     border-radius: 5px;
     margin: 2%;
-    height: 150px;
+    height: 170px;
     padding: 2%;
     border: 1px solid black;
     display: flex;
@@ -738,6 +750,7 @@ canvas {
     margin-top: 1%;
     border-radius: 10px;
     width: 40%;
+    display: flex;
     border: 1px solid black;
     height: 350px;
     box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
@@ -788,7 +801,7 @@ canvas {
     width: 30%;
     padding: 0.3%;
     margin-right: 2%;
-    border-radius: 3px;
+    border-radius: 5px;
 
 }
 
