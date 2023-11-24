@@ -48,12 +48,12 @@
         <p class="apoio">
           Caso tenha dificuldades com a sua localidade da sua conta, entre em
           contato com nossa equipe de
-          <a href="../Página Inicial/index.html" style="color: black"><span>suporte</span></a>
+          <a href="index.html" style="color: black"><span>suporte</span></a>
         </p>
       </div>
     </div>
     <div class="entradas">
-      <a class="p-volta" href="../cadastro-empresa/empresa.html">Voltar</a>
+      <a class="p-volta" href="empresa.html">Voltar</a>
       <h4>Endereço</h4>
       <label class="label-fazenda label" for="">Nome da Fazenda</label>
       <input class="css-input" id="input_fazenda" type="text" />
@@ -100,60 +100,36 @@
     var empresaVar = listaEmpresas.value
 
     if (logradouro == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
         "(Digite um valor no campo logradouro)";
 
-      finalizarAguardar();
       return false;
     } else if (bairro == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
         "(Digite um valor no campo bairro)";
 
-      finalizarAguardar();
       return false;
     } else if (municipio == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
         "(Digite um valor no campo municipio)";
 
-      finalizarAguardar();
       return false;
     } else if (estado == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
         "(Digite um valor no campo estado)";
 
-      finalizarAguardar();
       return false;
     } else if (numero == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
         "(Digite um valor no campo numero)";
 
-      finalizarAguardar();
       return false;
     } else if (cep == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
         "(Digite um valor no campo cep)";
 
-      finalizarAguardar();
       return false;
     } else if (nome == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
         "(Digite um valor no campo nome)";
 
-      finalizarAguardar();
       return false;
     } else if (empresaVar == "") {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
         "(Escolha uma empresa)";
 
-      finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -190,18 +166,18 @@
             "Cadastro realizado com sucesso! Redirecionando para tela de login...";
 
           setTimeout(() => {
-            window.location = "../login/login.html";
+            window.location = "login.html";
           }, "2000");
 
           limparFormulario();
-          finalizarAguardar();
+  
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+
       });
 
     return false;
