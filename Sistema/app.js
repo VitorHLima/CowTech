@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, "login")));
 app.use(express.static(path.join(__dirname, "paginaGrafico")));
 app.use(express.static(path.join(__dirname, "sistemaSensor")));
 app.use(express.static(path.join(__dirname, "img")));
+app.use(express.static(path.join(__dirname, "inicial/img")));
 app.use(express.static(path.join(__dirname, "Tela simulador financeiro")));
 app.use(express.static(path.join(__dirname, "paginaGrafico")));
 

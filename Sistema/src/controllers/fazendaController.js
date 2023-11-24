@@ -24,7 +24,13 @@ function publicar(req, res) {
             );
     }
 }
+function BuscarCurral(req, res) {
+    fazendaModel.BuscarCurral().then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
 
 module.exports = {
-    publicar
+    publicar,
+    BuscarCurral
 }
