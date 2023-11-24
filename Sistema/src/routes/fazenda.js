@@ -7,5 +7,8 @@ var fazendaController = require("../controllers/fazendaController");
 router.post("/publicar/:idUsuario", function (req, res) {
     fazendaController.publicar(req, res);
 });
+router.get("/BuscarCurral/", function (req, res) {
+    fazendaController.BuscarCurral(req, res);
+});
 
 module.exports = router;

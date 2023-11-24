@@ -14,17 +14,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+  <script src="/js/sessao.js"></script>
 </head>
 
 <body id="body_id" onload="carregar()">
   <div class="cabecario">
     <div id="div_logo">
-      <h2 id="texto_cowtech"><a href="../Site/Página Inicial/index.html">COW TECH</a></h2>
+      <h2 id="texto_cowtech"><a href="index.html">COW TECH</a></h2>
     </div>
     <div id="div_links">
       <ul id="lista_cabecario">
         <a href="#table_funcionario">FUNCIONÁRIOS</a>
-        <a href="#div_grafico">GRÁFICOS</a>
+        <a href="paginaGrafico.html">GRÁFICOS</a>
         <a href="/login.html">SAIR</a>
       </ul>
     </div>
@@ -44,7 +45,7 @@
         </div>
         <a href="#card_principal"><button class="botao-inicial">Começar</button></a>
 
-        <img class="img-fundo" id="img_fundo" src="img/Programmer-amico 1.jpg" alt="">
+        <img class="img-fundo" id="img_fundo" src="Programmer-amico 1.jpg" alt="">
       </div>
     </div>
     <!--Div do sistema, deixei separado para evitar problemas com o código-->
@@ -93,14 +94,14 @@
           <h3>Quantidade de sensores: 1</h3>
         </div>
         <div id="div_imagem_sensor">
-          <img src="img/Rectangle 3.jpg" id='img_sensor' alt="">
+          <img src="Rectangle 3.jpg" id='img_sensor' alt="">
         </div>
         <div id="div_botoes">
           <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda()">
-            <img src="img/icons8-voltar-100.png" alt="">
+            <img src="icons8-voltar-100.png" alt="">
           </button>
           <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita()">
-            <img src="img/icons8-voltar-50.png" alt="">
+            <img src="icons8-voltar-50.png" alt="">
           </button>
         </div>
       </div>
@@ -141,14 +142,14 @@
           <h3>Quantidade de sensores: 1</h3>
         </div>
         <div id="div_imagem_sensor">
-          <img src="img/dht11.jpg" id='img_sensor_dth11' alt="">
+          <img src="dht11.jpg" id='img_sensor_dth11' alt="">
         </div>
         <div id="div_botoes">
           <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda_dht11()">
-            <img src="img/icons8-voltar-100.png" alt="">
+            <img src="icons8-voltar-100.png" alt="">
           </button>
           <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita_dht11()">
-            <img src="img/icons8-voltar-50.png" alt="">
+            <img src="icons8-voltar-50.png" alt="">
           </button>
         </div>
       </div>
@@ -189,14 +190,14 @@
           <h3>Quantidade de sensores: 1</h3>
         </div>
         <div id="div_imagem_sensor">
-          <img src="img/lm35.jpg" id='img_sensor_lm35' alt="">
+          <img src="lm35.jpg" id='img_sensor_lm35' alt="">
         </div>
         <div id="div_botoes">
           <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda_lm35()">
-            <img src="img/icons8-voltar-100.png" alt="">
+            <img src="icons8-voltar-100.png" alt="">
           </button>
           <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita_lm35()">
-            <img src="img/icons8-voltar-50.png" alt="">
+            <img src="icons8-voltar-50.png" alt="">
           </button>
         </div>
         <div id="texto_sensor">
@@ -252,42 +253,7 @@
       </div>
     </div>
   </div>
-  <!--Div do grafico-->
-  <div id="div_grafico">
-    <div id="div_titulo_grafico">
-      <h1>GRÁFICOS</h1>
-    </div><br><br>
-
-
-  </div>
-
-  <div id="div_principal_sensor">
-    <div id="div_button_sensor">
-      <button id="button_temperatura" onclick="Grafico_temperatura()">
-        <h5 class="titulo_grafico_sensor">TEMPERATURA</h5>
-      </button>
-      <button id="button_umidade">
-        <h5 class="titulo_grafico_sensor" onclick="Grafico_umidade()">UMIDADE</h5>
-      </button>
-    </div>
-    <h2 style="width:100%; display: none; margin-top: 10%;" id="h2_dht11">Sensor DHT 11 - Umidade</h2>
-    <section style="width:100%; display: none;" id="section_dht11Umidade">
-      <canvas id="dht11Umidade"></canvas>
-    </section>
-    <h2 id="h2_lm35" style="width: 100%;margin-top: 10%;">Sensor LM35 - Temperatura</h2>
-    <section style="width: 100%;" id="section_lm35Temperatura">
-      <canvas id="lm35Temperatura"></canvas>
-    </section>
-    <!-- <h1>Sensor Chave</h1>-->
-
-    <div id="div_informacao_grafico">
-      <button id="button_informacao">INFORMAÇÕES</button>
-      <button class="opcao_grafico" id="opcao1_grafico">A</button>
-      <button class="opcao_grafico" id="opcao2_grafico">B</button>
-      <button class="opcao_grafico">C</button>
-    </div>
-  </div>
-  </div>
+ 
   <!--Div do cadastro de funcionarios-->
   <div id="div_funcionario">
     <div id="titulo_funcionario">
@@ -304,11 +270,11 @@
           <form id="formulario" action="#divisao_funcao_funcionario">
             <h4>Nome da fazenda</h4>
             <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
-            <br />
+          
             <h4>Endereço</h4>
             <select name="enderecos" id="listaEnderecos">
               <option selected>Selecione um Endereço</option>
-            </select>
+            </select><br>
             <button onclick="Cadastrar()">Cadastrar</button>
           </form>
         </div>
@@ -364,20 +330,20 @@
         <div class="redeFooter">
           <div class="facebook-logo">
             <a href="https://www.facebook.com/"> <img id="facebook-logo"
-                src="../Site/Página Inicial/img/facebook-logo.webp"></a>
+                src="img/facebook-logo.webp"></a>
           </div>
           <div class="facebook-texto"> Facebook </div>
         </div>
 
         <div class="redeFooter">
           <div class="instagram-logo"><a href="https://www.instagram.com/"> <img id="instagram-logo"
-                src="../Site/Página Inicial/img/instagram-logo.png"></a></div>
+                src="img/instagram-logo.png"></a></div>
           <div class="instagram-texto">Instagram</div>
         </div>
 
         <div class="redeFooter">
           <div class="whatsapp-logo"><a href="https://web.whatsapp.com/"> <img id="whatsapp-logo"
-                src="../Site/Página Inicial/img/whatsapp-logo.webp"></a></div>
+                src="img/whatsapp-logo.webp"></a></div>
           <div class="whatsapp-texto">Whatsappp</div>
         </div>
       </div>
@@ -387,6 +353,9 @@
 </body>
 <script>
   // div_logo.innerHTML = sessionStorage.ID_EMPRESA
+  var img = document.getElementById('img_sensor')
+  var idUsuario = sessionStorage.EMAIL_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
+  texto_cowtech.innerHTML = idUsuario
 
   function carregar() {
     listar();
@@ -398,8 +367,7 @@
     var nomeVar = input_nome_pessoa.value
     var enderecoVar = listaEnderecos.value
 
-    var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
-
+    var idUsuario = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
     var corpo = { //Aqui é a criação da variavel corpo, sendo um objeto, que o JSON consegue ler
       nomeServer: nomeVar, //Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
       enderecoServer: enderecoVar//Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
@@ -502,7 +470,6 @@
 
   function Cadastrar_sensor() {
     var idUsuario = sessionStorage.ID_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
-
     var nomeVar = input_nome_sensor.value
     var curralVar = listaCurrais.value
 
@@ -562,6 +529,7 @@
     button_adicionar.style.display = "none";
     button_adicionar_sensor.style.display = 'none';
     pop_up_sensor.style.position = 'absolute'
+    img.src = ''
   }
 
   function Alerta() {
@@ -740,7 +708,7 @@
     text-align: center;
     justify-content: center;
     /*Quando mexer nas paginas iniciais, mexer na margin-top e margin-bottom, só coloquei essa porcentagem para ficar mais legivel quando for utilizar o código*/
-    margin-top: 15%;
+    margin-top: 10%;
     margin-bottom: 15%;
   }
 
@@ -988,9 +956,9 @@
   }
 
   #pop_up_sensor {
-    width: 40%;
+    width: 35%;
     background-color: white;
-    height: 300px;
+    height: 220px;
     border: 2px solid black;
     display: none;
     position: absolute;
@@ -1225,7 +1193,7 @@
 
   #card_principal {
     width: 100%;
-    margin-top: 25%;
+    margin-top: 20%;
     height: auto;
     display: flex;
     flex-direction: row;

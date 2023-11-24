@@ -7,5 +7,9 @@ var sensorController = require("../controllers/sensorController");
 router.post("/publicar/", function (req, res) {
     sensorController.publicar(req, res);
 });
+router.post("/listar/", function (req, res) {
+    sensorController.listar(req, res);
+});
+
 
 module.exports = router;

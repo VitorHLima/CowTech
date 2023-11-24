@@ -99,7 +99,7 @@
           console.log(json);
           console.log(JSON.stringify(json));
           sessionStorage.EMAIL_USUARIO = json.email;
-          sessionStorage.NOME_USUARIO = json.nome;
+          sessionStorage.NOME_USUARIO = json.nomeEmpresa;
           sessionStorage.ID_EMPRESA = json.idEmpresa;
           sessionStorage.SENSOR = JSON.stringify(json.sensor)
           sessionStorage.CURRAL = JSON.stringify(json.curral)
@@ -109,8 +109,6 @@
           }, 1000); // apenas para exibir o loading
 
         });
-      
-
       } else {
 
         console.log("Houve um erro ao tentar realizar o login!");

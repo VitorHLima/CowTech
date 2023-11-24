@@ -31,6 +31,9 @@ fkEmpresa int,
 foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
+SELECT e.nomeFazenda, e.logradouro, e.numero, c.nome, s.nome as 'NomeSensor' FROM endFazenda 
+AS e JOIN curral AS c ON idEndereco = fkEndFazenda JOIN sensor AS s ON fkCurral = idCurral;
+
 create table curral(
 idCurral int primary key auto_increment,
 nome varchar(45),
