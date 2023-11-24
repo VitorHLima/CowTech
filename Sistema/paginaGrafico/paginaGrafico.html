@@ -2,143 +2,147 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Grafico</title>
-    <link rel="stylesheet" href="estilo.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;0,800;1,300;1,500;1,600&display=swap"
-        rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
-        <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina Grafico</title>
+  <link rel="stylesheet" href="estilo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;0,800;1,300;1,500;1,600&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+  <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 </head>
 
 <body>
-    <div id="principal_pagina_grafico">
-        <div class="cabecario">
-            <div id="div_logo">
-                <h2 id="texto_cowtech"><a href="../index.html">COW TECH</a></h2>
-            </div>
-            <div id="div_links">
-                <ul id="lista_cabecario">
-                    <a href="sistema.html">SISTEMA</a>
-                    <a href="#div_grafico">GRÁFICOS</a>
-                    <a href="../Site/login/login.html">SAIR</a>
-                </ul>
-            </div>
-        </div>
-        <div id="div_graficos">
-            <div id="div_select" style="position: relative;">
-                <h4 id="select_fazenda" style="color: black; position: absolute; margin-top: -12%;">Curral</h4>
-                <select name="" id="select_curral" class="select_grafico"></select>
-                <h4 id="select_galpao" style="color: black; position: absolute;margin-top: -12%;">Fazenda</h4>
-                <select name="" id="select_curral1" class="select_grafico"></select>
-                <button id="button_pesquisar"><img src="lupa.png" alt=""></button>
-            </div>
-            <div id="div_titulo_grafico">
-                <div class="div_tipos_metricas" id="div_tipos_metricas_esquerdo">
-                    <h4>Sensor1</h4><br>
-                    <button class="buttonMetrica"></button>
-                </div>
-                <div class="div_tipos_metricas" id="div_tipos_metricas_esquerdo">
-                  <h4>Sensor1</h4><br>
-                  <button class="buttonMetrica"></button>
-              </div>
-
-            </div>
-            <div id="div_todos_graficos">
-                <div id="div_separacao_grafico">
-                    <div class="graficos1" style="margin-right: 2%;">
-                      
-                            <section style="width: 100%;" id="myChartCanvas">
-                                <canvas id="lm35Temperatura"></canvas>
-                              </section>
-                    
-                    </div>
-                    <div class="graficos1">
-                     
-                            <section style="width: 100%;" id="myChartCanvas">
-                                <canvas id="lm35Temperatura"></canvas>
-                              </section>
-                     
-                    </div>
-                </div>
-                <div id="div_separacao_grafico">
-                    <div class="graficos1" style="margin-right: 2%;">
-                   
-                            <section style="width: 100%;" id="myChartCanvas">
-                                <canvas id="dht11Umidade"></canvas>
-                              </section>
-                     
-                    </div>
-                    <div class="graficos1">
-                            <section style="width: 100%;" id="myChartCanvas">
-                                <canvas id="lm35Temperatura2"></canvas>
-                              </section>
-             
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div id="principal_pagina_grafico">
+    <div class="cabecario">
+      <div id="div_logo">
+        <h2 id="texto_cowtech"><a href="../index.html">COW TECH</a></h2>
+      </div>
+      <div id="div_links">
+        <ul id="lista_cabecario">
+          <a href="sistema.html">SISTEMA</a>
+          <a href="#div_grafico">GRÁFICOS</a>
+          <a href="../Site/login/login.html">SAIR</a>
+        </ul>
+      </div>
     </div>
+    <div id="div_graficos">
+      <div id="div_select" style="position: relative;">
+        <h4 id="select_fazenda" style="color: black; position: absolute; margin-top: -12%;">Curral</h4>
+        <select name="" id="select_curral" class="select_grafico"></select>
+        <h4 id="select_galpao" style="color: black; position: absolute;margin-top: -12%;">Fazenda</h4>
+        <select class="select_grafico" name="currais" id="listaCurrais">
+          <option selected>Selecione um Curral</option>
+        </select>
+        <button id="button_pesquisar"><img src="lupa.png" alt=""></button>
+      </div>
+      <div id="div_titulo_grafico">
+        <div class="div_tipos_metricas" id="div_tipos_metricas_esquerdo">
+          <h4>Sensor1</h4><br>
+          <button class="buttonMetrica"></button>
+        </div>
+        <div class="div_tipos_metricas" id="div_tipos_metricas_esquerdo">
+          <h4>Sensor1</h4><br>
+          <button class="buttonMetrica"></button>
+        </div>
+
+      </div>
+      <div id="div_todos_graficos">
+        <div id="div_separacao_grafico">
+          <div class="graficos1" style="margin-right: 2%;">
+
+            <section style="width: 100%;" id="myChartCanvas">
+              <canvas id="lm35Temperatura"></canvas>
+            </section>
+
+          </div>
+          <div class="graficos1">
+
+            <section style="width: 100%;" id="myChartCanvas">
+              <canvas id="lm35Temperatura"></canvas>
+            </section>
+
+          </div>
+        </div>
+        <div id="div_separacao_grafico">
+          <div class="graficos1" style="margin-right: 2%;">
+
+            <section style="width: 100%;" id="myChartCanvas">
+              <canvas id="dht11Umidade"></canvas>
+            </section>
+
+          </div>
+          <div class="graficos1">
+            <section style="width: 100%;" id="myChartCanvas">
+              <canvas id="lm35Temperatura2"></canvas>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 <script>
   var idEmpresa = sessionStorage.ID_EMPRESA
-texto_cowtech.innerHTML = sessionStorage.ID_EMPRESA;
+  texto_cowtech.innerHTML = sessionStorage.ID_EMPRESA;
 
-    fetch("/enderecos/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((enderecos)=> {
-          enderecos.forEach((endFazenda) => {
-            select_curral.innerHTML += `<option value='${endFazenda.idEndereco}'>${endFazenda.nomeFazenda}</option>`;
-          });
+  fetch("/enderecos/listar", {
+    method: "GET",
+  })
+    .then(function (resposta) {
+      resposta.json().then((enderecos) => {
+        enderecos.forEach((endFazenda) => {
+          select_curral.innerHTML += `<option value='${endFazenda.idEndereco}'>${endFazenda.nomeFazenda}</option>`;
         });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
       });
-
-
-  
-      fetch(`/fazenda/BuscarCurral/`, {
-      method: "GET",
     })
-      .then(function (resposta) {
-        resposta.json().then((enderecos)=> {
-          enderecos.forEach((endFazenda) => {
-            select_curral1.innerHTML += `<option value='${endFazenda.nome}'>${endFazenda.nome}</option>`;
-          });
+    .catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+
+
+
+  fetch("/currais/listar", {
+    method: "GET",
+  })
+    .then(function (resposta) {
+      resposta.json().then((currais) => {
+        currais.forEach((curral) => {
+          listaCurrais.innerHTML += `<option value='${curral.idCurral}'>${curral.nome}</option>`;
         });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
       });
-  
-
-      fetch("/sensores/listar/", {
-      method: "GET",
     })
-      .then(function (resposta) {
-        resposta.json().then((objeto)=> {
-          var divPrincipal = document.getElementById('div_titulo_grafico')
+    .catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
 
-          objeto.forEach((item) => {
-          
+
+
+  fetch("/sensores/listar/", {
+    method: "GET",
+  })
+    .then(function (resposta) {
+      resposta.json().then((objeto) => {
+        var divPrincipal = document.getElementById('div_titulo_grafico')
+
+        objeto.forEach((item) => {
+
           var div = document.createElement('div')
           div.classList.add('div_tipos_metricas')
           div = item.nome
-          divPrincipal.appendChild(div)  
-          })
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
+          divPrincipal.appendChild(div)
+        })
       });
+    })
+    .catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
 
 
 
@@ -146,7 +150,7 @@ texto_cowtech.innerHTML = sessionStorage.ID_EMPRESA;
   let proximaAtualizacao;
 
   window.onload = exibirAquariosDoUsuario();
-  
+
   function exibirAquariosDoUsuario() {
     var aquarios = JSON.parse(sessionStorage.AQUARIOS);
     aquarios.forEach((item) => {
@@ -547,100 +551,100 @@ texto_cowtech.innerHTML = sessionStorage.ID_EMPRESA;
     padding: 0;
     margin: 0;
     font-family: Poppins;
-}
+  }
 
-canvas {
+  canvas {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-}
+  }
 
-.principal_pagina_grafico {
+  .principal_pagina_grafico {
     background-color: white;
-}
+  }
 
-.cabecario {
+  .cabecario {
     display: flex;
     width: 100%;
     height: fit-content;
     flex-direction: row;
     background-color: transparent;
     padding: 20px 0 0 0;
-}
+  }
 
-#div_logo {
+  #div_logo {
     padding: 10px;
     width: 40%;
-}
+  }
 
-#texto_cowtech {
+  #texto_cowtech {
     margin: 0 0 0 5%;
     font-weight: 600;
     font-size: 25px;
-}
+  }
 
-#texto_cowtech a {
+  #texto_cowtech a {
     text-decoration: none;
     list-style: none;
     color: black;
     margin: 0 0 0 5%;
     font-weight: 600;
     font-size: 25px;
-}
+  }
 
-#div_links {
+  #div_links {
     display: flex;
     flex-direction: row;
     width: 5%;
     width: 60%;
     padding: 10px;
     text-align: center;
-}
+  }
 
-#lista_cabecario {
+  #lista_cabecario {
     justify-content: right;
     text-align: right;
     display: flex;
     flex-direction: row;
     width: 100%;
-}
+  }
 
-#lista_cabecario a {
+  #lista_cabecario a {
     text-decoration: none;
     color: black;
     list-style: none;
     margin: 8px 10% 0 0;
     font-weight: 500;
     font-size: 17px;
-}
+  }
 
-#lista_cabecario a:hover {
+  #lista_cabecario a:hover {
     opacity: 0.8;
-}
+  }
 
-#texto_cowtech a:hover {
+  #texto_cowtech a:hover {
     opacity: 0.8;
-}
+  }
 
-#div_graficos {
+  #div_graficos {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: fit-content;
     flex-direction: column;
-}
+  }
 
-#div_procurar {
+  #div_procurar {
     margin-top: 5%;
     width: 80%;
     padding: 1%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
+  }
 
-#inpu_search {
+  #inpu_search {
     width: 60%;
     padding: 0.5%;
     border-radius: 3px;
@@ -648,9 +652,9 @@ canvas {
     box-shadow: -1px 4px 10px -6px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: -1px 4px 10px -6px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -1px 4px 10px -6px rgba(0, 0, 0, 0.75);
-}
+  }
 
-#button_lupa {
+  #button_lupa {
     background-color: transparent;
     border: 0;
     position: absolute;
@@ -658,9 +662,9 @@ canvas {
     height: 16px;
     width: 16px;
     margin-bottom: 1%;
-}
+  }
 
-#div_titulo_grafico {
+  #div_titulo_grafico {
     margin-top: 2%;
     width: 80%;
     display: flex;
@@ -671,29 +675,29 @@ canvas {
     /* Mantenha o overflow-y como hidden para esconder a barra de rolagem vertical */
     justify-content: center;
     white-space: nowrap;
-}
+  }
 
-#div_titulo_grafico::-webkit-scrollbar {
+  #div_titulo_grafico::-webkit-scrollbar {
     width: 100%;
     height: 10px;
-}
+  }
 
-#div_titulo_grafico::-webkit-scrollbar-thumb {
+  #div_titulo_grafico::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 6px;
-}
+  }
 
-#div_titulo_grafico::-webkit-scrollbar-thumb:hover {
+  #div_titulo_grafico::-webkit-scrollbar-thumb:hover {
     background: #555;
-}
+  }
 
-#div_titulo_grafico::-webkit-scrollbar-track {
+  #div_titulo_grafico::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 6px;
-}
+  }
 
 
-.div_tipos_metricas {
+  .div_tipos_metricas {
     width: 15%;
     border-radius: 5px;
     margin: 2%;
@@ -703,24 +707,24 @@ canvas {
     display: flex;
     align-items: center;
     flex-direction: column;
-}
+  }
 
-#div_todos_graficos {
+  #div_todos_graficos {
     width: 100%;
     margin-top: 2%;
     height: fit-content;
     display: flex;
     flex-direction: column;
     margin-bottom: 5%;
-}
+  }
 
-#div_separacao_grafico {
+  #div_separacao_grafico {
     width: 100%;
     display: flex;
     justify-content: center;
-}
+  }
 
-.graficos1 {
+  .graficos1 {
     margin-top: 1%;
     border-radius: 10px;
     width: 40%;
@@ -729,15 +733,15 @@ canvas {
     box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
-}
+  }
 
-.buttonMetrica {
+  .buttonMetrica {
     width: 100%;
     height: 20px;
     margin-top: 50%;
-}
+  }
 
-#div_select {
+  #div_select {
     width: 80%;
     padding: 2%;
     margin-top: 7%;
@@ -745,46 +749,47 @@ canvas {
     justify-content: center;
     flex-direction: row;
     align-items: center;
-}
+  }
 
-#div_select h4 {
+  #div_select h4 {
     position: absolute;
     top: 20%;
-}
+  }
 
-#select_galpao {
+  #select_galpao {
     right: 60%;
-}
+  }
 
-#select_fazenda {
+  #select_fazenda {
     right: 35%;
-}
+  }
 
-#button_pesquisar {
+  #button_pesquisar {
     background-color: transparent;
     border: none;
     max-width: 20px;
-}
+  }
 
-#button_pesquisar:hover {
+  #button_pesquisar:hover {
     cursor: pointer;
-}
+  }
 
-.select_grafico {
+  .select_grafico {
     width: 30%;
     padding: 0.3%;
     margin-right: 2%;
     border-radius: 3px;
 
-}
+  }
 
-.button_informacao_grafico {
+  .button_informacao_grafico {
     width: 100%;
     height: 100%;
     background-color: transparent;
     border: 0;
     cursor: pointer;
     opacity: 0.8;
-}
+  }
 </style>
+
 </html>
