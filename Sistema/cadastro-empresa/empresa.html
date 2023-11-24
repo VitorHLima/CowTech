@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,14 +58,14 @@
     <div class="entradas">
       <h4>Cadastro</h4>
       <label class="label-cnpj" for="">CNPJ</label>
-      <input class="css-input input_cnpj" id="input_cnpj" type="text" maxlength="18"/>
-      
+      <input class="css-input input_cnpj" id="input_cnpj" type="text" maxlength="18" />
+
       <label class="label-nome" for="">Nome Fantasia</label>
       <input class="css-input" id="input_nome" type="text" />
       <label class="label-ddd" for="">DDD</label>
       <input class="css-input ddd" id="input_ddd" type="text" maxlength="2" />
       <label class="label-telefone" for="">Telefone</label>
-      <input class="css-input telefone-top" id="input_contato" type="text" maxlength="10"/>
+      <input class="css-input telefone-top" id="input_contato" type="text" maxlength="10" />
       <label class="email" for="">E-mail</label>
       <input class="css-input" id="input_email" type="text" />
       <label class="emailRepeat" for="">Repita e-mail</label>
@@ -90,10 +91,6 @@
 
 <script>
   function cadastro() {
-<<<<<<< HEAD
-=======
-
->>>>>>> e7c362f7d18aa700a0854b343dbf83b5ba1ea147
     var cnpj = input_cnpj.value;
     var nome = input_nome.value;
     var ddd = input_ddd.value;
@@ -334,30 +331,30 @@
   }
 
   function mascara() {
-  const input_cnpj = document.querySelector('.input_cnpj');
+    const input_cnpj = document.querySelector('.input_cnpj');
 
-  input_cnpj.addEventListener('keypress', () => {
-    let cnpjLength = input_cnpj.value.length;
+    input_cnpj.addEventListener('keypress', () => {
+      let cnpjLength = input_cnpj.value.length;
 
-    if (cnpjLength == 2 || cnpjLength == 6) {
-      input_cnpj.value += ".";
-    } else if (cnpjLength == 10) {
-      input_cnpj.value += "/";
-    } else if (cnpjLength == 15) {
-      input_cnpj.value += "-";
-    }
-  });
+      if (cnpjLength == 2 || cnpjLength == 6) {
+        input_cnpj.value += ".";
+      } else if (cnpjLength == 10) {
+        input_cnpj.value += "/";
+      } else if (cnpjLength == 15) {
+        input_cnpj.value += "-";
+      }
+    });
 
-  const input_contato = document.querySelector('.telefone-top');
+    const input_contato = document.querySelector('.telefone-top');
 
-  input_contato.addEventListener('keypress', () => {
-    let telLength = input_contato.value.length;
+    input_contato.addEventListener('keypress', () => {
+      let telLength = input_contato.value.length;
 
-    if (telLength == 5) input_contato.value += '-'
-  })
-}
+      if (telLength == 5) input_contato.value += '-'
+    })
+  }
 
-mascara();
+  mascara();
 
   function sumirMensagem() {
     cardErro.style.display = "none";

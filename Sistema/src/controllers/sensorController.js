@@ -2,14 +2,14 @@ var sensorModel = require("../models/sensorModel");
 
 function publicar(req, res) {
     var nome = req.body.nomeServer;
-    var idUsuario = req.params.idUsuario;
+    var curral = req.body.curralServer;
 
     if (nome == undefined) {
         res.status(400).send("O nome está indefinido!");
-    } else if (idUsuario == undefined) {
+    } else if (curral == undefined) {
         res.status(400).send("A FK está indefinido!");
     } else {
-        sensorModel.publicar(nome, idUsuario)
+        sensorModel.publicar(nome, curral)
             .then(
                 function (resultado) {
                     res.json(resultado);
