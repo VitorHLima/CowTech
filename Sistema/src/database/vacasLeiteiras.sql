@@ -2,12 +2,13 @@ create database bdsistema;
 
 use bdsistema;
 
+
 create table empresa(
 idEmpresa int primary key auto_increment,
-cnpj char(14),
+cnpj char(18),
 nomeEmpresa varchar(50),
 ddd char(2),
-contato char(9),
+contato char(10),
 email varchar(30),
 senha varchar(20)
 );
@@ -33,18 +34,20 @@ foreign key (fkEndFazenda) references endFazenda(idEndereco)
 );
 
 create table sensor(
-idSensor int primary key,
+idSensor int auto_increment primary key,
 nome varchar(20),
 fkCurral int,
 foreign key (fkCurral) references curral(idCurral) 
 );
 
 create table registro(
-idRegistro int,
-dtAtual datetime default current_timestamp,
+idRegistro int auto_increment,
+dtAtual datetime,
 dht11_Umidade float,
 lm35_temperatura float,
 fkSensor int,
+key (idRegistro),
 foreign key (fkSensor) references sensor(idSensor),
 primary key (fkSensor,idRegistro)
 );
+
