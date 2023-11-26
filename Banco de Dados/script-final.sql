@@ -18,6 +18,7 @@ senha varchar(20)
 
 SELECT * FROM empresa;
 
+
 create table endFazenda(
 idEndereco int primary key auto_increment,
 nomeFazenda varchar(50),
@@ -45,10 +46,14 @@ SELECT * FROM curral JOIN EndFazenda ON idEndereco = fkEndFazenda;
 
 create table sensor(
 idSensor int primary key auto_increment,
-nome varchar(20),
+nomeSensor varchar(20),
 fkCurral int,
 foreign key (fkCurral) references curral(idCurral) 
 );
+
+SELECT Sensor.nomeSensor, curral.nome, endFazenda.nomeFazenda FROM Sensor JOIN curral ON fkCurral = idCurral 
+JOIN endFazenda ON fkEndFazenda = idEndereco 
+where endFazenda.idEndereco = 1 AND curral.idCurral = 3;
 
 SELECT * FROM sensor;
 
@@ -65,7 +70,16 @@ primary key (fkSensor,idRegistro)
 
 SELECT * FROM registro;
 
+INSERT registro VALUES (NULL, NULL, 80, 29, 1), (NULL, NULL, 80, 29, 2),(NULL, NULL, 70, 25, 3);
+
 SELECT idSensor, nome from Sensor;
+
+
+SELECT sensor.nomeSensor, registro.dht11_Umidade, 
+registro.lm35_temperatura, registro.dtAtual from Sensor 
+JOIN registro ON fkSensor = idSensor where idSensor= 1;
+
+
 
 -- Inserção de Dados
 

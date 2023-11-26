@@ -25,6 +25,23 @@ function publicar(req, res) {
     }
 }
 
+function buscarAquariosPorEmpresa(req, res) {
+    var fazenda = req.body.fazendaServer;
+    var curral = req.body.curralServer;
+
+    sensorModel.buscarAquariosPorEmpresa(fazenda, curral).then((resultado) => {
+        if (resultado.length >= 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).json([]);
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os sensores: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function listar(req, res) {
     sensorModel.listar().then(function (resultado) {
         if (resultado.length >= 0) {
@@ -40,5 +57,6 @@ function listar(req, res) {
 }
 module.exports = {
     publicar,
-    listar
+    listar,
+    buscarAquariosPorEmpresa
 }

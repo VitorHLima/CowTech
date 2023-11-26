@@ -10,6 +10,9 @@ router.post("/publicar/", function (req, res) {
 router.post("/listar/", function (req, res) {
     sensorController.listar(req, res);
 });
+router.post("/mostrar/", function (req, res) {
+    sensorController.buscarAquariosPorEmpresa(req, res);
+});
 
 
 module.exports = router;

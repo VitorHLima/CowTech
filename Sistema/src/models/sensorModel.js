@@ -15,7 +15,17 @@ function listar() {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+function buscarAquariosPorEmpresa(fazenda, curral) {
+
+    instrucaoSql = `SELECT Sensor.nomeSensor, curral.nome, endFazenda.nomeFazenda FROM Sensor JOIN curral ON fkCurral = idCurral 
+    JOIN endFazenda ON fkEndFazenda = idEndereco 
+    where endFazenda.idEndereco = ${fazenda} AND curral.idCurral = ${curral}; `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 module.exports = {
     publicar,
-    listar
+    listar,
+    buscarAquariosPorEmpresa
 }
