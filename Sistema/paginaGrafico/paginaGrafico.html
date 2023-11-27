@@ -153,20 +153,31 @@
         
         button1.addEventListener('click',  function obterDadosGrafico(dados) {
    
-    fetch(`/medidas/ultimas/${2}`, { cache: 'no-store' }).then(function (response) {
+          fetch(`/medidas/ultimas/${3}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
 
-            plotarGrafico(resposta, dados);
+            // plotarGrafico(resposta, dados);
 
+            for (var i = 0; i < resposta.length; i++) {
+                var item = resposta[i];
+                var medida = Number(item.lm35_temperatura);
+                console.log(medida);
+                if (medida > 24) {
+                    console.log('Acima de 24 graus');
+                } else if (medida === 24) {
+                    console.log('Medida de 24 graus');
+                } else {
+                    console.log('Abaixo de 24 graus');
+                }
+            }
         });
     } else {
         console.error('Nenhum dado encontrado ou erro na API');
     }
 })
-
     .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
