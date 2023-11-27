@@ -79,15 +79,29 @@
     </div>
    
 </body>
-<script>
+<script defer>
   var idEmpresa = sessionStorage.ID_EMPRESA
   texto_cowtech.innerHTML = sessionStorage.ID_EMPRESA;
-  var Sensores = JSON.parse(sessionStorage.SENSOR)
-  var fkSensor = JSON.stringify(sessionStorage.SENSOR)
-
+  var Sensores = sessionStorage.SENSOR
+  var fkSensor = sessionStorage.SENSOR
   console.log(Sensores)
 
-  fetch("/enderecos/listar", {
+
+  fetch("/currais/listar", {
+    method: "GET",
+  })
+    .then(function (resposta) {
+      resposta.json().then((currais) => {
+        currais.forEach((curral) => {
+          listaCurrais.innerHTML += `<option value='${curral.idCurral}'>${curral.nomeCurral}</option>`;
+        });
+      });
+    })
+    .catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+    fetch("/enderecos/listar", {
     method: "GET",
   })
     .then(function (resposta) {
@@ -98,15 +112,13 @@
     })
   })
 
-  
-  
   function Pesquisar() {
+    div_titulo_grafico.innerHTML = ''
   var fazendaVar = select_fazenda.value;
   var curralVar = listaCurrais.value;
 
-  div_titulo_grafico.innerHTML = '';
-
-  fetch("/sensores/mostrar", {
+  
+  fetch("/sensores/mostrar/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -168,22 +180,6 @@
 
   return false;
 }
-
-
-
-fetch("/currais/listar", {
-    method: "GET",
-  })
-    .then(function (resposta) {
-      resposta.json().then((currais) => {
-        currais.forEach((curral) => {
-          listaCurrais.innerHTML += `<option value='${curral.idCurral}'>${curral.nome}</option>`;
-        });
-      });
-    })
-    .catch(function (resposta) {
-      console.log(`#ERRO: ${resposta}`);
-    });
 
   let proximaAtualizacao;
 

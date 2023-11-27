@@ -18,7 +18,10 @@ senha varchar(20)
 
 SELECT * FROM empresa;
 
-
+SELECT * FROM curral JOIN EndFazenda 
+    ON idEndereco = fkEndFazenda JOIN Empresa on idEmpresa = fkEmpresa;
+    
+    select * from endFazenda;
 create table endFazenda(
 idEndereco int primary key auto_increment,
 nomeFazenda varchar(50),
@@ -32,12 +35,12 @@ fkEmpresa int,
 foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
-SELECT e.nomeFazenda, e.logradouro, e.numero, c.nome, s.nome as 'NomeSensor' FROM endFazenda 
+SELECT e.nomeFazenda, e.logradouro, e.numero, c.nome, s.nomeSensor as 'NomeSensor' FROM endFazenda 
 AS e JOIN curral AS c ON idEndereco = fkEndFazenda JOIN sensor AS s ON fkCurral = idCurral;
 
 create table curral(
 idCurral int primary key auto_increment,
-nome varchar(45),
+nomeCurral varchar(45),
 fkEndFazenda int,
 foreign key (fkEndFazenda) references endFazenda(idEndereco)
 );
@@ -51,7 +54,7 @@ fkCurral int,
 foreign key (fkCurral) references curral(idCurral) 
 );
 
-SELECT Sensor.nomeSensor, curral.nome, endFazenda.nomeFazenda FROM Sensor JOIN curral ON fkCurral = idCurral 
+SELECT Sensor.nomeSensor, curral.nomeCurral, endFazenda.nomeFazenda FROM Sensor JOIN curral ON fkCurral = idCurral 
 JOIN endFazenda ON fkEndFazenda = idEndereco 
 where endFazenda.idEndereco = 1 AND curral.idCurral = 3;
 
@@ -70,9 +73,7 @@ primary key (fkSensor,idRegistro)
 
 SELECT * FROM registro;
 
-INSERT registro VALUES (NULL, NULL, 80, 29, 1), (NULL, NULL, 80, 29, 2),(NULL, NULL, 70, 25, 3);
-
-SELECT idSensor, nome from Sensor;
+SELECT idSensor, nomeSensor from Sensor;
 
 
 SELECT sensor.nomeSensor, registro.dht11_Umidade, 
@@ -82,6 +83,8 @@ JOIN registro ON fkSensor = idSensor where idSensor= 1;
 
 
 -- Inserção de Dados
+
+INSERT registro VALUES (NULL, NULL, 80, 29, 1), (NULL, NULL, 80, 29, 2),(NULL, NULL, 70, 25, 3);
 
 insert into empresa values
 	(null,'01234567891234','Etiel','11','912345678','etiel@sptech.com','cowTech_123');

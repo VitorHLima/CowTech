@@ -7,7 +7,7 @@ function listar() {
 }
 
 function buscarPorNomeCurral(nome) {
-    var query = `select * from curral where nome = '${nome}'`;
+    var query = `select * from curral where nomeCurral = '${nome}'`;
 
     return database.executar(query);
 }
