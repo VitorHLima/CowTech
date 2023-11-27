@@ -112,3 +112,4 @@ insert into sensor values
 	(12,'Sensor 4',3);
     
     
+    

@@ -112,6 +112,8 @@
     })
   })
 
+  
+
   function Pesquisar() {
     div_titulo_grafico.innerHTML = ''
   var fazendaVar = select_fazenda.value;
@@ -151,28 +153,41 @@
 
         div.appendChild(button1);
         
-        button1.addEventListener('click',  function obterDadosGrafico(dados) {
-   
-          fetch(`/medidas/ultimas/${3}`, { cache: 'no-store' }).then(function (response) {
+    console.log(i)
+
+          fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
 
             // plotarGrafico(resposta, dados);
-
+            
             for (var i = 0; i < resposta.length; i++) {
                 var item = resposta[i];
                 var medida = Number(item.lm35_temperatura);
-                console.log(medida);
-                if (medida > 24) {
-                    console.log('Acima de 24 graus');
+                var button = document.getElementsByClassName('button_sensor')
+                console.log(button)
+
+                for(var b = 0; b < button.length; b++) {
+                  var primeiroButton = button[i]
+                  var estiloButton = window.getComputedStyle(primeiroButton)
+                  var cor = estiloButton.backgroundColor
+              
+                  if (medida > 24) {
+                  console.log('Acima de 24 graus');
+                  primeiroButton.style.backgroundColor = 'red'
                 } else if (medida === 24) {
                     console.log('Medida de 24 graus');
+                    primeiroButton.style.backgroundColor = 'yellow'
                 } else {
                     console.log('Abaixo de 24 graus');
+                    primeiroButton.style.backgroundColor = 'green'
                 }
+                }
+                console.log(medida);
             }
+            
         });
     } else {
         console.error('Nenhum dado encontrado ou erro na API');
@@ -181,7 +196,7 @@
     .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
-});
+
       } else {
         console.log('Impossível achar os dados');
       }
@@ -190,6 +205,9 @@
   .catch(erro => console.error(erro));
 
   return false;
+}
+function FunctionTeste() {
+  alert('funcionou')
 }
 
   let proximaAtualizacao;
