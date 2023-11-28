@@ -44,7 +44,7 @@
             </div>
             <div id="div_todos_graficos">
                 <div id="div_separacao_grafico">
-                    <div class="graficos1" style="margin-right: 2%;">
+                    <div class="graficos1" style="margin-right: 2%;" id="graf1">
                       
                             <section style="width: 100%;" id="myChartCanvas">
                                 <canvas id="lm35Temperatura"></canvas>
@@ -156,36 +156,31 @@
         
     console.log(i)
 
-          fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
 
-            // plotarGrafico(resposta, dados);
-            
             for (var i = 0; i < resposta.length; i++) {
                 var item = resposta[i];
                 var medida = Number(item.lm35_temperatura);
-                var button = document.getElementsByClassName('button_sensor')
-                console.log(button)
+                var buttons = document.getElementsByClassName('button_sensor');
 
-                for(var b = 0; b < button.length; b++) {
-                  var primeiroButton = button[i]
-                  var estiloButton = window.getComputedStyle(primeiroButton)
-                  var cor = estiloButton.backgroundColor
-              
-                  if (medida > 24) {
-                  console.log('Acima de 24 graus');
-                  primeiroButton.style.backgroundColor = 'red'
-                } else if (medida === 24) {
-                    console.log('Medida de 24 graus');
-                    primeiroButton.style.backgroundColor = 'yellow'
-                } else {
-                    console.log('Abaixo de 24 graus');
-                    primeiroButton.style.backgroundColor = 'green'
-                }
-                }
+                for (var b = 0; b < buttons.length; b++) {
+                    var currentButton = buttons[b];
+                    var estiloButton = window.getComputedStyle(currentButton);
+                    var cor = estiloButton.backgroundColor;
+                    
+                    if (medida > 24) {
+                        currentButton.style.backgroundColor = 'red';
+                    } else if (medida === 24) {
+                        currentButton.style.backgroundColor = 'yellow';
+                    } else if(medida < 24){
+                        currentButton.style.backgroundColor = 'green';
+                    }
+                  
+              }
                 console.log(medida);
             }
             
@@ -211,6 +206,8 @@ function FunctionTeste() {
   alert('funcionou')
 }
 
+  var sensores = JSON.parse(sessionStorage.SENSOR)
+  console.log(sensores)
   let proximaAtualizacao;
 
   window.onload = obterDadosGrafico();

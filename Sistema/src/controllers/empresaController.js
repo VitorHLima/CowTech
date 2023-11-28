@@ -22,20 +22,19 @@ function autenticar(req, res) {
 
                         aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].idEmpresa)
                             .then((resultadoAquarios) => {
-                                if (resultadoAquarios.length >= 0) {
+                                if (resultadoAquarios.length > 0) {
                                     res.json({
                                         idEmpresa: resultadoAutenticar[0].idEmpresa,
                                         email: resultadoAutenticar[0].email,
                                         nomeEmpresa: resultadoAutenticar[0].nomeEmpresa,
                                         senha: resultadoAutenticar[0].senha,
-                                        sensor: resultadoAquarios,
+                                        idSensor: resultadoAquarios[0].idSensor, // Atenção aqui
                                         curral: resultadoAquarios
                                     });
-                                }
-                                else {
+                                } else {
                                     res.status(204).json({ sensor: [] }, { curral: [] });
                                 }
-                            })
+                            });
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
