@@ -86,5 +86,5 @@ O envio é feito nesse botão que se encontra na área superior esquerda.
 <h2>6º Passo</h2>
 <h3>Teste de coleta de dados</h3>
 Inicie a coleta de dados dentro do Arduino IDE.<br>
-![image](/Documentação/Documentos/Manual%20do%20Projeto/inicio%20da%20coleta%20Arduino%20IDE.png)
+![image](/Documentção/Documentos/Manual%20do%20Projeto/inicio%20da%20coleta%20Arduino%20IDE.png)
 O início da coleta de dados é feito nesse botão que se encontra na área superior direita.
