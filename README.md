@@ -7,3 +7,55 @@ Projeto de Pesquisa e Inovação com entregáveis de Algoritmos, Banco de Dados,
 <h3>Resumo do projeto</h3>
 
 Monitoramento da temperatura e umidade de celeiros a fim de reduzir o estresse térmico para aumentar a produção de leite.
+
+
+
+<h1>Execução do Sistema</h1>
+
+<h2>1ºPasso</h2>
+<h3>Download do Projeto Pelo GitHub</h3>
+
+O projeto está salvo em um repositório do GitHub e pode ser baixado através de um perfil cujo acesso tenha sido liberado por um dos administradores do repositório, o download pode ser feito como um repositório local através do GitBash pelo comando git clone ou como um arquivo compactado que armazenará o repositório.
+
+<h2>2ºPasso</h2>
+<h3>Criação das Tabelas do Banco de Dados</h3>
+
+O Script para criação das tabelas do sistema está no repositório “Banco de Dados” dentro do repositório que foi baixado no passo anterior, o arquivo deve ser aberto em um sistema de gerenciamento de banco de dados e as tabelas devem ser criadas na ordem em que estão dentro do documento ou com o comando ctrl + shift + enter.
+
+<h2>3ºPasso</h2>
+<h3>Parametrização do Ambiente</h3>
+
+Abra o repositório no editor de códigos e acesse /Sistema/app.js, se você estiver utilizando um Ambiente de Produção (SQL Server na nuvem, remoto), comente a 1ª linha e deixe a 2ª linha habilitada, se você estiver utilizando um Ambiente de Desenvolvimento (MySQL Workbench, local) comente a 2ª linha e deixe a 1ª linha habilitada.
+
+<h2>4ºPasso</h2>
+<h3>Atualizar as credenciais do Banco de Dados</h3>
+
+Abra o repositório no editor de códigos e acesse /Sistema/src/database/config.js, caso esteja utilizando um Ambiente de Produção complete a área indicada como CONEXÃO DO SQL SERVER - AZURE (NUVEM), caso esteja utilizando um Ambiente de Desenvolvimento complete a área indicada como CONEXÃO DO MYSQL WORKBENCH.
+
+<h2>5º Passo</h2>
+<h3>Execução do node.js</h3>
+
+Abra o repositório no GitBash, no cmd ou no terminal do Visual Studio Code, acesse /Sistema e de o comando npm i ou npm instal para instalar as dependências do node.js e depois da instalação de o comando npm start para executar a aplicação.
+
+<h2>6º Passo</h2>
+<h3>Teste da Integração do node</h3>
+
+Copie o link disponibilizado no terminal durante a etapa anterior e acesse-o pelo seu navegador teste a funcionalidade do cadastro, login e das telas de dashboard.
+
+<h2>7º Passo</h2>
+<h3>Finalizar a execução</h3>
+Caso deseje parar a execução do sistema acesse o terminal em que executou o início da aplicação e execute o comando ctrl + c.
+
+
+
+<h1>Instalação dos Sensores</h1>
+
+<h2>1º Passo</h2>
+<h3>Sensores na protoboard</h3>
+
+Coloque os sensores na protoboard de forma que eles não ocupem a mesma coluna.
+
+<h2>2º Passo</h2>
+<h3>Ligue os sensores ao Arduíno</h3>
+Ligue os sensores ao Arduíno com os jumpers seguindo as entradas de cada sensor
+
