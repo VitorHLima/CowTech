@@ -14,8 +14,8 @@ function buscarUltimasMedidas(fkSensor) {
                     where fk_aquario = ${dados}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT sensor.nomeSensor, registro.dht11_Umidade, 
-        registro.lm35_temperatura, registro.dtAtual from Sensor 
+        instrucaoSql = `SELECT sensor.nome, registro.dht11_Umidade as umidade, 
+        registro.lm35_temperatura as temperatura, registro.dtAtual as momento_grafico from Sensor 
         JOIN registro ON fkSensor = idSensor where idSensor = ${fkSensor};
         
         
@@ -30,7 +30,7 @@ function buscarUltimasMedidas(fkSensor) {
 }
 
 
-function buscarMedidasEmTempoReal(idSensor) {
+function buscarMedidasEmTempoReal(fkSensor) {
 
     instrucaoSql = ''
 
@@ -44,13 +44,9 @@ function buscarMedidasEmTempoReal(idSensor) {
                     order by id desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
-        lm35_temperatura AS temperatura, dht11_Umidade as umidade,
-                        dtAtual,
-                        DATE_FORMAT(dtAtual,'%d:%m:%Y') as momento_grafico
-                    from registro
-                    where fkSensor = ${idSensor}
-                    order by idRegistro desc;`;
+        instrucaoSql = `SELECT sensor.nome, registro.dht11_Umidade as umidade, 
+        registro.lm35_temperatura as temperatura, registro.dtAtual as momento_grafico from Sensor 
+        JOIN registro ON fkSensor = idSensor where idSensor = ${fkSensor};`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

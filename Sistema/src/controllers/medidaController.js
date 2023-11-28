@@ -20,11 +20,11 @@ function buscarUltimasMedidas(req, res) {
 
 function buscarMedidasEmTempoReal(req, res) {
 
-    var idSensor = req.params.idSensor;
+    var fkSensor = req.params.fkSensor;
 
     console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarMedidasEmTempoReal(idSensor).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoReal(fkSensor).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

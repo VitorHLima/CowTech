@@ -7,16 +7,8 @@ router.get("/ultimas/:fkSensor", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
 
-router.get("/mensal/:idAquario", function (req, res) {
+router.get("/tempo-real/:fkSensor", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
-})
-
-router.get("/semanal/:idAquario", function (req, res) {
-    medidaController.buscarMedidasEmTempoReal(req, res);
-})
-
-router.get("/anual/:idAquario", function (req, res) {
-    medidaController.buscarMedidasEmTempoReal(req, res);
-})
+});
 
 module.exports = router;

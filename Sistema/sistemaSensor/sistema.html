@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,6 +17,7 @@
 </head>
 
 <!-- <body id="body_id" onload="carregar()"> -->
+
 <body id="body_id" onload="carregar()">
   <div class="cabecario">
     <div id="div_logo">
@@ -23,7 +25,7 @@
     </div>
     <div id="div_links">
       <ul id="lista_cabecario">
-      
+
         <a href="paginaGrafico.html">GRÁFICOS</a>
         <a href="login.html">SAIR</a>
       </ul>
@@ -253,7 +255,7 @@
       </div>
     </div>
   </div>
- 
+
 
   <!-- Div do cadastro de fazenda -->
   <div id="div_funcionario">
@@ -271,10 +273,10 @@
           <form id="formularioFazenda" action="#divisao_funcao_fazenda">
             <h4>Nome da fazenda</h4>
             <input id="input_fazenda" placeholder="Ex: Fazenda boa vista" /><br />
-          
+
             <h4>Endereço</h4>
             <label for="input_cep">CEP</label>
-            <input id="input_cep"/>
+            <input id="input_cep" />
 
             <label for="input_logradouro">Logradouro</label>
             <input id="input_logradouro" />
@@ -331,7 +333,7 @@
           <form id="formulario" action="#divisao_funcao_funcionario">
             <h4>Nome do Curral</h4>
             <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
-          
+
             <h4>Endereço</h4>
             <select name="enderecos" id="listaEnderecos">
               <option selected>Selecione um Endereço</option>
@@ -393,8 +395,7 @@
       <div class="texto_socialFooter">
         <div class="redeFooter">
           <div class="facebook-logo">
-            <a href="https://www.facebook.com/"> <img id="facebook-logo"
-                src="img/facebook-logo.webp"></a>
+            <a href="https://www.facebook.com/"> <img id="facebook-logo" src="img/facebook-logo.webp"></a>
           </div>
           <div class="facebook-texto"> Facebook </div>
         </div>
@@ -426,6 +427,12 @@
   function carregar() {
     listar();
     listarCurral();
+  }
+
+
+  function cadastrarFazenda() {
+    var cep = Number(input_cep.value);
+    var logradouro
   }
 
 
@@ -698,6 +705,8 @@
     h2_lm35.style.display = 'none'
     h2_dht11.style.display = 'flex'
   }
+
+
   function cadastrarFazenda() {
     var nome = input_fazenda.value;
     var cep = input_cep.value;
@@ -707,122 +716,122 @@
     var estado = input_estado.value;
     var numero = input_numero.value;
     var empresaVar = sessionStorage.ID_EMPRESA
-    
-if (logradouro == "") {
-    "(Digite um valor no campo logradouro)";
 
-  return false;
-} else if (bairro == "") {
-    "(Digite um valor no campo bairro)";
+    if (logradouro == "") {
+      "(Digite um valor no campo logradouro)";
 
-  return false;
-} else if (municipio == "") {
-    "(Digite um valor no campo municipio)";
+      return false;
+    } else if (bairro == "") {
+      "(Digite um valor no campo bairro)";
 
-  return false;
-} else if (estado == "") {
-    "(Digite um valor no campo estado)";
+      return false;
+    } else if (municipio == "") {
+      "(Digite um valor no campo municipio)";
 
-  return false;
-} else if (numero == "") {
-    "(Digite um valor no campo numero)";
+      return false;
+    } else if (estado == "") {
+      "(Digite um valor no campo estado)";
 
-  return false;
-} else if (cep == "") {
-    "(Digite um valor no campo cep)";
+      return false;
+    } else if (numero == "") {
+      "(Digite um valor no campo numero)";
 
-  return false;
-} else if (nome == "") {
-    "(Digite um valor no campo nome)";
+      return false;
+    } else if (cep == "") {
+      "(Digite um valor no campo cep)";
 
-  return false;
-} else if (empresaVar == "") {
-    "(Escolha uma empresa)";
+      return false;
+    } else if (nome == "") {
+      "(Digite um valor no campo nome)";
 
-  return false;
-}
+      return false;
+    } else if (empresaVar == "") {
+      "(Escolha uma empresa)";
 
-console.log(empresaVar);
-
-// Enviando o valor da nova input
-fetch("/enderecos/cadastrar", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    // crie um atributo que recebe o valor recuperado aqui
-    // Agora vá para o arquivo routes/usuario.js
-    nomeServer: nome,
-    logradouroServer: logradouro,
-    municipioServer: municipio,
-    cepServer: cep,
-    bairroServer: bairro,
-    estadoServer: estado,
-    numeroServer: numero,
-    empresaServer: empresaVar
-  }),
-})
-  .then(function (resposta) {
-    console.log("resposta: ", resposta);
-
-    if (resposta.ok) {
-      console.log("Cadastro realizado com sucesso! Redirecionando para tela de login...");
-
-    } else {
-      throw "Houve um erro ao tentar realizar o cadastro!";
+      return false;
     }
-  })
-  .catch(function (resposta) {
-    console.log(`#ERRO: ${resposta}`);
 
-  });
+    console.log(empresaVar);
 
-return false;
+    // Enviando o valor da nova input
+    fetch("/enderecos/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nome,
+        logradouroServer: logradouro,
+        municipioServer: municipio,
+        cepServer: cep,
+        bairroServer: bairro,
+        estadoServer: estado,
+        numeroServer: numero,
+        empresaServer: empresaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
 
-}
+        if (resposta.ok) {
+          console.log("Cadastro realizado com sucesso! Redirecionando para tela de login...");
 
-// function pesquisacep(valor) {
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
 
-// //Nova variável "cep" somente com dígitos.
-// var cep = valor.replace(/\D/g, '');
+      });
 
-// //Verifica se campo cep possui valor informado.
-// if (cep != "") {
+    return false;
 
-//     //Expressão regular para validar o CEP.
-//     var validacep = /^[0-9]{8}$/;
+  }
 
-//     //Valida o formato do CEP.
-//     if(validacep.test(cep)) {
+  // function pesquisacep(valor) {
 
-//         //Preenche os campos com "..." enquanto consulta webservice.
-//         document.getElementById('input_logradouro').value="...";
-//         document.getElementById('input_bairro').value="...";
-//         document.getElementById('input_municipio').value="...";
-//         document.getElementById('input_estado').value="...";
+  // //Nova variável "cep" somente com dígitos.
+  // var cep = valor.replace(/\D/g, '');
 
-//         //Cria um elemento javascript.
-//         var script = document.createElement('script');
+  // //Verifica se campo cep possui valor informado.
+  // if (cep != "") {
 
-//         //Sincroniza com o callback.
-//         script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+  //     //Expressão regular para validar o CEP.
+  //     var validacep = /^[0-9]{8}$/;
 
-//         //Insere script no documento e carrega o conteúdo.
-//         document.body.appendChild(script);
+  //     //Valida o formato do CEP.
+  //     if(validacep.test(cep)) {
 
-//     } //end if.
-//     else {
-//         //cep é inválido.
-//         limpa_formulário_cep();
-//         alert("Formato de CEP inválido.");
-//     }
-// } //end if.
-// else {
-//     //cep sem valor, limpa formulário.
-//     limpa_formulário_cep();
-// }
-// };
+  //         //Preenche os campos com "..." enquanto consulta webservice.
+  //         document.getElementById('input_logradouro').value="...";
+  //         document.getElementById('input_bairro').value="...";
+  //         document.getElementById('input_municipio').value="...";
+  //         document.getElementById('input_estado').value="...";
+
+  //         //Cria um elemento javascript.
+  //         var script = document.createElement('script');
+
+  //         //Sincroniza com o callback.
+  //         script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+  //         //Insere script no documento e carrega o conteúdo.
+  //         document.body.appendChild(script);
+
+  //     } //end if.
+  //     else {
+  //         //cep é inválido.
+  //         limpa_formulário_cep();
+  //         alert("Formato de CEP inválido.");
+  //     }
+  // } //end if.
+  // else {
+  //     //cep sem valor, limpa formulário.
+  //     limpa_formulário_cep();
+  // }
+  // };
 </script>
 <style>
   * {
@@ -934,12 +943,14 @@ return false;
     flex-direction: column;
   }
 
-  #table_funcionario, #table_fazenda {
+  #table_funcionario,
+  #table_fazenda {
     width: 70%;
     height: auto;
   }
 
-  #table_funcionario td, #table_fazenda td {
+  #table_funcionario td,
+  #table_fazenda td {
     padding: 8px;
   }
 
@@ -1043,7 +1054,7 @@ return false;
   #button_sair:hover {
     cursor: pointer;
   }
- 
+
   #pop_upFazenda {
     width: 40%;
     background-color: white;
@@ -1077,11 +1088,11 @@ return false;
     padding: 0 0 0 5%;
   }
 
-    #pop_upFazenda input {
+  #pop_upFazenda input {
     margin-bottom: 10px;
-    }
+  }
 
-    #div_button_adicionarFazenda {
+  #div_button_adicionarFazenda {
     margin-top: 3%;
     width: 60%;
     height: auto;
@@ -1091,7 +1102,7 @@ return false;
     justify-content: right;
   }
 
-    .button_adicionarFazenda {
+  .button_adicionarFazenda {
     background: black;
     color: white;
     width: 20%;
