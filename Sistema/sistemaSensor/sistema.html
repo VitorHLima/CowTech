@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,12 +12,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <!-- <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script> -->
-  <!-- <script src="js\sessao.js"></script> -->
-  <script src="../js/sessao.js"></script>
+  <!-- <script src="../js/sessao.js"></script> -->
 </head>
 
 <!-- <body id="body_id" onload="carregar()"> -->
-<body id="body_id" onload="carregar(), validarSessao();">
+<body id="body_id" onload="carregar()">
   <div class="cabecario">
     <div id="div_logo">
       <h2 id="texto_cowtech"><a href="index.html">COW TECH</a></h2>
@@ -273,22 +270,28 @@
         <div id="div_formularioFazenda">
           <form id="formularioFazenda" action="#divisao_funcao_fazenda">
             <h4>Nome da fazenda</h4>
-            <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
+            <input id="input_fazenda" placeholder="Ex: Fazenda boa vista" /><br />
           
             <h4>Endereço</h4>
-            <label for="input_fazenda">CEP</label>
-            <input id="input_cep" type="text"/>
-            <label for="input_cep">Logradouro</label>
-            <input id="input_logradouro" type="text" />
-            <label for="input_logradouro">Bairro</label>
-            <input id="input_bairro" type="text" />
-            <label for="input_bairro">Município</label>
-            <input type="text" id="input_municipio" />
-            <label for="input_municipio">Estado</label>
-            <input id="input_estado" type="text" />
-            <label for="input_estado">Número</label>
-            <input id="input_numero" type="text" />
-            <button onclick="CadastrarFazenda()">Cadastrar</button>
+            <label for="input_cep">CEP</label>
+            <input id="input_cep"/>
+
+            <label for="input_logradouro">Logradouro</label>
+            <input id="input_logradouro" />
+
+            <label for="input_bairro">Bairro</label>
+            <input id="input_bairro" />
+
+            <label for="input_municipio">Município</label>
+            <input id="input_municipio" />
+
+            <label for="input_estado">Estado</label>
+            <input id="input_estado" />
+
+            <label for="input_numero">Número</label>
+            <input id="input_numero" />
+
+            <button onclick="cadastrarFazenda()">Cadastrar</button>
           </form>
         </div>
       </div>
@@ -305,7 +308,7 @@
         </tbody>
       </table>
       <div id="div_button_adicionarFazenda">
-        <button class="button_adicionarFazenda" id="button_adicionar" onclick="AdicionarFazenda()">
+        <button class="button_adicionarFazenda" id="button_adicionarFazenda" onclick="AdicionarFazenda()">
           Adicionar
         </button>
       </div>
@@ -326,7 +329,7 @@
         </div>
         <div id="div_formulario">
           <form id="formulario" action="#divisao_funcao_funcionario">
-            <h4>Nome da fazenda</h4>
+            <h4>Nome do Curral</h4>
             <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
           
             <h4>Endereço</h4>
@@ -412,6 +415,8 @@
   </div>
   </div>
 </body>
+
+</html>
 <script>
   // div_logo.innerHTML = sessionStorage.ID_EMPRESA
   var img = document.getElementById('img_sensor')
@@ -514,6 +519,7 @@
   function RemoverFazenda() {
     table_fazenda.innerHTML = ``
   }
+
   function Adicionar() {
     pop_up.style.display = "flex";
     button_adicionar.style.display = "none";
@@ -526,7 +532,6 @@
     button_adicionarFazenda.style.display = "none";
     body_id.style.background = `rgb(0, 0, 0, 0.800)`;
     body_id.style.opacity = 1;
-    button_adicionar_sensor.style.display = `none`
   }
   function Sair() {
     pop_up.style.display = "none";
@@ -693,7 +698,131 @@
     h2_lm35.style.display = 'none'
     h2_dht11.style.display = 'flex'
   }
+  function cadastrarFazenda() {
+    var nome = input_fazenda.value;
+    var cep = input_cep.value;
+    var logradouro = input_logradouro.value;
+    var bairro = input_bairro.value;
+    var municipio = input_municipio.value;
+    var estado = input_estado.value;
+    var numero = input_numero.value;
+    var empresaVar = sessionStorage.ID_EMPRESA
+    
+if (logradouro == "") {
+    "(Digite um valor no campo logradouro)";
 
+  return false;
+} else if (bairro == "") {
+    "(Digite um valor no campo bairro)";
+
+  return false;
+} else if (municipio == "") {
+    "(Digite um valor no campo municipio)";
+
+  return false;
+} else if (estado == "") {
+    "(Digite um valor no campo estado)";
+
+  return false;
+} else if (numero == "") {
+    "(Digite um valor no campo numero)";
+
+  return false;
+} else if (cep == "") {
+    "(Digite um valor no campo cep)";
+
+  return false;
+} else if (nome == "") {
+    "(Digite um valor no campo nome)";
+
+  return false;
+} else if (empresaVar == "") {
+    "(Escolha uma empresa)";
+
+  return false;
+}
+
+console.log(empresaVar);
+
+// Enviando o valor da nova input
+fetch("/enderecos/cadastrar", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    // crie um atributo que recebe o valor recuperado aqui
+    // Agora vá para o arquivo routes/usuario.js
+    nomeServer: nome,
+    logradouroServer: logradouro,
+    municipioServer: municipio,
+    cepServer: cep,
+    bairroServer: bairro,
+    estadoServer: estado,
+    numeroServer: numero,
+    empresaServer: empresaVar
+  }),
+})
+  .then(function (resposta) {
+    console.log("resposta: ", resposta);
+
+    if (resposta.ok) {
+      console.log("Cadastro realizado com sucesso! Redirecionando para tela de login...");
+
+    } else {
+      throw "Houve um erro ao tentar realizar o cadastro!";
+    }
+  })
+  .catch(function (resposta) {
+    console.log(`#ERRO: ${resposta}`);
+
+  });
+
+return false;
+
+}
+
+// function pesquisacep(valor) {
+
+// //Nova variável "cep" somente com dígitos.
+// var cep = valor.replace(/\D/g, '');
+
+// //Verifica se campo cep possui valor informado.
+// if (cep != "") {
+
+//     //Expressão regular para validar o CEP.
+//     var validacep = /^[0-9]{8}$/;
+
+//     //Valida o formato do CEP.
+//     if(validacep.test(cep)) {
+
+//         //Preenche os campos com "..." enquanto consulta webservice.
+//         document.getElementById('input_logradouro').value="...";
+//         document.getElementById('input_bairro').value="...";
+//         document.getElementById('input_municipio').value="...";
+//         document.getElementById('input_estado').value="...";
+
+//         //Cria um elemento javascript.
+//         var script = document.createElement('script');
+
+//         //Sincroniza com o callback.
+//         script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+//         //Insere script no documento e carrega o conteúdo.
+//         document.body.appendChild(script);
+
+//     } //end if.
+//     else {
+//         //cep é inválido.
+//         limpa_formulário_cep();
+//         alert("Formato de CEP inválido.");
+//     }
+// } //end if.
+// else {
+//     //cep sem valor, limpa formulário.
+//     limpa_formulário_cep();
+// }
+// };
 </script>
 <style>
   * {
@@ -1807,5 +1936,3 @@
     margin-bottom: 6px;
   }
 </style>
-
-</html>
