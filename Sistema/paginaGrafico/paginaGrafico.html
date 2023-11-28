@@ -44,7 +44,7 @@
             </div>
             <div id="div_todos_graficos">
                 <div id="div_separacao_grafico">
-                    <div class="graficos1" style="margin-right: 2%;">
+                    <div class="graficos1" style="margin-right: 2%;" id="graf1">
                       
                             <section style="width: 100%;" id="myChartCanvas">
                                 <canvas id="lm35Temperatura"></canvas>
@@ -155,36 +155,31 @@
         
     console.log(i)
 
-          fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
 
-            // plotarGrafico(resposta, dados);
-            
             for (var i = 0; i < resposta.length; i++) {
                 var item = resposta[i];
                 var medida = Number(item.lm35_temperatura);
-                var button = document.getElementsByClassName('button_sensor')
-                console.log(button)
+                var buttons = document.getElementsByClassName('button_sensor');
 
-                for(var b = 0; b < button.length; b++) {
-                  var primeiroButton = button[i]
-                  var estiloButton = window.getComputedStyle(primeiroButton)
-                  var cor = estiloButton.backgroundColor
-              
-                  if (medida > 24) {
-                  console.log('Acima de 24 graus');
-                  primeiroButton.style.backgroundColor = 'red'
-                } else if (medida === 24) {
-                    console.log('Medida de 24 graus');
-                    primeiroButton.style.backgroundColor = 'yellow'
-                } else {
-                    console.log('Abaixo de 24 graus');
-                    primeiroButton.style.backgroundColor = 'green'
-                }
-                }
+                for (var b = 0; b < buttons.length; b++) {
+                    var currentButton = buttons[b];
+                    var estiloButton = window.getComputedStyle(currentButton);
+                    var cor = estiloButton.backgroundColor;
+                    
+                    if (medida > 24) {
+                        currentButton.style.backgroundColor = 'red';
+                    } else if (medida === 24) {
+                        currentButton.style.backgroundColor = 'yellow';
+                    } else if(medida < 24){
+                        currentButton.style.backgroundColor = 'green';
+                    }
+                  
+              }
                 console.log(medida);
             }
             
@@ -210,43 +205,45 @@ function FunctionTeste() {
   alert('funcionou')
 }
 
+  var sensores = JSON.parse(sessionStorage.SENSOR)
+  console.log(sensores)
   let proximaAtualizacao;
 
   window.onload = exibirAquariosDoUsuario();
 
   function exibirAquariosDoUsuario() {
-    var aquarios = JSON.parse(sessionStorage.AQUARIOS);
-    aquarios.forEach((item) => {
-      document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
+    var sensores = JSON.parse(sessionStorage.SENSORES);
+    sensores.forEach((item) => {
+      document.getElementById("graf1").innerHTML += `
+            <button class="btn-chart" onclick="exibirAquario(${item.idSensor})" id="btnAquario${item.id}">${item.descricao}</button>
             `;
 
-      document.getElementById("graficos").innerHTML += `
-                <div id="grafico${item.id}" class="display-none">
+      document.getElementById("graf1").innerHTML += `
+                <div id="grafico${item.idSensor}" class="display-none">
                     <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.id}">${item.descricao}</span>
+                        <span id="tituloAquario${item.idSensor}">${item.nomeSensor}</span>
                     </h3>
                     <div class="graph">
-                        <canvas id="myChartCanvas${item.id}"></canvas>
+                        <canvas id="myChartCanvas${item.idSensor}"></canvas>
                     </div>
                     <div class="label-captura">
-                        <p id="avisoCaptura${item.id}" style="color: white"></p>
+                        <p id="avisoCaptura${item.idSensor}" style="color: white"></p>
                     </div>
                 </div>
             `;
 
-      obterDadosGrafico(item.id);
+      obterDadosGrafico(item.idSensor);
     });
 
-    if (aquarios.length > 0) {
-      exibirAquario(aquarios[0].id);
+    if (sensores.length > 0) {
+      exibirAquario(sensores[0].idSensor);
     }
   }
 
-  function alterarTitulo(idAquario) {
-    var tituloAquario = document.getElementById(`tituloAquario${idAquario}`);
+  function alterarTitulo(idSensor) {
+    var tituloAquario = document.getElementById(`tituloAquario${idSensor}`);
     var descricao = JSON.parse(sessionStorage.AQUARIOS).find(
-      (item) => item.id == idAquario
+      (item) => item.id == idSensor
     ).descricao;
     tituloAquario.innerHTML =
       "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" +
@@ -254,12 +251,12 @@ function FunctionTeste() {
       "</span>";
   }
 
-  function exibirAquario(idAquario) {
-    let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
+  function exibirAquario(idSensor) {
+    let todosOsGraficos = JSON.parse(sessionStorage.SENSOR);
 
     for (i = 0; i < todosOsGraficos.length; i++) {
       // exibindo - ou não - o gráfico
-      if (todosOsGraficos[i].id != idAquario) {
+      if (todosOsGraficos[i].idSensor != idSensor) {
         let elementoAtual = document.getElementById(
           `grafico${todosOsGraficos[i].id}`
         );
@@ -270,7 +267,7 @@ function FunctionTeste() {
 
         // alterando estilo do botão
         let btnAtual = document.getElementById(
-          `btnAquario${todosOsGraficos[i].id}`
+          `btnAquario${todosOsGraficos[i].idSensor}`
         );
         if (btnAtual.classList.contains("btn-pink")) {
           btnAtual.classList.remove("btn-pink");
@@ -280,12 +277,12 @@ function FunctionTeste() {
     }
 
     // exibindo - ou não - o gráfico
-    let graficoExibir = document.getElementById(`grafico${idAquario}`);
+    let graficoExibir = document.getElementById(`grafico${idSensor}`);
     graficoExibir.classList.remove("display-none");
     graficoExibir.classList.add("display-block");
 
     // alterando estilo do botão
-    let btnExibir = document.getElementById(`btnAquario${idAquario}`);
+    let btnExibir = document.getElementById(`btnAquario${idSensor}`);
     btnExibir.classList.remove("btn-white");
     btnExibir.classList.add("btn-pink");
   }
@@ -301,21 +298,21 @@ function FunctionTeste() {
 
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
-  function obterDadosGrafico(idAquario) {
-    alterarTitulo(idAquario);
+  function obterDadosGrafico(idSensor) {
+    alterarTitulo(idSensor);
 
     if (proximaAtualizacao != undefined) {
       clearTimeout(proximaAtualizacao);
     }
 
-    fetch(`/medidas/ultimas/${idAquario}`, { cache: "no-store" })
+    fetch(`/medidas/ultimas/${idSensor}`, { cache: "no-store" })
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
 
-            plotarGrafico(resposta, idAquario);
+            plotarGrafico(resposta, idSensor);
           });
         } else {
           console.error("Nenhum dado encontrado ou erro na API");
@@ -331,7 +328,7 @@ function FunctionTeste() {
   // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
   // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
   // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-  function plotarGrafico(resposta, idAquario) {
+  function plotarGrafico(resposta, idSensor) {
     console.log("iniciando plotagem do gráfico...");
 
     // Criando estrutura para plotar gráfico - labels
@@ -388,11 +385,11 @@ function FunctionTeste() {
 
     // Adicionando gráfico criado em div na tela
     let myChart = new Chart(
-      document.getElementById(`myChartCanvas${idAquario}`),
+      document.getElementById(`myChartCanvas${idSensor}`),
       config
     );
 
-    setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+    setTimeout(() => atualizarGrafico(idSensor, dados, myChart), 2000);
   }
 
   // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
@@ -400,19 +397,19 @@ function FunctionTeste() {
 
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
-  function atualizarGrafico(idAquario, dados, myChart) {
-    fetch(`/medidas/tempo-real/${idAquario}`, { cache: "no-store" })
+  function atualizarGrafico(idSensor, dados, myChart) {
+    fetch(`/medidas/tempo-real/${idSensor}`, { cache: "no-store" })
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (novoRegistro) {
-            obterdados(idAquario);
-            // alertar(novoRegistro, idAquario);
+            obterdados(idSensor);
+            // alertar(novoRegistro, idSensor);
             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
             console.log(`Dados atuais do gráfico:`);
             console.log(dados);
 
             let avisoCaptura = document.getElementById(
-              `avisoCaptura${idAquario}`
+              `avisoCaptura${idSensor}`
             );
             avisoCaptura.innerHTML = "";
 
@@ -451,7 +448,7 @@ function FunctionTeste() {
 
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
             proximaAtualizacao = setTimeout(
-              () => atualizarGrafico(idAquario, dados, myChart),
+              () => atualizarGrafico(idSensor, dados, myChart),
               2000
             );
           });
@@ -459,7 +456,7 @@ function FunctionTeste() {
           console.error("Nenhum dado encontrado ou erro na API");
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
           proximaAtualizacao = setTimeout(
-            () => atualizarGrafico(idAquario, dados, myChart),
+            () => atualizarGrafico(idSensor, dados, myChart),
             2000
           );
         }
@@ -517,6 +514,7 @@ function FunctionTeste() {
   var contextoLm35Temperatura = document.getElementById('lm35Temperatura').getContext('2d');
   contextoLm35Temperatura.canvas.width = 1000;
   contextoLm35Temperatura.canvas.height = 300;
+
   var lm35Temperatura = new Chart(
     contextoLm35Temperatura,
     {
@@ -557,6 +555,7 @@ function FunctionTeste() {
 
   var paginacao = {};
   var tempo = {};
+
   function obterDados(grafico, endpoint) {
     var http = new XMLHttpRequest();
     http.open('GET', 'http://localhost:3000/sensores/' + endpoint, false);

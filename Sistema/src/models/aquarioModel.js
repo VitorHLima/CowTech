@@ -1,8 +1,11 @@
 var database = require("../database/config");
 
-function buscarAquariosPorEmpresa(idUsuario) {
+function buscarAquariosPorEmpresa(idUsuario, idSensor) {
 
-  instrucaoSql = `select * from sensor where fkCurral = ${idUsuario}`;
+  instrucaoSql = `SELECT idEmpresa, nomeFazenda, nomeCurral, idSensor, nomeSensor FROM empresa 
+  JOIN endFazenda ON idEndereco = fkEmpresa JOIN curral ON idEndereco = fkEndFazenda 
+  JOIN sensor ON fkCurral WHERE idEmpresa = ${idUsuario} ORDER BY nomeCurral DESC;
+  `;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
