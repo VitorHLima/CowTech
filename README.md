@@ -7,8 +7,9 @@ Projeto de Pesquisa e Inovação com entregáveis de Algoritmos, Banco de Dados,
 <h3>Resumo do projeto</h3>
 
 Monitoramento da temperatura e umidade de celeiros a fim de reduzir o estresse térmico para aumentar a produção de leite.
-
-
+<br>
+<br>
+<br>
 
 <h1>Execução do Sistema</h1>
 
@@ -45,8 +46,9 @@ Copie o link disponibilizado no terminal durante a etapa anterior e acesse-o pel
 <h2>7º Passo</h2>
 <h3>Finalizar a execução</h3>
 Caso deseje parar a execução do sistema acesse o terminal em que executou o início da aplicação e execute o comando ctrl + c.
-
-
+<br>
+<br>
+<br>
 
 <h1>Instalação dos Sensores</h1>
 
@@ -57,5 +59,32 @@ Coloque os sensores na protoboard de forma que eles não ocupem a mesma coluna.
 
 <h2>2º Passo</h2>
 <h3>Ligue os sensores ao Arduíno</h3>
-Ligue os sensores ao Arduíno com os jumpers seguindo as entradas de cada sensor
 
+Ligue os sensores ao Arduíno com os jumpers seguindo as entradas de cada sensor
+![image](/Documentação/Documentos/Manual%20do%20Projeto/DHT11.png)
+![image](/Documentação/Documentos/Manual%20do%20Projeto/LM35.png)
+<br>
+<h2>3º Passo</h2>
+<h3>Prepare o código do Arduíno</h3>
+
+Abra o código arduinoCode.ino que está dentro do repositório Sistema/arduinoCode, pelo Arduino IDE e verifique se o código está correto.
+![image](/Documentação/Documentos/Manual%20do%20Projeto/verificação%20Arduino%20IDE.png)
+A verificação é feita nesse botão que se encontra na área superior esquerda.
+
+<h2>4º Passo</h2>
+<h3>Conecte o Arduino</h3>
+
+Conecte o Arduino ao computador que recebera os dados via USB.
+
+<h2>5º Passo</h2>
+<h3>Envie o código para o Arduíno</h3>
+
+Após verificar o funcionamento do código envie ele para o Arduíno antes de iniciar a coleta de dados.
+![image](/Documentação/Documentos/Manual%20do%20Projeto/envio%20Arduino%20IDE.png)
+O envio é feito nesse botão que se encontra na área superior esquerda.
+
+<h2>6º Passo</h2>
+<h3>Teste de coleta de dados</h3>
+Inicie a coleta de dados dentro do Arduino IDE.
+![image](/Documentação/Documentos/Manual%20do%20Projeto/inicio%20da%20coleta%20Arduino%20IDE.png)
+O início da coleta de dados é feito nesse botão que se encontra na área superior direita.
