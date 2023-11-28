@@ -67,7 +67,7 @@ Ligue os sensores ao Arduíno com os jumpers seguindo as entradas de cada sensor
 <h2>3º Passo</h2>
 <h3>Prepare o código do Arduíno</h3>
 
-Abra o código arduinoCode.ino que está dentro do repositório Sistema/arduinoCode, pelo Arduino IDE e verifique se o código está correto.
+Abra o código arduinoCode.ino que está dentro do repositório Sistema/arduinoCode, pelo Arduino IDE e verifique se o código está correto.<br>
 ![image](/Documentação/Documentos/Manual%20do%20Projeto/verificação%20Arduino%20IDE.png)
 A verificação é feita nesse botão que se encontra na área superior esquerda.
 
@@ -79,12 +79,12 @@ Conecte o Arduino ao computador que recebera os dados via USB.
 <h2>5º Passo</h2>
 <h3>Envie o código para o Arduíno</h3>
 
-Após verificar o funcionamento do código envie ele para o Arduíno antes de iniciar a coleta de dados.
+Após verificar o funcionamento do código envie ele para o Arduíno antes de iniciar a coleta de dados.<br>
 ![image](/Documentação/Documentos/Manual%20do%20Projeto/envio%20Arduino%20IDE.png)
 O envio é feito nesse botão que se encontra na área superior esquerda.
 
 <h2>6º Passo</h2>
 <h3>Teste de coleta de dados</h3>
-Inicie a coleta de dados dentro do Arduino IDE.
+Inicie a coleta de dados dentro do Arduino IDE.<br>
 ![image](/Documentação/Documentos/Manual%20do%20Projeto/inicio%20da%20coleta%20Arduino%20IDE.png)
 O início da coleta de dados é feito nesse botão que se encontra na área superior direita.
