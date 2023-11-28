@@ -12,12 +12,14 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="index.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-  <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
-  <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
-  <script src="/js/sessao.js"></script>
+  <!-- <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+  <script src="http://www.chartjs.org/samples/latest/utils.js"></script> -->
+  <!-- <script src="js\sessao.js"></script> -->
+  <script src="../js/sessao.js"></script>
 </head>
 
-<body id="body_id" onload="carregar()">
+<!-- <body id="body_id" onload="carregar()"> -->
+<body id="body_id" onload="carregar(), validarSessao();">
   <div class="cabecario">
     <div id="div_logo">
       <h2 id="texto_cowtech"><a href="index.html">COW TECH</a></h2>
@@ -255,6 +257,61 @@
     </div>
   </div>
  
+
+  <!-- Div do cadastro de fazenda -->
+  <div id="div_funcionario">
+    <div id="titulo_funcionario">
+      <h1>Fazendas cadastradas</h1>
+    </div>
+    <div id="divisao_funcao_funcionario">
+      <div id="pop_upFazenda">
+        <div id="div_button_popUp">
+          <button id="button_sair" onclick="SairFazenda()">
+            <img src="img/sair.png" id="img_sair" alt="" />
+          </button>
+        </div>
+        <div id="div_formularioFazenda">
+          <form id="formularioFazenda" action="#divisao_funcao_fazenda">
+            <h4>Nome da fazenda</h4>
+            <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
+          
+            <h4>Endereço</h4>
+            <label for="input_fazenda">CEP</label>
+            <input id="input_cep" type="text"/>
+            <label for="input_cep">Logradouro</label>
+            <input id="input_logradouro" type="text" />
+            <label for="input_logradouro">Bairro</label>
+            <input id="input_bairro" type="text" />
+            <label for="input_bairro">Município</label>
+            <input type="text" id="input_municipio" />
+            <label for="input_municipio">Estado</label>
+            <input id="input_estado" type="text" />
+            <label for="input_estado">Número</label>
+            <input id="input_numero" type="text" />
+            <button onclick="CadastrarFazenda()">Cadastrar</button>
+          </form>
+        </div>
+      </div>
+      <table id="table_fazenda">
+        <tbody>
+          <tr id="tr_formulario">
+            <td id="td_id"><b>ID</b></td>
+            <td></td>
+            <td id="td_nome">Nome</td>
+            <td id="td_endereco" style="width: 100%; border: 1px solid black;">Endereço</td>
+            <td></td>
+            <td id="td_button"><button onclick="Remover()">-</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="div_button_adicionarFazenda">
+        <button class="button_adicionarFazenda" id="button_adicionar" onclick="AdicionarFazenda()">
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!--Div do cadastro de funcionarios-->
   <div id="div_funcionario">
     <div id="titulo_funcionario">
@@ -299,6 +356,9 @@
       </div>
     </div>
   </div>
+
+
+
   <div class="footer">
 
 
@@ -439,7 +499,7 @@
       .then(function (resposta) {
         resposta.json().then((currais) => {
           currais.forEach((curral) => {
-            listaCurrais.innerHTML += `<option value='${curral.idCurral}'>${curral.nomeCurral}</option>`;
+            listaCurrais.innerHTML += `<option value='${curral.idCurral}'>${curral.nome}</option>`;
           });
         });
       })
@@ -451,6 +511,9 @@
   function Remover() {
     table_funcionario.innerHTML = ``
   }
+  function RemoverFazenda() {
+    table_fazenda.innerHTML = ``
+  }
   function Adicionar() {
     pop_up.style.display = "flex";
     button_adicionar.style.display = "none";
@@ -458,9 +521,24 @@
     body_id.style.opacity = 1;
     button_adicionar_sensor.style.display = `none`
   }
+  function AdicionarFazenda() {
+    pop_upFazenda.style.display = "flex";
+    button_adicionarFazenda.style.display = "none";
+    body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+    body_id.style.opacity = 1;
+    button_adicionar_sensor.style.display = `none`
+  }
   function Sair() {
     pop_up.style.display = "none";
     button_adicionar.style.display = "inline";
+    document.body.style.opacity = 1;
+    body_id.style.backgroundColor = `white`;
+    button_adicionar_sensor.style.display = `flex`
+  }
+
+  function SairFazenda() {
+    pop_upFazenda.style.display = "none";
+    button_adicionarFazenda.style.display = "inline";
     document.body.style.opacity = 1;
     body_id.style.backgroundColor = `white`;
     button_adicionar_sensor.style.display = `flex`
@@ -630,9 +708,9 @@
     -ms-user-select: none;
   }
 
-  #myChartCanvas {
+  /* #myChartCanvas {
     max-width: 100%;
-  }
+  } */
 
   .div_principal_sistema {
     background-color: white;
@@ -727,12 +805,12 @@
     flex-direction: column;
   }
 
-  #table_funcionario {
+  #table_funcionario, #table_fazenda {
     width: 70%;
     height: auto;
   }
 
-  #table_funcionario td {
+  #table_funcionario td, #table_fazenda td {
     padding: 8px;
   }
 
@@ -835,6 +913,72 @@
 
   #button_sair:hover {
     cursor: pointer;
+  }
+ 
+  #pop_upFazenda {
+    width: 40%;
+    background-color: white;
+    height: 650px;
+    border: 2px solid black;
+    display: none;
+    position: absolute;
+    opacity: 1;
+    flex-direction: column;
+    border-radius: 10px;
+  }
+
+  #div_formularioFazenda {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    align-items: left;
+    justify-content: left;
+  }
+
+  #formularioFazenda {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    height: 100%;
+    margin-left: 41px;
+    text-align: left;
+    justify-content: left;
+    padding: 0 0 0 5%;
+  }
+
+    #pop_upFazenda input {
+    margin-bottom: 10px;
+    }
+
+    #div_button_adicionarFazenda {
+    margin-top: 3%;
+    width: 60%;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+    .button_adicionarFazenda {
+    background: black;
+    color: white;
+    width: 20%;
+    height: auto;
+    font-weight: 200;
+    padding: 4px;
+    display: inline;
+  }
+
+  #formularioFazenda button {
+    width: 40%;
+    background-color: black;
+    color: white;
+    padding: 4px;
+    margin-top: 2%;
+    border: 0;
   }
 
   #div_formulario {

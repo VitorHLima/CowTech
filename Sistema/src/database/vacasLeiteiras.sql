@@ -28,7 +28,7 @@ foreign key (fkEmpresa) references empresa(idEmpresa)
 
 create table curral(
 idCurral int primary key auto_increment,
-nome varchar(45),
+nomeCurral varchar(45),
 fkEndFazenda int,
 foreign key (fkEndFazenda) references endFazenda(idEndereco)
 );
