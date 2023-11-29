@@ -46,8 +46,8 @@
         <div id="div_separacao_grafico">
           <div class="graficos1" style="margin-right: 2%;" id="graf1">
 
-            <section style="width: 100%;" id="myChartCanvas">
-              <canvas id="lm35Temperatura"></canvas>
+            <section style="width: 100%; align-items: center; justify-content: center;" id="myChartCanvas">
+              <canvas id="lm35Temperatura" style="width: 82%; height: 80%; margin-top: 0%;"></canvas>
             </section>
 
           </div>
@@ -148,12 +148,13 @@
 
             h4 = valor.map(item => item.nomeSensor);
 
-            div.innerHTML = h4[i];
+            div.innerHTML += h4[i];
 
             divPrincipal.appendChild(div);
 
-            div.appendChild(button1);
-
+            // div.appendChild(button1);
+  
+            div.innerHTML += `<button class='button_sensor' onclick=obterDadosGrafico(${i+1})></button`
             console.log(i)
 
             fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function (response) {
@@ -162,7 +163,7 @@
                   console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                   resposta.reverse();
 
-                  for (var i = 0; i < resposta.length; i++) {
+                  for (var i = 1; i <= resposta.length; i++) {
                     var item = resposta[i];
                     var medida = Number(item.temperatura);
                     var buttons = document.getElementsByClassName('button_sensor');
@@ -202,15 +203,16 @@
 
     return false;
   }
-  function FunctionTeste() {
-    alert('funcionou')
+
+  function Teste(fkSensor) {
+    alert('funcionando ' + fkSensor)
   }
 
   var sensores = JSON.parse(sessionStorage.SENSOR)
   console.log(sensores)
   let proximaAtualizacao;
 
-  window.onload = obterDadosGrafico();
+  // window.onload = obterDadosGrafico();
 
   // function exibirAquariosDoUsuario() {
   //   var aquarios = JSON.parse(sessionStorage.AQUARIOS);
