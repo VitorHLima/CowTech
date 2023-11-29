@@ -29,10 +29,6 @@ fkEmpresa int,
 foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
-
-
-
-
 create table curral(
 idCurral int primary key auto_increment,
 nomeCurral varchar(45),
@@ -88,13 +84,11 @@ insert into sensor values
 	(12,'Sensor 4',3);
     
     INSERT registro VALUES 
-(NULL, now(), 80, 29, 1), (NULL, now(), 69, 20, 2),(NULL, now(), 70, 25, 3),
-(NULL, now(), 75, 24, 1), (NULL, now(), 87, 19, 2),(NULL, now(), 70, 26, 3),
-(NULL, now(), 60, 23, 1), (NULL, now(), 30, 15, 2),(NULL, now(), 70, 28, 3),
-						 (NULL, now(), 45, 20, 2),(NULL, now(), 70, 33, 3),
+(NULL, now(), 80, 29, 1), (NULL, now(), 69, 20, 2),(NULL, now(), 70, 25, 3), (NULL, now(), 80, 29, 4),
+(NULL, now(), 75, 24, 1), (NULL, now(), 87, 19, 2),(NULL, now(), 70, 26, 3), (NULL, now(), 65, 25, 4),
+(NULL, now(), 60, 23, 1), (NULL, now(), 30, 15, 2),(NULL, now(), 70, 28, 3), (NULL, now(), 44, 22, 4),
+						 (NULL, now(), 45, 20, 2),(NULL, now(), 70, 33, 3), (NULL, now(), 56, 18, 4),
                          (NULL, now(), 45, 10, 2);
-    
-
 -- selects
 SELECT * FROM empresa;
 SELECT * FROM EndFazenda;
@@ -120,7 +114,7 @@ where endFazenda.idEndereco = 1 AND curral.idCurral = 3;
 SELECT idSensor, nomeSensor from Sensor;
 
 SELECT sensor.nomeSensor, registro.dht11_Umidade, 
-registro.lm35_temperatura, registro.dtAtual from Sensor 
+registro.lm35_temperatura, registro.dtAtual, date_format(registro.dtAtual, "%d/%m/%Y") as momento_grafico from Sensor 
 JOIN registro ON fkSensor = idSensor where idSensor= 1;
 
 

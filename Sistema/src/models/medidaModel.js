@@ -15,7 +15,7 @@ function buscarUltimasMedidas(fkSensor) {
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT sensor.nomeSensor, registro.dht11_Umidade as umidade, 
-            registro.lm35_temperatura as temperatura, registro.dtAtual as momento_grafico from Sensor 
+            registro.lm35_temperatura as temperatura, registro.dtAtual, date_format(registro.dtAtual, "%d/%m/%Y") as momento_grafico from Sensor 
             JOIN registro ON fkSensor = idSensor where idSensor = ${fkSensor};
         
         
