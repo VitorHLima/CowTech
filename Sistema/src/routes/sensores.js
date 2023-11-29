@@ -11,7 +11,7 @@ router.post("/listar/", function (req, res) {
     sensorController.listar(req, res);
 });
 router.post("/mostrar/", function (req, res) {
-    sensorController.buscarAquariosPorEmpresa(req, res);
+    sensorController.listarSensores(req, res);
 });
 
 

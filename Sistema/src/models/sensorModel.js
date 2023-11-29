@@ -15,9 +15,9 @@ function listar() {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-function buscarAquariosPorEmpresa(fazenda, curral) {
+function listarSensores(fazenda, curral) {
 
-    instrucaoSql = `SELECT Sensor.nome, curral.nomeCurral, endFazenda.nomeFazenda FROM Sensor JOIN curral ON fkCurral = idCurral 
+    instrucaoSql = `SELECT Sensor.nomeSensor, curral.nomeCurral, endFazenda.nomeFazenda FROM Sensor JOIN curral ON fkCurral = idCurral 
     JOIN endFazenda ON fkEndFazenda = idEndereco 
     where endFazenda.idEndereco = ${fazenda} AND curral.idCurral = ${curral};`;
 
@@ -27,5 +27,5 @@ function buscarAquariosPorEmpresa(fazenda, curral) {
 module.exports = {
     publicar,
     listar,
-    buscarAquariosPorEmpresa
+    listarSensores
 }

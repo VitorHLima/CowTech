@@ -17,67 +17,67 @@
 </head>
 
 <body>
-    <div id="principal_pagina_grafico">
-        <div class="cabecario">
-            <div id="div_logo">
-                <h2 id="texto_cowtech"><a href="index.html">COW TECH</a></h2>
-      
-            </div>
-            <div id="div_links">
-                <ul id="lista_cabecario">
-                    <a href="sistema.html">SISTEMA</a>
-                    <a href="#div_grafico">GRÁFICOS</a>
-                    <a href="login.html">SAIR</a>
-                </ul>
-            </div>
-        </div>
-        <div id="div_graficos">
-            <div id="div_select" style="position: relative;">
-                <h4 id="select_fazenda_h4" style="color: black; position: absolute; margin-top: -12%;">Curral</h4>
-                <select name="" id="select_fazenda" class="select_grafico"></select>
-                <h4 id="select_galpao" style="color: black; position: absolute;margin-top: -12%;">Fazenda</h4>
-                <select name="" id="listaCurrais" class="select_grafico"></select>
-                <button id="button_pesquisar" onclick="Pesquisar()"><img src="lupa.png" alt=""></button>
-            </div>
-            <div id="div_titulo_grafico">
-            
-            </div>
-            <div id="div_todos_graficos">
-                <div id="div_separacao_grafico">
-                    <div class="graficos1" style="margin-right: 2%;" id="graf1">
-                      
-                            <section style="width: 100%;" id="myChartCanvas">
-                                <canvas id="lm35Temperatura"></canvas>
-                              </section>
-                    
-                    </div>
-                    <div class="graficos1">
-                     
-                            <section style="width: 100%;" id="myChartCanvas">
-                                <canvas id="lm35Temperatura"></canvas>
-                              </section>
-                     
-                    </div>
-                </div>
-                <div id="div_separacao_grafico">
-                    <div class="graficos1" style="margin-right: 2%;">
-                   
-                            <section style="width: 100%;" id="myChartCanvas">
-                                <canvas id="dht11Umidade"></canvas>
-                              </section>
-                     
-                    </div>
-                    <div class="graficos1">
-                            <section style="width: 100%;" id="myChartCanvas">
-                                <canvas id="lm35Temperatura2"></canvas>
-                              </section>
-             
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div id="principal_pagina_grafico">
+    <div class="cabecario">
+      <div id="div_logo">
+        <h2 id="texto_cowtech"><a href="index.html">COW TECH</a></h2>
+
+      </div>
+      <div id="div_links">
+        <ul id="lista_cabecario">
+          <a href="sistema.html">SISTEMA</a>
+          <a href="#div_grafico">GRÁFICOS</a>
+          <a href="login.html">SAIR</a>
+        </ul>
+      </div>
     </div>
-   
+    <div id="div_graficos">
+      <div id="div_select" style="position: relative;">
+        <h4 id="select_fazenda_h4" style="color: black; position: absolute; margin-top: -12%;">Curral</h4>
+        <select name="" id="select_fazenda" class="select_grafico"></select>
+        <h4 id="select_galpao" style="color: black; position: absolute;margin-top: -12%;">Fazenda</h4>
+        <select name="" id="listaCurrais" class="select_grafico"></select>
+        <button id="button_pesquisar" onclick="Pesquisar()"><img src="lupa.png" alt=""></button>
+      </div>
+      <div id="div_titulo_grafico">
+
+      </div>
+      <div id="div_todos_graficos">
+        <div id="div_separacao_grafico">
+          <div class="graficos1" style="margin-right: 2%;" id="graf1">
+
+            <section style="width: 100%;" id="myChartCanvas">
+              <canvas id="lm35Temperatura"></canvas>
+            </section>
+
+          </div>
+          <div class="graficos1">
+
+            <section style="width: 100%;" id="myChartCanvas">
+              <canvas id="lm35Temperatura"></canvas>
+            </section>
+
+          </div>
+        </div>
+        <div id="div_separacao_grafico">
+          <div class="graficos1" style="margin-right: 2%;">
+
+            <section style="width: 100%;" id="myChartCanvas">
+              <canvas id="dht11Umidade"></canvas>
+            </section>
+
+          </div>
+          <div class="graficos1">
+            <section style="width: 100%;" id="myChartCanvas">
+              <canvas id="lm35Temperatura2"></canvas>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 <script defer>
   var idEmpresa = sessionStorage.ID_EMPRESA
@@ -102,109 +102,109 @@
       console.log(`#ERRO: ${resposta}`);
     });
 
-    fetch("/enderecos/listar", {
+  fetch("/enderecos/listar", {
     method: "GET",
   })
     .then(function (resposta) {
       resposta.json().then((enderecos) => {
         enderecos.forEach((endFazenda) => {
           select_fazenda.innerHTML += `<option value='${endFazenda.idEndereco}'>${endFazenda.nomeFazenda}</option>`;
+        })
       })
     })
-  })
 
-  
+
 
   function Pesquisar() {
     div_titulo_grafico.innerHTML = ''
-  var fazendaVar = select_fazenda.value;
-  var curralVar = listaCurrais.value;
+    var fazendaVar = select_fazenda.value;
+    var curralVar = listaCurrais.value;
 
-  
-  fetch("/sensores/mostrar/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      fazendaServer: fazendaVar,
-      curralServer: curralVar
+
+    fetch("/sensores/mostrar/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fazendaServer: fazendaVar,
+        curralServer: curralVar
+      })
     })
-  })
-  .then(resposta => resposta.json())
-  .then(valor => {
+      .then(resposta => resposta.json())
+      .then(valor => {
 
-    for (var i = 0; i < valor.length; i++) {
-      var divPrincipal = document.getElementById('div_titulo_grafico');
-      if (Sensores) {
-        var div = document.createElement('div');
-        var h4 = document.createElement('h4');
-        var button1 = document.createElement('button');
+        for (var i = 0; i < valor.length; i++) {
+          var divPrincipal = document.getElementById('div_titulo_grafico');
+          if (Sensores) {
+            var div = document.createElement('div');
+            var h4 = document.createElement('h4');
+            var button1 = document.createElement('button');
 
-        button1.classList.add('button_sensor');
-        div.classList.add('div_tipos_metricas');
+            button1.classList.add('button_sensor');
+            div.classList.add('div_tipos_metricas');
 
-        div.innerHTML = valor.map(item => item.idSensor);
-       
-        h4 = valor.map(item => item.nomeSensor);
+            div.innerHTML = valor.map(item => item.idSensor);
 
-        div.innerHTML = h4[i];
+            h4 = valor.map(item => item.nomeSensor);
 
-        divPrincipal.appendChild(div);
+            div.innerHTML = h4[i];
 
-        div.appendChild(button1);
-        
-    console.log(i)
+            divPrincipal.appendChild(div);
 
-    fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (resposta) {
-            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            resposta.reverse();
+            div.appendChild(button1);
 
-            for (var i = 0; i < resposta.length; i++) {
-                var item = resposta[i];
-                var medida = Number(item.lm35_temperatura);
-                var buttons = document.getElementsByClassName('button_sensor');
+            console.log(i)
 
-                for (var b = 0; b < buttons.length; b++) {
-                    var currentButton = buttons[b];
-                    var estiloButton = window.getComputedStyle(currentButton);
-                    var cor = estiloButton.backgroundColor;
-                    
-                    if (medida > 24) {
+            fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function (response) {
+              if (response.ok) {
+                response.json().then(function (resposta) {
+                  console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                  resposta.reverse();
+
+                  for (var i = 0; i < resposta.length; i++) {
+                    var item = resposta[i];
+                    var medida = Number(item.temperatura);
+                    var buttons = document.getElementsByClassName('button_sensor');
+
+                    for (var b = 0; b < buttons.length; b++) {
+                      var currentButton = buttons[b];
+                      var estiloButton = window.getComputedStyle(currentButton);
+                      var cor = estiloButton.backgroundColor;
+
+                      if (medida > 24) {
                         currentButton.style.backgroundColor = 'red';
-                    } else if (medida === 24) {
+                      } else if (medida === 24) {
                         currentButton.style.backgroundColor = 'yellow';
-                    } else if(medida < 24){
+                      } else if (medida < 24) {
                         currentButton.style.backgroundColor = 'green';
+                      }
+
                     }
-                  
+                    console.log(medida);
+                  }
+
+                });
+              } else {
+                console.error('Nenhum dado encontrado ou erro na API');
               }
-                console.log(medida);
-            }
-            
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-    }
-})
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
+            })
+              .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+              });
 
-      } else {
-        console.log('Impossível achar os dados');
-      }
-    }
-  })
-  .catch(erro => console.error(erro));
+          } else {
+            console.log('Impossível achar os dados');
+          }
+        }
+      })
+      .catch(erro => console.error(erro));
 
-  return false;
-}
-function FunctionTeste() {
-  alert('funcionou')
-}
+    return false;
+  }
+  function FunctionTeste() {
+    alert('funcionou')
+  }
 
   var sensores = JSON.parse(sessionStorage.SENSOR)
   console.log(sensores)
@@ -433,7 +433,7 @@ function FunctionTeste() {
               console.log(
                 "---------------------------------------------------------------"
               );
-            } 
+            }
             // else {
             //   // tirando e colocando valores no gráfico
             //   dados.labels.shift(); // apagar o primeiro
@@ -614,32 +614,37 @@ function FunctionTeste() {
     margin: 0;
     font-family: Poppins;
   }
-.button_sensor {
-  padding: 2%;
-  width: 90%;
-  height: 25px;
-  border: 1px solid black;
-  margin-top: 60%;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
+
+  .button_sensor {
+    padding: 2%;
+    width: 90%;
+    height: 25px;
+    border: 1px solid black;
+    margin-top: 60%;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 6px 5px 10px -6px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
 
-}.button_sensor:hover {
-  padding: 2%;
-  width: 90%;
-  height: 25px;
-  border: 1px solid black;
-  margin-top: 60%;
-  border-radius: 10px;
-  opacity: 0.8;
-}
-.button_sensor:focus {
-  background-color: black;
-  border: 0;
-}
-canvas {
+  }
+
+  .button_sensor:hover {
+    padding: 2%;
+    width: 90%;
+    height: 25px;
+    border: 1px solid black;
+    margin-top: 60%;
+    border-radius: 10px;
+    opacity: 0.8;
+  }
+
+  .button_sensor:focus {
+    background-color: black;
+    border: 0;
+  }
+
+  canvas {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;

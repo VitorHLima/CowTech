@@ -25,11 +25,11 @@ function publicar(req, res) {
     }
 }
 
-function buscarAquariosPorEmpresa(req, res) {
+function listarSensores(req, res) {
     var fazenda = req.body.fazendaServer;
     var curral = req.body.curralServer;
 
-    sensorModel.buscarAquariosPorEmpresa(fazenda, curral).then((resultado) => {
+    sensorModel.listarSensores(fazenda, curral).then((resultado) => {
         if (resultado.length >= 0) {
             res.status(200).json(resultado);
         } else {
@@ -58,5 +58,5 @@ function listar(req, res) {
 module.exports = {
     publicar,
     listar,
-    buscarAquariosPorEmpresa
+    listarSensores
 }
