@@ -84,11 +84,14 @@ insert into sensor values
 	(12,'Sensor 4',3);
     
     INSERT registro VALUES 
-(NULL, now(), 80, 29, 1), (NULL, now(), 69, 20, 2),(NULL, now(), 70, 25, 3), (NULL, now(), 80, 29, 4),
-(NULL, now(), 75, 24, 1), (NULL, now(), 87, 19, 2),(NULL, now(), 70, 26, 3), (NULL, now(), 65, 25, 4),
-(NULL, now(), 60, 23, 1), (NULL, now(), 30, 15, 2),(NULL, now(), 70, 28, 3), (NULL, now(), 44, 22, 4),
-						 (NULL, now(), 45, 20, 2),(NULL, now(), 70, 33, 3), (NULL, now(), 56, 18, 4),
-                         (NULL, now(), 45, 10, 2);
+(1, now(), 80, 29, 1), (1, now(), 69, 20, 2),(1, now(), 70, 25, 3), 
+(1, now(), 80, 29, 4),(2, now(), 75, 24, 1), (2, now(), 87, 19, 2),
+(2, now(), 70, 26, 3), (2, now(), 65, 25, 4), (3, now(), 60, 23, 1), 
+(3, now(), 30, 15, 2),(3, now(), 70, 28, 3), (3, now(), 44, 22, 4),
+(4, now(), 45, 20, 1),(4, now(), 70, 33, 2), (4, now(), 56, 18, 3), (5, now(), 45, 10, 4);
+					
+truncate table registro;
+                         
 -- selects
 SELECT * FROM empresa;
 SELECT * FROM EndFazenda;
