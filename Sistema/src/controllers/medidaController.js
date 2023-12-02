@@ -3,7 +3,8 @@ var medidaModel = require("../models/medidaModel");
 
 function buscarUltimasMedidas(req, res) {
     var fkSensor = req.params.fkSensor
-    medidaModel.buscarUltimasMedidas(fkSensor).then(function (resultado) {
+    var fkCurral = req.params.fkCurral
+    medidaModel.buscarUltimasMedidas(fkSensor, fkCurral).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -37,15 +38,13 @@ function buscarMedidasEmTempoReal(req, res) {
     });
 }
 
-function buscarMedidasSemanal(req, res) {
-
-    const limite_linhas = 7;
+function buscarMedidasMensal(req, res) {
 
     var fkSensor = req.params.fkSensor;
 
     console.log(`Recuperando as ultimas medidas`);
 
-    medidaModel.buscarMedidasSemanal(fkSensor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarMedidasMensal(fkSensor).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -61,6 +60,6 @@ function buscarMedidasSemanal(req, res) {
 
 module.exports = {
     buscarMedidasEmTempoReal,
-    buscarMedidasSemanal,
+    buscarMedidasMensal,
     buscarUltimasMedidas
 }
