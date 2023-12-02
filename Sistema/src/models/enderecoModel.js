@@ -8,8 +8,8 @@ function cadastrar(nome, logradouro, bairro, municipio, estado, cep, numero, emp
     return database.executar(instrucaoSql);
 }
 
-function listar() {
-    var query = `select * from endFazenda`;
+function listar(idUsuario) {
+    var query = `select * from endFazenda JOIN empresa ON idEndereco = fkEmpresa where idEmpresa = ${idUsuario}`;
 
     return database.executar(query);
 }

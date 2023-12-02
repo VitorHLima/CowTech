@@ -88,7 +88,7 @@
   console.log(fkSensor);
 
 
-  fetch("/currais/listar", {
+  fetch(`/currais/listar/`, {
     method: "GET",
   })
     .then(function (resposta) {
@@ -102,7 +102,7 @@
       console.log(`#ERRO: ${resposta}`);
     });
 
-  fetch("/enderecos/listar", {
+  fetch(`/enderecos/listar/${idEmpresa}`, {
     method: "GET",
   })
     .then(function (resposta) {
@@ -135,6 +135,7 @@
       .then(valor => {
 
         for (var i = 0; i < valor.length; i++) {
+          
           var divPrincipal = document.getElementById('div_titulo_grafico');
           if (Sensores) {
             var div = document.createElement('div');
@@ -157,7 +158,7 @@
             div.innerHTML += `<button class='button_sensor' onclick=obterDadosGrafico(${i + 1})></button`
             console.log(i)
 
-            fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function (response) {
+            fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function Teste(response) {
               if (response.ok) {
                 response.json().then(function (resposta) {
                   console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -187,13 +188,13 @@
                       currentButton.style.backgroundColor = 'green';
                     }
 
-                    if (medidaUmi >= 40 && medidaUmi <= 60) {
-                      currentButton.style.backgroundColor = 'green';
-                    } else if ((medidaUmi > 60 && medidaUmi <= 65) || (medidaUmi >= 35 && medidaUmi < 40)) {
-                      currentButton.style.backgroundColor = 'yellow';
-                    } else if (medidaUmi > 60 || medidaUmi < 40) {
-                      currentButton.style.backgroundColor = 'red';
-                    }
+                    // if (medidaUmi >= 40 && medidaUmi <= 60) {
+                    //   currentButton.style.backgroundColor = 'green';
+                    // } else if ((medidaUmi > 60 && medidaUmi <= 65)) {
+                    //   currentButton.style.backgroundColor = 'yellow';
+                    // } else if (medidaUmi > 60 || medidaUmi < 40) {
+                    //   currentButton.style.backgroundColor = 'red';
+                    // }
 
                     console.log(medidaTemp);
                     console.log(medidaUmi)
@@ -217,6 +218,7 @@
 
     return false;
   }
+  setInterval(Pesquisar(), 3000);
 
   var sensores = JSON.parse(sessionStorage.SENSOR)
   console.log(sensores)

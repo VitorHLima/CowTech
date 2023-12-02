@@ -299,14 +299,7 @@
       </div>
       <table id="table_fazenda">
         <tbody>
-          <tr id="tr_formulario">
-            <td id="td_id"><b>ID</b></td>
-            <td></td>
-            <td id="td_nome">Nome</td>
-            <td id="td_endereco" style="width: 100%; border: 1px solid black;">Endereço</td>
-            <td></td>
-            <td id="td_button"><button onclick="Remover()">-</button></td>
-          </tr>
+          
         </tbody>
       </table>
       <div id="div_button_adicionarFazenda">
@@ -344,14 +337,7 @@
       </div>
       <table id="table_funcionario">
         <tbody>
-          <tr id="tr_formulario">
-            <td id="td_id"><b>ID</b></td>
-            <td></td>
-            <td id="td_nome">Nome</td>
-            <td id="td_endereco" style="width: 100%; border: 1px solid black;">Endereço</td>
-            <td></td>
-            <td id="td_button"><button onclick="Remover()">-</button></td>
-          </tr>
+          
         </tbody>
       </table>
       <div id="div_button_adicionar">
@@ -421,9 +407,58 @@
 <script>
   // div_logo.innerHTML = sessionStorage.ID_EMPRESA
   var img = document.getElementById('img_sensor')
-  var idUsuario = sessionStorage.EMAIL_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
-  texto_cowtech.innerHTML = idUsuario
+  var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
+  texto_cowtech.innerHTML = idEmpresa
   
+  document.addEventListener("DOMContentLoaded", function () {
+  fetch(`/enderecos/listar/${idEmpresa}`, {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((enderecos) => {
+          enderecos.forEach((endFazenda) => {
+            table_fazenda.innerHTML += `
+            <tbody>
+          <tr id="tr_formulario">
+            <td id="td_id"><b>${endFazenda.idEndereco}</b></td>
+            <td></td>
+            <td id="td_nome">${endFazenda.nomeFazenda}</td>
+            <td id="td_endereco" style="width: 100%; border: 1px solid black;">${endFazenda.logradouro}</td>
+            <td></td>
+            <td id="td_button"><button onclick="Remover()">-</button></td>
+            <br>
+          </tr>
+        </tbody>`;
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  })
+    fetch("/currais/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((currais) => {
+          currais.forEach((curral) => {
+            table_funcionario.innerHTML += `
+            <td id="td_id"><b>${curral.idCurral}</b></td>
+            <td></td>
+            <td id="td_nome">${curral.nomeCurral}</td>
+            <td id="td_endereco" style="width: 100%; border: 1px solid black;">${curral.nomeFazenda}</td>
+            <td></td>
+            <td id="td_button"><button onclick="Remover()">-</button></td>
+         <br> `
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  
+
+
   function carregar() {
     listar();
     listarCurral();
@@ -440,7 +475,7 @@
     var nomeVar = input_nome_pessoa.value
     var enderecoVar = listaEnderecos.value
 
-    var idUsuario = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
+    var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
     var corpo = { //Aqui é a criação da variavel corpo, sendo um objeto, que o JSON consegue ler
       nomeServer: nomeVar, //Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
       enderecoServer: enderecoVar//Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
@@ -448,7 +483,7 @@
     if (nomeVar == '') {
       alert('Insira um nome válido')
     } else {
-      fetch(`/fazenda/publicar/${idUsuario}`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
+      fetch(`/fazenda/publicar/${idEmpresa}`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
         method: "POST", //Aqui é o tipo da requisição, se é POST OU GET, POST é para enviar dados
         headers: {
           "Content-Type": "application/json",// Aqui informa ao servidor como será enviado, será em JSON
@@ -489,7 +524,7 @@
   }
 
   function listar() {
-    fetch("/enderecos/listar", {
+    fetch(`/enderecos/listar/${idEmpresa}`, {
       method: "GET",
     })
       .then(function (resposta) {
@@ -511,7 +546,7 @@
       .then(function (resposta) {
         resposta.json().then((currais) => {
           currais.forEach((curral) => {
-            listaCurrais.innerHTML += `<option value='${curral.idCurral}'>${curral.nome}</option>`;
+            listaCurrais.innerHTML += `<option value='${curral.idCurral}'>${curral.nomeCurral}</option>`;
           });
         });
       })
@@ -560,7 +595,7 @@
 
 
   function Cadastrar_sensor() {
-    var idUsuario = sessionStorage.ID_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
+    var idEmpresa = sessionStorage.ID_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
     var nomeVar = input_nome_sensor.value
     var curralVar = listaCurrais.value
 
@@ -1056,9 +1091,9 @@
   }
 
   #pop_upFazenda {
-    width: 40%;
+    width: 35%;
     background-color: white;
-    height: 650px;
+    height: 600px;
     border: 2px solid black;
     display: none;
     position: absolute;
@@ -1089,7 +1124,7 @@
   }
 
   #pop_upFazenda input {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   #div_button_adicionarFazenda {

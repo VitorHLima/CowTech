@@ -12,7 +12,7 @@ router.get("/buscar", function (req, res) {
     enderecoController.buscarPorNomeFazenda(req, res);
 });
 
-router.get("/listar", function (req, res) {
+router.get("/listar/:idUsuario", function (req, res) {
     enderecoController.listar(req, res);
 });
 

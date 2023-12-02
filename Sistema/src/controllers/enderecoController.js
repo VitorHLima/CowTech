@@ -58,9 +58,15 @@ function buscarPorNomeFazenda(req, res) {
 }
 
 function listar(req, res) {
-    enderecoModel.listar().then((resultado) => {
-        res.status(200).json(resultado);
-    });
+    var idUsuario = req.params.idUsuario
+
+    if (idUsuario == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else {
+        enderecoModel.listar(idUsuario).then((resultado) => {
+            res.status(200).json(resultado);
+        });
+    }
 }
 
 module.exports = {
