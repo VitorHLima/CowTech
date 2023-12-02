@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(fkSensor) {
+function buscarUltimasMedidas(fkSensor, fkCurral) {
 
     instrucaoSql = ''
 
@@ -14,12 +14,14 @@ function buscarUltimasMedidas(fkSensor) {
                     where fk_aquario = ${dados}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT sensor.nomeSensor, registro.dht11_Umidade as umidade, 
-            registro.lm35_temperatura as temperatura, registro.dtAtual, date_format(registro.dtAtual, "%d/%m/%Y") as momento_grafico from Sensor 
-            JOIN registro ON fkSensor = idSensor where idSensor = ${fkSensor};
-        
-        
-        `;
+        instrucaoSql = `SELECT
+        lm35_temperatura AS temperatura,
+        dht11_umidade AS umidade,
+        dtAtual,
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor JOIN
+        curral ON sensor.fkCurral = curral.idCurral WHERE
+        fkSensor = ${fkSensor} and fkCurral = ${fkCurral} AND dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
+        idRegistro ASC;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -44,9 +46,14 @@ function buscarMedidasEmTempoReal(fkSensor) {
                     order by id desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT sensor.nomeSensor, registro.dht11_Umidade as umidade, 
-        registro.lm35_temperatura as temperatura, registro.dtAtual as momento_grafico from Sensor 
-        JOIN registro ON fkSensor = idSensor where idSensor = ${fkSensor};`;
+        instrucaoSql = `SELECT
+        lm35_temperatura AS temperatura,
+        dht11_umidade AS umidade,
+        dtAtual,
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor JOIN
+        curral ON sensor.fkCurral = curral.idCurral WHERE
+        fkSensor = ${fkSensor} and fkCurral = ${fkCurral} AND dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
+        idRegistro ASC;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -56,7 +63,7 @@ function buscarMedidasEmTempoReal(fkSensor) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasSemanal(idSensor, limite_linhas) {
+function buscarMedidasMensal(idSensor) {
 
     instrucaoSql = ''
 
@@ -66,16 +73,16 @@ function buscarMedidasSemanal(idSensor, limite_linhas) {
                         dtAtual,
                         DATE_FORMAT(dtAtual,'%d:%m:%Y') as momento_grafico
                     from registro
-                    where fkSensor = ${idSensor} and dtAtual between date_sub(now(), interval 7 day) and now()
-                    order by idRegistro asc limit ${limite_linhas};`;
+                    where fkSensor = ${idSensor} and dtAtual between date_sub(now(), interval 30 day) and now()
+                    order by idRegistro asc;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select 
         lm35_temperatura AS temperatura, dht11_Umidade as umidade,
                         dtAtual,
                         DATE_FORMAT(dtAtual,'%d:%m:%Y') as momento_grafico
                     from registro
-                    where fkSensor = ${idSensor} and dtAtual between date_sub(now(), interval 7 day) and now()
-                    order by idRegistro asc limit ${limite_linhas};`;
+                    where fkSensor = ${idSensor} and dtAtual between date_sub(now(), interval 30 day) and now()
+                    order by idRegistro asc;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -88,6 +95,6 @@ function buscarMedidasSemanal(idSensor, limite_linhas) {
 
 module.exports = {
     buscarMedidasEmTempoReal,
-    buscarMedidasSemanal,
+    buscarMedidasMensal,
     buscarUltimasMedidas
 }

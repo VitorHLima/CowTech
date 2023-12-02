@@ -423,7 +423,7 @@
   var img = document.getElementById('img_sensor')
   var idUsuario = sessionStorage.EMAIL_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
   texto_cowtech.innerHTML = idUsuario
-  
+
   function carregar() {
     listar();
     listarCurral();
@@ -530,14 +530,14 @@
   function Adicionar() {
     pop_up.style.display = "flex";
     button_adicionar.style.display = "none";
-    body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+    // body_id.style.background = `rgb(0, 0, 0, 0.800)`;
     body_id.style.opacity = 1;
     button_adicionar_sensor.style.display = `none`
   }
   function AdicionarFazenda() {
     pop_upFazenda.style.display = "flex";
     button_adicionarFazenda.style.display = "none";
-    body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+    // body_id.style.background = `rgb(0, 0, 0, 0.800)`;
     body_id.style.opacity = 1;
   }
   function Sair() {

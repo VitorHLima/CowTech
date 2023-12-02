@@ -11,8 +11,8 @@ router.get("/tempo-real/:fkSensor", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 });
 
-router.get("/semanal/:fkSensor", function (req, res) {
-    medidaController.buscarMedidasSemanal(req, res);
+router.get("/mensal/:fkSensor", function (req, res) {
+    medidaController.buscarMedidasMensal(req, res);
 });
 
 module.exports = router;

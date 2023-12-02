@@ -110,10 +110,6 @@ AS e JOIN curral AS c ON idEndereco = fkEndFazenda JOIN sensor AS s ON fkCurral 
 
 SELECT * FROM curral JOIN EndFazenda ON idEndereco = fkEndFazenda;
 
-SELECT Sensor.nomeSensor, curral.nomeCurral, endFazenda.nomeFazenda FROM Sensor JOIN curral ON fkCurral = idCurral 
-JOIN endFazenda ON fkEndFazenda = idEndereco 
-where endFazenda.idEndereco = 1 AND curral.idCurral = 3;
-
 SELECT idSensor, nomeSensor from Sensor;
 
 SELECT sensor.nomeSensor, registro.dht11_Umidade, 
@@ -131,13 +127,29 @@ JOIN sensor ON fkCurral WHERE idEmpresa = 1 ORDER BY nomeCurral DESC;
 SELECT sensor.idSensor, curral.nomeCurral, endFazenda.nomeFazenda from curral join endFazenda on fkEndFazenda = idEndereco 
 join sensor on fkCurral = idCurral;
 
+select lm35_temperatura as temperatura, dht11_umidade as umidade, dtAtual, date_format(dtAtual,'%d:%m:%Y') as momento_grafico from registro join
+sensor on fkCurral = idCurral where fkSensor = 1 and dtAtual between date_sub(now(), interval 30 day) and now()
+                    order by idRegistro asc;
+
 select 
         lm35_temperatura AS temperatura, dht11_Umidade as umidade,
                         dtAtual,
                         DATE_FORMAT(dtAtual,'%d:%m:%Y') as momento_grafico
                     from registro
-                    where fkSensor = 1 and dtAtual between date_sub(now(), interval 7 day) and now()
-                    order by idRegistro asc limit 7;
+                    where fkSensor = 1 and dtAtual between date_sub(now(), interval 30 day) and now()
+                    order by idRegistro asc;
+
+
+SELECT
+    lm35_temperatura AS temperatura,
+    dht11_umidade AS umidade,
+    dtAtual,
+    DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor JOIN
+    curral ON sensor.fkCurral = curral.idCurral WHERE
+    fkSensor = 4 and fkCurral = 2 AND dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
+    idRegistro ASC;
+
+
                     
                       INSERT registro VALUES 
 (null, '2023-11-28', 30, 10, 1), (null, '2023-11-29', 40, 15, 1),(null, '2023-11-30', 50, 20, 1), (null, '2023-12-01', 60, 25, 1), 
