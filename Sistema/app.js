@@ -34,6 +34,12 @@ app.use(express.static(path.join(__dirname, "paginaGrafico")));
 
 app.use(cors());
 
+app.use(cors({
+    origin: 'http://localhost:3333',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'accesskey'],
+}));
+
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/enderecos", enderecoRouter);

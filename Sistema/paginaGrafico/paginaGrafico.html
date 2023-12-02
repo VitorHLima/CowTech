@@ -114,6 +114,33 @@
     })
 
 
+  function alertaEmail() {
+
+    fetch("https://api.staticforms.xyz/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        accessKey: "b48abe4c-d49f-49f6-a9ca-31f5b675cd08",
+        name: "Vitor",
+        email: "bruno.matos@sptech.school",
+        message: "ta ruim",
+        titulo: "teste1"
+      }),
+    }).then(function (resposta) {
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        console.log("FUNCIONOU!!!!!");
+      }
+    })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+
 
   function Pesquisar() {
     div_titulo_grafico.innerHTML = ''
@@ -135,7 +162,7 @@
       .then(valor => {
 
         for (var i = 0; i < valor.length; i++) {
-          
+
           var divPrincipal = document.getElementById('div_titulo_grafico');
           if (Sensores) {
             var div = document.createElement('div');
@@ -182,6 +209,7 @@
 
                     if (medidaTemp > 24) {
                       currentButton.style.backgroundColor = 'red';
+                      alertaEmail();
                     } else if (medidaTemp == 24) {
                       currentButton.style.backgroundColor = 'yellow';
                     } else if (medidaTemp < 24) {
