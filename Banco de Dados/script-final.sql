@@ -131,4 +131,17 @@ JOIN sensor ON fkCurral WHERE idEmpresa = 1 ORDER BY nomeCurral DESC;
 SELECT sensor.idSensor, curral.nomeCurral, endFazenda.nomeFazenda from curral join endFazenda on fkEndFazenda = idEndereco 
 join sensor on fkCurral = idCurral;
 
+select 
+        lm35_temperatura AS temperatura, dht11_Umidade as umidade,
+                        dtAtual,
+                        DATE_FORMAT(dtAtual,'%d:%m:%Y') as momento_grafico
+                    from registro
+                    where fkSensor = 1 and dtAtual between date_sub(now(), interval 7 day) and now()
+                    order by idRegistro asc limit 7;
+                    
+                      INSERT registro VALUES 
+(null, '2023-11-28', 30, 10, 1), (null, '2023-11-29', 40, 15, 1),(null, '2023-11-30', 50, 20, 1), (null, '2023-12-01', 60, 25, 1), 
+(null, '2023-12-02', 70, 30, 1), 
+(null, '2023-11-27', 35, 29, 1), (null, '2023-11-26', 65, 27, 1), (null, '2023-11-25', 55, 23, 1);
+
     
