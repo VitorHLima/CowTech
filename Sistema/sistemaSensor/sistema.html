@@ -407,7 +407,6 @@
 <script>
   // div_logo.innerHTML = sessionStorage.ID_EMPRESA
   var img = document.getElementById('img_sensor')
-<<<<<<< HEAD
   var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
   texto_cowtech.innerHTML = idEmpresa
   
@@ -459,22 +458,13 @@
       });
   
 
-=======
   var idUsuario = sessionStorage.EMAIL_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
   texto_cowtech.innerHTML = idUsuario
->>>>>>> 509ee98126a3520f309626620b859c8a13605858
 
   function carregar() {
     listar();
     listarCurral();
   }
-
-
-  function cadastrarFazenda() {
-    var cep = Number(input_cep.value);
-    var logradouro
-  }
-
 
   function Cadastrar() {
     var nomeVar = input_nome_pessoa.value
@@ -583,7 +573,7 @@
   function Sair() {
     pop_up.style.display = "none";
     button_adicionar.style.display = "inline";
-    document.body.style.opacity = 1;
+    
     body_id.style.backgroundColor = `white`;
     button_adicionar_sensor.style.display = `flex`
   }
@@ -591,7 +581,7 @@
   function SairFazenda() {
     pop_upFazenda.style.display = "none";
     button_adicionarFazenda.style.display = "inline";
-    document.body.style.opacity = 1;
+    
     body_id.style.backgroundColor = `white`;
     button_adicionar_sensor.style.display = `flex`
   }
@@ -623,7 +613,7 @@
           alert("Curral cadastrado");//Vai exibir para o usuario o resultado positivo
           pop_up_sensor.style.display = "none";
           button_adicionar.style.display = "inline";
-          document.body.style.opacity = 1;
+          
           body_id.style.backgroundColor = `white`;
           button_adicionar_sensor.style.display = 'inline'
           Sair()// Aqui está transferindo o usuario para outra pagina
@@ -648,14 +638,14 @@
 
   function Sair_sensor() {
     pop_up_sensor.style.display = "none";
-    document.body.style.opacity = 1;
+    
     body_id.style.backgroundColor = `white`;
     button_adicionar.style.display = "inline";
     button_adicionar_sensor.style.display = 'inline';
   }
   function Adicionar_sensor() {
     pop_up_sensor.style.display = 'flex';
-    body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+  
     body_id.style.opacity = 1;
     button_adicionar.style.display = "none";
     button_adicionar_sensor.style.display = 'none';
@@ -682,7 +672,7 @@
 
     if (dadoConcrecto > 24) {
       Alerta()
-      body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+    
       principal_alerta.style.display = 'flex'
       principal_alerta.style.position = 'absolute'
       img_sensor.style.display = 'none'
@@ -698,7 +688,7 @@
 
     if (dadoConcrecto < 4) {
       Alerta()
-      body_id.style.background = `rgb(0, 0, 0, 0.800)`;
+    
       principal_alerta.style.display = 'flex'
       principal_alerta.style.position = 'absolute';
       img_sensor.style.display = 'none'

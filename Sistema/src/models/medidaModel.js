@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(fkSensor, fkCurral) {
+function buscarUltimasMedidas(i) {
 
     instrucaoSql = ''
 
@@ -19,8 +19,7 @@ function buscarUltimasMedidas(fkSensor, fkCurral) {
         dht11_umidade AS umidade,
         dtAtual,
         DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor JOIN
-        curral ON sensor.fkCurral = curral.idCurral WHERE
-        fkSensor = ${fkSensor} and fkCurral = ${fkCurral} AND dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
+        curral ON sensor.fkCurral = curral.idCurral where idSensor = ${i} AND dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
         idRegistro ASC;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
