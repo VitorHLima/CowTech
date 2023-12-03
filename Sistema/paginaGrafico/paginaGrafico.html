@@ -124,7 +124,7 @@
       body: JSON.stringify({
         accessKey: "b48abe4c-d49f-49f6-a9ca-31f5b675cd08",
         name: "Vitor",
-        email: "bruno.matos@sptech.school",
+        email: "vitorhugolima24@outlook.com",
         message: "ta ruim",
         titulo: "teste1"
       }),
@@ -140,6 +140,20 @@
       });
   }
 
+  function alertaSms() {
+    app.get('/', async (req, res) => {
+      const url = "https://api.iagentesms.com.br/webservices/http.php?metodo=envio&usuario=BrunoViniciussenha=Brunolink123@&celular=11999590915&mensagem=teste+integracao+http";
+
+      await fetch(url).then((response) => response.text()).then((text) => {
+        if (text === "OK") {
+          res.send("mensagem enviada com sucesso")
+          console.log("SMS FOI");
+        }
+        console.log("SMS NÃO FOI");
+        res.send("ERRO: mensagem não enviada com sucesso")
+      })
+    });
+  }
 
 
   function Pesquisar() {
@@ -210,6 +224,7 @@
                     if (medidaTemp > 24) {
                       currentButton.style.backgroundColor = 'red';
                       alertaEmail();
+                      alertaSms();
                     } else if (medidaTemp == 24) {
                       currentButton.style.backgroundColor = 'yellow';
                     } else if (medidaTemp < 24) {
