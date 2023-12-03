@@ -140,20 +140,71 @@
       });
   }
 
-  function alertaSms() {
-    app.get('/', async (req, res) => {
-      const url = "https://api.iagentesms.com.br/webservices/http.php?metodo=envio&usuario=BrunoViniciussenha=Brunolink123@&celular=11999590915&mensagem=teste+integracao+http";
+  // async function alertaSms() {
 
-      await fetch(url).then((response) => response.text()).then((text) => {
-        if (text === "OK") {
-          res.send("mensagem enviada com sucesso")
-          console.log("SMS FOI");
-        }
-        console.log("SMS NÃO FOI");
-        res.send("ERRO: mensagem não enviada com sucesso")
-      })
-    });
-  }
+  //   try {
+  //     const response = await fetch(url, options);
+  //     const text = await response.text();
+
+  //     if (text === "OK") {
+  //       console.log("SMS FOI");
+  //       return "mensagem enviada com sucesso";
+  //     } else {
+  //       console.log("SMS NÃO FOI");
+  //       return "ERRO: mensagem não enviada com sucesso";
+  //     }
+  //   } catch (error) {
+  //     console.error("Erro ao enviar SMS:", error);
+  //     return "ERRO: mensagem não enviada com sucesso";
+  //   }
+  // }
+
+  // async function alertaSms() {
+  //   const url = "https://api.iagentesms.com.br/webservices/http.php?metodo=envio&usuario=brunoviniciuslink7@gmail.com&senha=Brunolink123@&celular=11999590915&mensagem=teste+integracao+http";
+
+  //   const headers = {
+  //     "Content-Type": "application/json",
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+  //   };
+
+  //   const options = {
+  //     method: "GET", 
+  //     headers: headers,
+  //   };
+
+  //   try {
+  //     const response = await fetch(url, options);
+  //     const text = await response.text();
+
+  //     if (text === "OK") {
+  //       console.log("SMS FOI");
+  //       return "mensagem enviada com sucesso";
+  //     } else {
+  //       console.log("SMS NÃO FOI");
+  //       return "ERRO: mensagem não enviada com sucesso";
+  //     }
+  //   } catch (error) {
+  //     console.error("Erro ao enviar SMS:", error);
+  //     return "ERRO: mensagem não enviada com sucesso";
+  //   }
+  // }
+
+  // async function alertaSms() {
+
+  //   const url = "https://api.iagentesms.com.br/webservices/http.php?metodo=envio&usuario=brunoviniciuslink7@gmail.comsenha=Brunolink123@&celular=11999590915&mensagem=teste+integracao+http";
+
+  //   await fetch(url).then((response) => response.text()).then((text) => {
+  //     if (text === "OK") {
+  //       res.send("mensagem enviada com sucesso")
+  //       console.log("SMS FOI");
+  //     }
+  //     console.log("SMS NÃO FOI");
+  //     res.send("ERRO: mensagem não enviada com sucesso")
+  //   })
+
+  // }
+
 
 
   function Pesquisar() {
@@ -223,8 +274,8 @@
 
                     if (medidaTemp > 24) {
                       currentButton.style.backgroundColor = 'red';
-                      alertaEmail();
-                      alertaSms();
+                      // alertaEmail();
+                      // alertaSms();
                     } else if (medidaTemp == 24) {
                       currentButton.style.backgroundColor = 'yellow';
                     } else if (medidaTemp < 24) {
