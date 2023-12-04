@@ -241,7 +241,7 @@
           </button>
         </div>
         <div id="div_formulario">
-          <form id="formulario" action="#divisao_funcao_funcionario">
+
             <h4>Nome</h4>
             <input type="text" id="input_nome_sensor" placeholder="Ex: Frizza" /><br />
             <h4>Curral</h4>
@@ -251,7 +251,7 @@
             <button class="button_sensor" onclick="Cadastrar_sensor()">Cadastrar</button>
             <br><br>
         </div><br>
-        </form>
+       
       </div>
     </div>
   </div>
@@ -270,11 +270,11 @@
           </button>
         </div>
         <div id="div_formularioFazenda">
-          <form id="formularioFazenda" action="#divisao_funcao_fazenda">
+      
             <h4>Nome da fazenda</h4>
             <input id="input_fazenda" placeholder="Ex: Fazenda boa vista" /><br />
 
-            <h4>Endereço</h4>
+            <h4>Endereço</h4><br>
             <label for="input_cep">CEP</label>
             <input id="input_cep" />
 
@@ -294,7 +294,7 @@
             <input id="input_numero" />
 
             <button onclick="cadastrarFazenda()">Cadastrar</button>
-          </form>
+      
         </div>
       </div>
       <table id="table_fazenda">
@@ -322,17 +322,17 @@
             <img src="img/sair.png" id="img_sair" alt="" />
           </button>
         </div>
-        <div id="div_formulario">
-          <form id="formulario" action="#divisao_funcao_funcionario">
+        <div id="div_formulario" style="align-items: left; text-align: left;">
+   
             <h4>Nome do Curral</h4>
             <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
 
             <h4>Endereço</h4>
-            <select name="enderecos" id="listaEnderecos">
+            <select name="enderecos" id="listaEnderecos" style=" width: 70%;">
               <option selected>Selecione um Endereço</option>
             </select><br>
-            <button onclick="Cadastrar()">Cadastrar</button>
-          </form>
+            <button onclick="Cadastrar()" style="background-color: black; color: white; padding: 0.5%; margin-top: 2%s;">Cadastrar</button>
+          
         </div>
       </div>
       <table id="table_funcionario">
@@ -478,7 +478,7 @@
     if (nomeVar == '') {
       alert('Insira um nome válido')
     } else {
-      fetch(`/fazenda/publicar/${idEmpresa}`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
+      fetch(`/currais/cadastrar`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
         method: "POST", //Aqui é o tipo da requisição, se é POST OU GET, POST é para enviar dados
         headers: {
           "Content-Type": "application/json",// Aqui informa ao servidor como será enviado, será em JSON
@@ -535,7 +535,7 @@
   }
 
   function listarCurral() {
-    fetch("/currais/listar", {
+    fetch(`/currais/listar/`, {
       method: "GET",
     })
       .then(function (resposta) {
@@ -784,7 +784,7 @@
     console.log(empresaVar);
 
     // Enviando o valor da nova input
-    fetch("/enderecos/cadastrar", {
+    fetch(`/enderecos/cadastrar/${idEmpresa}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -798,8 +798,7 @@
         cepServer: cep,
         bairroServer: bairro,
         estadoServer: estado,
-        numeroServer: numero,
-        empresaServer: empresaVar
+        numeroServer: numero
       }),
     })
       .then(function (resposta) {
@@ -864,6 +863,22 @@
   // };
 </script>
 <style>
+  #div_formulario input {
+    width: 70%;
+    border-radius: 4px;
+    padding: 2px;
+  }
+  #div_formulario select {
+    width: 70%;
+  }
+  #div_formulario button {
+    padding: 1%;
+    width: 40%;
+    border-radius: 4px;
+  }
+  #div_formulario {
+    padding:  0 0 0 5% !important;
+  }
   * {
     padding: 0;
     margin: 0;
@@ -1088,7 +1103,7 @@
   #pop_upFazenda {
     width: 35%;
     background-color: white;
-    height: 600px;
+    height: 570px;
     border: 2px solid black;
     display: none;
     position: absolute;
@@ -1102,9 +1117,20 @@
     height: 70%;
     display: flex;
     flex-direction: column;
-    padding: 2%;
+    padding: 0 0 0 4%;
     align-items: left;
+    text-align: left;
     justify-content: left;
+  }
+  #div_formularioFazenda input{
+    border-radius: 3px !important;
+  }
+  #div_formularioFazenda button {
+    width: 40%;
+    margin-top: 4%;
+    background-color: black;
+    color: white;
+    padding: 0.5%;
   }
 
   #formularioFazenda {

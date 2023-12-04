@@ -5,7 +5,13 @@ function listar() {
 
     return database.executar(query);
 }
+function publicar(nome, endereco) {
 
+    var instrucaoSql = `insert into curral(nomeCurral, fkEndFazenda) values ('${nome}',${endereco})`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 function buscarPorNomeCurral(nome) {
     var query = `select * from curral where nomeCurral = '${nome}'`;
 
@@ -14,5 +20,6 @@ function buscarPorNomeCurral(nome) {
 
 module.exports = {
     listar,
-    buscarPorNomeCurral
+    buscarPorNomeCurral,
+    publicar
 };    

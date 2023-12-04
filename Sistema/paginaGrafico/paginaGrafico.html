@@ -212,7 +212,6 @@
     var fazendaVar = select_fazenda.value;
     var curralVar = listaCurrais.value;
 
-
     fetch("/sensores/mostrar/", {
       method: "POST",
       headers: {
@@ -227,7 +226,7 @@
       .then(valor => {
 
         for (var i = 0; i < valor.length; i++) {
-
+          console.log(valor)
           var divPrincipal = document.getElementById('div_titulo_grafico');
           if (Sensores) {
             var div = document.createElement('div');
@@ -241,15 +240,14 @@
 
             h4 = valor.map(item => item.nomeSensor);
 
-            div.innerHTML += h4[i];
+            div.innerHTML = h4[i];
 
             divPrincipal.appendChild(div);
 
             // div.appendChild(button1);
 
             div.innerHTML += `<button class='button_sensor' onclick=obterDadosGrafico(${i + 1})></button`
-            console.log(i)
-
+    
             fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function Teste(response) {
               if (response.ok) {
                 response.json().then(function (resposta) {
@@ -258,14 +256,14 @@
 
                   var temperatura = resposta.map(item => Number(item.temperatura));
                   var umidade = resposta.map(item => Number(item.umidade));
-                  console.log(resposta)
+    
                   var buttons = document.getElementsByClassName('button_sensor');
 
-                  for (var b = 0; b < buttons.length; b++) {
+                  for (var b = 0; b < buttons.length +1; b++) {
                     var currentButton = buttons[b];
                     var estiloButton = window.getComputedStyle(currentButton);
                     var cor = estiloButton.backgroundColor;
-
+                    console.log(buttons)
                     var medidaTemp = temperatura[b];
                     var medidaUmi = umidade[b];
 

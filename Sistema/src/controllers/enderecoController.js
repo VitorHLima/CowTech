@@ -9,7 +9,7 @@ function cadastrar(req, res) {
     var bairro = req.body.bairroServer;
     var numero = req.body.numeroServer;
     var estado = req.body.estadoServer;
-    var empresaId = req.body.empresaServer;
+    var empresaId = req.params.idEmpresa;
 
     // Faça as validações dos valores
     if (logradouro == undefined) {

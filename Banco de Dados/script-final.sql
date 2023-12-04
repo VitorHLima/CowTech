@@ -55,7 +55,7 @@ primary key (fkSensor,idRegistro)
 )auto_increment = 1000;
 
 -- Inserção de Dados
-
+delete FROM endFazenda where idEndereco = 5;
 
 insert into empresa values
 	(null,'01234567891234','Etiel','11','912345678','etiel@sptech.com','cowTech_123');
@@ -93,6 +93,16 @@ insert into sensor values
 truncate table registro;
                          
 -- selects
+SELECT * FROM sensor JOIN Curral ON idCurral = fkCurral;
+
+SELECT
+        lm35_temperatura AS temperatura,
+        dht11_umidade AS umidade,
+        dtAtual,
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor JOIN
+        curral ON sensor.fkCurral = curral.idCurral and dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
+        idRegistro ASC;
+
 SELECT * FROM empresa;
 SELECT * FROM EndFazenda;
 SELECT * FROM curral;
