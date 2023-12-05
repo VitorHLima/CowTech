@@ -252,13 +252,15 @@
 
       <div class="divisao_suporte">
         <div class="contatoSuporte">
-          <h5>Nome</h5> <input id="ipt_nomeSuporte"> <br> <br>
-          <h5>E-mail</h5> <input id="ipt_emailSuporte" type="email"> <br> <br>
-          <h5>Telefone</h5> <input id="ipt_telefoneSuporte"> <br> <br>
-          <h5>Assunto</h5> <input id="ipt_assuntoSuporte"> <br> <br>
-          <h5>Descrição</h5> <input id="ipt_descricaoSuporte" class="ipt_descricao"> <br> <br>
+          <form action="https://formspree.io/f/xbjvvnna" method="POST">
+          <h5>Nome</h5> <input id="ipt_nomeSuporte" name="name"> <br> <br>
+          <h5>E-mail</h5> <input id="ipt_emailSuporte" type="email" name="email"> <br> <br>
+          <h5>Telefone</h5> <input id="ipt_telefoneSuporte" name="phone"> <br> <br>
+          <h5>Assunto</h5> <input id="ipt_assuntoSuporte" name="assunto"> <br> <br>
+          <h5>Descrição</h5> <input id="ipt_descricaoSuporte" name="message" class="ipt_descricao"> <br> <br>
           <div id="div_botaoSuporte">
-            <button class="botaoEnviarSuporte" onclick="Suporte()"> Enviar </button>
+            <button class="botaoEnviarSuporte" type="submit" onclick="Suporte()"> Enviar </button>
+            </form>
           </div>
         </div>
 
@@ -307,7 +309,7 @@
         <div class="titulo_contatoFooter">Contato</div>
         <div class="texto_ContatoFooter">
           Telefone: (11) 99999-9999
-          cowtechcompany@gmail.com <br>
+          cowtech2023suporte@gmail.com <br>
           <div class="copyright">@copyright Cow Tech 2023</div>
         </div>
       </div>
@@ -342,17 +344,18 @@
 
 
 <script>
-  function Suporte() {
-    var nome = ipt_nomeSuporte.value
-    var email = ipt_emailSuporte.value
-    var telefone = ipt_telefoneSuporte.value
-    var assunto = ipt_assuntoSuporte.value
-    var descricao = ipt_descricaoSuporte.value
+  //  function Suporte() {
+  //   var nome = ipt_nomeSuporte.value
+  //   var email = ipt_emailSuporte.value
+  //   var telefone = ipt_telefoneSuporte.value
+  //   var assunto = ipt_assuntoSuporte.value
+  //   var descricao = ipt_descricaoSuporte.value
+  //   var form = document.getElementById("formulario");
 
-    if (nome == '' || email == '' || telefone == '' || assunto == '' || descricao == '') {
-      alert('Insira todos os dados do formulario!')
-    } else {
-      alert('Email enviado!')
-    }
-  }
+  //   if (nome == '' || email == '' || telefone == '' || assunto == '' || descricao == '') {
+  //     alert('Insira todos os dados do formulario!')
+  //   } else {
+  //     alert('Email enviado!')
+  //   }
+  // }
 </script>

@@ -325,14 +325,13 @@
         <div id="div_formulario" style="align-items: left; text-align: left;">
    
             <h4>Nome do Curral</h4>
-            <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
+            <input type="text" id="input_nome_curral" placeholder="Ex: Fazenda boa vista" /><br />
 
             <h4>Endereço</h4>
             <select name="enderecos" id="listaEnderecos" style=" width: 70%;">
               <option selected>Selecione um Endereço</option>
             </select><br>
-            <button onclick="Cadastrar()" style="background-color: black; color: white; padding: 0.5%; margin-top: 2%s;">Cadastrar</button>
-          
+            <button onclick="Cadastrar()" style="background-color: black; color: white; padding: 0.5%; margin-top: 2%;">Cadastrar</button>
         </div>
       </div>
       <table id="table_funcionario">
@@ -404,19 +403,20 @@
 </body>
 
 </html>
-<script>
+<script defer>
   // div_logo.innerHTML = sessionStorage.ID_EMPRESA
   var img = document.getElementById('img_sensor')
   var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
   texto_cowtech.innerHTML = idEmpresa
-  
+
   document.addEventListener("DOMContentLoaded", function () {
   fetch(`/enderecos/listar/${idEmpresa}`, {
       method: "GET",
     })
       .then(function (resposta) {
         resposta.json().then((enderecos) => {
-          enderecos.forEach((endFazenda) => {
+          console.log(enderecos)
+          enderecos.forEach(endFazenda => {
             table_fazenda.innerHTML += `
             <tbody>
           <tr id="tr_formulario">
@@ -429,14 +429,14 @@
             <br>
           </tr>
         </tbody>`;
-          });
+          })
         });
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
   })
-    fetch("/currais/listar", {
+    fetch("/currais/listar/", {
       method: "GET",
     })
       .then(function (resposta) {
@@ -457,7 +457,7 @@
         console.log(`#ERRO: ${resposta}`);
       });
   
-
+    
   var idUsuario = sessionStorage.EMAIL_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
   texto_cowtech.innerHTML = idUsuario
 
@@ -466,57 +466,8 @@
     listarCurral();
   }
 
-  function Cadastrar() {
-    var nomeVar = input_nome_pessoa.value
-    var enderecoVar = listaEnderecos.value
+  
 
-    var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
-    var corpo = { //Aqui é a criação da variavel corpo, sendo um objeto, que o JSON consegue ler
-      nomeServer: nomeVar, //Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
-      enderecoServer: enderecoVar//Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
-    };
-    if (nomeVar == '') {
-      alert('Insira um nome válido')
-    } else {
-      fetch(`/currais/cadastrar`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
-        method: "POST", //Aqui é o tipo da requisição, se é POST OU GET, POST é para enviar dados
-        headers: {
-          "Content-Type": "application/json",// Aqui informa ao servidor como será enviado, será em JSON
-        },
-        body: JSON.stringify(corpo), //Aqui é o tipo dos dados que vão mandar, transformou o objeto corpo lá em cima, por um JSON, que vai ser recebido com o body na pagina controller
-      })
-        .then(function (resposta) {// Aqui é ele vai tentar mandar os dados pegos lá em cima, com o parametro de resposta para pegar se é uma resposta postiviva ou negativa vindo do servidor
-          console.log("resposta: ", resposta);//Aqui ele vai exibir a resposta do servidor
-
-          if (resposta.ok) { //Se a resposta for ok, ele vai cadastrar a historia com sucesso
-            alert("Curral cadastrado");//Vai exibir para o usuario o resultado positivo
-            table_funcionario.innerHTML += `<br><tbody>
-          <tr id="tr_formulario">
-            <td id="td_id"><b>ID</b></td>
-            <td></td>
-            <td id="td_nome">${nome}</td>
-            <td id="td_endereco">${endereco}</td>
-            <td></td>
-            <td id="td_button"><button>-</button></td>
-          </tr>`
-            Sair()// Aqui está transferindo o usuario para outra pagina
-          } else if (resposta.status == 404) {//Se a resposta for o erro 404, que pode ser que o servidor caiu ou não funcionou a requisição
-            window.alert("Deu 404!");//Aqui ele está exibindo um alerta na pagina, deu 404!
-          } else {//Senão for o erro 404
-            throw ( //Aqui ele está lançando uma mensagem caso não seja o erro acima
-              "Houve um erro ao tentar realizar a postagem! Código da resposta: " +//Aqui é respota que vai ser lançada
-              resposta.status// Aqui é a resposta e os status daquela resposta
-            );
-          }
-        })
-        .catch(function (resposta) { // Aqui ele vai pegar o erro, e com o paramentro seria a informação daquele erro
-          console.log(`#ERRO: ${resposta}`);//Está exibindo o erro
-        });
-
-      return false;//Está retornando falso
-    }
-
-  }
 
   function listar() {
     fetch(`/enderecos/listar/${idEmpresa}`, {
@@ -610,12 +561,11 @@
         console.log("resposta: ", resposta);//Aqui ele vai exibir a resposta do servidor
 
         if (resposta.ok) { //Se a resposta for ok, ele vai cadastrar a historia com sucesso
-          alert("Curral cadastrado");//Vai exibir para o usuario o resultado positivo
+          alert("Sensor cadastrado");//Vai exibir para o usuario o resultado positivo
           pop_up_sensor.style.display = "none";
-          button_adicionar.style.display = "inline";
           
-          body_id.style.backgroundColor = `white`;
           button_adicionar_sensor.style.display = 'inline'
+          window.location = 'sistema.html'
           Sair()// Aqui está transferindo o usuario para outra pagina
         } else if (resposta.status == 404) {//Se a resposta for o erro 404, que pode ser que o servidor caiu ou não funcionou a requisição
           alert("Deu 404!");//Aqui ele está exibindo um alerta na pagina, deu 404!
@@ -736,6 +686,38 @@
     h2_dht11.style.display = 'flex'
   }
 
+  function Cadastrar() {
+    var curralVar = listaEnderecos.value
+    var nomeVar = input_nome_curral.value
+
+    var corpo = {
+      nomeServer: nomeVar,
+      curralServer: curralVar
+    }
+
+    fetch(`/currais/cadastrar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(corpo),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          console.log("Curral cadastrado com sucesso");
+          window.location = 'sistema.html'
+          Sair()
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+      });
+  }
 
   function cadastrarFazenda() {
     var nome = input_fazenda.value;
@@ -745,7 +727,7 @@
     var municipio = input_municipio.value;
     var estado = input_estado.value;
     var numero = input_numero.value;
-    var empresaVar = sessionStorage.ID_EMPRESA
+    var idEmpresa = sessionStorage.ID_EMPRESA
 
     if (logradouro == "") {
       "(Digite um valor no campo logradouro)";
@@ -775,13 +757,11 @@
       "(Digite um valor no campo nome)";
 
       return false;
-    } else if (empresaVar == "") {
+    } else if (idEmpresa == "") {
       "(Escolha uma empresa)";
 
       return false;
     }
-
-    console.log(empresaVar);
 
     // Enviando o valor da nova input
     fetch(`/enderecos/cadastrar/${idEmpresa}`, {
@@ -806,7 +786,8 @@
 
         if (resposta.ok) {
           console.log("Cadastro realizado com sucesso! Redirecionando para tela de login...");
-
+          window.location = 'sistema.html'
+          Sair()
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }

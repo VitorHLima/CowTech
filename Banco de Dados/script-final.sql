@@ -29,6 +29,7 @@ fkEmpresa int,
 foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
+
 create table curral(
 idCurral int primary key auto_increment,
 nomeCurral varchar(45),
@@ -57,13 +58,16 @@ primary key (fkSensor,idRegistro)
 -- Inserção de Dados
 delete FROM endFazenda where idEndereco = 5;
 
+SELECT * FROM Curral JOIN endFazenda ON idEndereco;
+
 insert into empresa values
 	(null,'01234567891234','Etiel','11','912345678','etiel@sptech.com','cowTech_123');
     
+    SELECT * FROM Curral JOIN endFazenda ON idEndereco where idEmpresa = 1;
+
 insert into endFazenda values
 	(null,'FrezzaLaticinios','Rua Abobrinha','Chacaras Leguminosas','Hortifrut','Acre','69912345',678,1);
     
-
 insert into curral values
 	(null,'Galpão Sul',1),
 	(null,'Galpão Norte',1),
@@ -102,6 +106,8 @@ SELECT
         DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor JOIN
         curral ON sensor.fkCurral = curral.idCurral and dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
         idRegistro ASC;
+        
+select * from endFazenda JOIN empresa ON idEndereco where idEmpresa = 1;
 
 SELECT * FROM empresa;
 SELECT * FROM EndFazenda;

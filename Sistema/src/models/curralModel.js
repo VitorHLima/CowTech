@@ -1,13 +1,17 @@
 var database = require("../database/config")
 
 function listar() {
-    var query = `SELECT * FROM Curral JOIN endFazenda ON idEndereco`;
+    var query = `SELECT DISTINCT c.idCurral, c.nomeCurral, f.nomeFazenda
+    FROM Curral as c
+    INNER JOIN endFazenda as f ON c.fkEndFazenda = f.idEndereco
+    WHERE c.fkEndFazenda = idEndereco;
+    `;
 
     return database.executar(query);
 }
-function publicar(nome, endereco) {
+function cadastrar(nome, curral) {
 
-    var instrucaoSql = `insert into curral(nomeCurral, fkEndFazenda) values ('${nome}',${endereco})`;
+    var instrucaoSql = `insert into curral(nomeCurral, fkEndFazenda) values ('${nome}',${curral})`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -21,5 +25,5 @@ function buscarPorNomeCurral(nome) {
 module.exports = {
     listar,
     buscarPorNomeCurral,
-    publicar
+    cadastrar
 };    
