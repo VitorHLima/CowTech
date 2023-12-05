@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(i) {
+function buscarUltimasMedidas(fkSensor) {
 
     instrucaoSql = ''
 
@@ -18,9 +18,8 @@ function buscarUltimasMedidas(i) {
         lm35_temperatura AS temperatura,
         dht11_umidade AS umidade,
         dtAtual,
-        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor JOIN
-        curral ON sensor.fkCurral = curral.idCurral where idSensor = ${i} AND dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
-        idRegistro ASC;`;
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor 
+        where idSensor = ${fkSensor} ORDER BY idRegistro desc;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -45,14 +44,12 @@ function buscarMedidasEmTempoReal(fkSensor) {
                     order by id desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT
+        instrucaoSql = ` SELECT
         lm35_temperatura AS temperatura,
         dht11_umidade AS umidade,
         dtAtual,
-        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor JOIN
-        curral ON sensor.fkCurral = curral.idCurral WHERE
-        fkSensor = ${fkSensor} and fkCurral = ${fkCurral} AND dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
-        idRegistro ASC;`;
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor 
+        where idSensor = ${fkSensor} ORDER BY idRegistro;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -62,7 +59,7 @@ function buscarMedidasEmTempoReal(fkSensor) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasMensal(idSensor) {
+function buscarMedidasMensal(fkSensor) {
 
     instrucaoSql = ''
 
@@ -72,7 +69,7 @@ function buscarMedidasMensal(idSensor) {
                         dtAtual,
                         DATE_FORMAT(dtAtual,'%d:%m:%Y') as momento_grafico
                     from registro
-                    where fkSensor = ${idSensor} and dtAtual between date_sub(now(), interval 30 day) and now()
+                    where fkSensor = ${fkSensor} and dtAtual between date_sub(now(), interval 30 day) and now()
                     order by idRegistro asc;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select 
@@ -80,8 +77,8 @@ function buscarMedidasMensal(idSensor) {
                         dtAtual,
                         DATE_FORMAT(dtAtual,'%d:%m:%Y') as momento_grafico
                     from registro
-                    where fkSensor = ${idSensor} and dtAtual between date_sub(now(), interval 30 day) and now()
-                    order by idRegistro asc;`;
+                    where fkSensor = ${fkSensor} and dtAtual between date_sub(now(), interval 30 day) and now()
+                    order by idRegistro;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
