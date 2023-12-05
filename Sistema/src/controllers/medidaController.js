@@ -2,8 +2,8 @@ var medidaModel = require("../models/medidaModel");
 
 
 function buscarUltimasMedidas(req, res) {
-    var medidas = req.params.i
-    medidaModel.buscarUltimasMedidas(medidas).then(function (resultado) {
+    var fkSensor = req.params.fkSensor
+    medidaModel.buscarUltimasMedidas(fkSensor).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

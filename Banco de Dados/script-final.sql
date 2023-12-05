@@ -56,7 +56,7 @@ primary key (fkSensor,idRegistro)
 )auto_increment = 1000;
 
 -- Inserção de Dados
-delete FROM endFazenda where idEndereco = 5;
+
 
 SELECT * FROM Curral JOIN endFazenda ON idEndereco;
 
@@ -74,18 +74,13 @@ insert into curral values
 	(null,'Galpão Leste',1);
     
 insert into sensor values
-	(1,'Sensor 1',1),
-	(2,'Sensor 2',1),
-	(3,'Sensor 3',1),
-	(4,'Sensor 1',2),
-	(5,'Sensor 2',2),
-	(6,'Sensor 3',2),
-	(7,'Sensor 4',2),
-	(8,'Sensor 5',2),
-	(9,'Sensor 1',3),
-	(10,'Sensor 2',3),
-	(11,'Sensor 3',3),
-	(12,'Sensor 4',3);
+	(null,'Sensor 1',1),
+	(null,'Sensor 2',1),
+	(null,'Sensor 3',1),
+	(null,'Sensor 4',2),
+	(null,'Sensor 5',2),
+	(null,'Sensor 6',3),
+	(null,'Sensor 7',3);
     
     INSERT registro VALUES 
 (1, now(), 80, 29, 1), (1, now(), 69, 20, 2),(1, now(), 70, 25, 3), 
@@ -94,9 +89,10 @@ insert into sensor values
 (3, now(), 30, 15, 2),(3, now(), 70, 28, 3), (3, now(), 44, 22, 4),
 (4, now(), 45, 20, 1),(4, now(), 70, 33, 2), (4, now(), 56, 18, 3), (5, now(), 45, 10, 4);
 					
-truncate table registro;
+truncate table bdsistema.registro;
                          
 -- selects
+<<<<<<< HEAD
 SELECT * FROM sensor JOIN Curral ON idCurral = fkCurral;
 
 SELECT
@@ -114,6 +110,13 @@ SELECT * FROM EndFazenda;
 SELECT * FROM curral;
 SELECT * FROM sensor;
 SELECT * FROM registro;
+=======
+SELECT * FROM bdsistema.empresa;
+SELECT * FROM bdsistema.EndFazenda;
+SELECT * FROM bdsistema.curral;
+SELECT * FROM bdsistema.sensor;
+SELECT * FROM bdsistema.registro;
+>>>>>>> bfaa890636b6db605f86719ac32d7b680683f541
 
 SELECT * FROM Empresa JOIN EndFazenda
 	ON fkEmpresa = idEmpresa;
@@ -154,6 +157,13 @@ select
                     from registro
                     where fkSensor = 1 and dtAtual between date_sub(now(), interval 30 day) and now()
                     order by idRegistro asc;
+                    
+                    SELECT
+        lm35_temperatura AS temperatura,
+        dht11_umidade AS umidade,
+        dtAtual,
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor 
+        where idSensor = 1 ORDER BY idRegistro;
 
 
 SELECT
@@ -164,12 +174,40 @@ SELECT
     curral ON sensor.fkCurral = curral.idCurral WHERE
     fkSensor = 4 and fkCurral = 2 AND dtAtual BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY
     idRegistro ASC;
-
-
-                    
-                      INSERT registro VALUES 
-(null, '2023-11-28', 30, 10, 1), (null, '2023-11-29', 40, 15, 1),(null, '2023-11-30', 50, 20, 1), (null, '2023-12-01', 60, 25, 1), 
-(null, '2023-12-02', 70, 30, 1), 
-(null, '2023-11-27', 35, 29, 1), (null, '2023-11-26', 65, 27, 1), (null, '2023-11-25', 55, 23, 1);
-
     
+    SELECT sensor.nomeSensor, registro.dht11_Umidade as umidade, 
+        registro.lm35_temperatura as temperatura, registro.dtAtual, DATE_FORMAT(dtAtual, '%d:%m:%Y') as momento_grafico from Sensor 
+        JOIN registro ON fkSensor = idSensor where idSensor = 1;
+
+
+			INSERT bdsistema.registro VALUES
+(null, '2023-11-27', 35, 25, 4), 
+(null, '2023-11-28', 65, 27, 4), 
+(null, '2023-11-29', 55, 29, 4);
+
+select * from bdsistema.registro;
+
+
+INSERT bdsistema.registro VALUES
+(null, '2023-11-30', 35, 25, 5), 
+(null, '2023-12-01', 65, 27, 6), 
+(null, '2023-12-02', 55, 29, 7);
+
+
+INSERT bdsistema.registro VALUES
+(null, '2023-11-19', 55, 29, 1),             
+(null, '2023-11-20', 65, 30, 1), 
+(null, '2023-11-21', 35, 32, 1), 
+(null, '2023-11-22', 30, 27, 2), 
+(null, '2023-11-23', 40, 25, 2),
+(null, '2023-11-24', 50, 22, 2), 
+(null, '2023-11-25', 60, 19, 3), 
+(null, '2023-11-26', 70, 23, 3); 
+
+
+
+select * from registro;
+
+
+
+   

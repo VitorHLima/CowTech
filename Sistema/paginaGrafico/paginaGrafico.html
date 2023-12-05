@@ -226,7 +226,8 @@
       .then(valor => {
 
         for (var i = 0; i < valor.length; i++) {
-          console.log(valor)
+          console.log(valor + "AQUI ESTA O VALOR")
+
           var divPrincipal = document.getElementById('div_titulo_grafico');
           if (Sensores) {
             var div = document.createElement('div');
@@ -247,7 +248,7 @@
             // div.appendChild(button1);
 
             div.innerHTML += `<button class='button_sensor' onclick=obterDadosGrafico(${i + 1})></button`
-    
+
             fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function Teste(response) {
               if (response.ok) {
                 response.json().then(function (resposta) {
@@ -255,20 +256,17 @@
                   resposta.reverse();
 
                   var temperatura = resposta.map(item => Number(item.temperatura));
-                  var umidade = resposta.map(item => Number(item.umidade));
-    
+
                   var buttons = document.getElementsByClassName('button_sensor');
 
-                  for (var b = 0; b < buttons.length +1; b++) {
+                  for (var b = 0; b < buttons.length + 1; b++) {
                     var currentButton = buttons[b];
                     var estiloButton = window.getComputedStyle(currentButton);
                     var cor = estiloButton.backgroundColor;
                     console.log(buttons)
                     var medidaTemp = temperatura[b];
-                    var medidaUmi = umidade[b];
 
-                    console.log(medidaTemp)
-                    console.log(medidaUmi)
+                    console.log(medidaTemp + "temperatura AQUI")
 
                     if (medidaTemp > 24) {
                       currentButton.style.backgroundColor = 'red';
@@ -280,16 +278,9 @@
                       currentButton.style.backgroundColor = 'green';
                     }
 
-                    // if (medidaUmi >= 40 && medidaUmi <= 60) {
-                    //   currentButton.style.backgroundColor = 'green';
-                    // } else if ((medidaUmi > 60 && medidaUmi <= 65)) {
-                    //   currentButton.style.backgroundColor = 'yellow';
-                    // } else if (medidaUmi > 60 || medidaUmi < 40) {
-                    //   currentButton.style.backgroundColor = 'red';
-                    // }
 
                     console.log(medidaTemp);
-                    console.log(medidaUmi)
+
                   }
 
                 });
@@ -305,6 +296,8 @@
             console.log('Impossível achar os dados');
           }
         }
+
+
       })
       .catch(erro => console.error(erro));
 
@@ -344,24 +337,6 @@
             resposta.reverse();
 
             plotarGrafico(resposta, fkSensor);
-          });
-        } else {
-          console.error("Nenhum dado encontrado ou erro na API");
-        }
-      })
-      .catch(function (error) {
-        console.error(
-          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
-        );
-      });
-
-    fetch(`/medidas/tempo-real/${fkSensor}`, { cache: "no-store" })
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (resposta) {
-            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            resposta.reverse();
-
             plotarGrafico2(resposta, fkSensor);
           });
         } else {
@@ -373,6 +348,14 @@
           `Erro na obtenção dos dados p/ gráfico: ${error.message}`
         );
       });
+  }
+
+  function obterDadosMensais(fkSensor) {
+
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
+
 
     fetch(`/medidas/mensal/${fkSensor}`, { cache: "no-store" })
       .then(function (response) {
@@ -507,7 +490,7 @@
       config
     );
 
-    setTimeout(() => atualizarGrafico2(fkSensor, dados, myChart), 2000);
+    setTimeout(() => atualizarGrafico(fkSensor, dados, myChart), 2000);
   }
 
   function plotarGrafico3(resposta, fkSensor) {
@@ -563,7 +546,7 @@
       config
     );
 
-    setTimeout(() => atualizarGrafico3(fkSensor, dados, myChart), 2000);
+    setTimeout(() => atualizarGrafico2(fkSensor, dados, myChart), 2000);
   }
 
   function plotarGrafico4(resposta, fkSensor) {
@@ -619,7 +602,7 @@
       config
     );
 
-    setTimeout(() => atualizarGrafico3(fkSensor, dados, myChart), 2000);
+    setTimeout(() => atualizarGrafico2(fkSensor, dados, myChart), 2000);
   }
 
 
@@ -629,11 +612,11 @@
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
   function atualizarGrafico(fkSensor, dados, myChart) {
-    fetch(`/medidas/ultimas/${fkSensor}`, { cache: "no-store" })
+    fetch(`/medidas/tempo-real/${fkSensor}`, { cache: "no-store" })
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (novoRegistro) {
-            obterdados(fkSensor);
+            // obterDadosGrafico(fkSensor);
             // alertar(novoRegistro, fkSensor);
             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
             console.log(`Dados atuais do gráfico:`);
@@ -700,12 +683,13 @@
       });
   }
 
+
   function atualizarGrafico2(fkSensor, dados, myChart) {
-    fetch(`/medidas/tempo-real/${fkSensor}`, { cache: "no-store" })
+    fetch(`/medidas/mensal/${fkSensor}`, { cache: "no-store" })
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (novoRegistro) {
-            obterdados(fkSensor);
+            // obterDadosGrafico(fkSensor);
             // alertar(novoRegistro, fkSensor);
             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
             console.log(`Dados atuais do gráfico:`);
@@ -761,78 +745,6 @@
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
           proximaAtualizacao = setTimeout(
             () => atualizarGrafico2(fkSensor, dados, myChart),
-            2000
-          );
-        }
-      })
-      .catch(function (error) {
-        console.error(
-          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
-        );
-      });
-  }
-
-  function atualizarGrafico3(fkSensor, dados, myChart) {
-    fetch(`/medidas/mensal/${fkSensor}`, { cache: "no-store" })
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (novoRegistro) {
-            obterdados(fkSensor);
-            // alertar(novoRegistro, fkSensor);
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico:`);
-            console.log(dados);
-
-            let avisoCaptura = document.getElementById(
-              `avisoCaptura${fkSensor}`
-            );
-            avisoCaptura.innerHTML = "";
-
-            if (
-              novoRegistro[0].momento_grafico ==
-              dados.labels[dados.labels.length - 1]
-            ) {
-              console.log(
-                "---------------------------------------------------------------"
-              );
-              console.log(
-                "Como não há dados novos para captura, o gráfico não atualizará."
-              );
-              avisoCaptura.innerHTML =
-                "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
-              console.log("Horário do novo dado capturado:");
-              console.log(novoRegistro[0].momento_grafico);
-              console.log("Horário do último dado capturado:");
-              console.log(dados.labels[dados.labels.length - 1]);
-              console.log(
-                "---------------------------------------------------------------"
-              );
-            }
-            // else {
-            //   // tirando e colocando valores no gráfico
-            //   dados.labels.shift(); // apagar o primeiro
-            //   dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-            //   dados.datasets[0].data.shift(); // apagar o primeiro de umidade
-            //   dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
-
-            //   dados.datasets[1].data.shift(); // apagar o primeiro de temperatura
-            //   dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-            //   myChart.update();
-            // }
-
-            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            proximaAtualizacao = setTimeout(
-              () => atualizarGrafico3(fkSensor, dados, myChart),
-              2000
-            );
-          });
-        } else {
-          console.error("Nenhum dado encontrado ou erro na API");
-          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(
-            () => atualizarGrafico3(fkSensor, dados, myChart),
             2000
           );
         }

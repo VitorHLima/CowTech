@@ -33,7 +33,7 @@ function listarSensores(req, res) {
         if (resultado.length >= 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).json([]);
+            res.status(204).send("Nenhum resultado encontrado!")
         }
     }).catch(function (erro) {
         console.log(erro);
