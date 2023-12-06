@@ -66,6 +66,19 @@ JOIN Registro AS r ON r.fkSensor = s.idSensor
 WHERE em.idEmpresa = 2
 GROUP BY s.nomeSensor, c.nomeCurral;
 
+SELECT
+    lm35_temperatura AS temperatura,
+    (SELECT AVG(lm35_temperatura) FROM registro) AS media_temperatura,
+    (SELECT AVG(dht11_umidade) FROM registro WHERE fkSensor = 4) AS media_umidade,
+    dht11_umidade AS umidade,
+    dtAtual,
+    DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico
+FROM registro
+JOIN sensor ON registro.fkSensor = sensor.idSensor
+WHERE idSensor = 4
+ORDER BY idRegistro DESC;
+
+
 SELECT s.nomeSensor, c.nomeCurral, AVG(r.lm35_temperatura) AS media_temperatura
 FROM Sensor AS s
 JOIN Curral AS c ON c.idCurral = s.fkCurral
@@ -111,7 +124,7 @@ insert into sensor values
 
 INSERT INTO registro (idRegistro,dht11_Umidade,lm35_temperatura, fkSensor)
 VALUES (null,80, 29, 1),(null,80, 29, 2),(null,80, 29, 3),(null,80, 29, 4),
-(null,80, 29, 5),(null,80, 29, 6),(null,80, 29, 7),(null,80, 29, 8),(null,80,29, 9);
+(null,80, 29, 5),(null,80, 29, 6),(null,80, 29, 7),(null,80, 29, 8),(null,80,29, 9)
 					
 truncate table bdsistema.registro;
 		

@@ -16,11 +16,15 @@ function buscarUltimasMedidas(fkSensor) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
         lm35_temperatura AS temperatura,
+        (SELECT ROUND(AVG(lm35_temperatura),2) FROM registro) AS media_temperatura,
+        (SELECT ROUND(AVG(dht11_umidade),2) FROM registro WHERE fkSensor = ${fkSensor}) AS media_umidade,
         dht11_umidade AS umidade,
         dtAtual,
-        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor 
-        where idSensor = ${fkSensor} ORDER BY idRegistro desc;`;
-    } else {
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico
+    FROM registro
+    JOIN sensor ON registro.fkSensor = sensor.idSensor
+    WHERE idSensor = ${fkSensor}
+    ORDER BY idRegistro DESC;`} else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }

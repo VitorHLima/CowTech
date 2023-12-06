@@ -24,9 +24,9 @@ GROUP BY s.nomeSensor, c.nomeCurral;`;
 }
 function listarSensores(fazenda, curral) {
 
-    instrucaoSql = `SELECT Sensor.nomeSensor, curral.nomeCurral, endFazenda.nomeFazenda FROM Sensor JOIN curral ON fkCurral = idCurral 
+    instrucaoSql = `SELECT sensor.idSensor,Sensor.nomeSensor, curral.nomeCurral, endFazenda.nomeFazenda FROM Sensor JOIN curral ON fkCurral = idCurral 
     JOIN endFazenda ON fkEndFazenda = idEndereco 
-    where endFazenda.idEndereco = ${fazenda} AND curral.idCurral = ${curral}`;
+    where endFazenda.idEndereco = ${fazenda} AND curral.idCurral = ${curral};`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

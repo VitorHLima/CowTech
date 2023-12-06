@@ -90,6 +90,9 @@
           </div>
         </div>
       </div>
+      <div id="inserir_informacoes">
+      
+  </div>
     </div>
   </div>
 
@@ -256,23 +259,26 @@
 
             h4 = valor.map(item => item.nomeSensor);
 
+            var idSen = valor[i].idSensor;
+            
             div.innerHTML = h4[i];
 
             divPrincipal.appendChild(div);
 
             // div.appendChild(button1);
 
-            div.innerHTML += `<button class='button_sensor' onclick=obterDadosGrafico(${i + 1})></button`
-
-            fetch(`/medidas/ultimas/${i}`, { cache: 'no-store' }).then(function Teste(response) {
+            div.innerHTML += `<button class='button_sensor' onclick="obterDadosGrafico(${idSen}), obterDadosMensais(${idSen})"></button>`;
+            fetch(`/medidas/ultimas/${idSen}`, { cache: 'no-store' }).then(function Teste(response) {
               if (response.ok) {
                 response.json().then(function (resposta) {
                   console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                   resposta.reverse();
 
+                  
                   var temperatura = resposta.map(item => Number(item.temperatura));
-
+                  
                   var buttons = document.getElementsByClassName('button_sensor');
+                
 
                   for (var b = 0; b < buttons.length; b++) {
                     var currentButton = buttons[b];
@@ -319,7 +325,7 @@
 
     return false;
   }
-  setInterval(Pesquisar, 3000);
+  // setInterval(Pesquisar, 10000);
 
   var sensores = JSON.parse(sessionStorage.SENSOR)
   console.log(sensores)
@@ -351,7 +357,26 @@
           response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
-
+            inserir_informacoes.innerHTML = ''
+            var mediaTemp = resposta.map(item => item.media_temperatura)
+                  var mediaUmi = resposta.map(item => item.media_umidade)
+                  var Temp = resposta.map(item => item.temperatura)
+                  var Umi = resposta.map(item => item.umidade)
+                  inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
+        INFORMAÇÕES DO SENSOR:
+      </h2>
+      <div id="div_informacoes_medidas">
+        <ul style="margin-right: 10%;">
+          <li>TEMPERATURA ATUAL:<span style="text-decoration: none;">${Temp[0]}</span></li>
+    <br>
+          <li>MÉDIA DE TEMPERATURA(MENSAL):<span style="text-decoration: none;">${mediaTemp[0]}</span></li>
+        </ul>
+        <ul>
+          <li>UMIDADE ATUAL: <span style="text-decoration: none;">${Umi[0]}</span></li><br>
+          <li>MÉDIA DE UMIDADE(MENSAL): <span style="text-decoration: none;">${mediaUmi[0]}</span></li>
+        </ul>
+      </div>
+    </div>`
             plotarGrafico(resposta, fkSensor);
             plotarGrafico2(resposta, fkSensor);
           });
@@ -911,6 +936,34 @@
 
 </script>
 <style>
+  #inserir_informacoes{
+    width: 100%;
+    height: auto;
+    padding: 1% 0 0;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+  #div_informacao {
+    width: 100%;
+    height: auto;
+    padding: 1% 0 0;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+  #div_informacoes_medidas {
+    padding: 5% 5% 10% 5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  ul {
+    font-size: 20px;
+    text-decoration: none;
+    list-style: none;
+  }
   * {
     padding: 0;
     margin: 0;
