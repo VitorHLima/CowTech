@@ -93,39 +93,28 @@
     <div id="card_principal">
       <div id="separacao_esquerda_sistema">
         <div id="qt_sensor">
-          <h3>Quantidade de sensores: 1</h3>
+          <h3 id="quantidade_sensores"></h3>
         </div>
         <div id="div_imagem_sensor">
-          <img src="Rectangle 3.jpg" id='img_sensor' alt="">
+          <img src="dht11.jpg" id="img_sensor" alt="">
         </div>
         <div id="div_botoes">
-          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda()">
+          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosselEsquerda()">
             <img src="icons8-voltar-100.png" alt="">
           </button>
-          <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita()">
+          <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosselDireita()">
             <img src="icons8-voltar-50.png" alt="">
           </button>
         </div>
       </div>
       <div id="separacao_direita_sistema">
         <div id="temperatura_recomendada">
-          <h3>A temperatura recomendada é: 20°C</h3>
+          <h3>A temperatura desse sensor é: ${sensorAtual.temperatura}°C</h3>
         </div>
         <div id="detalhes_sensor">
-          <h2>X92G49193 (Nome do sensor)</h2><br>
-          <p>Aqui seria a descrição do protótipo, onde o usuário pode escolher um “apelido” para o equipamento, e mostra
-            a quantidade que possue no cadastro. </p>
+          <h2 id="nome_sensor">${sensorAtual.nomeSensor}</h2><br>
+          <p id="descricao_sensor">O curral onde este sensor está é: ${sensorAtual.nomeCurral}</p>
         </div>
-        <!-- <div id="ajustar_temp">
-          <div id="texto_temper">
-            <h3>Ajustar temperatura recomendada</h3>
-          </div>
-          <div id="buttoes_controlar_sensor">
-            <button class="botoes_controller" onclick="Aumentar_temperatura()">+</button>
-            <h3 id="dado_sensor1">18</h3>
-            <button class="botoes_controller" onclick="Diminuir_temperatura()">-</button>
-          </div>
-        </div> -->
         <div id="adicionar_sensor">
           <div id="texto_adicionar_sensor">
             <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span>
@@ -133,107 +122,12 @@
           </div>
         </div>
         <div id="texto_sensor">
-          <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir, para mais informações seria necessario
-            pesquisas mais aprofundadas dependendo do local </p>
+          <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir. Para mais informações, seria necessário
+            pesquisas mais aprofundadas dependendo do local.</p>
         </div>
       </div>
     </div>
-    <div id="card_secundario">
-      <div id="separacao_esquerda_sistema">
-        <div id="qt_sensor">
-          <h3>Quantidade de sensores: 1</h3>
-        </div>
-        <div id="div_imagem_sensor">
-          <img src="dht11.jpg" id='img_sensor_dth11' alt="">
-        </div>
-        <div id="div_botoes">
-          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda_dht11()">
-            <img src="icons8-voltar-100.png" alt="">
-          </button>
-          <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita_dht11()">
-            <img src="icons8-voltar-50.png" alt="">
-          </button>
-        </div>
-      </div>
-      <div id="separacao_direita_sistema">
-        <div id="temperatura_recomendada">
-          <h3>A temperatura recomendada é: 20*C</h3>
-        </div>
-        <div id="detalhes_sensor">
-          <h2>DHT11 (Nome do sensor)</h2><br>
-          <p>Aqui seria a descrição do prototipo, onde o usuario pode escolher um “apelido” para o equipamento, e mostra
-            a quantidade que possue no cadastro. </p>
-        </div>
-        <!-- <div id="ajustar_temp">
-          <div id="texto_temper">
-            <h3>Ajustar temperatura recomendada</h3>
-          </div>
-          <div id="buttoes_controlar_sensor">
-            <button class="botoes_controller" onclick="Aumentar_temperatura()">+</button>
-            <h3 id="dado_sensor">18</h3>
-            <button class="botoes_controller" onclick="Diminuir_temperatura()">-</button>
-          </div>
-        </div> -->
-        <div id="adicionar_sensor">
-          <div id="texto_adicionar_sensor">
-            <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span>
-            </h3>
-          </div>
-        </div>
-        <div id="texto_sensor">
-          <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir, para mais informações seria necessario
-            pesquisas mais aprofundadas dependendo do local </p>
-        </div>
-      </div>
-    </div>
-    <div id="card_terceiro">
-      <div id="separacao_esquerda_sistema">
-        <div id="qt_sensor">
-          <h3>Quantidade de sensores: 1</h3>
-        </div>
-        <div id="div_imagem_sensor">
-          <img src="lm35.jpg" id='img_sensor_lm35' alt="">
-        </div>
-        <div id="div_botoes">
-          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosel_esquerda_lm35()">
-            <img src="icons8-voltar-100.png" alt="">
-          </button>
-          <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosel_direita_lm35()">
-            <img src="icons8-voltar-50.png" alt="">
-          </button>
-        </div>
-        <div id="texto_sensor">
-          <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir, para mais informações seria necessario
-            pesquisas mais aprofundadas dependendo do local </p>
-        </div>
-      </div>
-      <div id="separacao_direita_sistema">
-        <div id="temperatura_recomendada">
-          <h3>A temperatura recomendada é: 20*C</h3>
-        </div>
-        <div id="detalhes_sensor">
-          <h2>LM35 (Nome do sensor)</h2><br>
-          <p>Aqui seria a descrição do prototipo, onde o usuario pode escolher um “apelido” para o equipamento, e mostra
-            a quantidade que possue no cadastro. </p>
-        </div>
-        <!-- <div id="ajustar_temp">
-          <div id="texto_temper">
-            <h3>Ajustar temperatura recomendada</h3>
-          </div>
-          <div id="buttoes_controlar_sensor">
-            <button class="botoes_controller" onclick="Aumentar_temperatura()">+</button>
-            <h3 id="dado_sensor">18</h3>
-            <button class="botoes_controller" onclick="Diminuir_temperatura()">-</button>
-          </div>
-        </div> -->
-        <div id="adicionar_sensor">
-          <div id="texto_adicionar_sensor">
-            <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span>
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <div id="principal_sensor">
       <div id="pop_up_sensor">
         <div id="div_button_popUp">
@@ -316,6 +210,7 @@
     <div id="titulo_funcionario">
       <h1>Currals cadastrados</h1>
     </div>
+
     <div id="divisao_funcao_funcionario">
       <div id="pop_up">
         <div id="div_button_popUp">
@@ -406,7 +301,7 @@
 </body>
 
 </html>
-<script>
+<script defer>
   // div_logo.innerHTML = sessionStorage.ID_EMPRESA
   var img = document.getElementById('img_sensor')
   var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
@@ -418,7 +313,8 @@
     })
       .then(function (resposta) {
         resposta.json().then((enderecos) => {
-          enderecos.forEach((endFazenda) => {
+          console.log(enderecos)
+          enderecos.forEach(endFazenda => {
             table_fazenda.innerHTML += `
             <tbody>
           <tr id="tr_formulario">
@@ -431,7 +327,7 @@
             <br>
           </tr>
         </tbody>`;
-          });
+          })
         });
       })
       .catch(function (resposta) {
@@ -481,57 +377,8 @@
     listarCurral();
   }
 
-  function Cadastrar() {
-    var nomeVar = input_nome_pessoa.value
-    var enderecoVar = listaEnderecos.value
 
-    var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
-    var corpo = { //Aqui é a criação da variavel corpo, sendo um objeto, que o JSON consegue ler
-      nomeServer: nomeVar, //Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
-      enderecoServer: enderecoVar//Aqui seria o primeiro valor o dado do objeto que estou criando, com a nomeclatura do banco de dados, e o valor da input
-    };
-    if (nomeVar == '') {
-      alert('Insira um nome válido')
-    } else {
-      fetch(`/currais/cadastrar`, { //Aqui é a requisição feita para cadastrar a historia, de acordo com o id do usuario, para identifica-lo
-        method: "POST", //Aqui é o tipo da requisição, se é POST OU GET, POST é para enviar dados
-        headers: {
-          "Content-Type": "application/json",// Aqui informa ao servidor como será enviado, será em JSON
-        },
-        body: JSON.stringify(corpo), //Aqui é o tipo dos dados que vão mandar, transformou o objeto corpo lá em cima, por um JSON, que vai ser recebido com o body na pagina controller
-      })
-        .then(function (resposta) {// Aqui é ele vai tentar mandar os dados pegos lá em cima, com o parametro de resposta para pegar se é uma resposta postiviva ou negativa vindo do servidor
-          console.log("resposta: ", resposta);//Aqui ele vai exibir a resposta do servidor
 
-          if (resposta.ok) { //Se a resposta for ok, ele vai cadastrar a historia com sucesso
-            alert("Curral cadastrado");//Vai exibir para o usuario o resultado positivo
-            table_funcionario.innerHTML += `<br><tbody>
-          <tr id="tr_formulario">
-            <td id="td_id"><b>ID</b></td>
-            <td></td>
-            <td id="td_nome">${nome}</td>
-            <td id="td_endereco">${endereco}</td>
-            <td></td>
-            <td id="td_button"><button>-</button></td>
-          </tr>`
-            Sair()// Aqui está transferindo o usuario para outra pagina
-          } else if (resposta.status == 404) {//Se a resposta for o erro 404, que pode ser que o servidor caiu ou não funcionou a requisição
-            window.alert("Deu 404!");//Aqui ele está exibindo um alerta na pagina, deu 404!
-          } else {//Senão for o erro 404
-            throw ( //Aqui ele está lançando uma mensagem caso não seja o erro acima
-              "Houve um erro ao tentar realizar a postagem! Código da resposta: " +//Aqui é respota que vai ser lançada
-              resposta.status// Aqui é a resposta e os status daquela resposta
-            );
-          }
-        })
-        .catch(function (resposta) { // Aqui ele vai pegar o erro, e com o paramentro seria a informação daquele erro
-          console.log(`#ERRO: ${resposta}`);//Está exibindo o erro
-        });
-
-      return false;//Está retornando falso
-    }
-
-  }
 
   function listar() {
     fetch(`/enderecos/listar/${idEmpresa}`, {
@@ -564,6 +411,7 @@
         console.log(`#ERRO: ${resposta}`);
       });
   }
+
 
   function Remover() {
     table_funcionario.innerHTML = ``
@@ -678,12 +526,11 @@
     img_sensor.style.display = 'flex'
     img_fundo.style.display = 'flex'
   }
-  function Aumentar_temperatura() {
-    var dado = dado_sensor1.innerHTML;
 
-    var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
 
-    dado_sensor1.innerHTML = `${dadoConcrecto += 1}`
+  function Cadastrar() {
+    var curralVar = listaEnderecos.value
+    var nomeVar = input_nome_curral.value
 
     if (dadoConcrecto > 24) {
       Alerta()
@@ -693,63 +540,39 @@
       img_sensor.style.display = 'none'
       img_fundo.style.display = 'none'
     }
-  }
-  function Diminuir_temperatura() {
-    var dado = dado_sensor1.innerHTML;
 
-    var dadoConcrecto = Number(dado.replace(/[^\d,]/g, ''))
+    fetch(`/currais/cadastrar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(corpo),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
 
-    dado_sensor1.innerHTML = `${dadoConcrecto -= 1}`
+        if (resposta.ok) {
+          console.log("Curral cadastrado com sucesso");
+          window.location = 'sistema.html'
+          Sair()
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
 
-    if (dadoConcrecto < 4) {
-      Alerta()
+        if (dadoConcrecto < 4) {
+          Alerta()
 
-      principal_alerta.style.display = 'flex'
-      principal_alerta.style.position = 'absolute';
-      img_sensor.style.display = 'none'
-      img_fundo.style.display = 'none'
-    }
-  }
-
-  function carrosel_esquerda() {
-    card_secundario.style.display = 'flex'
-    card_principal.style.display = 'none'
-
-  }
-
-  function carrosel_esquerda_dht11() {
-    card_secundario.style.display = 'none'
-    card_terceiro.style.display = 'flex'
-  }
-  function carrosel_esquerda_lm35() {
-    card_terceiro.style.display = 'none'
-    card_principal.style.display = 'flex'
-  }
-  function carrosel_direita() {
-    card_secundario.style.display = 'flex'
-    card_principal.style.display = 'none'
-  }
-  function carrosel_direita_dht11() {
-    card_secundario.style.display = 'none'
-    card_terceiro.style.display = 'flex'
-  }
-  function carrosel_direita_lm35() {
-    card_terceiro.style.display = 'none'
-    card_principal.style.display = 'flex'
+          principal_alerta.style.display = 'flex'
+          principal_alerta.style.position = 'absolute';
+          img_sensor.style.display = 'none'
+          img_fundo.style.display = 'none'
+        }
+      })
   }
 
-  function Grafico_temperatura() {
-    section_lm35Temperatura.style.display = 'flex'
-    section_dht11Umidade.style.display = 'none'
-    h2_lm35.style.display = 'flex'
-    h2_dht11.style.display = 'none'
-  }
-  function Grafico_umidade() {
-    section_lm35Temperatura.style.display = 'none'
-    section_dht11Umidade.style.display = 'flex'
-    h2_lm35.style.display = 'none'
-    h2_dht11.style.display = 'flex'
-  }
 
 
   function cadastrarFazenda() {
@@ -760,7 +583,7 @@
     var municipio = input_municipio.value;
     var estado = input_estado.value;
     var numero = input_numero.value;
-    var empresaVar = sessionStorage.ID_EMPRESA
+    var idEmpresa = sessionStorage.ID_EMPRESA
 
     if (logradouro == "") {
       "(Digite um valor no campo logradouro)";
@@ -790,13 +613,11 @@
       "(Digite um valor no campo nome)";
 
       return false;
-    } else if (empresaVar == "") {
+    } else if (idEmpresa == "") {
       "(Escolha uma empresa)";
 
       return false;
     }
-
-    console.log(empresaVar);
 
     // Enviando o valor da nova input
     fetch(`/enderecos/cadastrar/${idEmpresa}`, {
@@ -821,7 +642,8 @@
 
         if (resposta.ok) {
           console.log("Cadastro realizado com sucesso! Redirecionando para tela de login...");
-
+          window.location = 'sistema.html'
+          Sair()
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
@@ -1144,6 +966,7 @@
 
   #div_formularioFazenda input {
     border-radius: 3px !important;
+    padding: 0.2%;
   }
 
   #div_formularioFazenda button {
@@ -1380,6 +1203,10 @@
     text-align: center;
     background-color: rgb(202, 39, 39);
     width: 100%;
+  }
+
+  #quantidade_sensores {
+    margin-top: 6%;
   }
 
   #pop_up_texto {
@@ -1629,7 +1456,7 @@
     display: flex;
   }
 
-  #img_sensor_dth11 {
+  #img_sensor {
     display: flex;
     max-width: 70%;
     max-height: 70%;

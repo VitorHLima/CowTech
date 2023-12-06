@@ -7,12 +7,14 @@ var sensorController = require("../controllers/sensorController");
 router.post("/publicar/", function (req, res) {
     sensorController.publicar(req, res);
 });
-router.post("/listar/", function (req, res) {
+router.get("/listar/:idEmpresa", function (req, res) {
     sensorController.listar(req, res);
 });
 router.post("/mostrar/", function (req, res) {
     sensorController.listarSensores(req, res);
 });
-
+router.get("/todos/:idEmpresa", function (req, res) {
+    sensorController.todosSensores(req, res);
+});
 
 module.exports = router;

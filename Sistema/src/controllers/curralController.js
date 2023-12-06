@@ -14,22 +14,18 @@ function listar(req, res) {
         res.status(200).json(resultado);
     });
 }
-function cadastrar(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var nome = req.body.nomeServer;
-    var endereco = req.body.enderecoServer;
-    var empresaId = req.params.idEmpresa;
 
-    // Faça as validações dos valores
+function cadastrar(req, res) {
+    var nome = req.body.nomeServer;
+    var curral = req.body.curralServer;
+
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
-    } else if (empresaId == undefined) {
-        res.status(400).send("Seu empresaid está undefined!");
-    } else if (endereco == undefined) {
-        res.status(400).send("Seu endereco está undefined!");
+    } else if (curral == undefined) {
+        res.status(400).send("Seu curral está undefined!");
     } else {
-        // Passe os valores como parâmetro e vá para o arquivo enderecoModel.js
-        curralModel.publicar(nome, endereco)
+        // Passe os valores como parâmetro e vá para o arquivo curralModel.js
+        curralModel.cadastrar(nome, curral)
             .then(
                 function (resultado) {
                     res.json(resultado);

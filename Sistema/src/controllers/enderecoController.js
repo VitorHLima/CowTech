@@ -9,7 +9,7 @@ function cadastrar(req, res) {
     var bairro = req.body.bairroServer;
     var numero = req.body.numeroServer;
     var estado = req.body.estadoServer;
-    var empresaId = req.params.idEmpresa;
+    var idEmpresa = req.params.idEmpresa;
 
     // Faça as validações dos valores
     if (logradouro == undefined) {
@@ -26,12 +26,12 @@ function cadastrar(req, res) {
         res.status(400).send("Seu número está undefined!");
     } else if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
-    } else if (empresaId == undefined) {
+    } else if (idEmpresa == undefined) {
         res.status(400).send("Sua empresa está undefined!");
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo enderecoModel.js
-        enderecoModel.cadastrar(nome, logradouro, bairro, municipio, estado, cep, numero, empresaId)
+        enderecoModel.cadastrar(nome, logradouro, bairro, municipio, estado, cep, numero, idEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);

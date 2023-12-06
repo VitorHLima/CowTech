@@ -72,7 +72,6 @@
 #div_inicial {
     max-width: 100%;
     height: 650px;
-    border: 1px solid black;
     background: url('img/background.png') no-repeat bottom;
     background-size: cover
 }

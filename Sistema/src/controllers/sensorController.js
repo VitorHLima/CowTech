@@ -43,7 +43,9 @@ function listarSensores(req, res) {
 }
 
 function listar(req, res) {
-    sensorModel.listar().then(function (resultado) {
+    var idEmpresa = req.params.idEmpresa;
+
+    sensorModel.listar(idEmpresa).then(function (resultado) {
         if (resultado.length >= 0) {
             res.status(200).json(resultado);
         } else {
@@ -55,8 +57,25 @@ function listar(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+function todosSensores(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+
+    sensorModel.todos(idEmpresa).then((resultado) => {
+        if (resultado.length >= 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os sensores: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 module.exports = {
     publicar,
     listar,
-    listarSensores
+    listarSensores,
+    todosSensores
 }
