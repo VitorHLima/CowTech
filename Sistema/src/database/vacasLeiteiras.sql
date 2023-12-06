@@ -51,3 +51,32 @@ foreign key (fkSensor) references sensor(idSensor),
 primary key (fkSensor,idRegistro)
 );
 
+
+SELECT
+        lm35_temperatura AS temperatura,
+        (SELECT ROUND(AVG(lm35_temperatura),2) FROM registro ) AS media_temperatura,
+        (SELECT ROUND(AVG(dht11_umidade),2) FROM registro WHERE fkSensor = 1) AS media_umidade,
+        dht11_umidade AS umidade,
+        dtAtual,
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico
+    FROM registro
+    JOIN sensor ON registro.fkSensor = sensor.idSensor
+    WHERE idSensor = 1
+    ORDER BY idRegistro DESC;
+    
+SELECT * FROM REGISTRO JOIN SENSOR ON fkSensor = idSensor;
+
+
+select * from registro r where r.fkSensor = 4 order by dtAtual desc;
+
+
+
+-- button => id => button-4
+
+/*
+resposta.fe(linha => {
+	if(linha.tenp > x) {
+		document.getElementById(`button-${linha.fk/se}`)
+    }
+})
+*/

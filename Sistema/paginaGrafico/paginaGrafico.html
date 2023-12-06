@@ -91,8 +91,8 @@
         </div>
       </div>
       <div id="inserir_informacoes">
-      
-  </div>
+
+      </div>
     </div>
   </div>
 
@@ -244,15 +244,17 @@
       .then(valor => {
 
         for (var i = 0; i < valor.length; i++) {
-          console.log(valor + "AQUI ESTA O VALOR")
+          console.log(valor[i].idSensor + "AQUI ESTA O VALOR")
 
           var divPrincipal = document.getElementById('div_titulo_grafico');
           if (Sensores) {
             var div = document.createElement('div');
             var h4 = document.createElement('h4');
             var button1 = document.createElement('button');
+            `button-${fkSensor}`
 
             button1.classList.add('button_sensor');
+
             div.classList.add('div_tipos_metricas');
 
             div.innerHTML = valor.map(item => item.idSensor);
@@ -260,7 +262,7 @@
             h4 = valor.map(item => item.nomeSensor);
 
             var idSen = valor[i].idSensor;
-            
+
             div.innerHTML = h4[i];
 
             divPrincipal.appendChild(div);
@@ -274,11 +276,10 @@
                   console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                   resposta.reverse();
 
-                  
                   var temperatura = resposta.map(item => Number(item.temperatura));
+
                   
                   var buttons = document.getElementsByClassName('button_sensor');
-                
 
                   for (var b = 0; b < buttons.length; b++) {
                     var currentButton = buttons[b];
@@ -359,10 +360,10 @@
             resposta.reverse();
             inserir_informacoes.innerHTML = ''
             var mediaTemp = resposta.map(item => item.media_temperatura)
-                  var mediaUmi = resposta.map(item => item.media_umidade)
-                  var Temp = resposta.map(item => item.temperatura)
-                  var Umi = resposta.map(item => item.umidade)
-                  inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
+            var mediaUmi = resposta.map(item => item.media_umidade)
+            var Temp = resposta.map(item => item.temperatura)
+            var Umi = resposta.map(item => item.umidade)
+            inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
         INFORMAÇÕES DO SENSOR:
       </h2>
       <div id="div_informacoes_medidas">
@@ -377,6 +378,9 @@
         </ul>
       </div>
     </div>`
+    console.log("========================================");
+    console.log("REsposta");
+    console.log(resposta);
             plotarGrafico(resposta, fkSensor);
             plotarGrafico2(resposta, fkSensor);
           });
@@ -422,6 +426,7 @@
   // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
   // A função *plotarGrafico* também invoca a função *atualizarGrafico*
   function plotarGrafico(resposta, fkSensor) {
+    alert(fkSensor)
     console.log("iniciando plotagem do gráfico...");
 
     // Criando estrutura para plotar gráfico - labels
@@ -936,7 +941,7 @@
 
 </script>
 <style>
-  #inserir_informacoes{
+  #inserir_informacoes {
     width: 100%;
     height: auto;
     padding: 1% 0 0;
@@ -944,6 +949,7 @@
     text-align: center;
     flex-direction: column;
   }
+
   #div_informacao {
     width: 100%;
     height: auto;
@@ -952,6 +958,7 @@
     text-align: center;
     flex-direction: column;
   }
+
   #div_informacoes_medidas {
     padding: 5% 5% 10% 5%;
     display: flex;
@@ -959,11 +966,13 @@
     align-items: center;
     justify-content: center;
   }
+
   ul {
     font-size: 20px;
     text-decoration: none;
     list-style: none;
   }
+
   * {
     padding: 0;
     margin: 0;
@@ -1022,6 +1031,7 @@
     padding: 10px;
     width: 40%;
   }
+
   #principal_alerta {
     width: 100%;
     flex-direction: column;
@@ -1089,6 +1099,7 @@
     border: 0;
     font-weight: 400;
   }
+
   #texto_cowtech {
     margin: 0 0 0 5%;
     font-weight: 600;
