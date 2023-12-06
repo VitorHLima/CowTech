@@ -14,6 +14,7 @@
   <!-- <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script> -->
   <!-- <script src="../js/sessao.js"></script> -->
+  <script type='text/javascript' src='https://widget.freshworks.com/widgets/154000000855.js' async defer></script>
 </head>
 
 <!-- <body id="body_id" onload="carregar()"> -->
@@ -242,16 +243,16 @@
         </div>
         <div id="div_formulario">
 
-            <h4>Nome</h4>
-            <input type="text" id="input_nome_sensor" placeholder="Ex: Frizza" /><br />
-            <h4>Curral</h4>
-            <select name="currais" id="listaCurrais">
-              <option selected>Selecione um Curral</option>
-            </select><br>
-            <button class="button_sensor" onclick="Cadastrar_sensor()">Cadastrar</button>
-            <br><br>
+          <h4>Nome</h4>
+          <input type="text" id="input_nome_sensor" placeholder="Ex: Frizza" /><br />
+          <h4>Curral</h4>
+          <select name="currais" id="listaCurrais">
+            <option selected>Selecione um Curral</option>
+          </select><br>
+          <button class="button_sensor" onclick="Cadastrar_sensor()">Cadastrar</button>
+          <br><br>
         </div><br>
-       
+
       </div>
     </div>
   </div>
@@ -270,36 +271,36 @@
           </button>
         </div>
         <div id="div_formularioFazenda">
-      
-            <h4>Nome da fazenda</h4>
-            <input id="input_fazenda" placeholder="Ex: Fazenda boa vista" /><br />
 
-            <h4>Endereço</h4><br>
-            <label for="input_cep">CEP</label>
-            <input id="input_cep" />
+          <h4>Nome da fazenda</h4>
+          <input id="input_fazenda" placeholder="Ex: Fazenda boa vista" /><br />
 
-            <label for="input_logradouro">Logradouro</label>
-            <input id="input_logradouro" />
+          <h4>Endereço</h4><br>
+          <label for="input_cep">CEP</label>
+          <input id="input_cep" />
 
-            <label for="input_bairro">Bairro</label>
-            <input id="input_bairro" />
+          <label for="input_logradouro">Logradouro</label>
+          <input id="input_logradouro" />
 
-            <label for="input_municipio">Município</label>
-            <input id="input_municipio" />
+          <label for="input_bairro">Bairro</label>
+          <input id="input_bairro" />
 
-            <label for="input_estado">Estado</label>
-            <input id="input_estado" />
+          <label for="input_municipio">Município</label>
+          <input id="input_municipio" />
 
-            <label for="input_numero">Número</label>
-            <input id="input_numero" />
+          <label for="input_estado">Estado</label>
+          <input id="input_estado" />
 
-            <button onclick="cadastrarFazenda()">Cadastrar</button>
-      
+          <label for="input_numero">Número</label>
+          <input id="input_numero" />
+
+          <button onclick="cadastrarFazenda()">Cadastrar</button>
+
         </div>
       </div>
       <table id="table_fazenda">
         <tbody>
-          
+
         </tbody>
       </table>
       <div id="div_button_adicionarFazenda">
@@ -323,21 +324,22 @@
           </button>
         </div>
         <div id="div_formulario" style="align-items: left; text-align: left;">
-   
-            <h4>Nome do Curral</h4>
-            <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
 
-            <h4>Endereço</h4>
-            <select name="enderecos" id="listaEnderecos" style=" width: 70%;">
-              <option selected>Selecione um Endereço</option>
-            </select><br>
-            <button onclick="Cadastrar()" style="background-color: black; color: white; padding: 0.5%; margin-top: 2%s;">Cadastrar</button>
-          
+          <h4>Nome do Curral</h4>
+          <input type="text" id="input_nome_pessoa" placeholder="Ex: Fazenda boa vista" /><br />
+
+          <h4>Endereço</h4>
+          <select name="enderecos" id="listaEnderecos" style=" width: 70%;">
+            <option selected>Selecione um Endereço</option>
+          </select><br>
+          <button onclick="Cadastrar()"
+            style="background-color: black; color: white; padding: 0.5%; margin-top: 2%s;">Cadastrar</button>
+
         </div>
       </div>
       <table id="table_funcionario">
         <tbody>
-          
+
         </tbody>
       </table>
       <div id="div_button_adicionar">
@@ -409,9 +411,9 @@
   var img = document.getElementById('img_sensor')
   var idEmpresa = sessionStorage.ID_EMPRESA;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
   texto_cowtech.innerHTML = idEmpresa
-  
+
   document.addEventListener("DOMContentLoaded", function () {
-  fetch(`/enderecos/listar/${idEmpresa}`, {
+    fetch(`/enderecos/listar/${idEmpresa}`, {
       method: "GET",
     })
       .then(function (resposta) {
@@ -436,13 +438,13 @@
         console.log(`#ERRO: ${resposta}`);
       });
   })
-    fetch("/currais/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((currais) => {
-          currais.forEach((curral) => {
-            table_funcionario.innerHTML += `
+  fetch("/currais/listar", {
+    method: "GET",
+  })
+    .then(function (resposta) {
+      resposta.json().then((currais) => {
+        currais.forEach((curral) => {
+          table_funcionario.innerHTML += `
             <td id="td_id"><b>${curral.idCurral}</b></td>
             <td></td>
             <td id="td_nome">${curral.nomeCurral}</td>
@@ -450,13 +452,26 @@
             <td></td>
             <td id="td_button"><button onclick="Remover()">-</button></td>
          <br> `
-          });
         });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
       });
-  
+    })
+    .catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+
+
+
+
+  window.fwSettings = {
+    'widget_id': 154000000855
+  };
+  !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
+
+
+
+
+
 
   var idUsuario = sessionStorage.EMAIL_USUARIO;//Aqui é o id do usuario, onde a função nativa sessionStorage pega o ID
   texto_cowtech.innerHTML = idUsuario
@@ -573,7 +588,7 @@
   function Sair() {
     pop_up.style.display = "none";
     button_adicionar.style.display = "inline";
-    
+
     body_id.style.backgroundColor = `white`;
     button_adicionar_sensor.style.display = `flex`
   }
@@ -581,7 +596,7 @@
   function SairFazenda() {
     pop_upFazenda.style.display = "none";
     button_adicionarFazenda.style.display = "inline";
-    
+
     body_id.style.backgroundColor = `white`;
     button_adicionar_sensor.style.display = `flex`
   }
@@ -613,7 +628,7 @@
           alert("Curral cadastrado");//Vai exibir para o usuario o resultado positivo
           pop_up_sensor.style.display = "none";
           button_adicionar.style.display = "inline";
-          
+
           body_id.style.backgroundColor = `white`;
           button_adicionar_sensor.style.display = 'inline'
           Sair()// Aqui está transferindo o usuario para outra pagina
@@ -638,14 +653,14 @@
 
   function Sair_sensor() {
     pop_up_sensor.style.display = "none";
-    
+
     body_id.style.backgroundColor = `white`;
     button_adicionar.style.display = "inline";
     button_adicionar_sensor.style.display = 'inline';
   }
   function Adicionar_sensor() {
     pop_up_sensor.style.display = 'flex';
-  
+
     body_id.style.opacity = 1;
     button_adicionar.style.display = "none";
     button_adicionar_sensor.style.display = 'none';
@@ -672,7 +687,7 @@
 
     if (dadoConcrecto > 24) {
       Alerta()
-    
+
       principal_alerta.style.display = 'flex'
       principal_alerta.style.position = 'absolute'
       img_sensor.style.display = 'none'
@@ -688,7 +703,7 @@
 
     if (dadoConcrecto < 4) {
       Alerta()
-    
+
       principal_alerta.style.display = 'flex'
       principal_alerta.style.position = 'absolute';
       img_sensor.style.display = 'none'
@@ -868,17 +883,21 @@
     border-radius: 4px;
     padding: 2px;
   }
+
   #div_formulario select {
     width: 70%;
   }
+
   #div_formulario button {
     padding: 1%;
     width: 40%;
     border-radius: 4px;
   }
+
   #div_formulario {
-    padding:  0 0 0 5% !important;
+    padding: 0 0 0 5% !important;
   }
+
   * {
     padding: 0;
     margin: 0;
@@ -1122,9 +1141,11 @@
     text-align: left;
     justify-content: left;
   }
-  #div_formularioFazenda input{
+
+  #div_formularioFazenda input {
     border-radius: 3px !important;
   }
+
   #div_formularioFazenda button {
     width: 40%;
     margin-top: 4%;
