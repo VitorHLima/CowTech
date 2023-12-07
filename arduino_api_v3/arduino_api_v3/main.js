@@ -42,7 +42,7 @@ const serial = async (
         const dht11Umidade = parseFloat(valores[0]);
         // const dht11Temperatura = parseFloat(valores[1]);
         // const luminosidade = parseFloat(valores[2]);
-        const lm35Temperatura = parseFloat(valores[3]);
+        const lm35Temperatura = parseFloat(valores[1]);
         // const chave = parseInt(valores[4]);
 
         valoresDht11Umidade.push(dht11Umidade);
@@ -51,10 +51,12 @@ const serial = async (
         valoresLm35Temperatura.push(lm35Temperatura);
         // valoresChave.push(chave);
 
+        var fkSensor = Number(1 + parseInt(Math.random() * 5));
+
         if (HABILITAR_OPERACAO_INSERIR) {
             await poolBancoDados.execute(
-                'INSERT INTO registro (idRegistro, dht11_umidade, lm35_temperatura) VALUES (?, ?, ?)',
-                [dht11Umidade, lm35Temperatura]
+                `INSERT INTO registro (dht11_Umidade, lm35_temperatura, fkSensor) VALUES 
+                (${dht11Umidade}, ${lm35Temperatura}, ${fkSensor})`,
             );
         }
 
