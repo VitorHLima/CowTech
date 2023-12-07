@@ -3,7 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 
 const SERIAL_BAUD_RATE = 9600;
-const SERVIDOR_PORTA = 3000;
+const SERVIDOR_PORTA = 3333;
 const HABILITAR_OPERACAO_INSERIR = true;
 
 const serial = async (
@@ -15,10 +15,10 @@ const serial = async (
 ) => {
     const poolBancoDados = mysql.createPool(
         {
-            host: 'localhost',
+            host: '10.18.32.138',
             port: 3306,
             user: 'root',
-            password: 'Vi19hu86!',
+            password: 'ga22032005',
             database: 'bdsistema'
         }
     ).promise();
@@ -40,6 +40,7 @@ const serial = async (
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         const valores = data.split(';');
         const dht11Umidade = parseFloat(valores[0]);
+        console.log(dht11Umidade)
         // const dht11Temperatura = parseFloat(valores[1]);
         // const luminosidade = parseFloat(valores[2]);
         const lm35Temperatura = parseFloat(valores[1]);
@@ -56,7 +57,8 @@ const serial = async (
         if (HABILITAR_OPERACAO_INSERIR) {
             await poolBancoDados.execute(
                 `INSERT INTO registro (dht11_Umidade, lm35_temperatura, fkSensor) VALUES 
-                (${dht11Umidade}, ${lm35Temperatura}, ${fkSensor})`,
+                (?, ?, ${fkSensor})`,
+                [dht11Umidade, lm35Temperatura]
             );
         }
 
