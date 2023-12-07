@@ -7,7 +7,13 @@ function cadastrar(nome, logradouro, bairro, municipio, estado, cep, numero, emp
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function cadastrar2(nome, logradouro, bairro, municipio, estado, cep, numero, empresaId) {
 
+    var instrucaoSql = `insert into endfazenda (nomeFazenda, logradouro, bairro, municipio, estado, cep, numero, fkEmpresa) values ('${nome}', '${logradouro}', '${bairro}', '${municipio}', '${estado}', '${cep}', '${numero}', ${empresaId})`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 function listar(idUsuario) {
     var query = `select * from endFazenda JOIN empresa ON idEndereco where idEmpresa = ${idUsuario}
     `;
@@ -24,5 +30,6 @@ function buscarPorNomeFazenda(nomeFazenda) {
 module.exports = {
     cadastrar,
     listar,
-    buscarPorNomeFazenda
+    buscarPorNomeFazenda,
+    cadastrar2
 };    

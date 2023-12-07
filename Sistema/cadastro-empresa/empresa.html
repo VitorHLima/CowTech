@@ -64,7 +64,7 @@
       <input class="css-input" id="input_nome" type="text" />
       <label class="label-ddd" for="">DDD</label>
       <input class="css-input ddd" id="input_ddd" type="text" maxlength="2" />
-      <label class="label-telefone" for="">Telefone</label>
+      <label class="label-telefone" for="" style="margin-top: -11% !important;">Telefone</label>
       <input class="css-input telefone-top" id="input_contato" type="text" maxlength="10" />
       <label class="email" for="">E-mail</label>
       <input class="css-input" id="input_email" type="text" />
@@ -236,8 +236,7 @@
                     contatoServer: contato,
                     emailServer: email,
                     senhaServer: senha,
-                    confirmaSenhaServer: confirmaSenha,
-                    confirmaEmailServer: confirmaEmail
+            
                   }),
                 })
                   .then(function (resposta) {

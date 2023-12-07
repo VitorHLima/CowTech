@@ -28,8 +28,8 @@ function autenticar(req, res) {
                                         email: resultadoAutenticar[0].email,
                                         nomeEmpresa: resultadoAutenticar[0].nomeEmpresa,
                                         senha: resultadoAutenticar[0].senha,
-                                        idSensor: resultadoAquarios[0].idSensor, // Atenção aqui
-                                        curral: resultadoAquarios
+                                        // idSensor: resultadoAquarios[0].idSensor, // Atenção aqui
+                                        // curral: resultadoAquarios
                                     });
                                 } else {
                                     res.status(204).json({ sensor: [] }, { curral: [] });

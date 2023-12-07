@@ -91,41 +91,7 @@
       </div>
     </div>
     <div id="card_principal">
-      <div id="separacao_esquerda_sistema">
-        <div id="qt_sensor">
-          <h3 id="quantidade_sensores"></h3>
-        </div>
-        <div id="div_imagem_sensor">
-          <img src="dht11.jpg" id="img_sensor" alt="">
-        </div>
-        <div id="div_botoes">
-          <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosselEsquerda()">
-            <img src="icons8-voltar-100.png" alt="">
-          </button>
-          <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosselDireita()">
-            <img src="icons8-voltar-50.png" alt="">
-          </button>
-        </div>
-      </div>
-      <div id="separacao_direita_sistema">
-        <div id="temperatura_recomendada">
-          <h3></h3>
-        </div>
-        <div id="detalhes_sensor">
-          <h2 id="nome_sensor"></h2><br>
-          <p id="descricao_sensor"></p>
-        </div>
-        <div id="adicionar_sensor">
-          <div id="texto_adicionar_sensor">
-            <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span>
-            </h3>
-          </div>
-        </div>
-        <div id="texto_sensor">
-          <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir. Para mais informações, seria necessário
-            pesquisas mais aprofundadas dependendo do local.</p>
-        </div>
-      </div>
+      
     </div>
 
     <div id="principal_sensor">
@@ -266,7 +232,7 @@
     <div class="contatoFooter">
       <div class="titulo_contatoFooter">Contato</div>
       <div class="texto_ContatoFooter">
-        Telefone: (11) 99999-9999
+        Telefone: (11) 99999-9999 <br>
         cowtechcompany@gmail.com <br>
         <div class="copyright">@copyright Cow Tech 2023</div>
       </div>
@@ -356,12 +322,7 @@ function exibirSensorAtual() {
         <h2 id="nome_sensor">${sensorAtual.nomeSensor}</h2><br>
         <p id="descricao_sensor">O curral onde este sensor está é: ${sensorAtual.nomeCurral}</p>
       </div>
-      <div id="adicionar_sensor">
-        <div id="texto_adicionar_sensor">
-          <h3>Deseja adicionar mais um sensor?<span><button onclick="Adicionar_sensor()">Adicionar</button></span>
-          </h3>
-        </div>
-      </div>
+      
       <div id="texto_sensor">
         <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir. Para mais informações, seria necessário
           pesquisas mais aprofundadas dependendo do local.</p>
@@ -402,7 +363,6 @@ function carrosselDireita() {
             <td id="td_nome">${endFazenda.nomeFazenda}</td>
             <td id="td_endereco" style="width: 100%; border: 1px solid black;">${endFazenda.logradouro}</td>
             <td></td>
-            <td id="td_button"><button onclick="RemoverFazenda(${endFazenda.idEndereco})">-</button></td>
             <br>
           </tr>
         </tbody>`;
@@ -427,8 +387,7 @@ function carrosselDireita() {
             <td id="td_nome">${curral.nomeCurral}</td>
             <td id="td_endereco" style="width: 100%; border: 1px solid black;">${curral.nomeFazenda}</td>
             <td></td>
-            <td id="td_button"><button onclick="Remover(${curral.idCurral})">-</button></td>
-         <br> `
+          <br> `
         
         });
       });
@@ -677,8 +636,6 @@ function carrosselDireita() {
         console.log(`#ERRO: ${resposta}`)
       })
   }
-
-
 
   function cadastrarFazenda() {
     var nome = input_fazenda.value;
@@ -946,10 +903,12 @@ function carrosselDireita() {
   }
 
   #td_id {
-    border: 1px solid;
     border-radius: 100%;
-    height: 20px;
-    width: 7%;
+    height: 100%;
+    width: 5% !important;
+    
+    font-size: 23px;
+    
   }
 
   #td_nome {
@@ -1096,7 +1055,9 @@ function carrosselDireita() {
   #pop_upFazenda input {
     margin-bottom: 5px;
   }
-
+  tbody {
+    padding: 5%;
+  }
   #div_button_adicionarFazenda {
     margin-top: 3%;
     width: 60%;
@@ -1173,7 +1134,10 @@ function carrosselDireita() {
     display: flex;
     flex-direction: row;
   }
-
+  #tr_formulario {
+    height: 50px;
+    padding: 10px;
+  }
   #div_ddd {
     width: 10%;
     margin-right: 5%;
@@ -1186,7 +1150,9 @@ function carrosselDireita() {
   #input_ddd {
     width: 10%;
   }
-
+  #td_endereco {
+    padding: 3%;
+  }
   #input_telefone {
     width: 30%;
   }

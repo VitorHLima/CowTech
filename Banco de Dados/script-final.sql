@@ -8,7 +8,7 @@ use bdsistema;
 
 create table empresa(
 idEmpresa int primary key auto_increment,
-cnpj char(18),
+cnpj char(14),
 nomeEmpresa varchar(50),
 ddd char(2),
 contato char(10),
