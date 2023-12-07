@@ -86,3 +86,16 @@ O envio é feito nesse botão que se encontra na área superior esquerda.
 <h2>6º Passo</h2>
 <h3>Teste de coleta de dados</h3>
 Inicie a coleta de dados dentro do Arduino IDE.<br>
+
+<h1>Cadastrar Sensor</h1>
+<h2>1º Passo</h2>
+<h3>Abrir o MySQL e abrir o banco</h3>
+Use o comando: USE bdsistema;<br>
+
+<h2>2º Passo</h2>
+<h3>Inseir os dados do novo sensor</h3>
+Use o comando: INSERT INTO sensor VALUES (null, "Nome do Sensor", "fkCurral");<br>
+
+
+
+
