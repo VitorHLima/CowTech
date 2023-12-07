@@ -223,10 +223,113 @@
 
   // }
 
+  // function Pesquisar() {
+  //   div_titulo_grafico.innerHTML = ''
+  //   var fazendaVar = select_fazenda.value;
+  //   var curralVar = listaCurrais.value;
+
+  //   fetch("/sensores/mostrar/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       fazendaServer: fazendaVar,
+  //       curralServer: curralVar
+  //     })
+  //   })
+  //     .then(resposta => resposta.json())
+  //     .then(valor => {
+
+  //       for (var i = 0; i < valor.length; i++) {
+  //         console.log(valor[i].idSensor + "AQUI ESTA O VALOR")
+
+  //         var divPrincipal = document.getElementById('div_titulo_grafico');
+  //         if (Sensores) {
+  //           var div = document.createElement('div');
+  //           var h4 = document.createElement('h4');
+  //           var button1 = document.createElement('button');
+  //           `button-${fkSensor}`
+
+  //           button1.classList.add('button_sensor');
+
+  //           div.classList.add('div_tipos_metricas');
+
+  //           div.innerHTML = valor.map(item => item.idSensor);
+
+  //           h4 = valor.map(item => item.nomeSensor);
+
+  //           var idSen = valor[i].idSensor;
+
+  //           div.innerHTML = h4[i];
+
+  //           divPrincipal.appendChild(div);
+
+  //           // div.appendChild(button1);
+
+  //           div.innerHTML += `<button class='button_sensor' onclick="obterDadosGrafico(${idSen}), obterDadosMensais(${idSen})"></button>`;
+  //           fetch(`/medidas/ultimas/${idSen}`, { cache: 'no-store' }).then(function Teste(response) {
+  //             if (response.ok) {
+  //               response.json().then(function (resposta) {
+  //                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+  //                 resposta.reverse();
+
+  //                 var temperatura = resposta.map(item => Number(item.temperatura));
+
+
+  //                 var buttons = document.getElementsByClassName('button_sensor');
+
+  //                 for (var b = 0; b < buttons.length; b++) {
+  //                   var currentButton = buttons[b];
+  //                   var estiloButton = window.getComputedStyle(currentButton);
+  //                   var cor = estiloButton.backgroundColor;
+  //                   console.log(buttons)
+  //                   var medidaTemp = temperatura[b];
+
+  //                   console.log(medidaTemp + "temperatura AQUI")
+
+  //                   if (medidaTemp > 24) {
+  //                     currentButton.style.backgroundColor = 'red';
+  //                     // alertaEmail();
+  //                     // alertaSms();
+  //                     pop_up_alerta.style.display = 'flex'
+  //                   } else if (medidaTemp == 24) {
+  //                     currentButton.style.backgroundColor = 'yellow';
+  //                   } else if (medidaTemp < 24) {
+  //                     currentButton.style.backgroundColor = 'green';
+  //                   }
+
+
+  //                   console.log(medidaTemp);
+
+  //                 }
+
+  //               });
+  //             } else {
+  //               console.error('Nenhum dado encontrado ou erro na API');
+  //             }
+  //           })
+  //             .catch(function (error) {
+  //               console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  //             });
+
+  //         } else {
+  //           console.log('Impossível achar os dados');
+  //         }
+  //       }
+
+
+  //     })
+  //     .catch(erro => console.error(erro));
+
+  //   return false;
+  // }
+
 
 
   function Pesquisar() {
-    div_titulo_grafico.innerHTML = ''
+    div_titulo_grafico.innerHTML = '';
+
     var fazendaVar = select_fazenda.value;
     var curralVar = listaCurrais.value;
 
@@ -241,91 +344,71 @@
       })
     })
       .then(resposta => resposta.json())
-      .then(valor => {
-
-        for (var i = 0; i < valor.length; i++) {
-          console.log(valor[i].idSensor + "AQUI ESTA O VALOR")
+      .then(valores => {
+        valores.forEach(valor => {
+          console.log(valor.idSensor + " AQUI ESTA O VALOR");
 
           var divPrincipal = document.getElementById('div_titulo_grafico');
-          if (Sensores) {
-            var div = document.createElement('div');
-            var h4 = document.createElement('h4');
-            var button1 = document.createElement('button');
-            `button-${fkSensor}`
+          var div = document.createElement('div');
+          var h4 = document.createElement('h4');
+          var button1 = document.createElement('button');
 
-            button1.classList.add('button_sensor');
 
-            div.classList.add('div_tipos_metricas');
+          div.classList.add('div_tipos_metricas');
+          div.innerHTML = valor.nomeSensor;
+          button1.id = `button-${valor.idSensor}`;
+          button1.classList.add('button_sensor');
+          h4.textContent = valor.nomeSensor;
 
-            div.innerHTML = valor.map(item => item.idSensor);
+          div.appendChild(h4);
+          div.appendChild(button1);
+          divPrincipal.appendChild(div);
 
-            h4 = valor.map(item => item.nomeSensor);
+          button1.addEventListener('click', function () {
+            obterDadosGrafico(valor.idSensor);
+            obterDadosMensais(valor.idSensor);
+          });
 
-            var idSen = valor[i].idSensor;
-
-            div.innerHTML = h4[i];
-
-            divPrincipal.appendChild(div);
-
-            // div.appendChild(button1);
-
-            div.innerHTML += `<button class='button_sensor' onclick="obterDadosGrafico(${idSen}), obterDadosMensais(${idSen})"></button>`;
-            fetch(`/medidas/ultimas/${idSen}`, { cache: 'no-store' }).then(function Teste(response) {
+          fetch(`/medidas/ultimas/${valor.idSensor}`, { cache: 'no-store' })
+            .then(response => {
               if (response.ok) {
-                response.json().then(function (resposta) {
-                  console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                  resposta.reverse();
-
-                  var temperatura = resposta.map(item => Number(item.temperatura));
-
-                  
-                  var buttons = document.getElementsByClassName('button_sensor');
-
-                  for (var b = 0; b < buttons.length; b++) {
-                    var currentButton = buttons[b];
-                    var estiloButton = window.getComputedStyle(currentButton);
-                    var cor = estiloButton.backgroundColor;
-                    console.log(buttons)
-                    var medidaTemp = temperatura[b];
-
-                    console.log(medidaTemp + "temperatura AQUI")
-
-                    if (medidaTemp > 24) {
-                      currentButton.style.backgroundColor = 'red';
-                      // alertaEmail();
-                      // alertaSms();
-                      pop_up_alerta.style.display = 'flex'
-                    } else if (medidaTemp == 24) {
-                      currentButton.style.backgroundColor = 'yellow';
-                    } else if (medidaTemp < 24) {
-                      currentButton.style.backgroundColor = 'green';
-                    }
-
-
-                    console.log(medidaTemp);
-
-                  }
-
-                });
+                return response.json();
               } else {
-                console.error('Nenhum dado encontrado ou erro na API');
+                throw new Error('Nenhum dado encontrado ou erro na API');
               }
             })
-              .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-              });
+            .then(resposta => {
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+              resposta.reverse();
 
-          } else {
-            console.log('Impossível achar os dados');
-          }
-        }
+              var temperatura = resposta.map(item => Number(item.temperatura));
+              var currentButton = document.getElementById(`button-${valor.idSensor}`);
 
+              var medidaTemp = temperatura[0]; // Ajuste conforme necessário
 
+              if (medidaTemp > 24) {
+                currentButton.style.backgroundColor = 'red';
+                // alertaEmail();
+                // alertaSms();
+                pop_up_alerta.style.display = 'flex';
+              } else if (medidaTemp == 24) {
+                currentButton.style.backgroundColor = 'yellow';
+              } else if (medidaTemp < 24) {
+                currentButton.style.backgroundColor = 'green';
+              }
+
+              console.log(medidaTemp);
+            })
+            .catch(error => {
+              console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+        });
       })
       .catch(erro => console.error(erro));
 
     return false;
   }
+
   // setInterval(Pesquisar, 10000);
 
   var sensores = JSON.parse(sessionStorage.SENSOR)
@@ -378,9 +461,9 @@
         </ul>
       </div>
     </div>`
-    console.log("========================================");
-    console.log("REsposta");
-    console.log(resposta);
+            console.log("========================================");
+            console.log("REsposta");
+            console.log(resposta);
             plotarGrafico(resposta, fkSensor);
             plotarGrafico2(resposta, fkSensor);
           });
@@ -984,7 +1067,7 @@
     width: 90%;
     height: 25px;
     border: 1px solid black;
-    margin-top: 60%;
+    margin-top: 40%;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
@@ -998,7 +1081,7 @@
     width: 90%;
     height: 25px;
     border: 1px solid black;
-    margin-top: 60%;
+    margin-top: 40%;
     border-radius: 10px;
     opacity: 0.8;
   }

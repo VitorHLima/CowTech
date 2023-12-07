@@ -24,7 +24,7 @@ function buscarUltimasMedidas(fkSensor) {
     FROM registro
     JOIN sensor ON registro.fkSensor = sensor.idSensor
     WHERE idSensor = ${fkSensor}
-    ORDER BY dtAtual DESC;`} else {
+    ORDER BY dtAtual asc;`} else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
