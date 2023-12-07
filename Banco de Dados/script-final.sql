@@ -34,14 +34,14 @@ create table curral(
 idCurral int primary key auto_increment,
 nomeCurral varchar(45),
 fkEndFazenda int,
-foreign key (fkEndFazenda) references endFazenda(idEndereco)
+foreign key (fkEndFazenda) references endFazenda(idEndereco) ON DELETE CASCADE
 );
 
 create table sensor(
 idSensor int primary key auto_increment,
 nomeSensor varchar(20),
 fkCurral int,
-foreign key (fkCurral) references curral(idCurral) 
+foreign key (fkCurral) references curral(idCurral) ON DELETE CASCADE
 );
 
 create table registro(
@@ -51,52 +51,17 @@ dht11_Umidade decimal(10,2),
 lm35_temperatura decimal(10,2),
 fkSensor int,
 key(idRegistro),
-foreign key (fkSensor) references sensor(idSensor),
-primary key (fkSensor,idRegistro)
+foreign key (fkSensor) references sensor(idSensor) ON DELETE CASCADE,
+primary key (fkSensor,idRegistro) 
 )auto_increment = 1000;
 
 -- Inserção de Dados
-
-SELECT s.nomeSensor, c.nomeCurral, AVG(r.lm35_temperatura) AS media_temperatura
-FROM Sensor AS s
-JOIN Curral AS c ON c.idCurral = s.fkCurral
-JOIN endFazenda AS e ON c.fkEndFazenda = e.idEndereco
-JOIN Empresa AS em ON em.idEmpresa = e.fkEmpresa
-JOIN Registro AS r ON r.fkSensor = s.idSensor
-WHERE em.idEmpresa = 2
-GROUP BY s.nomeSensor, c.nomeCurral;
-
-SELECT
-    lm35_temperatura AS temperatura,
-    (SELECT AVG(lm35_temperatura) FROM registro) AS media_temperatura,
-    (SELECT AVG(dht11_umidade) FROM registro WHERE fkSensor = 4) AS media_umidade,
-    dht11_umidade AS umidade,
-    dtAtual,
-    DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico
-FROM registro
-JOIN sensor ON registro.fkSensor = sensor.idSensor
-WHERE idSensor = 4
-ORDER BY idRegistro DESC;
-
-
-SELECT s.nomeSensor, c.nomeCurral, AVG(r.lm35_temperatura) AS media_temperatura
-FROM Sensor AS s
-JOIN Curral AS c ON c.idCurral = s.fkCurral
-JOIN endFazenda AS e ON c.fkEndFazenda = e.idEndereco
-JOIN Empresa AS em ON em.idEmpresa = e.fkEmpresa
-JOIN Registro AS r ON r.fkSensor = s.idSensor
-WHERE em.idEmpresa = 1
-GROUP BY s.nomeSensor, c.nomeCurral;
-
-SELECT distinct Sensor.nomeSensor, curral.nomeCurral, registro.lm35_temperatura as temperatura FROM Sensor join curral ON idCurral = fkCurral 
-JOIN endFazenda ON fkEndFazenda = idEndereco JOIN Empresa ON idEmpresa = fkEmpresa JOIN registro on idRegistro = fkSensor where idEmpresa = 1; 
-
-SELECT * FROM Curral JOIN endFazenda ON idEndereco;
-
 insert into empresa values
 	(null,'01234567891234','Etiel','11','912345678','etiel@sptech.com','cowTech_123');
     
-    SELECT * FROM Curral JOIN endFazenda ON idEndereco where idEmpresa = 1;
+    SELECT * FROM Curral;
+	select * from sensor;
+
 
 insert into endFazenda values
 	(null,'FrezzaLaticinios','Rua Abobrinha','Chacaras Leguminosas','Hortifrut','Acre','69912345',678,1);
@@ -124,7 +89,7 @@ insert into sensor values
 
 INSERT INTO registro (idRegistro,dht11_Umidade,lm35_temperatura, fkSensor)
 VALUES (null,80, 29, 1),(null,80, 29, 2),(null,80, 29, 3),(null,80, 29, 4),
-(null,80, 29, 5),(null,80, 29, 6),(null,80, 29, 7),(null,80, 29, 8),(null,80,29, 9)
+(null,80, 29, 5),(null,80, 29, 6),(null,80, 29, 7),(null,80, 29, 8),(null,80,29, 9);
 					
 truncate table bdsistema.registro;
 		
@@ -248,6 +213,52 @@ INSERT bdsistema.registro VALUES
 
 select * from registro;
 
+SELECT s.nomeSensor, c.nomeCurral, AVG(r.lm35_temperatura) AS media_temperatura
+FROM Sensor AS s
+JOIN Curral AS c ON c.idCurral = s.fkCurral
+JOIN endFazenda AS e ON c.fkEndFazenda = e.idEndereco
+JOIN Empresa AS em ON em.idEmpresa = e.fkEmpresa
+JOIN Registro AS r ON r.fkSensor = s.idSensor
+WHERE em.idEmpresa = 2
+GROUP BY s.nomeSensor, c.nomeCurral;
 
+SELECT
+    lm35_temperatura AS temperatura,
+    (SELECT AVG(lm35_temperatura) FROM registro) AS media_temperatura,
+    (SELECT AVG(dht11_umidade) FROM registro WHERE fkSensor = 4) AS media_umidade,
+    dht11_umidade AS umidade,
+    dtAtual,
+    DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico
+FROM registro
+JOIN sensor ON registro.fkSensor = sensor.idSensor
+WHERE idSensor = 4
+ORDER BY idRegistro DESC;
+
+
+SELECT s.nomeSensor, c.nomeCurral, AVG(r.lm35_temperatura) AS media_temperatura
+FROM Sensor AS s
+JOIN Curral AS c ON c.idCurral = s.fkCurral
+JOIN endFazenda AS e ON c.fkEndFazenda = e.idEndereco
+JOIN Empresa AS em ON em.idEmpresa = e.fkEmpresa
+JOIN Registro AS r ON r.fkSensor = s.idSensor
+WHERE em.idEmpresa = 1
+GROUP BY s.nomeSensor, c.nomeCurral;
+
+SELECT distinct Sensor.nomeSensor, curral.nomeCurral, registro.lm35_temperatura as temperatura FROM Sensor join curral ON idCurral = fkCurral 
+JOIN endFazenda ON fkEndFazenda = idEndereco JOIN Empresa ON idEmpresa = fkEmpresa JOIN registro on idRegistro = fkSensor where idEmpresa = 1; 
+
+SELECT * FROM Curral JOIN endFazenda ON idEndereco;
+
+DELETE curral, sensor, registro
+FROM curral
+ JOIN sensor ON idCurral = fkCurral
+ JOIN registro ON idSensor = fkSensor
+WHERE idCurral = 1;
+
+DELETE endFazenda, curral, sensor, registro
+FROM curral
+JOIN sensor ON idCurral = fkCurral
+JOIN registro ON idSensor = fkSensor JOIN endFazenda ON idEndereco = fkEndFazenda
+WHERE idEndereco = 1;
 
    

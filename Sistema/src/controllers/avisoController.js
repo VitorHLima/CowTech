@@ -70,7 +70,7 @@ function publicar(req, res) {
         res.status(400).send("O título está indefinido!");
     } else if (descricao == undefined) {
         res.status(400).send("A descrição está indefinido!");
-    }else if (classificacao == undefined) {
+    } else if (classificacao == undefined) {
         res.status(400).send("A descrição está indefinido!");
     } else if (idUsuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
@@ -112,9 +112,26 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idAviso = req.params.idAviso;
+    var idCurral = req.params.idCurral;
 
-    avisoModel.deletar(idAviso)
+    avisoModel.deletar(idCurral)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+function deletar2(req, res) {
+    var idFazenda = req.params.idFazenda;
+
+    avisoModel.deletar2(idFazenda)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -135,5 +152,6 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     editar,
-    deletar
+    deletar,
+    deletar2
 }

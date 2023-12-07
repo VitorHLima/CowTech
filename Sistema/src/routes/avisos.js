@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var avisoController = require("../../controllers/avisoController");
+var avisoController = require("../controllers/avisoController");
 
 router.get("/listar", function (req, res) {
     avisoController.listar(req, res);
@@ -23,8 +23,11 @@ router.put("/editar/:idAviso", function (req, res) {
     avisoController.editar(req, res);
 });
 
-router.delete("/deletar/:idAviso", function (req, res) {
+router.delete("/deletar/:idCurral", function (req, res) {
     avisoController.deletar(req, res);
+});
+router.delete("/deletarF/:idFazenda", function (req, res) {
+    avisoController.deletar2(req, res);
 });
 
 module.exports = router;

@@ -40,19 +40,7 @@
         <button id="button_pesquisar" onclick="Pesquisar()"><img src="lupa.png" alt=""></button>
       </div>
       <div id="principal_alerta">
-        <div id='pop_up_alerta'>
-          <div id="pop_up_titulo">
-            <h2>AVISO!</h2>
-          </div>
-          <div id="pop_up_texto">
-            <h3>A temperatura não está ideal!</h3><br><br>
-            <h4>Recomendamos que normalize a temperatura no local</h4><br>
-            <h4>X92G49193 (Nome do sensor)</h4>
-          </div>
-          <div id="div_button_alerta">
-            <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
-          </div>
-        </div>
+        
       </div>
       <div id="div_titulo_grafico">
 
@@ -130,7 +118,13 @@
         })
       })
     })
-
+    function Alerta_continuar() {
+      var alerta = document.getElementById('principal_alerta')
+      alerta.style.display = 'none'
+                
+      pop_up_alerta.style.display = 'none';
+              
+    }
 
   function alertaEmail() {
 
@@ -380,7 +374,7 @@
             .then(resposta => {
               console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
               resposta.reverse();
-
+              var nomeSensor = valor.nomeSensor
               var temperatura = resposta.map(item => Number(item.temperatura));
               var currentButton = document.getElementById(`button-${valor.idSensor}`);
 
@@ -388,9 +382,22 @@
 
               if (medidaTemp > 24) {
                 currentButton.style.backgroundColor = 'red';
-                // alertaEmail();
-                // alertaSms();
+                var alerta = document.getElementById('principal_alerta')
+                alerta.innerHTML = `<div id='pop_up_alerta'>
+          <div id="pop_up_titulo">
+            <h2>AVISO!</h2>
+          </div>
+          <div id="pop_up_texto">
+            O sensor "${nomeSensor}" está acima da temperatura recomendada
+          </div>
+          <div id="div_button_alerta">
+            <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
+          </div>
+        </div>`
+                alerta.style.display = 'flex'
+                
                 pop_up_alerta.style.display = 'flex';
+              
               } else if (medidaTemp == 24) {
                 currentButton.style.backgroundColor = 'yellow';
               } else if (medidaTemp < 24) {
@@ -451,9 +458,9 @@
       </h2>
       <div id="div_informacoes_medidas">
         <ul style="margin-right: 10%;">
-          <li>TEMPERATURA ATUAL:<span style="text-decoration: none;">${Temp[0]}</span></li>
+          <li>TEMPERATURA ATUAL: <span style="text-decoration: none;">${Temp[0]}</span></li>
     <br>
-          <li>MÉDIA DE TEMPERATURA(MENSAL):<span style="text-decoration: none;">${mediaTemp[0]}</span></li>
+          <li>MÉDIA DE TEMPERATURA(MENSAL): <span style="text-decoration: none;">${mediaTemp[0]}</span></li>
         </ul>
         <ul>
           <li>UMIDADE ATUAL: <span style="text-decoration: none;">${Umi[0]}</span></li><br>
@@ -509,7 +516,7 @@
   // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
   // A função *plotarGrafico* também invoca a função *atualizarGrafico*
   function plotarGrafico(resposta, fkSensor) {
-    alert(fkSensor)
+    
     console.log("iniciando plotagem do gráfico...");
 
     // Criando estrutura para plotar gráfico - labels
@@ -536,7 +543,7 @@
     console.log(resposta);
 
     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < resposta.length; i++) {
+    for (var i = resposta.length - 1; i >= 0; i--) {
       var registro = resposta[i];
       labels.push(registro.momento_grafico);
       dados.datasets[0].data.push(registro.umidade);
@@ -584,6 +591,7 @@
           tension: 0.1,
         },
       ],
+      
     };
 
     console.log("----------------------------------------------");
@@ -593,12 +601,11 @@
     console.log(resposta);
 
     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < resposta.length; i++) {
-      var registro = resposta[i];
-      labels.push(registro.momento_grafico);
-      // dados.datasets[0].data.push(registro.umidade);
-      dados.datasets[0].data.push(registro.temperatura);
-    }
+    for (var i = resposta.length - 1; i >= 0; i--) {
+    var registro = resposta[i];
+    labels.push(registro.momento_grafico);
+    dados.datasets[0].data.push(registro.temperatura);
+  }
     console.log("----------------------------------------------");
     console.log("O gráfico será plotado com os respectivos valores:");
     console.log("Labels:");
@@ -649,7 +656,7 @@
     console.log(resposta);
 
     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < resposta.length; i++) {
+    for (var i = resposta.length - 1; i >= 0; i--) {
       var registro = resposta[i];
       labels.push(registro.momento_grafico);
       dados.datasets[0].data.push(registro.umidade);
@@ -705,7 +712,7 @@
     console.log(resposta);
 
     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < resposta.length; i++) {
+    for (var i = resposta.length - 1; i >= 0; i--) {
       var registro = resposta[i];
       labels.push(registro.momento_grafico);
       // dados.datasets[0].data.push(registro.umidade);
@@ -1063,11 +1070,11 @@
   }
 
   .button_sensor {
-    padding: 2%;
+    padding: 5%;
     width: 90%;
     height: 25px;
     border: 1px solid black;
-    margin-top: 40%;
+    margin-top: 20%;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
@@ -1077,12 +1084,13 @@
   }
 
   .button_sensor:hover {
-    padding: 2%;
+    padding: 5%;
     width: 90%;
     height: 25px;
     border: 1px solid black;
-    margin-top: 40%;
+    margin-top: 20%;
     border-radius: 10px;
+    cursor: pointer;
     opacity: 0.8;
   }
 
@@ -1120,10 +1128,10 @@
     flex-direction: column;
     height: auto;
     display: none;
-    margin-top: 19%;
+    top:0;
     justify-items: center;
     align-items: center;
-    margin-bottom: 10%;
+    position: absolute;
   }
 
   #titulo_alerta {
@@ -1138,7 +1146,7 @@
     flex-direction: column;
     position: absolute;
     background-color: white;
-    width: 40%;
+    width: 33%;
     height: 350px;
     margin-top: 20%;
     padding: 0% 0% 2% 0%;
@@ -1146,9 +1154,10 @@
 
   #pop_up_titulo {
     color: white;
-    padding: 3% 0 3% 0;
     align-items: center;
     display: flex;
+    pad: 10%;
+    padding: 2%;
     flex-direction: column;
     text-align: center;
     background-color: rgb(202, 39, 39);
@@ -1156,22 +1165,25 @@
   }
 
   #pop_up_texto {
-    margin-top: 10%;
+    color: black;
     width: 100%;
     text-align: center;
-    height: auto;
+    height: 60%;
+    font-size: 21px;
+    padding: 10% 0 0 0;
+    font-weight: 600;
     justify-items: center;
     display: flex;
     flex-direction: column;
   }
-
+  
   #div_button_alerta {
     width: 100%;
-    height: auto;
+    height: 40%;
     align-items: center;
     display: flex;
     justify-content: center;
-    padding: 8% 0 0 0;
+    margin: 1px solid black;
   }
 
   #button_alerta {
@@ -1180,6 +1192,7 @@
     background-color: black;
     color: white;
     border: 0;
+    
     font-weight: 400;
   }
 
