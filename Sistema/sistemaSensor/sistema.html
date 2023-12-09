@@ -281,22 +281,55 @@
   !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
 
 
-
-
   fetch(`/sensores/todos/${idEmpresa}`, {
-    method: "GET",
-  })
-    .then(function (resposta) {
-      resposta.json()
-        .then((dados) => {
-          sensores = dados;
+  method: "GET",
+})
+  .then(function (resposta) {
+    resposta.json()
+      .then((dados) => {
+        sensores = dados;
+        if (sensores.length > 0) {
           exibirSensorAtual();
-        });
-    })
-    .catch(function (erro) {
-      console.log(erro);
-
-    });
+        } else {
+          // Caso não haja sensores cadastrados
+          var card_principal = document.getElementById("card_principal");
+          card_principal.innerHTML =  `<div id="separacao_esquerda_sistema">
+      <div id="qt_sensor">
+        <h3 id="quantidade_sensores"></h3>
+      </div>
+      <div id="div_imagem_sensor">
+        <img src="dht11.jpg" id="img_sensor" alt="">
+      </div>
+      <div id="div_botoes">
+        <button id="esquerda_sensor" class="botao_sistema_seta" onclick="carrosselEsquerda()">
+          <img src="icons8-voltar-100.png" alt="">
+        </button>
+        <button id="direita_sensor" class="botao_sistema_seta" onclick="carrosselDireita()">
+          <img src="icons8-voltar-50.png" alt="">
+        </button>
+      </div>
+    </div>
+    <div id="separacao_direita_sistema">
+      <div id="temperatura_recomendada" style="margin-top:0%;">
+        <h3>Cadastre um sensor com nosso suporte</h3>
+      </div>
+      <div id="detalhes_sensor">
+        <h2 id="nome_sensor"></h2><br>
+        <p id="descricao_sensor">Aqui é uma descrição de seu sensor, cadastre agora com nosso suporte!</p>
+      </div>
+      
+      <div id="texto_sensor">
+        <p>Dependendo de sua região, a temperatura pode aumentar ou diminuir. Para mais informações, seria necessário
+          pesquisas mais aprofundadas dependendo do local.</p>
+      </div>
+    </div>
+  `
+        }
+      });
+  })
+  .catch(function (erro) {
+    console.log(erro);
+  });
 
   function exibirSensorAtual() {
     var card_principal = document.getElementById("card_principal");
@@ -322,7 +355,7 @@
     </div>
     <div id="separacao_direita_sistema">
       <div id="temperatura_recomendada">
-        <h3>A temperatura desse sensor é: ${sensorAtual.temperatura}°C</h3>
+        <h3> </h3>
       </div>
       <div id="detalhes_sensor">
         <h2 id="nome_sensor">${sensorAtual.nomeSensor}</h2><br>
@@ -336,7 +369,7 @@
     </div>
   `;
   }
-
+  console.log(sensores)
   function carrosselEsquerda() {
     contador--;
     if (contador < 0) {
@@ -1592,6 +1625,7 @@
   #temperatura_recomendada {
     width: 100%;
     text-align: center;
+    margin-top: 4%;
   }
 
   #detalhes_sensor {

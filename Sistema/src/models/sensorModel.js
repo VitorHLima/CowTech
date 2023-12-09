@@ -4,7 +4,7 @@ function publicar(nome, curral) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ");
     var instrucao = `
         INSERT INTO sensor(nomeSensor, fkCurral) VALUES ('${nome}',${curral});
-    `;
+    `; s
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -33,9 +33,8 @@ function listarSensores(fazenda, curral) {
 }
 function todos(idEmpresa) {
 
-    instrucaoSql = `SELECT Sensor.nomeSensor, curral.nomeCurral, registro.lm35_temperatura as temperatura FROM Sensor join curral ON idCurral = fkCurral 
-    JOIN endFazenda ON fkEndFazenda = idEndereco JOIN Empresa ON idEmpresa = fkEmpresa JOIN registro on idRegistro = fkSensor where idEmpresa = ${idEmpresa}; 
-    
+    instrucaoSql = `SELECT Sensor.nomeSensor, curral.nomeCurral FROM Sensor join curral ON idCurral = fkCurral 
+    JOIN endFazenda ON fkEndFazenda = idEndereco JOIN Empresa ON idEmpresa = fkEmpresa where idEmpresa = ${idEmpresa}; 
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

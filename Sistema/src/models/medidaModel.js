@@ -15,6 +15,7 @@ function buscarUltimasMedidas(fkSensor) {
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
+        sensor.nomeSensor,
         lm35_temperatura AS temperatura,
         (SELECT ROUND(AVG(lm35_temperatura),2) FROM registro WHERE fkSensor = ${fkSensor} order by dtAtual desc) AS media_temperatura,
         (SELECT ROUND(AVG(dht11_umidade),2) FROM registro WHERE fkSensor = ${fkSensor} order by dtAtual desc) AS media_umidade,

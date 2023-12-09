@@ -106,6 +106,11 @@ insert into curral values
 	(null,'Galpão Norte',1),
 	(null,'Galpão Leste',1);
     
+    insert into sensor values
+	(null,'Sensor 1',1);
+    
+    
+
 insert into sensor values
 	(null,'Sensor 1',1),
 	(null,'Sensor 2',1),
@@ -114,6 +119,13 @@ insert into sensor values
 	(null,'Sensor 5',2),
 	(null,'Sensor 6',3),
 	(null,'Sensor 7',3);
+    
+    SELECT Sensor.nomeSensor, curral.nomeCurral FROM Sensor join curral ON idCurral = fkCurral 
+    JOIN endFazenda ON fkEndFazenda = idEndereco JOIN Empresa ON idEmpresa = fkEmpresa where idEmpresa = 1; 
+    
+    insert registro values (null, now(), 50, 24, 2),(null, now(), 50, 24, 2),(null, now(), 55, 24, 2),(null, now(), 70, 24, 2);
+    select * from registro;
+    select * from sensor;
     
     INSERT registro VALUES 
 (1, now(), 80, 29, 1), (1, now(), 69, 20, 2),(1, now(), 70, 25, 3), 
@@ -128,6 +140,10 @@ VALUES (null,80, 29, 1),(null,80, 29, 2),(null,80, 29, 3),(null,80, 29, 4),
 					
 truncate table bdsistema.registro;
 		
+SELECT Sensor.nomeSensor, curral.nomeCurral, registro.lm35_temperatura as temperatura FROM Sensor join curral ON idCurral = fkCurral 
+    JOIN endFazenda ON fkEndFazenda = idEndereco JOIN Empresa ON idEmpresa = fkEmpresa JOIN registro on idRegistro = fkSensor where idEmpresa = 1;        
+        
+        truncate table sensor;
 -- selects
 
 SELECT * FROM sensor JOIN Curral ON idCurral = fkCurral;

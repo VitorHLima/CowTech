@@ -35,7 +35,7 @@
     <div class="regua">
       <div class="item-regua alerta-frio">
         <h4>Ideal</h4>
-        <h2>&lt;24°C</h2>
+        <h2>&gt; 0°C a &lt;24°C</h2>
       </div>
       <div class="item-regua ideal">
         <h4>Alerta</h4>
@@ -43,7 +43,7 @@
       </div>
       <div class="item-regua perigo-quente">
         <h4>Perigo</h4>
-        <h2>&gt;24°C</h2>
+        <h2>&lt; 0°C ou &gt; 24°C</h2>
       </div>
     </div>
 
@@ -153,39 +153,46 @@
         console.log(`#ERRO: ${resposta}`);
       });
   }
+  var global = 1;
+var intervalID; // Variável para armazenar o ID do intervalo
+var divsArmazenadas = []; // Variável para armazenar as divs existentes
 
+function Pesquisar() {
+  div_titulo_grafico.innerHTML = '';
+  divsArmazenadas = []; // Limpar o array divsArmazenadas
 
+  var fazendaVar = select_fazenda.value;
+  var curralVar = listaCurrais.value;
 
-  var global = 1
-
-
-  function Pesquisar() {
-    div_titulo_grafico.innerHTML = '';
-
-    var fazendaVar = select_fazenda.value;
-    var curralVar = listaCurrais.value;
-
-    fetch("/sensores/mostrar/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        fazendaServer: fazendaVar,
-        curralServer: curralVar
-      })
+  fetch("/sensores/mostrar/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      fazendaServer: fazendaVar,
+      curralServer: curralVar
     })
-      .then(resposta => resposta.json())
-      .then(valores => {
-        valores.forEach(valor => {
-          console.log(valor.idSensor + " AQUI ESTA O VALOR");
+  })
+    .then(resposta => resposta.json())
+    .then(valores => {
+      valores.forEach(valor => {
+        console.log(valor.idSensor + " AQUI ESTA O VALOR");
 
-          var divPrincipal = document.getElementById('div_titulo_grafico');
+        var divExistente = divsArmazenadas.find(div => div.id === `div-${valor.idSensor}`);
+        if (divExistente) {
+          // Atualizar o conteúdo da div existente
+          divExistente.innerHTML = valor.nomeSensor;
+
+          var currentButton = document.getElementById(`button-${valor.idSensor}`);
+          currentButton.textContent = valor.nomeSensor;
+        } else {
+          // Criar uma nova div
           var div = document.createElement('div');
           var h4 = document.createElement('h4');
           var button1 = document.createElement('button');
-
-
+          var divPrincipal = document.getElementById('div_titulo_grafico');
+          div.id = `div-${valor.idSensor}`;
           div.classList.add('div_tipos_metricas');
           div.innerHTML = valor.nomeSensor;
           button1.id = `button-${valor.idSensor}`;
@@ -196,34 +203,36 @@
           div.appendChild(button1);
           divPrincipal.appendChild(div);
 
-          button1.addEventListener('click', function () {
-            verificador = 0;
-            obterDadosGrafico(valor.idSensor);
+          divsArmazenadas.push(div);
+        }
 
-          });
+        button1.addEventListener('click', function () {
+          verificador = 0;
+          obterDadosGrafico(valor.idSensor);
+        });
 
-          fetch(`/medidas/ultimas/${valor.idSensor}`, { cache: 'no-store' })
-            .then(response => {
-              if (response.ok) {
-                return response.json();
-              } else {
-                throw new Error('Nenhum dado encontrado ou erro na API');
-              }
-            })
-            .then(resposta => {
-              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-              resposta.reverse();
-              var nomeSensor = valor.nomeSensor
-              var temperatura = resposta.map(item => Number(item.temperatura));
-              var currentButton = document.getElementById(`button-${valor.idSensor}`);
+        fetch(`/medidas/ultimas/${valor.idSensor}`, { cache: 'no-store' })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Nenhum dado encontrado ou erro na API');
+            }
+          })
+          .then(resposta => {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+            var nomeSensor = valor.nomeSensor
+            var temperatura = resposta.map(item => Number(item.temperatura));
+            var currentButton = document.getElementById(`button-${valor.idSensor}`);
 
-              var medidaTemp = temperatura[0]; // Ajuste conforme necessário
+            var medidaTemp = temperatura[0]; // Ajuste conforme necessário
 
-              if (medidaTemp > 24) {
-                currentButton.style.backgroundColor = 'red';
-                var alerta = document.getElementById('principal_alerta')
-                if (global === 1) {
-                  alerta.innerHTML = `<div id='pop_up_alerta'>
+            if (medidaTemp > 24) {
+              currentButton.style.backgroundColor = 'red';
+              var alerta = document.getElementById('principal_alerta')
+              if (global === 1) {
+                alerta.innerHTML = `<div id='pop_up_alerta'>
           <div id="pop_up_titulo">
             <h2>AVISO!</h2>
           </div>
@@ -234,40 +243,35 @@
             <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
           </div>
         </div>`
-                  alerta.style.display = 'flex'
+                alerta.style.display = 'flex'
 
-                  pop_up_alerta.style.display = 'flex';
+                pop_up_alerta.style.display = 'flex';
 
-                  global += 1
-                  alertaEmail()
-                } else {
-                  alerta.style.display = 'none'
+                global += 1
+                alertaEmail()
+              } else {
+                alerta.style.display = 'none'
 
-                  pop_up_alerta.style.display = 'none';
-                }
-
-              } else if (medidaTemp == 24) {
-                currentButton.style.backgroundColor = 'yellow';
-              } else if (medidaTemp < 24) {
-                currentButton.style.backgroundColor = 'green';
+                pop_up_alerta.style.display = 'none';
               }
 
+            } else if (medidaTemp == 24) {
+              currentButton.style.backgroundColor = 'yellow';
+            } else if (medidaTemp < 24 && medidaTemp > 0) {
+              currentButton.style.backgroundColor = 'green';
+            } else if (medidaTemp < 0) {
+              currentButton.style.backgroundColor = 'red';
+            }
+          })
+          .catch(error => {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+          });
+      });
+    });
+}
 
-            })
-            .catch(error => {
-              console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-        });
-      })
-      .catch(erro => console.error(erro));
-
-    return false;
-  }
-
-  // setInterval(Pesquisar, 4000);
 
   var sensores = JSON.parse(sessionStorage.SENSOR)
-  console.log(sensores)
   let proximaAtualizacao;
 
   var verificador = 0;
@@ -282,21 +286,22 @@
             resposta.reverse();
             inserir_informacoes.innerHTML = ''
             var mediaTemp = resposta.map(item => item.media_temperatura)
+            var nomeSensor = resposta[0].nomeSensor
             var mediaUmi = resposta.map(item => item.media_umidade)
             var Temp = resposta.map(item => item.temperatura)
             var Umi = resposta.map(item => item.umidade)
             inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
-        INFORMAÇÕES DO SENSOR:
+        INFORMAÇÕES DO ${nomeSensor}:
       </h2>
       <div id="div_informacoes_medidas">
         <ul style="margin-right: 10%;">
-          <li>TEMPERATURA ATUAL: <span style="text-decoration: none;">${Temp[Temp.length - 1]}</span></li>
+          <li>TEMPERATURA ATUAL: <span style="text-decoration: none;">${Temp[0]}</span></li>
     <br>
-          <li>MÉDIA DE TEMPERATURA(MENSAL): <span style="text-decoration: none;">${mediaTemp[mediaTemp.length - 1]}</span></li>
+          <li>MÉDIA DE TEMPERATURA(MENSAL): <span style="text-decoration: none;">${mediaTemp[0]}</span></li>
         </ul>
         <ul>
-          <li>UMIDADE ATUAL: <span style="text-decoration: none;">${Umi[Umi.length - 1]}</span></li><br>
-          <li>MÉDIA DE UMIDADE(MENSAL): <span style="text-decoration: none;">${mediaUmi[mediaUmi.length - 1]}</span></li>
+          <li>UMIDADE ATUAL: <span style="text-decoration: none;">${Umi[0]}</span></li><br>
+          <li>MÉDIA DE UMIDADE(MENSAL): <span style="text-decoration: none;">${mediaUmi[0]}</span></li>
         </ul>
       </div>
     </div>`
@@ -342,7 +347,7 @@
     console.log(resposta)
 
     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < resposta.length; i++) {
+    for (var i = resposta.length - 1; i >= 0; i--) {
       var registro = resposta[i];
       labels.push(registro.momento_grafico);
       dados.datasets[0].data.push(registro.umidade);
@@ -405,7 +410,7 @@
     console.log(resposta)
 
     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < resposta.length; i++) {
+    for (var i = resposta.length - 1; i >= 0; i--) {
       var registro = resposta[i];
       labels.push(registro.momento_grafico);
       // dados.datasets[0].data.push(registro.umidade);
