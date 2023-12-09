@@ -155,13 +155,72 @@
   }
 
   var global = 1;
-  var i = 0
-var intervalID; 
-var divsArmazenadas = []; 
+var i = 0;
+var intervalID;
+var divsArmazenadas = [];
+
+function atualizarCores() {
+  divsArmazenadas.forEach(div => {
+    var idSensor = div.id.split('-')[1];
+    var currentButton = document.getElementById(`button-${idSensor}`);
+
+    fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .then(resposta => {
+        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        resposta.reverse();
+        var nomeSensor = div.innerHTML;
+        var temperatura = resposta.map(item => Number(item.temperatura));
+
+        var medidaTemp = temperatura[temperatura.length - 1]; // Ajuste conforme necessário
+
+        if (medidaTemp > 24) {
+          currentButton.style.backgroundColor = 'red';
+          var alerta = document.getElementById('principal_alerta');
+          if (global === 1) {
+            alerta.innerHTML = `<div id='pop_up_alerta'>
+              <div id="pop_up_titulo">
+                <h2>AVISO!</h2>
+              </div>
+              <div id="pop_up_texto">
+                O sensor "${nomeSensor}" está acima da temperatura recomendada
+              </div>
+              <div id="div_button_alerta">
+                <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
+              </div>
+            </div>`;
+           
+
+            global += 1;
+            alertaEmail();
+          } else {
+            alerta.style.display = 'none';
+
+            pop_up_alerta.style.display = 'none';
+          }
+        } else if (medidaTemp == 24) {
+          currentButton.style.backgroundColor = 'yellow';
+        } else if (medidaTemp < 24 && medidaTemp > 0) {
+          currentButton.style.backgroundColor = 'green';
+        } else if (medidaTemp < 0) {
+          currentButton.style.backgroundColor = 'red';
+        }
+      })
+      .catch(error => {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  });
+}
 
 function Pesquisar() {
   div_titulo_grafico.innerHTML = '';
-  divsArmazenadas = []; 
+  divsArmazenadas = [];
 
   var fazendaVar = select_fazenda.value;
   var curralVar = listaCurrais.value;
@@ -183,13 +242,11 @@ function Pesquisar() {
 
         var divExistente = divsArmazenadas.find(div => div.id === `div-${valor.idSensor}`);
         if (divExistente) {
-       
           divExistente.innerHTML = valor.nomeSensor;
 
           var currentButton = document.getElementById(`button-${valor.idSensor}`);
           currentButton.textContent = valor.nomeSensor;
         } else {
-     
           var div = document.createElement('div');
           var h4 = document.createElement('h4');
           var button1 = document.createElement('button');
@@ -211,66 +268,18 @@ function Pesquisar() {
         button1.addEventListener('click', function () {
           verificador = 0;
           obterDadosGrafico(valor.idSensor);
+
         });
-
-        fetch(`/medidas/tempo-real/${valor.idSensor}`, { cache: 'no-store' })
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error('Nenhum dado encontrado ou erro na API');
-            }
-          })
-          .then(resposta => {
-            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            resposta.reverse();
-            var nomeSensor = valor.nomeSensor
-            var temperatura = resposta.map(item => Number(item.temperatura));
-            var currentButton = document.getElementById(`button-${valor.idSensor}`);
-
-            var medidaTemp = temperatura[temperatura.length-1]; // Ajuste conforme necessário
-
-            if (medidaTemp > 24) {
-              currentButton.style.backgroundColor = 'red';
-              var alerta = document.getElementById('principal_alerta')
-              if (global === 1) {
-                alerta.innerHTML = `<div id='pop_up_alerta'>
-                  <div id="pop_up_titulo">
-                    <h2>AVISO!</h2>
-                  </div>
-                  <div id="pop_up_texto">
-                    O sensor "${nomeSensor}" está acima da temperatura recomendada
-                  </div>
-                  <div id="div_button_alerta">
-                    <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
-                  </div>
-                </div>`
-                alerta.style.display = 'flex'
-
-                pop_up_alerta.style.display = 'flex';
-
-                global += 1
-                alertaEmail()
-              } else {
-                alerta.style.display = 'none'
-
-                pop_up_alerta.style.display = 'none';
-              }
-
-            } else if (medidaTemp == 24) {
-              currentButton.style.backgroundColor = 'yellow';
-            } else if (medidaTemp < 24 && medidaTemp > 0) {
-              currentButton.style.backgroundColor = 'green';
-            } else if (medidaTemp < 0) {
-              currentButton.style.backgroundColor = 'red';
-            }
-          })
-          .catch(error => {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-          });
       });
+
+      // Chamar a função atualizarCores inicialmente
+      atualizarCores()
+      // Chamar a função atualizarCores a cada 5 segundos (ajuste o intervalo conforme necessário)
+
     });
 }
+
+// Chamar a função Pesquisar quando a página carregar
 
 var sensores = JSON.parse(sessionStorage.SENSOR);
 let proximaAtualizacao;
@@ -314,6 +323,7 @@ function obterDadosGrafico(fkSensor) {
       </div>`;
         plotarGrafico(resposta, fkSensor);
         plotarGrafico2(resposta, fkSensor);
+       
       })
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
@@ -380,6 +390,7 @@ function plotarGrafico(resposta, fkSensor) {
   let myChart = new Chart(document.getElementById(`dht11Umidade`), config);
 
   setTimeout(() => atualizarGrafico(fkSensor, dados, myChart), 8000);
+  setTimeout(() =>  atualizarCores, 8000)
 }
 
   function plotarGrafico2(resposta, fkSensor) {
@@ -501,8 +512,10 @@ function plotarGrafico(resposta, fkSensor) {
             myChart.update();
           }
 
-          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+        
           setTimeout(() => atualizarGrafico(fkSensor, dados, myChart), 8000);
+      
+
         });
       } else {
         throw new Error('Erro na resposta da API');
@@ -591,7 +604,7 @@ function plotarGrafico(resposta, fkSensor) {
       });
 
   }
-
+ setInterval(atualizarCores, 2000)
 
 </script>
 <style>
