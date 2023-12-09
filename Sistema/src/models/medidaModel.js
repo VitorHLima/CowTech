@@ -20,11 +20,11 @@ function buscarUltimasMedidas(fkSensor) {
         (SELECT ROUND(AVG(dht11_umidade),2) FROM registro WHERE fkSensor = ${fkSensor} order by dtAtual desc) AS media_umidade,
         dht11_umidade AS umidade,
         dtAtual,
-        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico
+        DATE_FORMAT(dtAtual, '%H:%i:%s') AS momento_grafico
     FROM registro
     JOIN sensor ON registro.fkSensor = sensor.idSensor
     WHERE idSensor = ${fkSensor}
-    ORDER BY dtAtual asc;`} else {
+    ORDER BY dtAtual desc;`} else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
@@ -48,12 +48,17 @@ function buscarMedidasEmTempoReal(fkSensor) {
                     order by id desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = ` SELECT
+        instrucaoSql = `SELECT
         lm35_temperatura AS temperatura,
+        (SELECT ROUND(AVG(lm35_temperatura),2) FROM registro WHERE fkSensor = ${fkSensor} order by dtAtual desc) AS media_temperatura,
+        (SELECT ROUND(AVG(dht11_umidade),2) FROM registro WHERE fkSensor = ${fkSensor} order by dtAtual desc) AS media_umidade,
         dht11_umidade AS umidade,
         dtAtual,
-        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor 
-        where idSensor = ${fkSensor} ORDER BY idRegistro;`;
+        DATE_FORMAT(dtAtual,  '%H:%i:%s') AS momento_grafico
+    FROM registro
+    JOIN sensor ON registro.fkSensor = sensor.idSensor
+    WHERE idSensor = ${fkSensor}
+    ORDER BY dtAtual desc limit 1;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

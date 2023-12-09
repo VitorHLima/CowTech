@@ -8,7 +8,7 @@ use bdsistema;
 
 create table empresa(
 idEmpresa int primary key auto_increment,
-cnpj char(14),
+cnpj char(18),
 nomeEmpresa varchar(50),
 ddd char(2),
 contato char(10),
@@ -34,34 +34,69 @@ create table curral(
 idCurral int primary key auto_increment,
 nomeCurral varchar(45),
 fkEndFazenda int,
-foreign key (fkEndFazenda) references endFazenda(idEndereco) ON DELETE CASCADE
+foreign key (fkEndFazenda) references endFazenda(idEndereco)
 );
 
 create table sensor(
 idSensor int primary key auto_increment,
 nomeSensor varchar(20),
 fkCurral int,
-foreign key (fkCurral) references curral(idCurral) ON DELETE CASCADE
+foreign key (fkCurral) references curral(idCurral) 
 );
 
 create table registro(
 idRegistro int auto_increment,
-dtAtual datetime default current_timestamp,
+dtAtual timestamp default current_timestamp,
 dht11_Umidade decimal(10,2),
 lm35_temperatura decimal(10,2),
 fkSensor int,
 key(idRegistro),
-foreign key (fkSensor) references sensor(idSensor) ON DELETE CASCADE,
-primary key (fkSensor,idRegistro) 
+foreign key (fkSensor) references sensor(idSensor),
+primary key (fkSensor,idRegistro)
 )auto_increment = 1000;
 
 -- Inserção de Dados
+
+SELECT s.nomeSensor, c.nomeCurral, AVG(r.lm35_temperatura) AS media_temperatura
+FROM Sensor AS s
+JOIN Curral AS c ON c.idCurral = s.fkCurral
+JOIN endFazenda AS e ON c.fkEndFazenda = e.idEndereco
+JOIN Empresa AS em ON em.idEmpresa = e.fkEmpresa
+JOIN Registro AS r ON r.fkSensor = s.idSensor
+WHERE em.idEmpresa = 2
+GROUP BY s.nomeSensor, c.nomeCurral;
+
+SELECT
+    lm35_temperatura AS temperatura,
+    (SELECT AVG(lm35_temperatura) FROM registro) AS media_temperatura,
+    (SELECT AVG(dht11_umidade) FROM registro WHERE fkSensor = 4) AS media_umidade,
+    dht11_umidade AS umidade,
+    dtAtual,
+    DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico
+FROM registro
+JOIN sensor ON registro.fkSensor = sensor.idSensor
+WHERE idSensor = 4
+ORDER BY idRegistro DESC;
+
+
+SELECT s.nomeSensor, c.nomeCurral, AVG(r.lm35_temperatura) AS media_temperatura
+FROM Sensor AS s
+JOIN Curral AS c ON c.idCurral = s.fkCurral
+JOIN endFazenda AS e ON c.fkEndFazenda = e.idEndereco
+JOIN Empresa AS em ON em.idEmpresa = e.fkEmpresa
+JOIN Registro AS r ON r.fkSensor = s.idSensor
+WHERE em.idEmpresa = 1
+GROUP BY s.nomeSensor, c.nomeCurral;
+
+SELECT distinct Sensor.nomeSensor, curral.nomeCurral, registro.lm35_temperatura as temperatura FROM Sensor join curral ON idCurral = fkCurral 
+JOIN endFazenda ON fkEndFazenda = idEndereco JOIN Empresa ON idEmpresa = fkEmpresa JOIN registro on idRegistro = fkSensor where idEmpresa = 1; 
+
+SELECT * FROM Curral JOIN endFazenda ON idEndereco;
+
 insert into empresa values
 	(null,'01234567891234','Etiel','11','912345678','etiel@sptech.com','cowTech_123');
     
-    SELECT * FROM Curral;
-	select * from sensor;
-
+    SELECT * FROM Curral JOIN endFazenda ON idEndereco where idEmpresa = 1;
 
 insert into endFazenda values
 	(null,'FrezzaLaticinios','Rua Abobrinha','Chacaras Leguminosas','Hortifrut','Acre','69912345',678,1);
@@ -209,56 +244,45 @@ INSERT bdsistema.registro VALUES
 (null, '2023-11-25', 60, 19, 3), 
 (null, '2023-11-26', 70, 23, 3); 
 
+truncate table registro;
+
+
+
+insert into registro (lm35_temperatura, dht11_umidade) values
+(22, 45),
+(24, 55),
+(27, 67);	
+
+insert into registro (lm35_temperatura, dht11_umidade) values
+(30, 23),
+(29, 36),
+(21, 68);
+
+insert into registro (lm35_temperatura, dht11_umidade) values
+(34, 30),
+(28, 42),
+(19, 90);
+
 
 
 select * from registro;
 
-SELECT s.nomeSensor, c.nomeCurral, AVG(r.lm35_temperatura) AS media_temperatura
-FROM Sensor AS s
-JOIN Curral AS c ON c.idCurral = s.fkCurral
-JOIN endFazenda AS e ON c.fkEndFazenda = e.idEndereco
-JOIN Empresa AS em ON em.idEmpresa = e.fkEmpresa
-JOIN Registro AS r ON r.fkSensor = s.idSensor
-WHERE em.idEmpresa = 2
-GROUP BY s.nomeSensor, c.nomeCurral;
 
 SELECT
-    lm35_temperatura AS temperatura,
-    (SELECT AVG(lm35_temperatura) FROM registro) AS media_temperatura,
-    (SELECT AVG(dht11_umidade) FROM registro WHERE fkSensor = 4) AS media_umidade,
-    dht11_umidade AS umidade,
-    dtAtual,
-    DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico
-FROM registro
-JOIN sensor ON registro.fkSensor = sensor.idSensor
-WHERE idSensor = 4
-ORDER BY idRegistro DESC;
-
-
-SELECT s.nomeSensor, c.nomeCurral, AVG(r.lm35_temperatura) AS media_temperatura
-FROM Sensor AS s
-JOIN Curral AS c ON c.idCurral = s.fkCurral
-JOIN endFazenda AS e ON c.fkEndFazenda = e.idEndereco
-JOIN Empresa AS em ON em.idEmpresa = e.fkEmpresa
-JOIN Registro AS r ON r.fkSensor = s.idSensor
-WHERE em.idEmpresa = 1
-GROUP BY s.nomeSensor, c.nomeCurral;
-
-SELECT distinct Sensor.nomeSensor, curral.nomeCurral, registro.lm35_temperatura as temperatura FROM Sensor join curral ON idCurral = fkCurral 
-JOIN endFazenda ON fkEndFazenda = idEndereco JOIN Empresa ON idEmpresa = fkEmpresa JOIN registro on idRegistro = fkSensor where idEmpresa = 1; 
-
-SELECT * FROM Curral JOIN endFazenda ON idEndereco;
-
-DELETE curral, sensor, registro
-FROM curral
- JOIN sensor ON idCurral = fkCurral
- JOIN registro ON idSensor = fkSensor
-WHERE idCurral = 1;
-
-DELETE endFazenda, curral, sensor, registro
-FROM curral
-JOIN sensor ON idCurral = fkCurral
-JOIN registro ON idSensor = fkSensor JOIN endFazenda ON idEndereco = fkEndFazenda
-WHERE idEndereco = 1;
-
+        lm35_temperatura AS temperatura,
+        (SELECT ROUND(AVG(lm35_temperatura),2) FROM registro WHERE fkSensor = 1 order by dtAtual desc) AS media_temperatura,
+        (SELECT ROUND(AVG(dht11_umidade),2) FROM registro WHERE fkSensor = 1 order by dtAtual desc) AS media_umidade,
+        dht11_umidade AS umidade,
+        dtAtual,
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico
+    FROM registro
+    JOIN sensor ON registro.fkSensor = sensor.idSensor
+    WHERE idSensor = 1;
+    
+    SELECT
+        lm35_temperatura AS temperatura,
+        dht11_umidade AS umidade,
+        dtAtual,
+        DATE_FORMAT(dtAtual, '%d:%m:%Y') AS momento_grafico FROM registro JOIN sensor ON registro.fkSensor = sensor.idSensor 
+        where idSensor = 1 ORDER BY idRegistro;
    
