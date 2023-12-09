@@ -109,7 +109,6 @@ insert into curral values
     insert into sensor values
 	(null,'Sensor 1',1);
     
-    
 
 insert into sensor values
 	(null,'Sensor 1',1),
@@ -125,7 +124,24 @@ insert into sensor values
     
     insert registro values (null, now(), 50, 24, 2),(null, now(), 50, 24, 2),(null, now(), 55, 24, 2),(null, now(), 70, 24, 2);
     select * from registro;
+    
     select * from sensor;
+	
+    select * from registro join sensor on fkSensor = idSensor where sensor.idSensor = 1;
+      
+      insert into registro values 
+    (null, now(), 36, 14,2);
+
+SELECT
+        lm35_temperatura AS temperatura,
+        (SELECT ROUND(AVG(lm35_temperatura),2) FROM registro WHERE fkSensor = 1 order by dtAtual desc) AS media_temperatura,
+        (SELECT ROUND(AVG(dht11_umidade),2) FROM registro WHERE fkSensor = 1 order by dtAtual desc) AS media_umidade,
+        dht11_umidade AS umidade,
+        dtAtual,
+        DATE_FORMAT(dtAtual,  '%H:%i:%s') AS momento_grafico
+    FROM registro
+    JOIN sensor ON registro.fkSensor = sensor.idSensor
+    WHERE idSensor = 1 order by dtAtual;
     
     INSERT registro VALUES 
 (1, now(), 80, 29, 1), (1, now(), 69, 20, 2),(1, now(), 70, 25, 3), 
