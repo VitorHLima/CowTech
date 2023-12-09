@@ -253,3 +253,11 @@ h4 {
     font-weight: 500;
     font-size: 20px;
 }
+
+.select_grafico {
+    width: 30%;
+    padding: 0.3%;
+    margin-right: 2%;
+    border-radius: 3px;
+
+}

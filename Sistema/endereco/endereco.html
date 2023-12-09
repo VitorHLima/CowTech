@@ -53,12 +53,11 @@
       </div>
     </div>
     <div class="entradas">
-      <a class="p-volta" href="empresa.html">Voltar</a>
       <h4>Endereço</h4>
       <label class="label-fazenda label" for="">Nome da Fazenda</label>
       <input class="css-input" id="input_fazenda" type="text" />
       <label class="label-cep label" for="">CEP</label>
-      <input class="css-input" id="input_cep" type="text" onblur="pesquisacep(this.value);"/>
+      <input class="css-input" id="input_cep" type="text" onblur="pesquisacep(this.value);" />
       <label class="label-logradouro label" for="">Logradouro</label>
       <input class="css-input" id="input_logradouro" type="text" />
       <label class="label-bairro label" for="">Bairro</label>
@@ -69,7 +68,7 @@
       <input class="css-input" id="input_estado" type="text" />
       <label class="label-numero label" for="">Número</label>
       <input class="css-input" id="input_numero" type="text" />
-      <select name="empresas" id="listaEmpresas">
+      <select class="select_grafico" name="empresas" id="listaEmpresas">
         <option selected>Selecione uma empresa</option>
       </select>
       <button class="bt-enviar" id="button-enviar" onclick="cadastrar()">
@@ -100,35 +99,35 @@
     var empresaVar = listaEmpresas.value
 
     if (logradouro == "") {
-        "(Digite um valor no campo logradouro)";
+      "(Digite um valor no campo logradouro)";
 
       return false;
     } else if (bairro == "") {
-        "(Digite um valor no campo bairro)";
+      "(Digite um valor no campo bairro)";
 
       return false;
     } else if (municipio == "") {
-        "(Digite um valor no campo municipio)";
+      "(Digite um valor no campo municipio)";
 
       return false;
     } else if (estado == "") {
-        "(Digite um valor no campo estado)";
+      "(Digite um valor no campo estado)";
 
       return false;
     } else if (numero == "") {
-        "(Digite um valor no campo numero)";
+      "(Digite um valor no campo numero)";
 
       return false;
     } else if (cep == "") {
-        "(Digite um valor no campo cep)";
+      "(Digite um valor no campo cep)";
 
       return false;
     } else if (nome == "") {
-        "(Digite um valor no campo nome)";
+      "(Digite um valor no campo nome)";
 
       return false;
     } else if (empresaVar == "") {
-        "(Escolha uma empresa)";
+      "(Escolha uma empresa)";
 
       return false;
     } else {
@@ -170,7 +169,7 @@
           }, "2000");
 
           limparFormulario();
-  
+
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
@@ -205,67 +204,67 @@
   }
 
   function limpa_formulário_cep() {
-            //Limpa valores do formulário de cep.
-            document.getElementById('input_logradouro').value=("");
-            document.getElementById('input_bairro').value=("");
-            document.getElementById('input_municipio').value=("");
-            document.getElementById('input_estado').value=("");
+    //Limpa valores do formulário de cep.
+    document.getElementById('input_logradouro').value = ("");
+    document.getElementById('input_bairro').value = ("");
+    document.getElementById('input_municipio').value = ("");
+    document.getElementById('input_estado').value = ("");
+  }
+
+  function meu_callback(conteudo) {
+    if (!("erro" in conteudo)) {
+      //Atualiza os campos com os valores.
+      document.getElementById('input_logradouro').value = (conteudo.logradouro);
+      document.getElementById('input_bairro').value = (conteudo.bairro);
+      document.getElementById('input_municipio').value = (conteudo.localidade);
+      document.getElementById('input_estado').value = (conteudo.uf);
+    } //end if.
+    else {
+      //CEP não Encontrado.
+      limpa_formulário_cep();
+      alert("CEP não encontrado.");
     }
+  }
 
-    function meu_callback(conteudo) {
-        if (!("erro" in conteudo)) {
-            //Atualiza os campos com os valores.
-            document.getElementById('input_logradouro').value=(conteudo.logradouro);
-            document.getElementById('input_bairro').value=(conteudo.bairro);
-            document.getElementById('input_municipio').value=(conteudo.localidade);
-            document.getElementById('input_estado').value=(conteudo.uf);
-        } //end if.
-        else {
-            //CEP não Encontrado.
-            limpa_formulário_cep();
-            alert("CEP não encontrado.");
-        }
+  function pesquisacep(valor) {
+
+    //Nova variável "cep" somente com dígitos.
+    var cep = valor.replace(/\D/g, '');
+
+    //Verifica se campo cep possui valor informado.
+    if (cep != "") {
+
+      //Expressão regular para validar o CEP.
+      var validacep = /^[0-9]{8}$/;
+
+      //Valida o formato do CEP.
+      if (validacep.test(cep)) {
+
+        //Preenche os campos com "..." enquanto consulta webservice.
+        document.getElementById('input_logradouro').value = "...";
+        document.getElementById('input_bairro').value = "...";
+        document.getElementById('input_municipio').value = "...";
+        document.getElementById('input_estado').value = "...";
+
+        //Cria um elemento javascript.
+        var script = document.createElement('script');
+
+        //Sincroniza com o callback.
+        script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+        //Insere script no documento e carrega o conteúdo.
+        document.body.appendChild(script);
+
+      } //end if.
+      else {
+        //cep é inválido.
+        limpa_formulário_cep();
+        alert("Formato de CEP inválido.");
+      }
+    } //end if.
+    else {
+      //cep sem valor, limpa formulário.
+      limpa_formulário_cep();
     }
-        
-    function pesquisacep(valor) {
-
-        //Nova variável "cep" somente com dígitos.
-        var cep = valor.replace(/\D/g, '');
-
-        //Verifica se campo cep possui valor informado.
-        if (cep != "") {
-
-            //Expressão regular para validar o CEP.
-            var validacep = /^[0-9]{8}$/;
-
-            //Valida o formato do CEP.
-            if(validacep.test(cep)) {
-
-                //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('input_logradouro').value="...";
-                document.getElementById('input_bairro').value="...";
-                document.getElementById('input_municipio').value="...";
-                document.getElementById('input_estado').value="...";
-
-                //Cria um elemento javascript.
-                var script = document.createElement('script');
-
-                //Sincroniza com o callback.
-                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
-
-                //Insere script no documento e carrega o conteúdo.
-                document.body.appendChild(script);
-
-            } //end if.
-            else {
-                //cep é inválido.
-                limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
-            }
-        } //end if.
-        else {
-            //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
-        }
-    };
+  };
 </script>
