@@ -51,6 +51,7 @@ function buscarMedidasEmTempoReal(fkSensor) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
         lm35_temperatura AS temperatura,
+        sensor.nomeSensor,
         (SELECT ROUND(AVG(lm35_temperatura),2) FROM registro WHERE fkSensor = ${fkSensor} order by dtAtual desc) AS media_temperatura,
         (SELECT ROUND(AVG(dht11_umidade),2) FROM registro WHERE fkSensor = ${fkSensor} order by dtAtual desc) AS media_umidade,
         dht11_umidade AS umidade,

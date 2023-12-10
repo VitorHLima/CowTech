@@ -69,19 +69,19 @@
       <div class="regua">
         <div class="item-regua alerta-frio">
           <h4>Alerta</h4>
-          <h2>&lt;=0°C</h2>
+          <h2>&lt; 0°C</h2>
         </div>
         <div class="item-regua ideal">
           <h4>Ideal</h4>
-          <h2>24°C</h2>
+          <h2>0°C A 24°C</h2>
         </div>
         <div class="item-regua alerta-quente">
           <h4>Alerta</h4>
-          <h2>&gt;=30°C</h2>
+          <h2>25°C A 30°C</h2>
         </div>
         <div class="item-regua perigo-quente">
           <h4>Perigo</h4>
-          <h2>&gt;=35°C</h2>
+          <h2>&gt; 30°C</h2>
         </div>
       </div>
 
@@ -89,19 +89,19 @@
       <div class="regua">
         <div class="item-regua alerta-frio">
           <h4>Alerta</h4>
-          <h2>&lt;=30%</h2>
+          <h2>&lt; 30%</h2>
         </div>
         <div class="item-regua ideal">
           <h4>Ideal</h4>
-          <h2>70%</h2>
+          <h2>30% A 70%</h2>
         </div>
         <div class="item-regua alerta-quente">
           <h4>Alerta</h4>
-          <h2>&gt;=80%</h2>
+          <h2>71% A 90%</h2>
         </div>
         <div class="item-regua perigo-quente">
           <h4>Perigo</h4>
-          <h2>&gt;=90%</h2>
+          <h2>&gt; 90%</h2>
         </div>
       </div>
 
@@ -238,7 +238,7 @@
             p.innerHTML = "temperatura"
             p2.innerHTML = "umidade"
 
-            h4.textContent = valor.nomeSensor;
+            h4.innerHTML += `${valor.nomeSensor}<br><br>`;
 
             div.appendChild(h4);
             div.appendChild(p);
@@ -276,7 +276,7 @@
               var medidaTemp = temperatura[temperatura.length - 1]; // Ajuste conforme necessário
               var medidaUmi = umidade[umidade.length - 1]; // Ajuste conforme necessário
 
-              if (medidaTemp > 34) {
+              if (medidaTemp > 30) {
                 currentButton.style.backgroundColor = 'red';
                 var alerta = document.getElementById('principal_alerta')
                 if (global === 1) {
@@ -303,10 +303,10 @@
                   pop_up_alerta.style.display = 'none';
                 }
 
-              } else if (medidaTemp >= 30 && medidaTemp < 35) {
+              } else if (medidaTemp >= 25 && medidaTemp <= 30) {
                 currentButton.style.backgroundColor = 'yellow';
                 // alertaEmail()
-              } else if (medidaTemp > 1 && medidaTemp <= 29) {
+              } else if (medidaTemp >= 1 && medidaTemp <= 24) {
                 currentButton.style.backgroundColor = 'green';
               } else if (medidaTemp < 1) {
                 currentButton.style.backgroundColor = '#42A5F5';
@@ -314,7 +314,7 @@
 
 
 
-              if (medidaUmi >= 90) {
+              if (medidaUmi > 90) {
                 currentButton2.style.backgroundColor = 'red';
                 var alerta = document.getElementById('principal_alerta')
                 if (global === 1) {
@@ -341,11 +341,11 @@
                   pop_up_alerta.style.display = 'none';
                 }
 
-              } else if (medidaUmi >= 80 && medidaUmi < 89) {
+              } else if (medidaUmi >= 71 && medidaUmi < 90) {
                 currentButton2.style.backgroundColor = 'yellow';
-              } else if (medidaUmi > 40 && medidaUmi <= 70) {
+              } else if (medidaUmi >= 30 && medidaUmi <= 70) {
                 currentButton2.style.backgroundColor = 'green';
-              } else if (medidaUmi <= 30) {
+              } else if (medidaUmi < 30) {
                 currentButton2.style.backgroundColor = '#42A5F5';
               }
             })
@@ -556,8 +556,9 @@
               var temperaturaNova = novoRegistro[0].temperatura;
               var mediaTemp = novoRegistro[0].media_temperatura;
               var mediaUmi = novoRegistro[0].media_umidade;
-              inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
-              INFORMAÇÕES DO SENSOR:
+              var nomeSensor = novoRegistro[0].nomeSensor;
+              inserir_informacoes.innerHTML += `<div id="div_informacao">
+                <h2>INFORMAÇÕES DO ${nomeSensor}:
             </h2>
             <div id="div_informacoes_medidas">
               <ul style="margin-right: 10%;">
@@ -626,9 +627,10 @@
               var umidadeNova = novoRegistro[0].umidade
               var temperaturaNova = novoRegistro[0].temperatura
               var mediaTemp = novoRegistro[0].media_temperatura
-              var mediaUmi = novoRegistro[0].media_umidade
+              var mediaUmi = novoRegistro[0].media_umidade;
+              var nomeSensor = novoRegistro[0].nomeSensor
               inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
-    INFORMAÇÕES DO SENSOR:
+    INFORMAÇÕES DO ${nomeSensor}:
   </h2>
   <div id="div_informacoes_medidas">
     <ul style="margin-right: 10%;">
@@ -675,7 +677,6 @@
       });
 
   }
-  setInterval(atualizarCores, 2000)
 
 </script>
 <style>
@@ -686,8 +687,11 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    margin-top: 5%;
   }
-
+  .titulo-medida {
+    font-weight: 700;
+  }
   .texto-medida {
     margin-top: -41%;
   }
@@ -756,6 +760,7 @@
     width: 100%;
     height: auto;
     padding: 1% 0 0;
+    margin-top: 5%;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -774,7 +779,9 @@
     text-decoration: none;
     list-style: none;
   }
-
+  p {
+    font-weight: 500;
+  }
   * {
     padding: 0;
     margin: 0;
@@ -782,7 +789,7 @@
   }
 
   .button_sensor {
-    padding: 5%;
+    padding: 4%;
     width: 90%;
     height: 25px;
     border: 1px solid black;
@@ -795,9 +802,9 @@
   }
 
   .button_sensor:hover {
-    padding: 5%;
+    padding: 4%;
     width: 90%;
-    height: 25px;
+    height: px;
     border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
@@ -1030,12 +1037,15 @@
     width: 15%;
     border-radius: 5px;
     margin: 2%;
-    height: 170px;
+    height: 200px;
     padding: 2%;
     border: 1px solid black;
     display: flex;
     align-items: center;
     flex-direction: column;
+    -webkit-box-shadow: 6px 5px 7px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 6px 5px 7px -4px rgba(0,0,0,0.75);
+box-shadow: 6px 5px 7px -4px rgba(0,0,0,0.75);
   }
 
   #div_todos_graficos {
@@ -1089,7 +1099,6 @@
   #select_galpao {
     right: 60%;
   }
-
   #select_fazenda_h4 {
     right: 35%;
   }

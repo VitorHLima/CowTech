@@ -130,7 +130,7 @@ insert into sensor values
     select * from registro join sensor on fkSensor = idSensor where sensor.idSensor = 1;
       
       insert into registro values 
-    (null, now(), 36, 24,1);
+    (null, now(), 45, 21,1);
 
 SELECT
         lm35_temperatura AS temperatura,
