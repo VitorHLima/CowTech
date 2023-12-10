@@ -32,21 +32,6 @@
       </div>
     </div>
 
-    <div class="regua">
-      <div class="item-regua alerta-frio">
-        <h4>Ideal</h4>
-        <h2>&gt; 0°C a &lt;24°C</h2>
-      </div>
-      <div class="item-regua ideal">
-        <h4>Alerta</h4>
-        <h2>24°C</h2>
-      </div>
-      <div class="item-regua perigo-quente">
-        <h4>Perigo</h4>
-        <h2>&lt; 0°C ou &gt; 24°C</h2>
-      </div>
-    </div>
-
     <div id="div_graficos">
       <div id="div_select" style="position: relative;">
         <h4 id="select_fazenda_h4" style="color: black; position: absolute; margin-top: -12%;">Curral</h4>
@@ -79,6 +64,47 @@
           </div>
         </div>
       </div>
+
+      <h1 class="titulo-medida">Temperatura</h1>
+      <div class="regua">
+        <div class="item-regua alerta-frio">
+          <h4>Alerta</h4>
+          <h2>&lt;=0°C</h2>
+        </div>
+        <div class="item-regua ideal">
+          <h4>Ideal</h4>
+          <h2>24°C</h2>
+        </div>
+        <div class="item-regua alerta-quente">
+          <h4>Alerta</h4>
+          <h2>&gt;=30°C</h2>
+        </div>
+        <div class="item-regua perigo-quente">
+          <h4>Perigo</h4>
+          <h2>&gt;=35°C</h2>
+        </div>
+      </div>
+
+      <h1 class="titulo-medida">Umidade</h1>
+      <div class="regua">
+        <div class="item-regua alerta-frio">
+          <h4>Alerta</h4>
+          <h2>&lt;=30%</h2>
+        </div>
+        <div class="item-regua ideal">
+          <h4>Ideal</h4>
+          <h2>70%</h2>
+        </div>
+        <div class="item-regua alerta-quente">
+          <h4>Alerta</h4>
+          <h2>&gt;=80%</h2>
+        </div>
+        <div class="item-regua perigo-quente">
+          <h4>Perigo</h4>
+          <h2>&gt;=90%</h2>
+        </div>
+      </div>
+
       <div id="inserir_informacoes">
 
       </div>
@@ -156,85 +182,105 @@
 
   var global = 1;
   var i = 0
-var intervalID; 
-var divsArmazenadas = []; 
+  var intervalID;
+  var divsArmazenadas = [];
 
-function Pesquisar() {
-  div_titulo_grafico.innerHTML = '';
-  divsArmazenadas = []; 
+  function Pesquisar() {
+    div_titulo_grafico.innerHTML = '';
+    divsArmazenadas = [];
 
-  var fazendaVar = select_fazenda.value;
-  var curralVar = listaCurrais.value;
+    var fazendaVar = select_fazenda.value;
+    var curralVar = listaCurrais.value;
 
-  fetch("/sensores/mostrar/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      fazendaServer: fazendaVar,
-      curralServer: curralVar
+    fetch("/sensores/mostrar/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fazendaServer: fazendaVar,
+        curralServer: curralVar
+      })
     })
-  })
-    .then(resposta => resposta.json())
-    .then(valores => {
-      valores.forEach(valor => {
-        console.log(valor.idSensor + " AQUI ESTA O VALOR");
+      .then(resposta => resposta.json())
+      .then(valores => {
+        valores.forEach(valor => {
+          console.log(valor.idSensor + " AQUI ESTA O VALOR");
 
-        var divExistente = divsArmazenadas.find(div => div.id === `div-${valor.idSensor}`);
-        if (divExistente) {
-       
-          divExistente.innerHTML = valor.nomeSensor;
+          var divExistente = divsArmazenadas.find(div => div.id === `div-${valor.idSensor}`);
+          if (divExistente) {
 
-          var currentButton = document.getElementById(`button-${valor.idSensor}`);
-          currentButton.textContent = valor.nomeSensor;
-        } else {
-     
-          var div = document.createElement('div');
-          var h4 = document.createElement('h4');
-          var button1 = document.createElement('button');
-          var divPrincipal = document.getElementById('div_titulo_grafico');
-          div.id = `div-${valor.idSensor}`;
-          div.classList.add('div_tipos_metricas');
-          div.innerHTML = valor.nomeSensor;
-          button1.id = `button-${valor.idSensor}`;
-          button1.classList.add('button_sensor');
-          h4.textContent = valor.nomeSensor;
+            divExistente.innerHTML = valor.nomeSensor;
 
-          div.appendChild(h4);
-          div.appendChild(button1);
-          divPrincipal.appendChild(div);
-
-          divsArmazenadas.push(div);
-        }
-
-        button1.addEventListener('click', function () {
-          verificador = 0;
-          obterDadosGrafico(valor.idSensor);
-        });
-
-        fetch(`/medidas/tempo-real/${valor.idSensor}`, { cache: 'no-store' })
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error('Nenhum dado encontrado ou erro na API');
-            }
-          })
-          .then(resposta => {
-            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            resposta.reverse();
-            var nomeSensor = valor.nomeSensor
-            var temperatura = resposta.map(item => Number(item.temperatura));
             var currentButton = document.getElementById(`button-${valor.idSensor}`);
+            currentButton.textContent = valor.nomeSensor;
+          } else {
 
-            var medidaTemp = temperatura[temperatura.length-1]; // Ajuste conforme necessário
+            var div = document.createElement('div');
+            var h4 = document.createElement('h4');
+            var button1 = document.createElement('button');
+            var p = document.createElement('p');
+            var p2 = document.createElement('p');
+            var div2 = document.createElement('div');
+            var divPrincipal = document.getElementById('div_titulo_grafico');
 
-            if (medidaTemp > 24) {
-              currentButton.style.backgroundColor = 'red';
-              var alerta = document.getElementById('principal_alerta')
-              if (global === 1) {
-                alerta.innerHTML = `<div id='pop_up_alerta'>
+            div2.classList.add('div_umidade');
+            button1.classList.add('button_sensor');
+            div.classList.add('div_tipos_metricas');
+
+            div.id = `div-${valor.idSensor}`;
+            button1.id = `button-${valor.idSensor}`;
+            div2.id = `div-umidade-${valor.idSensor}`;
+            p.classList.add('texto-medida');
+            p.classList.add('texto-medida');
+
+            div.innerHTML = valor.nomeSensor;
+            p.innerHTML = "temperatura"
+            p2.innerHTML = "umidade"
+
+            h4.textContent = valor.nomeSensor;
+
+            div.appendChild(h4);
+            div.appendChild(p);
+            div.appendChild(button1);
+            div.appendChild(p2);
+            div.appendChild(div2);
+            divPrincipal.appendChild(div);
+
+            divsArmazenadas.push(div);
+
+          }
+
+          button1.addEventListener('click', function () {
+            verificador = 0;
+            obterDadosGrafico(valor.idSensor);
+          });
+
+          fetch(`/medidas/ultimas/${valor.idSensor}`, { cache: 'no-store' })
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Nenhum dado encontrado ou erro na API');
+              }
+            })
+            .then(resposta => {
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+              resposta.reverse();
+              var nomeSensor = valor.nomeSensor
+              var temperatura = resposta.map(item => Number(item.temperatura));
+              var umidade = resposta.map(item => Number(item.umidade));
+              var currentButton = document.getElementById(`button-${valor.idSensor}`);
+              var currentButton2 = document.getElementById(`div-umidade-${valor.idSensor}`);
+
+              var medidaTemp = temperatura[temperatura.length - 1]; // Ajuste conforme necessário
+              var medidaUmi = umidade[umidade.length - 1]; // Ajuste conforme necessário
+
+              if (medidaTemp > 34) {
+                currentButton.style.backgroundColor = 'red';
+                var alerta = document.getElementById('principal_alerta')
+                if (global === 1) {
+                  alerta.innerHTML = `<div id='pop_up_alerta'>
                   <div id="pop_up_titulo">
                     <h2>AVISO!</h2>
                   </div>
@@ -245,142 +291,180 @@ function Pesquisar() {
                     <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
                   </div>
                 </div>`
-                alerta.style.display = 'flex'
+                  alerta.style.display = 'flex'
 
-                pop_up_alerta.style.display = 'flex';
+                  pop_up_alerta.style.display = 'flex';
 
-                global += 1
-                alertaEmail()
-              } else {
-                alerta.style.display = 'none'
+                  global += 1
 
-                pop_up_alerta.style.display = 'none';
+                } else {
+                  alerta.style.display = 'none'
+
+                  pop_up_alerta.style.display = 'none';
+                }
+
+              } else if (medidaTemp >= 30 && medidaTemp < 35) {
+                currentButton.style.backgroundColor = 'yellow';
+                // alertaEmail()
+              } else if (medidaTemp > 1 && medidaTemp <= 29) {
+                currentButton.style.backgroundColor = 'green';
+              } else if (medidaTemp < 1) {
+                currentButton.style.backgroundColor = '#42A5F5';
               }
 
-            } else if (medidaTemp == 24) {
-              currentButton.style.backgroundColor = 'yellow';
-            } else if (medidaTemp < 24 && medidaTemp > 0) {
-              currentButton.style.backgroundColor = 'green';
-            } else if (medidaTemp < 0) {
-              currentButton.style.backgroundColor = 'red';
-            }
-          })
-          .catch(error => {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-          });
+
+
+              if (medidaUmi >= 90) {
+                currentButton2.style.backgroundColor = 'red';
+                var alerta = document.getElementById('principal_alerta')
+                if (global === 1) {
+                  alerta.innerHTML = `<div id='pop_up_alerta'>
+                  <div id="pop_up_titulo">
+                    <h2>AVISO!</h2>
+                  </div>
+                  <div id="pop_up_texto">
+                    O sensor "${nomeSensor}" está acima da umidade recomendada
+                  </div>
+                  <div id="div_button_alerta">
+                    <button id="button_alerta" onclick="Alerta_continuar()">CONTINUAR</button>
+                  </div>
+                </div>`
+                  alerta.style.display = 'flex'
+
+                  pop_up_alerta.style.display = 'flex';
+
+                  global += 1
+
+                } else {
+                  alerta.style.display = 'none'
+
+                  pop_up_alerta.style.display = 'none';
+                }
+
+              } else if (medidaUmi >= 80 && medidaUmi < 89) {
+                currentButton2.style.backgroundColor = 'yellow';
+              } else if (medidaUmi > 40 && medidaUmi <= 70) {
+                currentButton2.style.backgroundColor = 'green';
+              } else if (medidaUmi <= 30) {
+                currentButton2.style.backgroundColor = '#42A5F5';
+              }
+            })
+            .catch(error => {
+              console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+        });
       });
-    });
-}
+  }
 
-var sensores = JSON.parse(sessionStorage.SENSOR);
-let proximaAtualizacao;
+  var sensores = JSON.parse(sessionStorage.SENSOR);
+  let proximaAtualizacao;
 
-var verificador = 0;
+  var verificador = 0;
 
-function obterDadosGrafico(fkSensor) {
-  if (verificador === 0) {
-    verificador = 1;
-    fetch(`/medidas/ultimas/${fkSensor}`, { cache: 'no-store' })
-      .then(function (response) {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Nenhum dado encontrado ou erro na API');
-        }
-      })
-      .then(function (resposta) {
-        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-        resposta.reverse();
-        inserir_informacoes.innerHTML = '';
-        var mediaTemp = resposta.map(item => item.media_temperatura);
-        var nomeSensor = resposta[0].nomeSensor;
-        var mediaUmi = resposta.map(item => item.media_umidade);
-        var Temp = resposta.map(item => item.temperatura);
-        var Umi = resposta.map(item => item.umidade);
-        inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
-          INFORMAÇÕES DO ${nomeSensor}:
+  function obterDadosGrafico(fkSensor) {
+    if (verificador === 0) {
+      verificador = 1;
+      fetch(`/medidas/ultimas/${fkSensor}`, { cache: 'no-store' })
+        .then(function (response) {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Nenhum dado encontrado ou erro na API');
+          }
+        })
+        .then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          inserir_informacoes.innerHTML = '';
+          var mediaTemp = resposta.map(item => item.media_temperatura);
+          var nomeSensor = resposta[0].nomeSensor;
+          var mediaUmi = resposta.map(item => item.media_umidade);
+          var Temp = resposta.map(item => item.temperatura);
+          var Umi = resposta.map(item => item.umidade);
+          inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
+          Informações do ${nomeSensor}:
         </h2>
         <div id="div_informacoes_medidas">
           <ul style="margin-right: 10%;">
-            <li>TEMPERATURA ATUAL: <span style="text-decoration: none;">${Temp[Temp.length-1]}</span></li>
+            <li>TEMPERATURA ATUAL: <span style="text-decoration: none;">${Temp[Temp.length - 1]}</span></li>
             <br>
-            <li>MÉDIA DE TEMPERATURA (MENSAL): <span style="text-decoration: none;">${mediaTemp[mediaTemp.length-1]}</span></li>
+            <li>MÉDIA DE TEMPERATURA (MENSAL): <span style="text-decoration: none;">${mediaTemp[mediaTemp.length - 1]}</span></li>
           </ul>
           <ul>
-            <li>UMIDADE ATUAL: <span style="text-decoration: none;">${Umi[Umi.length-1]}</span></li><br>
-            <li>MÉDIA DE UMIDADE (MENSAL): <span style="text-decoration: none;">${mediaUmi[mediaUmi.length-1]}</span></li>
+            <li>UMIDADE ATUAL: <span style="text-decoration: none;">${Umi[Umi.length - 1]}</span></li><br>
+            <li>MÉDIA DE UMIDADE (MENSAL): <span style="text-decoration: none;">${mediaUmi[mediaUmi.length - 1]}</span></li>
           </ul>
         </div>
       </div>`;
-        plotarGrafico(resposta, fkSensor);
-        plotarGrafico2(resposta, fkSensor);
-      })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-}
-
-function plotarGrafico(resposta, fkSensor) {
-  console.log('Iniciando plotagem do gráfico...');
-
-  // Criando estrutura para plotar gráfico - labels
-  let labels = [];
-
-  // Criando estrutura para plotar gráfico - dados
-  let dados = {
-    labels: labels,
-    datasets: [
-      {
-        label: 'Umidade',
-        data: [],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-      }
-    ]
-  };
-
-  console.log('----------------------------------------------');
-  console.log(
-    'Estes dados foram recebidos pela função "obterDadosGrafico" e passados para "plotarGrafico":'
-  );
-  console.log(resposta);
-
-  // Inserindo valores recebidos em estrutura para plotar o gráfico
-  for (i = 0; i < resposta.length; i++) {
-    var registro = resposta[i];
-    labels.push(registro.momento_grafico);
-    dados.datasets[0].data.push(registro.umidade);
-  }
-
-  console.log('----------------------------------------------');
-  console.log('O gráfico será plotado com os respectivos valores:');
-  console.log('Labels:');
-  console.log(labels);
-  console.log('Dados:');
-  console.log(dados.datasets);
-  console.log('----------------------------------------------');
-
-  // Criando estrutura para plotar gráfico - config
-  const config = {
-    type: 'line',
-    data: dados,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      },
-      events: []
+          plotarGrafico(resposta, fkSensor);
+          plotarGrafico2(resposta, fkSensor);
+        })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
     }
-  };
+  }
 
-  // Adicionando gráfico criado em div na tela
-  let myChart = new Chart(document.getElementById(`dht11Umidade`), config);
+  function plotarGrafico(resposta, fkSensor) {
+    console.log('Iniciando plotagem do gráfico...');
 
-  setTimeout(() => atualizarGrafico(fkSensor, dados, myChart), 8000);
-}
+    // Criando estrutura para plotar gráfico - labels
+    let labels = [];
+
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Umidade',
+          data: [],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }
+      ]
+    };
+
+    console.log('----------------------------------------------');
+    console.log(
+      'Estes dados foram recebidos pela função "obterDadosGrafico" e passados para "plotarGrafico":'
+    );
+    console.log(resposta);
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labels.push(registro.momento_grafico);
+      dados.datasets[0].data.push(registro.umidade);
+    }
+
+    console.log('----------------------------------------------');
+    console.log('O gráfico será plotado com os respectivos valores:');
+    console.log('Labels:');
+    console.log(labels);
+    console.log('Dados:');
+    console.log(dados.datasets);
+    console.log('----------------------------------------------');
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: 'line',
+      data: dados,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        events: []
+      }
+    };
+
+    // Adicionando gráfico criado em div na tela
+    let myChart = new Chart(document.getElementById(`dht11Umidade`), config);
+
+    setTimeout(() => atualizarGrafico(fkSensor, dados, myChart), 8000);
+  }
 
   function plotarGrafico2(resposta, fkSensor) {
 
@@ -425,17 +509,17 @@ function plotarGrafico(resposta, fkSensor) {
 
     // Criando estrutura para plotar gráfico - config
     const config = {
-  type: 'line',
-  data: dados,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
+      type: 'line',
+      data: dados,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        events: []
       }
-    },
-    events: []
-  }
-};
+    };
 
     let myChart = new Chart(
       document.getElementById(`lm35Temperatura`),
@@ -447,32 +531,32 @@ function plotarGrafico(resposta, fkSensor) {
 
 
   function atualizarGrafico(fkSensor, dados, myChart) {
-  fetch(`/medidas/tempo-real/${fkSensor}`, { cache: 'no-store' })
-    .then(function (response) {
-      if (response.ok) {
-        response.json().then(function (novoRegistro) {
-          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-          console.log(`Dados atuais do gráfico:`);
-          console.log(dados);
+    fetch(`/medidas/tempo-real/${fkSensor}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (novoRegistro) {
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(dados);
 
-          console.log(novoRegistro[0].momento_grafico);
-          console.log(dados.labels[dados.labels.length - 1]);
-
-          if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-            console.log("---------------------------------------------------------------");
-            console.log("Como não há dados novos para captura, o gráfico não será atualizado.");
-            console.log("Horário do novo dado capturado:");
             console.log(novoRegistro[0].momento_grafico);
-            console.log("Horário do último dado capturado:");
             console.log(dados.labels[dados.labels.length - 1]);
-            console.log("---------------------------------------------------------------");
-          } else {
-            inserir_informacoes.innerHTML = "";
-            var umidadeNova = novoRegistro[0].umidade;
-            var temperaturaNova = novoRegistro[0].temperatura;
-            var mediaTemp = novoRegistro[0].media_temperatura;
-            var mediaUmi = novoRegistro[0].media_umidade;
-            inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
+
+            if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
+              console.log("---------------------------------------------------------------");
+              console.log("Como não há dados novos para captura, o gráfico não será atualizado.");
+              console.log("Horário do novo dado capturado:");
+              console.log(novoRegistro[0].momento_grafico);
+              console.log("Horário do último dado capturado:");
+              console.log(dados.labels[dados.labels.length - 1]);
+              console.log("---------------------------------------------------------------");
+            } else {
+              inserir_informacoes.innerHTML = "";
+              var umidadeNova = novoRegistro[0].umidade;
+              var temperaturaNova = novoRegistro[0].temperatura;
+              var mediaTemp = novoRegistro[0].media_temperatura;
+              var mediaUmi = novoRegistro[0].media_umidade;
+              inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
               INFORMAÇÕES DO SENSOR:
             </h2>
             <div id="div_informacoes_medidas">
@@ -488,33 +572,33 @@ function plotarGrafico(resposta, fkSensor) {
             </div>
           </div>`;
 
-            if (dados && dados.datasets && dados.datasets.length > 0 && dados.datasets[0].data) {
-              dados.labels.shift();
-              dados.labels.push(novoRegistro[0].momento_grafico);
-              dados.datasets[0].data.shift();
-              dados.datasets[0].data.push(novoRegistro[0].umidade);
-              console.log('Acessando dados para Umidade:', dados.datasets[0].data);
+              if (dados && dados.datasets && dados.datasets.length > 0 && dados.datasets[0].data) {
+                dados.labels.shift();
+                dados.labels.push(novoRegistro[0].momento_grafico);
+                dados.datasets[0].data.shift();
+                dados.datasets[0].data.push(novoRegistro[0].umidade);
+                console.log('Acessando dados para Umidade:', dados.datasets[0].data);
+              }
+
+              console.log('Dados após a atualização do gráfico:', dados);
+
+              myChart.update();
             }
 
-            console.log('Dados após a atualização do gráfico:', dados);
-
-            myChart.update();
-          }
-
-          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          setTimeout(() => atualizarGrafico(fkSensor, dados, myChart), 8000);
-        });
-      } else {
-        throw new Error('Erro na resposta da API');
-      }
-    })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      // Trate o erro aqui, se necessário
-      // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-      setTimeout(() => atualizarGrafico(fkSensor, dados, myChart), 8000);
-    });
-}
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            setTimeout(() => atualizarGrafico(fkSensor, dados, myChart), 8000);
+          });
+        } else {
+          throw new Error('Erro na resposta da API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        // Trate o erro aqui, se necessário
+        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+        setTimeout(() => atualizarGrafico(fkSensor, dados, myChart), 8000);
+      });
+  }
   function atualizarGrafico2(fkSensor, dados, myChart) {
 
     fetch(`/medidas/tempo-real/${fkSensor}`, { cache: 'no-store' })
@@ -571,7 +655,7 @@ function plotarGrafico(resposta, fkSensor) {
               console.log('Dados após a atualização do gráfico:', dados);
 
               myChart.update();
-         
+
 
             }
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
@@ -595,6 +679,30 @@ function plotarGrafico(resposta, fkSensor) {
 
 </script>
 <style>
+  .titulo-medida {
+    display: flex;
+    margin: auto;
+    width: 200px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .texto-medida {
+    margin-top: -41%;
+  }
+
+  .div_umidade {
+    padding: 5%;
+    width: 90%;
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 6px 5px 10px -6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
+  }
+
   .regua {
     display: flex;
     flex-wrap: wrap;
@@ -603,16 +711,20 @@ function plotarGrafico(resposta, fkSensor) {
     margin-top: 30px;
   }
 
+  .alerta-quente {
+    background-color: yellow;
+  }
+
   .perigo-quente {
     background-color: red;
   }
 
   .alerta-frio {
-    background-color: green;
+    background-color: #42A5F5;
   }
 
   .ideal {
-    background-color: yellow;
+    background-color: green;
   }
 
   .item-regua {
@@ -674,7 +786,6 @@ function plotarGrafico(resposta, fkSensor) {
     width: 90%;
     height: 25px;
     border: 1px solid black;
-    margin-top: 20%;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 7px 6px 15px -6px rgba(0, 0, 0, 0.75);
@@ -688,7 +799,6 @@ function plotarGrafico(resposta, fkSensor) {
     width: 90%;
     height: 25px;
     border: 1px solid black;
-    margin-top: 20%;
     border-radius: 10px;
     cursor: pointer;
     opacity: 0.8;
