@@ -362,6 +362,7 @@
   var verificador = 0;
 
   function obterDadosGrafico(fkSensor) {
+
     if (verificador === 0) {
       verificador = 1;
       fetch(`/medidas/ultimas/${fkSensor}`, { cache: 'no-store' })
@@ -381,6 +382,8 @@
           var mediaUmi = resposta.map(item => item.media_umidade);
           var Temp = resposta.map(item => item.temperatura);
           var Umi = resposta.map(item => item.umidade);
+
+
           inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
           Informações do ${nomeSensor}:
         </h2>
@@ -551,28 +554,30 @@
               console.log(dados.labels[dados.labels.length - 1]);
               console.log("---------------------------------------------------------------");
             } else {
-              inserir_informacoes.innerHTML = "";
               var umidadeNova = novoRegistro[0].umidade;
               var temperaturaNova = novoRegistro[0].temperatura;
               var mediaTemp = novoRegistro[0].media_temperatura;
               var mediaUmi = novoRegistro[0].media_umidade;
               var nomeSensor = novoRegistro[0].nomeSensor;
-              inserir_informacoes.innerHTML += `<div id="div_informacao">
-                <h2>INFORMAÇÕES DO ${nomeSensor}:
-            </h2>
-            <div id="div_informacoes_medidas">
-              <ul style="margin-right: 10%;">
-                <li>TEMPERATURA ATUAL: <span style="text-decoration: none;">${temperaturaNova}</span></li>
-                <br>
-                <li>MÉDIA DE TEMPERATURA (MENSAL): <span style="text-decoration: none;">${mediaTemp}</span></li>
-              </ul>
-              <ul>
-                <li>UMIDADE ATUAL: <span style="text-decoration: none;">${umidadeNova}</span></li><br>
-                <li>MÉDIA DE UMIDADE (MENSAL): <span style="text-decoration: none;">${mediaUmi}</span></li>
-              </ul>
-            </div>
-          </div>`;
-
+              nomeSensor = nomeSensor.slice(0, nomeSensor.length - 1);
+              if (nomeSensor == fkSensor) {
+                inserir_informacoes.innerHTML = "";
+                inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
+          Informações do ${nomeSensor}:
+        </h2>
+        <div id="div_informacoes_medidas">
+          <ul style="margin-right: 10%;">
+            <li>TEMPERATURA ATUAL: <span style="text-decoration: none;">${Temp[Temp.length - 1]}</span></li>
+            <br>
+            <li>MÉDIA DE TEMPERATURA (MENSAL): <span style="text-decoration: none;">${mediaTemp[mediaTemp.length - 1]}</span></li>
+          </ul>
+          <ul>
+            <li>UMIDADE ATUAL: <span style="text-decoration: none;">${Umi[Umi.length - 1]}</span></li><br>
+            <li>MÉDIA DE UMIDADE (MENSAL): <span style="text-decoration: none;">${mediaUmi[mediaUmi.length - 1]}</span></li>
+          </ul>
+        </div>
+      </div>`;
+              }
               if (dados && dados.datasets && dados.datasets.length > 0 && dados.datasets[0].data) {
                 dados.labels.shift();
                 dados.labels.push(novoRegistro[0].momento_grafico);
@@ -582,8 +587,10 @@
               }
 
               console.log('Dados após a atualização do gráfico:', dados);
+              if (nomeSensor == fkSensor) {
 
-              myChart.update();
+                myChart.update();
+              }
             }
 
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
@@ -623,27 +630,30 @@
               console.log(dados.labels[dados.labels.length - 1])
               console.log("---------------------------------------------------------------")
             } else {
-              inserir_informacoes.innerHTML = "";
               var umidadeNova = novoRegistro[0].umidade
               var temperaturaNova = novoRegistro[0].temperatura
               var mediaTemp = novoRegistro[0].media_temperatura
               var mediaUmi = novoRegistro[0].media_umidade;
-              var nomeSensor = novoRegistro[0].nomeSensor
-              inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
-    INFORMAÇÕES DO ${nomeSensor}:
-  </h2>
-  <div id="div_informacoes_medidas">
-    <ul style="margin-right: 10%;">
-      <li>TEMPERATURA ATUAL: <span style="text-decoration: none;">${temperaturaNova}</span></li>
-<br>
-      <li>MÉDIA DE TEMPERATURA(MENSAL): <span style="text-decoration: none;">${mediaTemp}</span></li>
-    </ul>
-    <ul>
-      <li>UMIDADE ATUAL: <span style="text-decoration: none;">${umidadeNova}</span></li><br>
-      <li>MÉDIA DE UMIDADE(MENSAL): <span style="text-decoration: none;">${mediaUmi}</span></li>
-    </ul>
-  </div>
-</div>`
+              var nomeSensor = novoRegistro[0].nomeSensor;
+              nomeSensor = nomeSensor.slice(0, nomeSensor.length - 1);
+              if (nomeSensor == fkSensor) {
+                inserir_informacoes.innerHTML = "";
+                inserir_informacoes.innerHTML += `<div id="div_informacao"><h2>
+          Informações do ${nomeSensor}:
+        </h2>
+        <div id="div_informacoes_medidas">
+          <ul style="margin-right: 10%;">
+            <li>TEMPERATURA ATUAL: <span style="text-decoration: none;">${Temp[Temp.length - 1]}</span></li>
+            <br>
+            <li>MÉDIA DE TEMPERATURA (MENSAL): <span style="text-decoration: none;">${mediaTemp[mediaTemp.length - 1]}</span></li>
+          </ul>
+          <ul>
+            <li>UMIDADE ATUAL: <span style="text-decoration: none;">${Umi[Umi.length - 1]}</span></li><br>
+            <li>MÉDIA DE UMIDADE (MENSAL): <span style="text-decoration: none;">${mediaUmi[mediaUmi.length - 1]}</span></li>
+          </ul>
+        </div>
+      </div>`;
+              }
               if (dados && dados.datasets && dados.datasets.length > 0 && dados.datasets[0].data) {
                 // Acesse dados.datasets[0].data aqui
                 dados.labels.shift();
@@ -655,8 +665,10 @@
 
 
               console.log('Dados após a atualização do gráfico:', dados);
+              if (nomeSensor == fkSensor) {
 
-              myChart.update();
+                myChart.update();
+              }
 
 
             }
@@ -689,9 +701,11 @@
     align-items: center;
     margin-top: 5%;
   }
+
   .titulo-medida {
     font-weight: 700;
   }
+
   .texto-medida {
     margin-top: -41%;
   }
@@ -779,9 +793,11 @@
     text-decoration: none;
     list-style: none;
   }
+
   p {
     font-weight: 500;
   }
+
   * {
     padding: 0;
     margin: 0;
@@ -1043,9 +1059,9 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    -webkit-box-shadow: 6px 5px 7px -4px rgba(0,0,0,0.75);
--moz-box-shadow: 6px 5px 7px -4px rgba(0,0,0,0.75);
-box-shadow: 6px 5px 7px -4px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 6px 5px 7px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 6px 5px 7px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 6px 5px 7px -4px rgba(0, 0, 0, 0.75);
   }
 
   #div_todos_graficos {
@@ -1099,6 +1115,7 @@ box-shadow: 6px 5px 7px -4px rgba(0,0,0,0.75);
   #select_galpao {
     right: 60%;
   }
+
   #select_fazenda_h4 {
     right: 35%;
   }
